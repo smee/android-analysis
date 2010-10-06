@@ -93,7 +93,7 @@ object ManifestAnalysisMain extends Rewriter{
   }
 
   val manifestsFilter = new FileFilter(){
-		def accept( p: File ) = p.isFile && ( p.getName endsWith ".xml" )
+		def accept( p: File ) = p.isFile //&& ( p.getName endsWith ".xml" )
 	}
 
 }
