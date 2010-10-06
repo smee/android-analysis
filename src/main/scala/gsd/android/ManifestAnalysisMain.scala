@@ -17,8 +17,8 @@
 package gsd.android
 
 import java.io.{File, FileFilter}
-import xml.XML
 import kiama.rewriting.Rewriter
+import xml.{Node, XML}
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,10 +34,18 @@ object ManifestAnalysisMain extends Rewriter{
   val NS_android = "http://schemas.android.com/apk/res/android"
 
 
-  case class App( name: String, intentFilter: List[IntentFilter] )
-  case class IntentFilter( action: List[Action], category: List[Category] )
+  case class App( name: String,
+                  intentFilter: List[IntentFilter] )
+  case class IntentFilter( action: List[Action],
+                           category: List[Category],
+                           data: List[Data] )
   case class Action( name: String )
   case class Category( name: String)
+  case class Data( mimeType: Option[String],
+                   scheme: Option[String],
+                   host: Option[String],
+                   port: Option[String],
+                   path: Option[String] )
 
 
   def main( args: Array[String] ){
@@ -55,18 +63,20 @@ object ManifestAnalysisMain extends Rewriter{
     val apps = manifestXMLs.toList.map{ m =>
       App( m._1, (m._2\\"intent-filter").toList.map{ intf =>
         IntentFilter(
-          (intf\"action").toList.map( a => Action( a.attribute(NS_android,"name") match{
-            case Some( attr ) => attr text
-          }) ),
-          (intf\"category").toList.map( c => Category( c.attribute(NS_android,"name") match{
-            case Some( attr ) => attr text
-          }) ) )
+          (intf\"action").toList.map( a => Action( getAttr( a, "name" ) get ) ),
+          (intf\"category").toList.map( c => Category( getAttr( c, "name" ) get ) ),
+          (intf\"data").toList.map( d => Data( getAttr( d, "mimeType" ),
+                                               getAttr( d, "scheme" ),
+                                               getAttr( d, "host" ),
+                                               getAttr( d, "port" ),
+                                               getAttr( d, "path" ) ) )
+        )
       })
     }
 
 //    apps foreach println
 
-    val actions = collects{
+    val actions:Set[String] = collects{
       case Action( a ) => a
     }(apps)
 
@@ -74,14 +84,21 @@ object ManifestAnalysisMain extends Rewriter{
       case Category( c ) => c
     }(apps)
 
+    val mimeTypes = collects{
+      case Data( Some(m), _, _, _, _ ) => m
+    }(apps)
+
     println( "============================\nActions:")
     actions foreach println
     println( "============================\nCategories:")
     categories foreach println
+    println( "============================\nMIME Types:")
+    mimeTypes foreach println
 
     println
     println( actions.size + " unique actions" )
     println( categories.size + " unique categories" )
+    println( mimeTypes.size + " unique MIME types" )
     println
 
     val androidPrefix:(String=>Boolean) = x =>
@@ -95,5 +112,11 @@ object ManifestAnalysisMain extends Rewriter{
   val manifestsFilter = new FileFilter(){
 		def accept( p: File ) = p.isFile //&& ( p.getName endsWith ".xml" )
 	}
+
+  def getAttr( n: Node, attr: String ): Option[String] =
+    n.attribute( NS_android, attr ) match{
+      case Some( a ) => Some( a text )
+      case None => None
+    }
 
 }
