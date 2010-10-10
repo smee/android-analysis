@@ -76,7 +76,7 @@ object ManifestAnalysisMain extends Rewriter{
 
 //    apps foreach println
 
-    val actions:Set[String] = collects{
+    val actions = collects{
       case Action( a ) => a
     }(apps)
 
@@ -101,8 +101,8 @@ object ManifestAnalysisMain extends Rewriter{
     println( mimeTypes.size + " unique MIME types" )
     println
 
-    val androidPrefix:(String=>Boolean) = x =>
-      !x.startsWith("com.android.") && !x.startsWith("android.")
+    val androidPrefix:(String=>Boolean) =
+      x => !x.startsWith("com.android.") && !x.startsWith("android.")
 
     println( "non-android actions:" + actions.filter( androidPrefix ).size )
     println( "non-android categories:" + categories.filter( androidPrefix ).size )
