@@ -15,10 +15,11 @@
   (= :action (:tag element)))
 
 (defn get-actions [xml]
-  (filter (comp not nil?)
-    (map 
-      #(-> % :attrs :android:name)
-      (filter is-action? xml)))) 
+  (distinct
+    (filter (comp not nil?)
+      (map 
+        #(-> % :attrs :android:name)
+        (filter is-action? xml))))) 
 
 
 (comment
@@ -26,7 +27,7 @@
 
 (defn create-non-android-action-map [xml]
   (let [package-name        (-> xml first :attrs :package)
-        all-actions         (into #{} (get-actions xml))
+        all-actions         (get-actions xml)
         non-android-actions (filter #(and (not (.startsWith % "android.")) (not (.startsWith % "com.android."))) all-actions)]
     (hash-map :package package-name :actions (into #{} non-android-actions))))
 
