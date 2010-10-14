@@ -7,9 +7,16 @@
   (for [file (seq (.listFiles (java.io.File. dir)))]
     file))
 
-(defn parse-xmls [dir]
+(defn parse-xmls-in [dir]
   (for [file (files-in dir)]
     (xml-seq (xml/parse file))))
+
+(defn find-file [dirpath pattern]
+  "Traverse directory dirpath depth first, return all files matching
+the regular expression pattern"
+  (for [file (-> dirpath java.io.File. file-seq) 
+        :when (re-matches pattern (.getName file))]
+    file))
 
 (defn is-action? [element]
   (= :action (:tag element)))
@@ -32,7 +39,7 @@
     (hash-map :package package-name :actions (into #{} non-android-actions))))
 
 (defn load-manifests [dir]
-  (map create-non-android-action-map (parse-xmls dir)))
+  (map create-non-android-action-map (parse-xmls-in dir)))
 
 (defn filter-non-empty-actions [maps]
   (filter (fn [{actions :actions}] (not (empty? actions))) maps))
@@ -53,5 +60,9 @@ Returns a map with keys :package (package name of the manifest), :actions (non-a
         :references-from (mapcat #(search-lucene lucene-index-dir %) actions)))))
 
 (comment
-  (find-all-references "d:/android/manifests" "d:/android/lucene-index"))
+  (find-all-references "d:/android/manifests" "d:/android/lucene-index")
 
+;; or
+(map load-manifests (walk "d:/android/decompiled/freewarelovers.com" #".*AndroidManifest.xml"))
+
+)
