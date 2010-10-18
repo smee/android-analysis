@@ -40,12 +40,13 @@ recursively and add them to the index."
   "Search an existing lucene index using the given query. Syntax of the query can be found at 
 http://lucene.apache.org/java/2_4_0/queryparsersyntax.html"
   [index-directory query-string]
-  (let [lucene-dir     (FSDirectory/open (new File index-directory))
-        index-reader   (IndexReader/open lucene-dir)
-        index-searcher (new IndexSearcher index-reader)
-        analyzer       (new StandardAnalyzer Version/LUCENE_CURRENT)
-        query-parser   (new QueryParser Version/LUCENE_CURRENT "contents" analyzer)
-        query          (.parse query-parser query-string)
-        hits           (.search index-searcher query 1000000)]
-    (for [hit (.scoreDocs hits)]
-      (.get (.doc index-searcher (.doc hit)) "path"))))
+  (with-open [lucene-dir     (FSDirectory/open (new File index-directory))
+              index-reader   (IndexReader/open lucene-dir)]
+    (let [index-searcher (new IndexSearcher index-reader)
+          analyzer       (new StandardAnalyzer Version/LUCENE_CURRENT)
+          query-parser   (new QueryParser Version/LUCENE_CURRENT "contents" analyzer)
+          query          (.parse query-parser query-string)
+          hits           (.search index-searcher query 1000000)]
+      (doall
+        (for [hit (.scoreDocs hits)]
+          (.get (.doc index-searcher (.doc hit)) "path"))))))
