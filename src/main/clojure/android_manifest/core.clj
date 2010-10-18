@@ -56,7 +56,10 @@ the regular expression pattern"
 (defn search-action-references [actions lucene-index-dir]
   (into {}
     (for [a actions]
-      [a (map (partial extract-path-part 8) (search-lucene lucene-index-dir a))])))
+      [a (distinct 
+           (map 
+             (partial extract-path-part 8) 
+             (search-lucene lucene-index-dir a)))])))
 
 (defn find-all-references [manifest-files lucene-index-dir]
   "Search the lucene index saved at lucene-index-dir for action references
