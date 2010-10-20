@@ -36,6 +36,21 @@ recursively and add them to the index."
     (.optimize index-writer)
     (.close index-writer)))
 
+(defn search-lucene-seq [index-directory queries-seq]
+  (with-open [lucene-dir     (#_org.apache.lucene.store.NIOFSDirectory. FSDirectory/open (new File index-directory))
+              index-reader   (IndexReader/open lucene-dir)]
+    (let [index-searcher (new IndexSearcher index-reader)
+          analyzer       (new StandardAnalyzer Version/LUCENE_CURRENT)
+          query-parser   (new QueryParser Version/LUCENE_CURRENT "contents" analyzer)]
+      
+      (doall 
+        (for [q queries-seq]
+          (let [query (.parse query-parser q)
+                hits  (.search index-searcher query 1000000)]
+            (doall
+              (for [hit (.scoreDocs hits)]
+                (.get (.doc index-searcher (.doc hit)) "path")))))))))
+
 (defn search-lucene 
   "Search an existing lucene index using the given query. Syntax of the query can be found at 
 http://lucene.apache.org/java/2_4_0/queryparsersyntax.html"

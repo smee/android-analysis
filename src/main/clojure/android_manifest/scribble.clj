@@ -5,20 +5,20 @@
 (defn get-actions [all-apps app-name]
   (get-in all-apps [app-name :actions]))
 
-(defn filter-references [ref-map r]
+(defn filter-references [ref-map name-app-map]
   "Retain only apps that call an intent that is not defined within their own
    manifest.xml."
   (into {}
     (for [[action dependent-apps] ref-map]
-      (let [filtered-refs (remove #(contains? (get-actions r %) action) dependent-apps)]
+      (let [filtered-refs (remove #(contains? (get-actions name-app-map %) action) dependent-apps)]
         [action filtered-refs]))))
 
 (defn filter-included-actions [r]
   "Retain only apps that call an intent that is not defined within their own
    manifest.xml."
-  (into {}
-   (for [[app-name {refs :references-from :as m}] r]
-     [app-name (assoc m :references-from (filter-references refs r))])))
+  (let [name-app-map (into {} (map #(hash-map (:name %) %) r))]
+    (for [{refs :references-from :as m} r]
+      (assoc m :references-from (filter-references refs name-app-map)))))
     
 
 (defn valid-action? [s]
@@ -27,18 +27,18 @@
 
 (defn get-ref-strings [all-apps]
   (distinct (flatten
-    (for [[app-name {refs :references-from}] all-apps]
-      (for [[action apps] refs :when (valid-action? action)]
-        (for [app apps]
+    (for [{app-name :name refs :references-from} all-apps]
+      (for [[action dep-apps] refs :when (valid-action? action)]
+        (for [dep-app dep-apps]
           (str
-            \" app \" "[shape=box] \n"
-            \" app \" "->" \" action \" " [color=red] ;\n")))))))
+            \" dep-app \" "[shape=box] \n"
+            \" dep-app \" "->" \" action \" " [color=red] ;\n")))))))
 
 
 (defn get-action-def-strings [all-apps]
-  (let [action-defs (for [[app-name attr-map] all-apps]
-                      [app-name 
-                       (for [[action dependent-apps] (:references-from attr-map) :when (not-empty dependent-apps)]
+  (let [action-defs (for [{name :name refs :references-from} all-apps]
+                       [name
+                        (for [[action dependent-apps] refs :when (not-empty dependent-apps)]
                          action)])]
     
     (for [[name actions] action-defs :when (not-empty actions)]
@@ -59,22 +59,24 @@
     (apply str (interpose " " (get-ref-strings real-external-refs)))
     "}"))
 
+
+(comment
 ;; script start
-(def android-apps (deserialize "results/potential-refs"))
+(def android-apps (deserialize "results/refs.x"))
 
 (def real-external-refs 
   (filter 
-    (fn [[_ {v :references-from}]] (not-empty v)) 
+    #(not-empty (:references-from %)) 
     (filter-included-actions android-apps)))
   
 (printf "Got %d real references between apps.\n" (count real-external-refs))
 (binding [*print-length* 10]
   (pprint (take 10 real-external-refs)))
 
-(comment
+
   (use 'clojure.contrib.json)
   ;; write output as json file
-  (spit "results/real-refs" (with-out-str (pprint-json real-external-refs)))
+  (spit "results/real-refs.json" (with-out-str (pprint-json real-external-refs)))
   ;; visualize results via graphviz
   (spit "results/real-external-refs.dot" (graphviz real-external-refs))
   )

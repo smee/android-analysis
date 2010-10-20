@@ -4,11 +4,13 @@
 
 (defn serialize [file-name obj]  
   "Serialize the native clojure datastructure obj to file."
-  (with-open [w (java.io.FileWriter. (java.io.File. file-name))] 
-    (binding [*out* w 
-              *print-dup* true
-              *print-length* nil] 
-      (pprint obj))))
+  (dorun
+    (with-open [w (java.io.FileWriter. (java.io.File. file-name))] 
+      (binding [*out* w 
+                *print-dup* true
+                *print-length* nil] 
+        (pprint obj)))
+    :done))
 
 
 (defn deserialize [filename]

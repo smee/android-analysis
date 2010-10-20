@@ -96,9 +96,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <script>src/main/clojure/android_manifest/main.clj</script>
-                </configuration>
             </plugin>
 			
 		</plugins>
