@@ -1,8 +1,10 @@
 (ns android-manifest.core
   (:use [clojure.xml :as xml]
         [clojure.contrib.zip-filter.xml :as zip]
+        [clojure.set :only [intersection]]
         android-manifest.lucene
-        android-manifest.serialization)
+        android-manifest.serialization
+        android-manifest.util)
   (:import java.io.File))
 
 
@@ -51,15 +53,19 @@ the regular expression pattern"
  
  
  
-(defn search-action-references [actions lucene-index-dir]
-  "Create map of action names to a set of app names that reference this action."
+(defn search-action-references [actions lucene-index-dir avail-app-names]
+  "Create map of action names to a set of app names that reference this action.
+  Ignores all found app names that are not in avail-app-names."
   (into {}
     (for [a actions]
-      [a (into #{} 
-           (map 
-             ;; my index was created on a directory hierarchy where the app was at depth 8
-             (partial extract-path-part 8) 
-             (search-lucene lucene-index-dir a)))])))
+      [a (intersection 
+           avail-app-names 
+           (set 
+             (map 
+               ;; my index was created on a directory hierarchy where the app was at depth 8
+               (partial extract-path-part 8) 
+               (search-lucene lucene-index-dir a))))])))
+
 
 (defn find-all-references [manifest-files lucene-index-dir]
   "Search the lucene index saved at lucene-index-dir for action references
@@ -67,17 +73,18 @@ the regular expression pattern"
    Returns a map with keys :package (package name of the manifest), :actions (non-android action strings) and
    :references-from (paths of smali files containing any of these actions)."
   (let
-    [android-apps (map load-android-app manifest-files)]
-    (for [{actions :actions :as m} android-apps]
-      (assoc m :references-from (search-action-references actions lucene-index-dir)))))
+    [android-apps (map load-android-app manifest-files)
+     ;; sort by version descending     
+     sorted-apps  (reverse (sort-by :version android-apps))
+     ;; filter all apps where version and path are equals
+     reduced-apps (distinct-fn sorted-apps :package)
+     avail-app-names (set (map :name reduced-apps))]
+    ;; search for external references by querying the lucene index
+    (filter #(contains? avail-app-names (:name %))
+      (for [{actions :actions :as m} reduced-apps]
+        (assoc m :references-from (search-action-references actions lucene-index-dir avail-app-names)))))
 
   
-(defn change-values [m f]
-  "Change all map values by applying f to each one."
-  (into {} (for [[k v] m] [k (f v)])))
-
-(defn remove-empty-values [m]
-  (into {} (for [[k v] m :when (not (empty? v))] [k v])))
 
  (defn foreign-refs-only [maps]
    "Remove all potentially external action references, if they came from
@@ -85,7 +92,7 @@ the regular expression pattern"
    (for [{refs :references-from name :name :as m} maps]
      (assoc m :references-from 
        (remove-empty-values 
-         (change-values refs (partial filter #(not= % name)))))))
+         (map-values (partial filter #(not= % name)) refs)))))
  
  
  
@@ -99,8 +106,20 @@ the regular expression pattern"
  (def r (foreign-refs-only         
           (find-all-references (find-file app-sources #".*AndroidManifest.xml") index-dir)))
  ;; or
- (def r (foreign-refs-only         
-          (find-all-references (map #(File. %) (deserialize "d:/android/all-manifests")) index-dir)))
- (use 'clojure.pprint)
+ (def r
+   (let  [manifest-files (map #(File. %) (deserialize "d:/android/all-manifests"))
+          all-refs (find-all-references manifest-files index-dir)]
+     (foreign-refs-only all-refs)))
+
  
+ (use 'clojure.pprint)
+ (count r)
+ (serialize "results/unique-refs.clj" r)
+ 
+ (let
+    [manifest-files (map #(File. %) (deserialize "d:/android/all-manifests"))
+     android-apps (map load-android-app manifest-files)
+     reduced-apps (distinct-apps android-apps)]
+    (println "all apps: " (count android-apps) " w/o duplicates: " (count reduced-apps))
+    [android-apps reduced-apps])
 )
