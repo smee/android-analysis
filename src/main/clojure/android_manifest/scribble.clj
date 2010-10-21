@@ -1,17 +1,15 @@
 (ns android-manifest.scribble
-  (:use android-manifest.serialization
+  (:use 
+    android-manifest.serialization
      [clojure.contrib.pprint :only (pprint)]
-     [clojure.set :only (map-invert)))
-
-(defn get-actions [all-apps app-name]
-  (get-in all-apps [app-name :actions]))
+     [clojure.set :only (map-invert)]))
 
 (defn filter-references [ref-map name-app-map]
   "Retain only apps that call an intent that is not defined within their own
    manifest.xml."
   (into {}
     (for [[action dependent-apps] ref-map]
-      (let [filtered-refs (remove #(contains? (get-actions name-app-map %) action) dependent-apps)]
+      (let [filtered-refs (remove #(contains? (get-in name-app-map  [% :actions]) action) dependent-apps)]
         [action filtered-refs]))))
 
 (defn filter-included-actions [r]
@@ -62,6 +60,23 @@
     "}"))
 ;;;;;;;;;;;;;;;; GraphVIZ ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+
+(defn print-findings [real-external-refs all-apps manifest-files]
+  (let [openintents (distinct (filter #(.contains % "openintent") (mapcat #(keys (:references-from %)) real-external-refs)))
+      action-call-freq (apply merge-with + (flatten
+                                             (for [m (map :references-from real-external-refs)]
+                                               (for [[k v] m :when (valid-action? k)]
+                                                 {k (count v)}))))
+      sorted-freq (into (sorted-map-by (fn [k1 k2] (compare (get action-call-freq k2) (get action-call-freq k1))))
+                    action-call-freq)]
+  (println 
+    "# manifests: " (count manifest-files)
+    "\n# unique Apps: " (count all-apps)
+    "\n# of actions called from foreign apps: " (count (distinct (mapcat #(keys (:references-from %)) real-external-refs)))
+    "\n# apps calling foreing actions: " (count (distinct (mapcat #(vals (:references-from %)) real-external-refs)))
+    "\n# openintents: " (count openintents) openintents
+    "\nMost called actions: " (take 3 sorted-freq))))
+
 (comment
 ;; script start
 (def android-apps (deserialize "results/refs.x"))
@@ -83,20 +98,7 @@
   (spit "results/real-external-refs-unique.dot" (graphviz real-external-refs))
   )
 
-(let [openintents (distinct (filter #(.contains % "openintent") (mapcat #(keys (:references-from %)) real-external-refs)))
-      action-call-freq (apply merge-with + (flatten
-                                             (for [m (map :references-from real-external-refs)]
-                                               (for [[k v] m :when (valid-action? k)]
-                                                 {k (count v)}))))
-      sorted-freq (into (sorted-map-by (fn [k1 k2] (compare (get action-call-freq k2) (get action-call-freq k1))))
-                    action-call-freq)]
-  (println 
-    "# manifests: " (count (deserialize "d:/android/all-manifests"))
-    "\n# unique Apps: " (count android-apps)
-    "\n# of actions called from foreign apps: " (count (distinct (mapcat #(keys (:references-from %)) real-external-refs)))
-    "\n# apps calling foreing actions: " (count (distinct (mapcat #(vals (:references-from %)) real-external-refs)))
-    "\n# openintents: " (count openintents) openintents
-    "\nMost called actions: " (take 3 sorted-freq)))
+
 
 
 ;; total number of referenced intents?

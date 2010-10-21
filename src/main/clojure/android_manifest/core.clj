@@ -2,6 +2,7 @@
   (:use [clojure.xml :as xml]
         [clojure.contrib.zip-filter.xml :as zip]
         [clojure.set :only [intersection]]
+        [clojure.pprint :only (pprint)]
         android-manifest.lucene
         android-manifest.serialization
         android-manifest.util)
@@ -82,7 +83,7 @@ the regular expression pattern"
     ;; search for external references by querying the lucene index
     (filter #(contains? avail-app-names (:name %))
       (for [{actions :actions :as m} reduced-apps]
-        (assoc m :references-from (search-action-references actions lucene-index-dir avail-app-names)))))
+        (assoc m :references-from (search-action-references actions lucene-index-dir avail-app-names))))))
 
   
 
@@ -112,14 +113,6 @@ the regular expression pattern"
      (foreign-refs-only all-refs)))
 
  
- (use 'clojure.pprint)
  (count r)
  (serialize "results/unique-refs.clj" r)
- 
- (let
-    [manifest-files (map #(File. %) (deserialize "d:/android/all-manifests"))
-     android-apps (map load-android-app manifest-files)
-     reduced-apps (distinct-apps android-apps)]
-    (println "all apps: " (count android-apps) " w/o duplicates: " (count reduced-apps))
-    [android-apps reduced-apps])
 )
