@@ -11,6 +11,7 @@
     [java.io File FileReader]))
 
 (defn- index-file [index-writer file]
+;; TODO add Field for the app name, remove path fiddling code from core
   (when (.contains (.getCanonicalPath file) "smali")
     (.addDocument index-writer (doto (Document.)
                                  (.add (Field. "path" (.toString file) Field$Store/YES,Field$Index/NOT_ANALYZED))

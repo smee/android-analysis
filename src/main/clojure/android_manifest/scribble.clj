@@ -16,9 +16,9 @@
   "Retain only apps that call an intent that is not defined within their own
    manifest.xml."
   (let [name-app-map (into {} (map #(hash-map (:name %) %) r))]
-    (for [{arefs :action-refs crefs :category-refs :as m} r]
-      (assoc m 
-        :action-refs (filter-references arefs name-app-map :actions)
+    (for [{arefs :action-refs crefs :category-refs :as app} r]
+      (assoc app 
+        :action-refs   (filter-references arefs name-app-map :actions)
         :category-refs (filter-references crefs name-app-map :categories)))))
     
 
@@ -66,24 +66,24 @@
 
 
 (defn print-findings [real-external-refs all-apps manifest-files]
-  (let [openintent-actions (distinct (filter #(.contains % "openintent") (mapcat #(keys (:action-refs %)) real-external-refs)))
-        openintent-categories (distinct (filter #(.contains % "openintent") (mapcat #(keys (:action-refs %)) real-external-refs)))
-        action-call-freq (apply merge-with + (flatten
-                                             (for [m (map :action-refs real-external-refs)]
-                                               (for [[k v] m :when (valid-action? k)]
-                                                 {k (count v)}))))
-      sorted-freq (into (sorted-map-by (fn [k1 k2] (compare (get action-call-freq k2) (get action-call-freq k1))))
-                    action-call-freq)]
+  (let [openintent-actions    (distinct (filter #(.contains % "openintent") (mapcat #(keys (:action-refs %)) real-external-refs)))
+        openintent-categories (distinct (filter #(.contains % "openintent") (mapcat #(keys (:category-refs %)) real-external-refs)))
+        action-call-freq      (apply merge-with + (flatten
+                                                    (for [m (map :action-refs real-external-refs)]
+                                                      (for [[k v] m :when (valid-action? k)]
+                                                        {k (count v)}))))
+      sorted-freq              (into (sorted-map-by (fn [k1 k2] (compare (get action-call-freq k2) (get action-call-freq k1))))
+                                 action-call-freq)]
   (println 
-    "# manifests: " (count manifest-files)
-    "\n# unique Apps: " (count all-apps)
-    "\n# of actions offered from apps: " (count (distinct (mapcat #(keys (:action-refs %)) real-external-refs)))
-    "\n# apps calling foreign actions: " (count (distinct (mapcat #(vals (:action-refs %)) real-external-refs)))
-    "\n# openintents (actions): " (count openintent-actions) openintent-actions
+    "# manifests: "                         (count manifest-files)
+    "\n# unique Apps: "                     (count all-apps)
+    "\n# of actions offered from apps: "    (count (distinct (mapcat #(keys (:action-refs %)) real-external-refs)))
+    "\n# apps calling foreign actions: "    (count (distinct (mapcat #(vals (:action-refs %)) real-external-refs)))
+    "\n# openintents (actions): "           (count openintent-actions) openintent-actions
     "\n# of categories offered from apps: " (count (distinct (mapcat #(keys (:category-refs %)) real-external-refs)))
     "\n# apps calling foreign categories: " (count (distinct (mapcat #(vals (:category-refs %)) real-external-refs)))
-    "\n# openintents (category): " (count openintent-categories) openintent-categories
-    "\nMost called actions: " (take 3 sorted-freq))))
+    "\n# openintents (category): "          (count openintent-categories) openintent-categories
+    "\nMost called actions: "               (take 3 sorted-freq))))
 
 (comment
 ;; script start
@@ -92,8 +92,8 @@
 (def real-external-refs 
   (filter 
     #(or 
-       (not-empty (:category-refs %)) 
-       (not-empty (:action-refs %)))
+       (not-empty (remove-empty-values (:category-refs %))) 
+       (not-empty (remove-empty-values (:action-refs %))))
     (filter-included-actions android-apps)))
   
 (binding [*print-length* 10]

@@ -5,11 +5,12 @@
         [clojure.pprint :only (pprint)]
         android-manifest.lucene
         android-manifest.serialization
-        android-manifest.util)
+        android-manifest.util
+        [android-manifest.scribble :only (filter-included-actions print-findings)])
   (:import java.io.File))
 
 
-(defrecord Android-App [name version package actions categories action-refs-from category-refs])
+(defrecord Android-App [name version package actions categories action-refs category-refs])
 
 (defn find-file [dirpath pattern]
   "Traverse directory dirpath depth first, return all files matching
@@ -24,7 +25,7 @@ the regular expression pattern"
     (filter identity
       (map 
         #(-> % :attrs :android:name)
-        (filter #(= tag (:tag element)) xml))))) 
+        (filter #(= tag (:tag %)) xml))))) 
 
 (defn android-specific? [s]
   (or
@@ -80,19 +81,21 @@ the regular expression pattern"
     [android-apps    (map load-android-app manifest-files)
      reduced-apps    (distinct-by :package (reverse (sort-by :version android-apps))) ;; sort by version descending, filter all apps where version and path are equals
      avail-app-names (set (map :name reduced-apps))]
-    ;; search for external references by querying the lucene index
-    (for [{actions :actions categories :categories :as app} reduced-apps]
-      (assoc app 
-        :action-refs   (query-references actions    lucene-index-dir avail-app-names)
-        :category-refs (query-references categories lucene-index-dir avail-app-names)))))
+    ;; search parallel for external references by querying the lucene index
+    (pmap 
+      (fn [{actions :actions categories :categories :as app}]
+        (assoc app 
+          :action-refs   (query-references actions    lucene-index-dir avail-app-names)
+          :category-refs (query-references categories lucene-index-dir avail-app-names))) 
+      reduced-apps)))
 
   
 
  (defn foreign-refs-only [maps]
    "Remove all potentially external action references, if they came from
     the application itself."
-   (for [{refs :references-from name :name :as m} maps]
-     (assoc m :references-from 
+   (for [{refs :action-refs name :name :as m} maps]
+     (assoc m :action-refs 
        (remove-empty-values 
          (map-values (partial filter #(not= % name)) refs)))))
  
@@ -104,24 +107,19 @@ the regular expression pattern"
   (def app-sources "D:/android/decompiled")
   (def index-dir "D:/android/lucene-index")
  
-  ;; create sequence of maps with :path, :actions, :references-from
- (def r (foreign-refs-only         
-          (find-all-references (find-file app-sources #".*AndroidManifest.xml") index-dir)))
  ;; or
- (def r
+ (def real-external-refs
    (let  [manifest-files (map #(File. %) (deserialize "d:/android/all-manifests"))
-          all-refs (find-all-references manifest-files index-dir)]
-     (foreign-refs-only all-refs)))
-
- 
- (count r)
- (serialize "results/unique-refs.clj" r)
+          all-refs (find-all-references manifest-files index-dir)
+          all-apps (foreign-refs-only all-refs)
+          real-external-refs (filter #(or (not-empty (remove-empty-values (:category-refs %))) (not-empty (remove-empty-values (:action-refs %)))) (filter-included-actions all-apps))]
+     (do 
+       (serialize "results/unique-refs.clj" all-apps)
+       (print-findings real-external-refs all-apps manifest-files )
+       real-external-refs)))
 )
 
 (comment
     (set! *print-length* 15)
-  (def apps
-    (let  [manifest-files (map #(File. %) (deserialize "d:/android/all-manifests"))
-           android-apps   (map load-android-app manifest-files)]
-      (distinct (mapcat :categories android-apps))))
+    (find-file app-sources #".*AndroidManifest.xml")
   )
