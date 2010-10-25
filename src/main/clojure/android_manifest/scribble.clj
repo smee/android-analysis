@@ -103,7 +103,8 @@
 
   (use 'clojure.contrib.json)
   ;; write output as json file
-  (spit "results/real-refs-unique.json" (with-out-str (pprint-json real-external-refs)))
+  (binding [*print-length* nil]
+    (spit "results/real-refs-unique.json" (with-out-str (pprint-json real-external-refs))))
   ;; visualize results via graphviz
   (spit "results/real-external-refs-unique.dot" (graphviz real-external-refs))
   )

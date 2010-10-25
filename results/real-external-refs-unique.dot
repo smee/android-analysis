@@ -1,474 +1,544 @@
 digraph {
-"004fee84-6d67-102c-9e11-12313a00d126"[shape=box] ; 
-"004fee84-6d67-102c-9e11-12313a00d126"->{"org.abrantes.filex" } [color=green] ; 
- "00ff20e2-a4c1-102d-9303-12313b000c93"[shape=box] ; 
-"00ff20e2-a4c1-102d-9303-12313b000c93"->{"com.aunndroid.klove.KplayerInterface" "com.aunndroid.klove.KLOVE_VIEWER" } [color=green] ; 
- "09699570-d8b8-102d-a194-6ec07c99d928"[shape=box] ; 
-"09699570-d8b8-102d-a194-6ec07c99d928"->{"europe.de.ftdevelop.aviation.snowtamdecoder.ACTION_SNOWTAM_DECODE" } [color=green] ; 
- "14f45220-6128-102d-8168-12313b000c93"[shape=box] ; 
-"14f45220-6128-102d-8168-12313b000c93"->{"org.neferty.android.mp3widget.service.NotificationService" "org.neferty.android.mp3widget.service.LibraryService" "org.neferty.android.mp3widget.service.DownloadService" "org.neferty.android.mp3widget.service.SearchService" "org.neferty.android.mp3widget.service.AdService" } [color=green] ; 
- "18b614dc-ea1a-102c-a134-12313a00d126"[shape=box] ; 
-"18b614dc-ea1a-102c-a134-12313a00d126"->{"WAKEUP" } [color=green] ; 
- "222b4632-a8a5-102d-9303-12313b000c93"[shape=box] ; 
-"222b4632-a8a5-102d-9303-12313b000c93"->{"comment_post" "poslist" "comments" "posview" } [color=green] ; 
- "244e7462-7398-102d-97db-12313b000c93"[shape=box] ; 
-"244e7462-7398-102d-97db-12313b000c93"->{"com.asksven.xtremepp.intent.action.MESSAGE_RECEIVED" "com.fsck.k9.intent.action.EMAIL_RECEIVED" } [color=green] ; 
- "2b9b96b8-7a5b-102d-97db-12313b000c93"[shape=box] ; 
-"2b9b96b8-7a5b-102d-97db-12313b000c93"->{"com.asksven.systemsettings.action.EXECUTE_COMMAND" } [color=green] ; 
- "38aec906-fb7f-102d-bbbc-6ec07c99d928"[shape=box] ; 
-"38aec906-fb7f-102d-bbbc-6ec07c99d928"->{"mobi.bbase.ahome.THEME" } [color=green] ; 
- "46abbc62-1066-102d-a134-12313a00d126"[shape=box] ; 
-"46abbc62-1066-102d-a134-12313a00d126"->{"net.laoyu.app_review.action.VIEW_TOPIC" } [color=green] ; 
- "51fde2b8-58f8-102d-a134-12313a00d126"[shape=box] ; 
-"51fde2b8-58f8-102d-a134-12313a00d126"->{"com.google.zxing.client.android.SCAN" } [color=green] ; 
- "54f2a7d0-591f-102c-9e11-12313a00d126"[shape=box] ; 
-"54f2a7d0-591f-102c-9e11-12313a00d126"->{"com.twofortyfouram.locale.intent.action.FIRE_SETTING" } [color=green] ; 
- "5a9f9baa-5b01-102c-9e11-12313a00d126"[shape=box] ; 
-"5a9f9baa-5b01-102c-9e11-12313a00d126"->{"com.twofortyfouram.locale.intent.action.FIRE_SETTING" } [color=green] ; 
- "66ec0dbe-a75c-102d-9303-12313b000c93"[shape=box] ; 
-"66ec0dbe-a75c-102d-9303-12313b000c93"->{"org.openintents.action.PICK_FILE" } [color=green] ; 
- "6b980a5e-8cd9-102d-823a-12313b000c93"[shape=box] ; 
-"6b980a5e-8cd9-102d-823a-12313b000c93"->{"com.appventive.actions.EditEmailAccount" "com.appventive.action.UpdateMail" "com.appventive.actions.CreateEmailAccount" } [color=green] ; 
- "7a1787c2-8486-102d-97db-12313b000c93"[shape=box] ; 
-"7a1787c2-8486-102d-97db-12313b000c93"->{"ACTIVATE" } [color=green] ; 
- "81ab85fa-4c43-102c-a73c-12313a00d126"[shape=box] ; 
-"81ab85fa-4c43-102c-a73c-12313a00d126"->{"com.eclipsim.gpsstatus.VIEW" "PREFERENCES" } [color=green] ; 
- "93da31d4-157b-102d-a134-12313a00d126"[shape=box] ; 
-"93da31d4-157b-102d-a134-12313a00d126"->{"org.iii.romulus.meridian.playstatechanged" } [color=green] ; 
- "96dc0b18-bf13-102d-9790-6ec07c99d928"[shape=box] ; 
-"96dc0b18-bf13-102d-9790-6ec07c99d928"->{"com.xtralogic.logcollector.intent.action.SEND_LOG" } [color=green] ; 
- "a04720e4-fb4e-102d-bbbc-6ec07c99d928"[shape=box] ; 
-"a04720e4-fb4e-102d-bbbc-6ec07c99d928"->{"mobi.bbase.ahome.THEME" } [color=green] ; 
- "a280b8b8-ea90-102c-a134-12313a00d126"[shape=box] ; 
-"a280b8b8-ea90-102c-a134-12313a00d126"->{"com.twofortyfouram.locale.intent.action.FIRE_SETTING" } [color=green] ; 
- "a2d5946a-d8b9-102d-a194-6ec07c99d928"[shape=box] ; 
-"a2d5946a-d8b9-102d-a194-6ec07c99d928"->{"europe.de.ftdevelop.aviation.snowtamdecoder.ACTION_SNOWTAM_DECODE" } [color=green] ; 
- "a758d284-ea91-102c-a134-12313a00d126"[shape=box] ; 
-"a758d284-ea91-102c-a134-12313a00d126"->{"com.twofortyfouram.locale.intent.action.FIRE_SETTING" } [color=green] ; 
- "bc5a33f2-ea1a-102c-a134-12313a00d126"[shape=box] ; 
-"bc5a33f2-ea1a-102c-a134-12313a00d126"->{"WAKEUP" } [color=green] ; 
- "c504256a-0dbb-102e-9405-6ec07c99d928"[shape=box] ; 
-"c504256a-0dbb-102e-9405-6ec07c99d928"->{"com.carl.askastranger.AUTH_SUCCESS" "com.carl.askastranger.QUEST_ADDLIST" } [color=green] ; 
- "c5be93f0-f3d2-102b-9253-000f4b0782e8"[shape=box] ; 
-"c5be93f0-f3d2-102b-9253-000f4b0782e8"->{"org.openintents.action.SET_SHARE_SETTINGS" "org.openintents.action.ADD_LOCATION_ALERT" } [color=green] ; 
- "cbdee650-d904-102c-a134-12313a00d126"[shape=box] ; 
-"cbdee650-d904-102c-a134-12313a00d126"->{"aldiko.intent.action.ADD_BOOKS_TO_LABEL" "aldiko.intent.action.VIEW_BOOKS_BY_AUTHOR" "aldiko.intent.action.ADD_COLLECTIONS_TO_BOOK" "aldiko.intent.action.VIEW_BOOKS_IN_LABEL" "aldiko.intent.action.VIEW_BOOKS_IN_COLLECTION" "aldiko.intent.action.ADD_LABELS_TO_BOOK" "aldiko.intent.action.ADD_BOOKS_TO_COLLECTION" "aldiko.intent.action.VIEW_LABELS_WITH_BOOK" "aldiko.intent.action.VIEW_COLLECTIONS_WITH_BOOK" } [color=green] ; 
- "dad5f14c-30a9-102d-a134-12313a00d126"[shape=box] ; 
-"dad5f14c-30a9-102d-a134-12313a00d126"->{"com.appventive.mailprovider.error" "com.appventive.mailprovider.goodAccount" "com.appventive.mailprovider.intent.action.EMAIL_RECEIVED" "com.appventive.ExecAssist.updateEmail" } [color=green] ; 
- "ed2e7266-de0f-102c-a134-12313a00d126"[shape=box] ; 
-"ed2e7266-de0f-102c-a134-12313a00d126"->{"com.yeradis.android.hellotxt.RECEIVER" } [color=green] ; 
- "f3144db2-1c49-102e-b4a5-6ec07c99d928"[shape=box] ; 
-"f3144db2-1c49-102e-b4a5-6ec07c99d928"->{"org.openintents.action.PICK_FILE" } [color=green] ; 
- "f6508a54-7dde-102d-97db-12313b000c93"[shape=box] ; 
-"f6508a54-7dde-102d-97db-12313b000c93"->{"net.jjc1138.android.scrobbler.action.MUSIC_STATUS" } [color=green] ; 
- "f87a2a10-ec10-102d-a194-6ec07c99d928"[shape=box] ; 
-"f87a2a10-ec10-102d-a194-6ec07c99d928"->{"com.google.zxing.client.android.ENCODE" "com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" "com.google.zxing.client.android.SCAN" "com.google.zxing.client.android.SHARE" } [color=green] ; 
- "ffc87194-0fd5-102e-9405-6ec07c99d928"[shape=box] ; 
-"ffc87194-0fd5-102e-9405-6ec07c99d928"->{"ConnectivityManager.CONNECTIVITY_ACTION" } [color=green] ; 
- "1284295920_3banana_Notes_1.17"[shape=box] ; 
-"1284295920_3banana_Notes_1.17"->{"com.snaptic.intent.action.VIEW" "com.threebanana.notes.NoteEditor.ACTION_GEONOTE" "com.snaptic.intent.action.ADD" "com.threebanana.notes.Notes.ACTION_FILTER_NOTES" } [color=green] ; 
- "1282855217_APNdroid_2.1.3"[shape=box] ; 
-"1282855217_APNdroid_2.1.3"->{"com.google.code.apndroid.intent.action.STATUS_REQUEST" "com.google.code.apndroid.intent.action.STATUS_CHANGED" "com.twofortyfouram.locale.intent.action.FIRE_SETTING" "com.google.code.apndroid.intent.action.CHANGE_REQUEST" } [color=green] ; 
- "1267803998_DOVE6_A"[shape=box] ; 
-"1267803998_DOVE6_A"->{".EDIT_LOGIN" } [color=green] ; 
- "1281799312_FoxyRing_1.11"[shape=box] ; 
-"1281799312_FoxyRing_1.11"->{"com.twofortyfouram.locale.intent.action.FIRE_SETTING" } [color=green] ; 
- "1264384589_Last.fm_-_Personal_Radio_1.3.5"[shape=box] ; 
-"1264384589_Last.fm_-_Personal_Radio_1.3.5"->{"fm.last.android.LOVE" "fm.last.android.playbackcomplete" "com.smartmadsoft.openwatch.command.BUTTON_FF" "fm.last.android.playbackpaused" "fm.last.android.BAN" "fm.last.android.metachanged" } [color=green] ; 
- "1277752367_LocationBotLite"[shape=box] ; 
-"1277752367_LocationBotLite"->{".EditLocation" ".Config" } [color=green] ; 
- "1264445224_Music_Online_Lite_1.9.2"[shape=box] ; 
-"1264445224_Music_Online_Lite_1.9.2"->{"com.yyqidian.musiconlinelite.DownloadService" } [color=green] ; 
- "1277223178_MyMoBuy_1.2"[shape=box] ; 
-"1277223178_MyMoBuy_1.2"->{"com.google.zxing.client.android.ENCODE" "com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" "com.google.zxing.client.android.SCAN" "com.google.zxing.client.android.SHARE" } [color=green] ; 
- "1265800370_NewsRob_(Google_Reader_RSS)_3.5.3"[shape=box] ; 
-"1265800370_NewsRob_(Google_Reader_RSS)_3.5.3"->{"com.twofortyfouram.locale.intent.action.FIRE_SETTING" } [color=green] ; 
- "1264433339_OI_File_Manager_1.1.1"[shape=box] ; 
-"1264433339_OI_File_Manager_1.1.1"->{"org.openintents.action.PICK_FILE" "org.openintents.action.PICK_DIRECTORY" } [color=green] ; 
- "1264293185_Text-To-Speech_Extended_2.0"[shape=box] ; 
-"1264293185_Text-To-Speech_Extended_2.0"->{"com.google.intent.action.START_TTS_SERVICE_BETA" } [color=green] ; 
+"ed2e7266-de0f-102c-a134-12313a00d126"[shape=box] ; 
+"ed2e7266-de0f-102c-a134-12313a00d126"->{"com.yeradis.android.hellotxt.RECEIVER" } [color=green,arrowhead="diamond"] ; 
  "1283978253_Wikitude_9.03"[shape=box] ; 
-"1283978253_Wikitude_9.03"->{"org.openintents.action.AR_VIEW" } [color=green] ; 
- "1267145594_ixMAT_Barcode_Scanner_2.2"[shape=box] ; 
-"1267145594_ixMAT_Barcode_Scanner_2.2"->{"com.google.zxing.client.android.SCAN" } [color=green] ; 
- "1265912139_twidroid_3.1.2"[shape=box] ; 
-"1265912139_twidroid_3.1.2"->{"com.twidroid.SendTweet" } [color=green] ; 
+"1283978253_Wikitude_9.03"->{"org.openintents.action.AR_VIEW" } [color=green,arrowhead="diamond"] ; 
+ "66ec0dbe-a75c-102d-9303-12313b000c93"[shape=box] ; 
+"66ec0dbe-a75c-102d-9303-12313b000c93"->{"org.openintents.action.PICK_FILE" } [color=green,arrowhead="diamond"] ; 
+ "14f45220-6128-102d-8168-12313b000c93"[shape=box] ; 
+"14f45220-6128-102d-8168-12313b000c93"->{"org.neferty.android.mp3widget.service.NotificationService" "org.neferty.android.mp3widget.service.LibraryService" "org.neferty.android.mp3widget.service.DownloadService" "org.neferty.android.mp3widget.service.SearchService" "org.neferty.android.mp3widget.service.AdService" } [color=green,arrowhead="diamond"] ; 
+ "1281787958_NewsRob_4.2.0"[shape=box] ; 
+"1281787958_NewsRob_4.2.0"->{"com.newsrob.SYNC" "com.twofortyfouram.locale.intent.action.FIRE_SETTING" } [color=green,arrowhead="diamond"] ; 
+ "81ab85fa-4c43-102c-a73c-12313a00d126"[shape=box] ; 
+"81ab85fa-4c43-102c-a73c-12313a00d126"->{"com.eclipsim.gpsstatus.VIEW" "PREFERENCES" } [color=green,arrowhead="diamond"] ; 
+ "1285018216_Barcode_Scanner_3.5"[shape=box] ; 
+"1285018216_Barcode_Scanner_3.5"->{"com.google.zxing.client.android.ENCODE" "com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" "com.google.zxing.client.android.SCAN" "com.google.zxing.client.android.SHARE" } [color=green,arrowhead="diamond"] ; 
+ "1283980108_Astrid_3.2.7"[shape=box] ; 
+"1283980108_Astrid_3.2.7"->{"com.twofortyfouram.locale.intent.action.FIRE_SETTING" } [color=green,arrowhead="diamond"] ; 
+ "1268188719_twidroid_3.1.9"[shape=box] ; 
+"1268188719_twidroid_3.1.9"->{"com.twidroid.SendTweet" } [color=green,arrowhead="diamond"] ; 
+ "1284676730_Text-To-Speech_Extended_3.1"[shape=box] ; 
+"1284676730_Text-To-Speech_Extended_3.1"->{"com.google.intent.action.START_TTS_SERVICE_BETA" } [color=green,arrowhead="diamond"] ; 
+ "1281819701_K-9_Mail_3.001"[shape=box] ; 
+"1281819701_K-9_Mail_3.001"->{"com.fsck.k9.service.CoreReceiver.wakeLockRelease" "com.fsck.k9.service.BroadcastReceiver.scheduleIntent" } [color=green,arrowhead="diamond"] ; 
+ "f6508a54-7dde-102d-97db-12313b000c93"[shape=box] ; 
+"f6508a54-7dde-102d-97db-12313b000c93"->{"net.jjc1138.android.scrobbler.action.MUSIC_STATUS" } [color=green,arrowhead="diamond"] ; 
+ "1278398979_MixZing_2.4.0"[shape=box] ; 
+"1278398979_MixZing_2.4.0"->{"org.iii.romulus.meridian.playstatechanged" } [color=green,arrowhead="diamond"] ; 
+ "1281089673_ixMAT_Scanner_2.4"[shape=box] ; 
+"1281089673_ixMAT_Scanner_2.4"->{"com.google.zxing.client.android.SCAN" } [color=green,arrowhead="diamond"] ; 
+ "1282855217_APNdroid_2.1.3"[shape=box] ; 
+"1282855217_APNdroid_2.1.3"->{"com.google.code.apndroid.intent.action.STATUS_REQUEST" "com.google.code.apndroid.intent.action.STATUS_CHANGED" "com.twofortyfouram.locale.intent.action.FIRE_SETTING" "com.google.code.apndroid.intent.action.CHANGE_REQUEST" } [color=green,arrowhead="diamond"] ; 
+ "96dc0b18-bf13-102d-9790-6ec07c99d928"[shape=box] ; 
+"96dc0b18-bf13-102d-9790-6ec07c99d928"->{"com.xtralogic.logcollector.intent.action.SEND_LOG" } [color=green,arrowhead="diamond"] ; 
+ "1264445224_Music_Online_Lite_1.9.2"[shape=box] ; 
+"1264445224_Music_Online_Lite_1.9.2"->{"com.yyqidian.musiconlinelite.DownloadService" } [color=green,arrowhead="diamond"] ; 
+ "f3144db2-1c49-102e-b4a5-6ec07c99d928"[shape=box] ; 
+"f3144db2-1c49-102e-b4a5-6ec07c99d928"->{"org.openintents.action.PICK_FILE" } [color=green,arrowhead="diamond"] ; 
+ "1284544286_Amazon_MP3_1.8.22"[shape=box] ; 
+"1284544286_Amazon_MP3_1.8.22"->{"com.amazon.mp3.action.EXTERNAL_EVENT" } [color=green,arrowhead="diamond"] ; 
+ "7a1787c2-8486-102d-97db-12313b000c93"[shape=box] ; 
+"7a1787c2-8486-102d-97db-12313b000c93"->{"ACTIVATE" } [color=green,arrowhead="diamond"] ; 
+ "46abbc62-1066-102d-a134-12313a00d126"[shape=box] ; 
+"46abbc62-1066-102d-a134-12313a00d126"->{"net.laoyu.app_review.action.VIEW_TOPIC" } [color=green,arrowhead="diamond"] ; 
+ "222b4632-a8a5-102d-9303-12313b000c93"[shape=box] ; 
+"222b4632-a8a5-102d-9303-12313b000c93"->{"comment_post" "poslist" "comments" "posview" } [color=green,arrowhead="diamond"] ; 
+ "5a9f9baa-5b01-102c-9e11-12313a00d126"[shape=box] ; 
+"5a9f9baa-5b01-102c-9e11-12313a00d126"->{"com.twofortyfouram.locale.intent.action.FIRE_SETTING" } [color=green,arrowhead="diamond"] ; 
+ "1283977370_Last.fm_1.6.6"[shape=box] ; 
+"1283977370_Last.fm_1.6.6"->{"fm.last.android.LOVE" "fm.last.android.playbackcomplete" "net.jjc1138.android.scrobbler.action.MUSIC_STATUS" "com.smartmadsoft.openwatch.command.BUTTON_FF" "com.adam.aslfms.notify.playstatechanged" "fm.last.android.playbackpaused" "fm.last.android.BAN" "fm.last.android.metachanged" } [color=green,arrowhead="diamond"] ; 
+ "dad5f14c-30a9-102d-a134-12313a00d126"[shape=box] ; 
+"dad5f14c-30a9-102d-a134-12313a00d126"->{"com.appventive.mailprovider.error" "com.appventive.mailprovider.goodAccount" "com.appventive.mailprovider.intent.action.EMAIL_RECEIVED" "com.appventive.ExecAssist.updateEmail" } [color=green,arrowhead="diamond"] ; 
+ "004fee84-6d67-102c-9e11-12313a00d126"[shape=box] ; 
+"004fee84-6d67-102c-9e11-12313a00d126"->{"org.abrantes.filex" } [color=green,arrowhead="diamond"] ; 
+ "1277223532_MyMoBuy_1.3"[shape=box] ; 
+"1277223532_MyMoBuy_1.3"->{"com.google.zxing.client.android.ENCODE" "com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" "com.google.zxing.client.android.SCAN" "com.google.zxing.client.android.SHARE" } [color=green,arrowhead="diamond"] ; 
+ "bc5a33f2-ea1a-102c-a134-12313a00d126"[shape=box] ; 
+"bc5a33f2-ea1a-102c-a134-12313a00d126"->{"WAKEUP" } [color=green,arrowhead="diamond"] ; 
+ "1280693202_OI_Shopping_list_1.2.4"[shape=box] ; 
+"1280693202_OI_Shopping_list_1.2.4"->{"org.openintents.action.SET_SHARE_SETTINGS" "org.openintents.action.ADD_LOCATION_ALERT" } [color=green,arrowhead="diamond"] ; 
+ "1281699855_3banana_Notes_1.19"[shape=box] ; 
+"1281699855_3banana_Notes_1.19"->{"com.snaptic.intent.action.VIEW" "com.threebanana.notes.NoteEditor.ACTION_GEONOTE" "com.snaptic.intent.action.ADD" "com.threebanana.notes.Notes.ACTION_FILTER_NOTES" } [color=green,arrowhead="diamond"] ; 
+ "1281799312_FoxyRing_1.11"[shape=box] ; 
+"1281799312_FoxyRing_1.11"->{"com.twofortyfouram.locale.intent.action.FIRE_SETTING" } [color=green,arrowhead="diamond"] ; 
  "1278437978_youcast"[shape=box] ; 
-"1278437978_youcast"->{"org.openintents.action.PICK_FILE" "com.xtralogic.logcollector.intent.action.SEND_LOG" "org.openintents.action.PICK_DIRECTORY" } [color=green] ; 
-"ad7083d4-201e-102d-a134-12313a00d126"[shape=box] 
-"ad7083d4-201e-102d-a134-12313a00d126"->"org.abrantes.filex" [color=red] ;
- "556cff08-a92d-102d-9303-12313b000c93"[shape=box] 
-"556cff08-a92d-102d-9303-12313b000c93"->"com.aunndroid.klove.KplayerInterface" [color=red] ;
- "556cff08-a92d-102d-9303-12313b000c93"[shape=box] 
-"556cff08-a92d-102d-9303-12313b000c93"->"com.aunndroid.klove.KLOVE_VIEWER" [color=red] ;
- "bd5f2f12-e2f0-102d-a194-6ec07c99d928"[shape=box] 
-"bd5f2f12-e2f0-102d-a194-6ec07c99d928"->"europe.de.ftdevelop.aviation.snowtamdecoder.ACTION_SNOWTAM_DECODE" [color=red] ;
- "1284839094_MP3_Download_Lite_4.982"[shape=box] 
-"1284839094_MP3_Download_Lite_4.982"->"org.neferty.android.mp3widget.service.NotificationService" [color=red] ;
- "1284839094_MP3_Download_Lite_4.982"[shape=box] 
-"1284839094_MP3_Download_Lite_4.982"->"org.neferty.android.mp3widget.service.LibraryService" [color=red] ;
- "1284839094_MP3_Download_Lite_4.982"[shape=box] 
-"1284839094_MP3_Download_Lite_4.982"->"org.neferty.android.mp3widget.service.DownloadService" [color=red] ;
- "1284839094_MP3_Download_Lite_4.982"[shape=box] 
-"1284839094_MP3_Download_Lite_4.982"->"org.neferty.android.mp3widget.service.SearchService" [color=red] ;
- "1284839094_MP3_Download_Lite_4.982"[shape=box] 
-"1284839094_MP3_Download_Lite_4.982"->"org.neferty.android.mp3widget.service.AdService" [color=red] ;
- "3772bdaa-8bf3-102d-97db-12313b000c93"[shape=box] 
-"3772bdaa-8bf3-102d-97db-12313b000c93"->"com.asksven.xtremepp.intent.action.MESSAGE_RECEIVED" [color=red] ;
- "1278437978_youcast"[shape=box] 
-"1278437978_youcast"->"com.fsck.k9.intent.action.EMAIL_RECEIVED" [color=red] ;
- "3772bdaa-8bf3-102d-97db-12313b000c93"[shape=box] 
-"3772bdaa-8bf3-102d-97db-12313b000c93"->"com.asksven.systemsettings.action.EXECUTE_COMMAND" [color=red] ;
- "ce1ac646-b838-102d-9790-6ec07c99d928"[shape=box] 
-"ce1ac646-b838-102d-9790-6ec07c99d928"->"mobi.bbase.ahome.THEME" [color=red] ;
- "cdf5f302-3f52-102d-a134-12313a00d126"[shape=box] 
-"cdf5f302-3f52-102d-a134-12313a00d126"->"net.laoyu.app_review.action.VIEW_TOPIC" [color=red] ;
- "40d3382e-3f55-102d-a134-12313a00d126"[shape=box] 
-"40d3382e-3f55-102d-a134-12313a00d126"->"net.laoyu.app_review.action.VIEW_TOPIC" [color=red] ;
- "1272391487_BookPriceRussia"[shape=box] 
-"1272391487_BookPriceRussia"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "1284295920_3banana_Notes_1.17"[shape=box] 
-"1284295920_3banana_Notes_1.17"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "1281024026_CardStar_2.0.6"[shape=box] 
-"1281024026_CardStar_2.0.6"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "1278408765_PhiSq_Scanner_1.5"[shape=box] 
-"1278408765_PhiSq_Scanner_1.5"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "31c64c4e-7278-102d-97db-12313b000c93"[shape=box] 
-"31c64c4e-7278-102d-97db-12313b000c93"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "1280720629_Prisjakt_1.2.5"[shape=box] 
-"1280720629_Prisjakt_1.2.5"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "7b708c5e-e89f-102d-a194-6ec07c99d928"[shape=box] 
-"7b708c5e-e89f-102d-a194-6ec07c99d928"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "1264276631_barcoo_1.9"[shape=box] 
-"1264276631_barcoo_1.9"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "1280691013_Key_Ring_2.2.1"[shape=box] 
-"1280691013_Key_Ring_2.2.1"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "9aece042-5578-102d-a134-12313a00d126"[shape=box] 
-"9aece042-5578-102d-a134-12313a00d126"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "3ac7a348-8168-102d-97db-12313b000c93"[shape=box] 
-"3ac7a348-8168-102d-97db-12313b000c93"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "1280724600_CNET_Scan_Shop_1.1.1"[shape=box] 
-"1280724600_CNET_Scan_Shop_1.1.1"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "1281046015_idealo_1.3"[shape=box] 
-"1281046015_idealo_1.3"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "1264201301_ShopSavvy_3.6.1"[shape=box] 
-"1264201301_ShopSavvy_3.6.1"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "07760fa4-c90f-102d-bded-6ec07c99d928"[shape=box] 
-"07760fa4-c90f-102d-bded-6ec07c99d928"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "b802111a-c64e-102d-bded-6ec07c99d928"[shape=box] 
-"b802111a-c64e-102d-bded-6ec07c99d928"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "1281092675_Shopping_List_Plus_3.1.1"[shape=box] 
-"1281092675_Shopping_List_Plus_3.1.1"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "1282732500_Calorie_Counter_1.10.0"[shape=box] 
-"1282732500_Calorie_Counter_1.10.0"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "0d7ad6be-2d1b-102c-8875-000f4b0782e8"[shape=box] 
-"0d7ad6be-2d1b-102c-8875-000f4b0782e8"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "4a2eed2e-ecce-102d-a194-6ec07c99d928"[shape=box] 
-"4a2eed2e-ecce-102d-a194-6ec07c99d928"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "4974154e-9ca6-102d-823a-12313b000c93"[shape=box] 
-"4974154e-9ca6-102d-823a-12313b000c93"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "1270993896_Cardex_1.2"[shape=box] 
-"1270993896_Cardex_1.2"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "1267389797_Appack_0.7"[shape=box] 
-"1267389797_Appack_0.7"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "ff68c0e2-1c9b-102d-a134-12313a00d126"[shape=box] 
-"ff68c0e2-1c9b-102d-a134-12313a00d126"->"com.google.zxing.client.android.SCAN" [color=red] ;
- "1274176294_Touiteur_1.20"[shape=box] 
-"1274176294_Touiteur_1.20"->"com.twofortyfouram.locale.intent.action.FIRE_SETTING" [color=red] ;
- "78222074-0bec-102e-9405-6ec07c99d928"[shape=box] 
-"78222074-0bec-102e-9405-6ec07c99d928"->"org.openintents.action.PICK_FILE" [color=red] ;
- "6db0102c-5514-102d-a134-12313a00d126"[shape=box] 
-"6db0102c-5514-102d-a134-12313a00d126"->"org.openintents.action.PICK_FILE" [color=red] ;
- "260d9d1e-e526-102d-a194-6ec07c99d928"[shape=box] 
-"260d9d1e-e526-102d-a194-6ec07c99d928"->"org.openintents.action.PICK_FILE" [color=red] ;
- "c8a699c2-0bc3-102e-9405-6ec07c99d928"[shape=box] 
-"c8a699c2-0bc3-102e-9405-6ec07c99d928"->"org.openintents.action.PICK_FILE" [color=red] ;
- "1ce049c8-b7f7-102d-9790-6ec07c99d928"[shape=box] 
-"1ce049c8-b7f7-102d-9790-6ec07c99d928"->"org.openintents.action.PICK_FILE" [color=red] ;
- "1265627825_Transdroid_0.13.5"[shape=box] 
-"1265627825_Transdroid_0.13.5"->"org.openintents.action.PICK_FILE" [color=red] ;
- "16d56a38-f74e-102b-9253-000f4b0782e8"[shape=box] 
-"16d56a38-f74e-102b-9253-000f4b0782e8"->"org.openintents.action.PICK_FILE" [color=red] ;
- "0ae1f494-eb3b-102c-a134-12313a00d126"[shape=box] 
-"0ae1f494-eb3b-102c-a134-12313a00d126"->"org.openintents.action.PICK_FILE" [color=red] ;
- "dad5f14c-30a9-102d-a134-12313a00d126"[shape=box] 
-"dad5f14c-30a9-102d-a134-12313a00d126"->"com.appventive.actions.EditEmailAccount" [color=red] ;
- "dad5f14c-30a9-102d-a134-12313a00d126"[shape=box] 
-"dad5f14c-30a9-102d-a134-12313a00d126"->"com.appventive.action.UpdateMail" [color=red] ;
- "dad5f14c-30a9-102d-a134-12313a00d126"[shape=box] 
-"dad5f14c-30a9-102d-a134-12313a00d126"->"com.appventive.actions.CreateEmailAccount" [color=red] ;
- "1265809516_AndNav2_0.8.8.2.1"[shape=box] 
-"1265809516_AndNav2_0.8.8.2.1"->"com.eclipsim.gpsstatus.VIEW" [color=red] ;
- "1c9f9c02-8c9b-102d-823a-12313b000c93"[shape=box] 
-"1c9f9c02-8c9b-102d-823a-12313b000c93"->"com.eclipsim.gpsstatus.VIEW" [color=red] ;
- "1283589549_Meridian_Player_Pioneer_0.20.1"[shape=box] 
-"1283589549_Meridian_Player_Pioneer_0.20.1"->"org.iii.romulus.meridian.playstatechanged" [color=red] ;
- "0f023202-7ba8-102d-97db-12313b000c93"[shape=box] 
-"0f023202-7ba8-102d-97db-12313b000c93"->"com.xtralogic.logcollector.intent.action.SEND_LOG" [color=red] ;
- "1281647846_Foursquare_2010-08-05"[shape=box] 
-"1281647846_Foursquare_2010-08-05"->"com.xtralogic.logcollector.intent.action.SEND_LOG" [color=red] ;
- "1265627825_Transdroid_0.13.5"[shape=box] 
-"1265627825_Transdroid_0.13.5"->"com.xtralogic.logcollector.intent.action.SEND_LOG" [color=red] ;
- "1283683688_Music_Online_Lite_1.9.16"[shape=box] 
-"1283683688_Music_Online_Lite_1.9.16"->"com.xtralogic.logcollector.intent.action.SEND_LOG" [color=red] ;
- "2a6919ae-bc47-102d-9790-6ec07c99d928"[shape=box] 
-"2a6919ae-bc47-102d-9790-6ec07c99d928"->"com.xtralogic.logcollector.intent.action.SEND_LOG" [color=red] ;
- "6b0417f2-101b-102e-9405-6ec07c99d928"[shape=box] 
-"6b0417f2-101b-102e-9405-6ec07c99d928"->"com.carl.askastranger.AUTH_SUCCESS" [color=red] ;
- "6b0417f2-101b-102e-9405-6ec07c99d928"[shape=box] 
-"6b0417f2-101b-102e-9405-6ec07c99d928"->"com.carl.askastranger.QUEST_ADDLIST" [color=red] ;
- "46207e7a-f58e-102b-9253-000f4b0782e8"[shape=box] 
-"46207e7a-f58e-102b-9253-000f4b0782e8"->"org.openintents.action.SET_SHARE_SETTINGS" [color=red] ;
- "46207e7a-f58e-102b-9253-000f4b0782e8"[shape=box] 
-"46207e7a-f58e-102b-9253-000f4b0782e8"->"org.openintents.action.ADD_LOCATION_ALERT" [color=red] ;
- "99102e14-e7d7-102c-a134-12313a00d126"[shape=box] 
-"99102e14-e7d7-102c-a134-12313a00d126"->"aldiko.intent.action.ADD_BOOKS_TO_LABEL" [color=red] ;
- "99102e14-e7d7-102c-a134-12313a00d126"[shape=box] 
-"99102e14-e7d7-102c-a134-12313a00d126"->"aldiko.intent.action.VIEW_BOOKS_BY_AUTHOR" [color=red] ;
- "99102e14-e7d7-102c-a134-12313a00d126"[shape=box] 
-"99102e14-e7d7-102c-a134-12313a00d126"->"aldiko.intent.action.ADD_COLLECTIONS_TO_BOOK" [color=red] ;
- "99102e14-e7d7-102c-a134-12313a00d126"[shape=box] 
-"99102e14-e7d7-102c-a134-12313a00d126"->"aldiko.intent.action.VIEW_BOOKS_IN_LABEL" [color=red] ;
- "99102e14-e7d7-102c-a134-12313a00d126"[shape=box] 
-"99102e14-e7d7-102c-a134-12313a00d126"->"aldiko.intent.action.VIEW_BOOKS_IN_COLLECTION" [color=red] ;
- "99102e14-e7d7-102c-a134-12313a00d126"[shape=box] 
-"99102e14-e7d7-102c-a134-12313a00d126"->"aldiko.intent.action.ADD_LABELS_TO_BOOK" [color=red] ;
- "99102e14-e7d7-102c-a134-12313a00d126"[shape=box] 
-"99102e14-e7d7-102c-a134-12313a00d126"->"aldiko.intent.action.ADD_BOOKS_TO_COLLECTION" [color=red] ;
- "99102e14-e7d7-102c-a134-12313a00d126"[shape=box] 
-"99102e14-e7d7-102c-a134-12313a00d126"->"aldiko.intent.action.VIEW_LABELS_WITH_BOOK" [color=red] ;
- "99102e14-e7d7-102c-a134-12313a00d126"[shape=box] 
-"99102e14-e7d7-102c-a134-12313a00d126"->"aldiko.intent.action.VIEW_COLLECTIONS_WITH_BOOK" [color=red] ;
- "6b980a5e-8cd9-102d-823a-12313b000c93"[shape=box] 
-"6b980a5e-8cd9-102d-823a-12313b000c93"->"com.appventive.mailprovider.error" [color=red] ;
- "6b980a5e-8cd9-102d-823a-12313b000c93"[shape=box] 
-"6b980a5e-8cd9-102d-823a-12313b000c93"->"com.appventive.mailprovider.goodAccount" [color=red] ;
- "6b980a5e-8cd9-102d-823a-12313b000c93"[shape=box] 
-"6b980a5e-8cd9-102d-823a-12313b000c93"->"com.appventive.mailprovider.intent.action.EMAIL_RECEIVED" [color=red] ;
- "6b980a5e-8cd9-102d-823a-12313b000c93"[shape=box] 
-"6b980a5e-8cd9-102d-823a-12313b000c93"->"com.appventive.ExecAssist.updateEmail" [color=red] ;
- "96285474-f04b-102d-a194-6ec07c99d928"[shape=box] 
-"96285474-f04b-102d-a194-6ec07c99d928"->"com.yeradis.android.hellotxt.RECEIVER" [color=red] ;
- "004fee84-6d67-102c-9e11-12313a00d126"[shape=box] 
-"004fee84-6d67-102c-9e11-12313a00d126"->"net.jjc1138.android.scrobbler.action.MUSIC_STATUS" [color=red] ;
- "a846b7b2-ce69-102d-a194-6ec07c99d928"[shape=box] 
-"a846b7b2-ce69-102d-a194-6ec07c99d928"->"net.jjc1138.android.scrobbler.action.MUSIC_STATUS" [color=red] ;
- "1283589549_Meridian_Player_Pioneer_0.20.1"[shape=box] 
-"1283589549_Meridian_Player_Pioneer_0.20.1"->"net.jjc1138.android.scrobbler.action.MUSIC_STATUS" [color=red] ;
- "2ec9e3bc-84ba-102d-97db-12313b000c93"[shape=box] 
-"2ec9e3bc-84ba-102d-97db-12313b000c93"->"net.jjc1138.android.scrobbler.action.MUSIC_STATUS" [color=red] ;
- "93da31d4-157b-102d-a134-12313a00d126"[shape=box] 
-"93da31d4-157b-102d-a134-12313a00d126"->"net.jjc1138.android.scrobbler.action.MUSIC_STATUS" [color=red] ;
- "101bd794-8277-102d-97db-12313b000c93"[shape=box] 
-"101bd794-8277-102d-97db-12313b000c93"->"net.jjc1138.android.scrobbler.action.MUSIC_STATUS" [color=red] ;
- "1281837743_MortPlayer_Music_0.8.2"[shape=box] 
-"1281837743_MortPlayer_Music_0.8.2"->"net.jjc1138.android.scrobbler.action.MUSIC_STATUS" [color=red] ;
- "1284295920_3banana_Notes_1.17"[shape=box] 
-"1284295920_3banana_Notes_1.17"->"com.google.zxing.client.android.ENCODE" [color=red] ;
- "1281024026_CardStar_2.0.6"[shape=box] 
-"1281024026_CardStar_2.0.6"->"com.google.zxing.client.android.ENCODE" [color=red] ;
- "31c64c4e-7278-102d-97db-12313b000c93"[shape=box] 
-"31c64c4e-7278-102d-97db-12313b000c93"->"com.google.zxing.client.android.ENCODE" [color=red] ;
- "51fde2b8-58f8-102d-a134-12313a00d126"[shape=box] 
-"51fde2b8-58f8-102d-a134-12313a00d126"->"com.google.zxing.client.android.ENCODE" [color=red] ;
- "1264276631_barcoo_1.9"[shape=box] 
-"1264276631_barcoo_1.9"->"com.google.zxing.client.android.ENCODE" [color=red] ;
- "81ab85fa-4c43-102c-a73c-12313a00d126"[shape=box] 
-"81ab85fa-4c43-102c-a73c-12313a00d126"->"com.google.zxing.client.android.ENCODE" [color=red] ;
- "1280691013_Key_Ring_2.2.1"[shape=box] 
-"1280691013_Key_Ring_2.2.1"->"com.google.zxing.client.android.ENCODE" [color=red] ;
- "9aece042-5578-102d-a134-12313a00d126"[shape=box] 
-"9aece042-5578-102d-a134-12313a00d126"->"com.google.zxing.client.android.ENCODE" [color=red] ;
- "3ac7a348-8168-102d-97db-12313b000c93"[shape=box] 
-"3ac7a348-8168-102d-97db-12313b000c93"->"com.google.zxing.client.android.ENCODE" [color=red] ;
- "1280724600_CNET_Scan_Shop_1.1.1"[shape=box] 
-"1280724600_CNET_Scan_Shop_1.1.1"->"com.google.zxing.client.android.ENCODE" [color=red] ;
- "1264201301_ShopSavvy_3.6.1"[shape=box] 
-"1264201301_ShopSavvy_3.6.1"->"com.google.zxing.client.android.ENCODE" [color=red] ;
- "1282732500_Calorie_Counter_1.10.0"[shape=box] 
-"1282732500_Calorie_Counter_1.10.0"->"com.google.zxing.client.android.ENCODE" [color=red] ;
- "4a2eed2e-ecce-102d-a194-6ec07c99d928"[shape=box] 
-"4a2eed2e-ecce-102d-a194-6ec07c99d928"->"com.google.zxing.client.android.ENCODE" [color=red] ;
- "4974154e-9ca6-102d-823a-12313b000c93"[shape=box] 
-"4974154e-9ca6-102d-823a-12313b000c93"->"com.google.zxing.client.android.ENCODE" [color=red] ;
- "1270993896_Cardex_1.2"[shape=box] 
-"1270993896_Cardex_1.2"->"com.google.zxing.client.android.ENCODE" [color=red] ;
- "ff68c0e2-1c9b-102d-a134-12313a00d126"[shape=box] 
-"ff68c0e2-1c9b-102d-a134-12313a00d126"->"com.google.zxing.client.android.ENCODE" [color=red] ;
- "6e941d62-1f36-102d-a134-12313a00d126"[shape=box] 
-"6e941d62-1f36-102d-a134-12313a00d126"->"com.google.zxing.client.android.ENCODE" [color=red] ;
- "1281024026_CardStar_2.0.6"[shape=box] 
-"1281024026_CardStar_2.0.6"->"com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" [color=red] ;
- "31c64c4e-7278-102d-97db-12313b000c93"[shape=box] 
-"31c64c4e-7278-102d-97db-12313b000c93"->"com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" [color=red] ;
- "51fde2b8-58f8-102d-a134-12313a00d126"[shape=box] 
-"51fde2b8-58f8-102d-a134-12313a00d126"->"com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" [color=red] ;
- "1264276631_barcoo_1.9"[shape=box] 
-"1264276631_barcoo_1.9"->"com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" [color=red] ;
- "1280691013_Key_Ring_2.2.1"[shape=box] 
-"1280691013_Key_Ring_2.2.1"->"com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" [color=red] ;
- "1280724600_CNET_Scan_Shop_1.1.1"[shape=box] 
-"1280724600_CNET_Scan_Shop_1.1.1"->"com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" [color=red] ;
- "1264201301_ShopSavvy_3.6.1"[shape=box] 
-"1264201301_ShopSavvy_3.6.1"->"com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" [color=red] ;
- "1282732500_Calorie_Counter_1.10.0"[shape=box] 
-"1282732500_Calorie_Counter_1.10.0"->"com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" [color=red] ;
- "1281024026_CardStar_2.0.6"[shape=box] 
-"1281024026_CardStar_2.0.6"->"com.google.zxing.client.android.SHARE" [color=red] ;
- "31c64c4e-7278-102d-97db-12313b000c93"[shape=box] 
-"31c64c4e-7278-102d-97db-12313b000c93"->"com.google.zxing.client.android.SHARE" [color=red] ;
- "51fde2b8-58f8-102d-a134-12313a00d126"[shape=box] 
-"51fde2b8-58f8-102d-a134-12313a00d126"->"com.google.zxing.client.android.SHARE" [color=red] ;
- "1264276631_barcoo_1.9"[shape=box] 
-"1264276631_barcoo_1.9"->"com.google.zxing.client.android.SHARE" [color=red] ;
- "1280691013_Key_Ring_2.2.1"[shape=box] 
-"1280691013_Key_Ring_2.2.1"->"com.google.zxing.client.android.SHARE" [color=red] ;
- "1280724600_CNET_Scan_Shop_1.1.1"[shape=box] 
-"1280724600_CNET_Scan_Shop_1.1.1"->"com.google.zxing.client.android.SHARE" [color=red] ;
- "1264201301_ShopSavvy_3.6.1"[shape=box] 
-"1264201301_ShopSavvy_3.6.1"->"com.google.zxing.client.android.SHARE" [color=red] ;
- "0e8901ec-1424-102e-9405-6ec07c99d928"[shape=box] 
-"0e8901ec-1424-102e-9405-6ec07c99d928"->"com.snaptic.intent.action.VIEW" [color=red] ;
- "87954b42-46f0-102d-a134-12313a00d126"[shape=box] 
-"87954b42-46f0-102d-a134-12313a00d126"->"com.snaptic.intent.action.VIEW" [color=red] ;
- "c981e4b0-1423-102e-9405-6ec07c99d928"[shape=box] 
-"c981e4b0-1423-102e-9405-6ec07c99d928"->"com.snaptic.intent.action.VIEW" [color=red] ;
- "4b5161ba-f779-102b-9253-000f4b0782e8"[shape=box] 
-"4b5161ba-f779-102b-9253-000f4b0782e8"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red] ;
- "374d566a-f620-102b-9253-000f4b0782e8"[shape=box] 
-"374d566a-f620-102b-9253-000f4b0782e8"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red] ;
- "1264273611_BBC_News_1.6.0"[shape=box] 
-"1264273611_BBC_News_1.6.0"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red] ;
- "aade0482-d705-102c-a134-12313a00d126"[shape=box] 
-"aade0482-d705-102c-a134-12313a00d126"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red] ;
- "31ab9b9a-d6f8-102c-a134-12313a00d126"[shape=box] 
-"31ab9b9a-d6f8-102c-a134-12313a00d126"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red] ;
- "2e9bdac0-d705-102c-a134-12313a00d126"[shape=box] 
-"2e9bdac0-d705-102c-a134-12313a00d126"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red] ;
- "1264200279_DailyHoroscope_1.6"[shape=box] 
-"1264200279_DailyHoroscope_1.6"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red] ;
- "2a533ab6-d706-102c-a134-12313a00d126"[shape=box] 
-"2a533ab6-d706-102c-a134-12313a00d126"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red] ;
- "04cad9c2-d6fa-102c-a134-12313a00d126"[shape=box] 
-"04cad9c2-d6fa-102c-a134-12313a00d126"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red] ;
- "931f4cd8-d706-102c-a134-12313a00d126"[shape=box] 
-"931f4cd8-d706-102c-a134-12313a00d126"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red] ;
- "051c53bc-d707-102c-a134-12313a00d126"[shape=box] 
-"051c53bc-d707-102c-a134-12313a00d126"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red] ;
- "1264191986_Compass_1.0.22"[shape=box] 
-"1264191986_Compass_1.0.22"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red] ;
- "1264212787_10001_Cocktails_4.1"[shape=box] 
-"1264212787_10001_Cocktails_4.1"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red] ;
- "0e8901ec-1424-102e-9405-6ec07c99d928"[shape=box] 
-"0e8901ec-1424-102e-9405-6ec07c99d928"->"com.snaptic.intent.action.ADD" [color=red] ;
- "87954b42-46f0-102d-a134-12313a00d126"[shape=box] 
-"87954b42-46f0-102d-a134-12313a00d126"->"com.snaptic.intent.action.ADD" [color=red] ;
- "c981e4b0-1423-102e-9405-6ec07c99d928"[shape=box] 
-"c981e4b0-1423-102e-9405-6ec07c99d928"->"com.snaptic.intent.action.ADD" [color=red] ;
- "4b5161ba-f779-102b-9253-000f4b0782e8"[shape=box] 
-"4b5161ba-f779-102b-9253-000f4b0782e8"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red] ;
- "374d566a-f620-102b-9253-000f4b0782e8"[shape=box] 
-"374d566a-f620-102b-9253-000f4b0782e8"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red] ;
- "1264273611_BBC_News_1.6.0"[shape=box] 
-"1264273611_BBC_News_1.6.0"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red] ;
- "aade0482-d705-102c-a134-12313a00d126"[shape=box] 
-"aade0482-d705-102c-a134-12313a00d126"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red] ;
- "31ab9b9a-d6f8-102c-a134-12313a00d126"[shape=box] 
-"31ab9b9a-d6f8-102c-a134-12313a00d126"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red] ;
- "2e9bdac0-d705-102c-a134-12313a00d126"[shape=box] 
-"2e9bdac0-d705-102c-a134-12313a00d126"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red] ;
- "1264200279_DailyHoroscope_1.6"[shape=box] 
-"1264200279_DailyHoroscope_1.6"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red] ;
- "2a533ab6-d706-102c-a134-12313a00d126"[shape=box] 
-"2a533ab6-d706-102c-a134-12313a00d126"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red] ;
- "04cad9c2-d6fa-102c-a134-12313a00d126"[shape=box] 
-"04cad9c2-d6fa-102c-a134-12313a00d126"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red] ;
- "931f4cd8-d706-102c-a134-12313a00d126"[shape=box] 
-"931f4cd8-d706-102c-a134-12313a00d126"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red] ;
- "051c53bc-d707-102c-a134-12313a00d126"[shape=box] 
-"051c53bc-d707-102c-a134-12313a00d126"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red] ;
- "1264191986_Compass_1.0.22"[shape=box] 
-"1264191986_Compass_1.0.22"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red] ;
- "1264212787_10001_Cocktails_4.1"[shape=box] 
-"1264212787_10001_Cocktails_4.1"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red] ;
- "1284766912_PhoneUsage_2.2.2"[shape=box] 
-"1284766912_PhoneUsage_2.2.2"->"com.google.code.apndroid.intent.action.STATUS_REQUEST" [color=red] ;
- "1284766150_PhoneUsage_Korean_2.1.4"[shape=box] 
-"1284766150_PhoneUsage_Korean_2.1.4"->"com.google.code.apndroid.intent.action.STATUS_REQUEST" [color=red] ;
- "1284766912_PhoneUsage_2.2.2"[shape=box] 
-"1284766912_PhoneUsage_2.2.2"->"com.google.code.apndroid.intent.action.STATUS_CHANGED" [color=red] ;
- "1284766150_PhoneUsage_Korean_2.1.4"[shape=box] 
-"1284766150_PhoneUsage_Korean_2.1.4"->"com.google.code.apndroid.intent.action.STATUS_CHANGED" [color=red] ;
- "c3f58f40-36cc-102d-a134-12313a00d126"[shape=box] 
-"c3f58f40-36cc-102d-a134-12313a00d126"->"com.google.code.apndroid.intent.action.CHANGE_REQUEST" [color=red] ;
- "1284766912_PhoneUsage_2.2.2"[shape=box] 
-"1284766912_PhoneUsage_2.2.2"->"com.google.code.apndroid.intent.action.CHANGE_REQUEST" [color=red] ;
- "1284766150_PhoneUsage_Korean_2.1.4"[shape=box] 
-"1284766150_PhoneUsage_Korean_2.1.4"->"com.google.code.apndroid.intent.action.CHANGE_REQUEST" [color=red] ;
- "1284858045_doubleTwist_Player_1.1"[shape=box] 
-"1284858045_doubleTwist_Player_1.1"->"fm.last.android.LOVE" [color=red] ;
- "1284858045_doubleTwist_Player_1.1"[shape=box] 
-"1284858045_doubleTwist_Player_1.1"->"fm.last.android.playbackcomplete" [color=red] ;
- "a203eed2-bd85-102d-9790-6ec07c99d928"[shape=box] 
-"a203eed2-bd85-102d-9790-6ec07c99d928"->"com.smartmadsoft.openwatch.command.BUTTON_FF" [color=red] ;
- "1284858045_doubleTwist_Player_1.1"[shape=box] 
-"1284858045_doubleTwist_Player_1.1"->"fm.last.android.playbackpaused" [color=red] ;
- "1284858045_doubleTwist_Player_1.1"[shape=box] 
-"1284858045_doubleTwist_Player_1.1"->"fm.last.android.BAN" [color=red] ;
- "1284858045_doubleTwist_Player_1.1"[shape=box] 
-"1284858045_doubleTwist_Player_1.1"->"fm.last.android.metachanged" [color=red] ;
- "1283683688_Music_Online_Lite_1.9.16"[shape=box] 
-"1283683688_Music_Online_Lite_1.9.16"->"com.yyqidian.musiconlinelite.DownloadService" [color=red] ;
- "78222074-0bec-102e-9405-6ec07c99d928"[shape=box] 
-"78222074-0bec-102e-9405-6ec07c99d928"->"org.openintents.action.PICK_DIRECTORY" [color=red] ;
- "6db0102c-5514-102d-a134-12313a00d126"[shape=box] 
-"6db0102c-5514-102d-a134-12313a00d126"->"org.openintents.action.PICK_DIRECTORY" [color=red] ;
- "f3144db2-1c49-102e-b4a5-6ec07c99d928"[shape=box] 
-"f3144db2-1c49-102e-b4a5-6ec07c99d928"->"org.openintents.action.PICK_DIRECTORY" [color=red] ;
- "260d9d1e-e526-102d-a194-6ec07c99d928"[shape=box] 
-"260d9d1e-e526-102d-a194-6ec07c99d928"->"org.openintents.action.PICK_DIRECTORY" [color=red] ;
- "c8a699c2-0bc3-102e-9405-6ec07c99d928"[shape=box] 
-"c8a699c2-0bc3-102e-9405-6ec07c99d928"->"org.openintents.action.PICK_DIRECTORY" [color=red] ;
- "2eabbc40-a763-102d-9303-12313b000c93"[shape=box] 
-"2eabbc40-a763-102d-9303-12313b000c93"->"org.openintents.action.PICK_DIRECTORY" [color=red] ;
- "bed9d136-61c1-102d-8168-12313b000c93"[shape=box] 
-"bed9d136-61c1-102d-8168-12313b000c93"->"org.openintents.action.PICK_DIRECTORY" [color=red] ;
- "16d56a38-f74e-102b-9253-000f4b0782e8"[shape=box] 
-"16d56a38-f74e-102b-9253-000f4b0782e8"->"org.openintents.action.PICK_DIRECTORY" [color=red] ;
- "0ae1f494-eb3b-102c-a134-12313a00d126"[shape=box] 
-"0ae1f494-eb3b-102c-a134-12313a00d126"->"org.openintents.action.PICK_DIRECTORY" [color=red] ;
- "d7f07a72-e3e4-102c-a134-12313a00d126"[shape=box] 
-"d7f07a72-e3e4-102c-a134-12313a00d126"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red] ;
- "1272007263_Time_Alarm_2.3.0"[shape=box] 
-"1272007263_Time_Alarm_2.3.0"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red] ;
- "93427ff6-3a24-102d-a134-12313a00d126"[shape=box] 
-"93427ff6-3a24-102d-a134-12313a00d126"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red] ;
- "1faa32fe-3170-102c-8875-000f4b0782e8"[shape=box] 
-"1faa32fe-3170-102c-8875-000f4b0782e8"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red] ;
- "da8efc06-a20f-102d-820b-12313b000c93"[shape=box] 
-"da8efc06-a20f-102d-820b-12313b000c93"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red] ;
- "1265809516_AndNav2_0.8.8.2.1"[shape=box] 
-"1265809516_AndNav2_0.8.8.2.1"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red] ;
- "1264193614_Google_Translate_1.0"[shape=box] 
-"1264193614_Google_Translate_1.0"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red] ;
- "8acef8de-e967-102d-a194-6ec07c99d928"[shape=box] 
-"8acef8de-e967-102d-a194-6ec07c99d928"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red] ;
- "ddf81e1e-785b-102d-97db-12313b000c93"[shape=box] 
-"ddf81e1e-785b-102d-97db-12313b000c93"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red] ;
+"1278437978_youcast"->{"org.openintents.action.PICK_FILE" "com.xtralogic.logcollector.intent.action.SEND_LOG" "org.openintents.action.PICK_DIRECTORY" } [color=green,arrowhead="diamond"] ; 
+ "1264433339_OI_File_Manager_1.1.1"[shape=box] ; 
+"1264433339_OI_File_Manager_1.1.1"->{"org.openintents.action.PICK_FILE" "org.openintents.action.PICK_DIRECTORY" } [color=green,arrowhead="diamond"] ; 
+ "ffc87194-0fd5-102e-9405-6ec07c99d928"[shape=box] ; 
+"ffc87194-0fd5-102e-9405-6ec07c99d928"->{"ConnectivityManager.CONNECTIVITY_ACTION" } [color=green,arrowhead="diamond"] ; 
+ "18b614dc-ea1a-102c-a134-12313a00d126"[shape=box] ; 
+"18b614dc-ea1a-102c-a134-12313a00d126"->{"WAKEUP" } [color=green,arrowhead="diamond"] ; 
+ "a280b8b8-ea90-102c-a134-12313a00d126"[shape=box] ; 
+"a280b8b8-ea90-102c-a134-12313a00d126"->{"com.twofortyfouram.locale.intent.action.FIRE_SETTING" } [color=green,arrowhead="diamond"] ; 
+ "51fde2b8-58f8-102d-a134-12313a00d126"[shape=box] ; 
+"51fde2b8-58f8-102d-a134-12313a00d126"->{"com.google.zxing.client.android.SCAN" } [color=green,arrowhead="diamond"] ; 
+ "cbdee650-d904-102c-a134-12313a00d126"[shape=box] ; 
+"cbdee650-d904-102c-a134-12313a00d126"->{"aldiko.intent.action.ADD_BOOKS_TO_LABEL" "aldiko.intent.action.VIEW_BOOKS_BY_AUTHOR" "aldiko.intent.action.ADD_COLLECTIONS_TO_BOOK" "aldiko.intent.action.VIEW_BOOKS_IN_LABEL" "aldiko.intent.action.VIEW_BOOKS_IN_COLLECTION" "aldiko.intent.action.ADD_LABELS_TO_BOOK" "aldiko.intent.action.ADD_BOOKS_TO_COLLECTION" "aldiko.intent.action.VIEW_LABELS_WITH_BOOK" "aldiko.intent.action.VIEW_COLLECTIONS_WITH_BOOK" } [color=green,arrowhead="diamond"] ; 
+ "a758d284-ea91-102c-a134-12313a00d126"[shape=box] ; 
+"a758d284-ea91-102c-a134-12313a00d126"->{"com.twofortyfouram.locale.intent.action.FIRE_SETTING" } [color=green,arrowhead="diamond"] ; 
+ "a04720e4-fb4e-102d-bbbc-6ec07c99d928"[shape=box] ; 
+"a04720e4-fb4e-102d-bbbc-6ec07c99d928"->{"mobi.bbase.ahome.THEME" } [color=green,arrowhead="diamond"] ; 
+ "38aec906-fb7f-102d-bbbc-6ec07c99d928"[shape=box] ; 
+"38aec906-fb7f-102d-bbbc-6ec07c99d928"->{"mobi.bbase.ahome.THEME" } [color=green,arrowhead="diamond"] ; 
+ "1267803998_DOVE6_A"[shape=box] ; 
+"1267803998_DOVE6_A"->{".EDIT_LOGIN" } [color=green,arrowhead="diamond"] ; 
+ "1277752367_LocationBotLite"[shape=box] ; 
+"1277752367_LocationBotLite"->{".EditLocation" ".Config" } [color=green,arrowhead="diamond"] ; 
+ "c504256a-0dbb-102e-9405-6ec07c99d928"[shape=box] ; 
+"c504256a-0dbb-102e-9405-6ec07c99d928"->{"com.carl.askastranger.AUTH_SUCCESS" "com.carl.askastranger.QUEST_ADDLIST" } [color=green,arrowhead="diamond"] ; 
+ "a2d5946a-d8b9-102d-a194-6ec07c99d928"[shape=box] ; 
+"a2d5946a-d8b9-102d-a194-6ec07c99d928"->{"europe.de.ftdevelop.aviation.snowtamdecoder.ACTION_SNOWTAM_DECODE" } [color=green,arrowhead="diamond"] ; 
+ "09699570-d8b8-102d-a194-6ec07c99d928"[shape=box] ; 
+"09699570-d8b8-102d-a194-6ec07c99d928"->{"europe.de.ftdevelop.aviation.snowtamdecoder.ACTION_SNOWTAM_DECODE" } [color=green,arrowhead="diamond"] ; 
+ "00ff20e2-a4c1-102d-9303-12313b000c93"[shape=box] ; 
+"00ff20e2-a4c1-102d-9303-12313b000c93"->{"com.aunndroid.klove.KplayerInterface" "com.aunndroid.klove.KLOVE_VIEWER" } [color=green,arrowhead="diamond"] ; 
+ "244e7462-7398-102d-97db-12313b000c93"[shape=box] ; 
+"244e7462-7398-102d-97db-12313b000c93"->{"com.asksven.xtremepp.intent.action.MESSAGE_RECEIVED" "com.fsck.k9.intent.action.EMAIL_RECEIVED" } [color=green,arrowhead="diamond"] ; 
+ "54f2a7d0-591f-102c-9e11-12313a00d126"[shape=box] ; 
+"54f2a7d0-591f-102c-9e11-12313a00d126"->{"com.twofortyfouram.locale.intent.action.FIRE_SETTING" } [color=green,arrowhead="diamond"] ; 
+ "2b9b96b8-7a5b-102d-97db-12313b000c93"[shape=box] ; 
+"2b9b96b8-7a5b-102d-97db-12313b000c93"->{"com.asksven.systemsettings.action.EXECUTE_COMMAND" } [color=green,arrowhead="diamond"] ; 
+ "6b980a5e-8cd9-102d-823a-12313b000c93"[shape=box] ; 
+"6b980a5e-8cd9-102d-823a-12313b000c93"->{"com.appventive.actions.EditEmailAccount" "com.appventive.action.UpdateMail" "com.appventive.actions.CreateEmailAccount" } [color=green,arrowhead="diamond"] ; 
+ "1265425348_VLC_Remote_0.3.3"[shape=box] ; 
+"1265425348_VLC_Remote_0.3.3"->{"org.openintents.remote.intent.action.VIEW" } [color=green,arrowhead="diamond"] ; 
+"1284676730_Text-To-Speech_Extended_3.1"[shape=box] ; 
+"1284676730_Text-To-Speech_Extended_3.1"->{"com.google.intent.category.TTS_BETA" } [color=blue,arrowhead="diamond"] ; 
+ "09f29c62-f24b-102b-9253-000f4b0782e8"[shape=box] ; 
+"09f29c62-f24b-102b-9253-000f4b0782e8"->{"org.openintents.category.SETTINGS" } [color=blue,arrowhead="diamond"] ; 
+"96285474-f04b-102d-a194-6ec07c99d928"[shape=box] 
+"96285474-f04b-102d-a194-6ec07c99d928"->"com.yeradis.android.hellotxt.RECEIVER" [color=red, style=dotted] ;
  "f85c3c68-ea03-102c-a134-12313a00d126"[shape=box] 
-"f85c3c68-ea03-102c-a134-12313a00d126"->"org.openintents.action.AR_VIEW" [color=red] ;
+"f85c3c68-ea03-102c-a134-12313a00d126"->"org.openintents.action.AR_VIEW" [color=red, style=dotted] ;
  "4e16816c-b292-102c-9e11-12313a00d126"[shape=box] 
-"4e16816c-b292-102c-9e11-12313a00d126"->"org.openintents.action.AR_VIEW" [color=red] ;
+"4e16816c-b292-102c-9e11-12313a00d126"->"org.openintents.action.AR_VIEW" [color=red, style=dotted] ;
  "a564824c-673d-102d-8168-12313b000c93"[shape=box] 
-"a564824c-673d-102d-8168-12313b000c93"->"org.openintents.action.AR_VIEW" [color=red] ;
- "d3963e78-ccee-102d-a194-6ec07c99d928"[shape=box] 
-"d3963e78-ccee-102d-a194-6ec07c99d928"->"com.twidroid.SendTweet" [color=red] ;
- "174b3e58-06a1-102d-a134-12313a00d126"[shape=box] 
-"174b3e58-06a1-102d-a134-12313a00d126"->"com.twidroid.SendTweet" [color=red] ;
- "2ff6dd5c-29a8-102d-a134-12313a00d126"[shape=box] 
-"2ff6dd5c-29a8-102d-a134-12313a00d126"->"com.twidroid.SendTweet" [color=red] ;
+"a564824c-673d-102d-8168-12313b000c93"->"org.openintents.action.AR_VIEW" [color=red, style=dotted] ;
+ "78222074-0bec-102e-9405-6ec07c99d928"[shape=box] 
+"78222074-0bec-102e-9405-6ec07c99d928"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "6db0102c-5514-102d-a134-12313a00d126"[shape=box] 
+"6db0102c-5514-102d-a134-12313a00d126"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "1284893574_Transdroid_0.21.0"[shape=box] 
+"1284893574_Transdroid_0.21.0"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "260d9d1e-e526-102d-a194-6ec07c99d928"[shape=box] 
+"260d9d1e-e526-102d-a194-6ec07c99d928"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "c8a699c2-0bc3-102e-9405-6ec07c99d928"[shape=box] 
+"c8a699c2-0bc3-102e-9405-6ec07c99d928"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "1ce049c8-b7f7-102d-9790-6ec07c99d928"[shape=box] 
+"1ce049c8-b7f7-102d-9790-6ec07c99d928"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "1282050479_ConnectBot_1.6.2"[shape=box] 
+"1282050479_ConnectBot_1.6.2"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "1265807613_OI_Notepad_1.1.3"[shape=box] 
+"1265807613_OI_Notepad_1.1.3"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "1284839094_MP3_Download_Lite_4.982"[shape=box] 
+"1284839094_MP3_Download_Lite_4.982"->"org.neferty.android.mp3widget.service.NotificationService" [color=red, style=dotted] ;
+ "1284839094_MP3_Download_Lite_4.982"[shape=box] 
+"1284839094_MP3_Download_Lite_4.982"->"org.neferty.android.mp3widget.service.LibraryService" [color=red, style=dotted] ;
+ "1284839094_MP3_Download_Lite_4.982"[shape=box] 
+"1284839094_MP3_Download_Lite_4.982"->"org.neferty.android.mp3widget.service.DownloadService" [color=red, style=dotted] ;
+ "1284839094_MP3_Download_Lite_4.982"[shape=box] 
+"1284839094_MP3_Download_Lite_4.982"->"org.neferty.android.mp3widget.service.SearchService" [color=red, style=dotted] ;
+ "1284839094_MP3_Download_Lite_4.982"[shape=box] 
+"1284839094_MP3_Download_Lite_4.982"->"org.neferty.android.mp3widget.service.AdService" [color=red, style=dotted] ;
+ "c3f58f40-36cc-102d-a134-12313a00d126"[shape=box] 
+"c3f58f40-36cc-102d-a134-12313a00d126"->"com.newsrob.SYNC" [color=red, style=dotted] ;
+ "1281892287_Touiteur_1.33"[shape=box] 
+"1281892287_Touiteur_1.33"->"com.twofortyfouram.locale.intent.action.FIRE_SETTING" [color=red, style=dotted] ;
+ "1265809516_AndNav2_0.8.8.2.1"[shape=box] 
+"1265809516_AndNav2_0.8.8.2.1"->"com.eclipsim.gpsstatus.VIEW" [color=red, style=dotted] ;
+ "1c9f9c02-8c9b-102d-823a-12313b000c93"[shape=box] 
+"1c9f9c02-8c9b-102d-823a-12313b000c93"->"com.eclipsim.gpsstatus.VIEW" [color=red, style=dotted] ;
+ "1281024026_CardStar_2.0.6"[shape=box] 
+"1281024026_CardStar_2.0.6"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "1282732976_Calorie_Counter_1.7.0"[shape=box] 
+"1282732976_Calorie_Counter_1.7.0"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "31c64c4e-7278-102d-97db-12313b000c93"[shape=box] 
+"31c64c4e-7278-102d-97db-12313b000c93"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "51fde2b8-58f8-102d-a134-12313a00d126"[shape=box] 
+"51fde2b8-58f8-102d-a134-12313a00d126"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "1283717915_barcoo_2.2"[shape=box] 
+"1283717915_barcoo_2.2"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "81ab85fa-4c43-102c-a73c-12313a00d126"[shape=box] 
+"81ab85fa-4c43-102c-a73c-12313a00d126"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "9aece042-5578-102d-a134-12313a00d126"[shape=box] 
+"9aece042-5578-102d-a134-12313a00d126"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "3ac7a348-8168-102d-97db-12313b000c93"[shape=box] 
+"3ac7a348-8168-102d-97db-12313b000c93"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "1281699855_3banana_Notes_1.19"[shape=box] 
+"1281699855_3banana_Notes_1.19"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "1270908243_ListBuddy"[shape=box] 
+"1270908243_ListBuddy"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
  "1280724600_CNET_Scan_Shop_1.1.1"[shape=box] 
-"1280724600_CNET_Scan_Shop_1.1.1"->"com.twidroid.SendTweet" [color=red] ;
- "1264201301_ShopSavvy_3.6.1"[shape=box] 
-"1264201301_ShopSavvy_3.6.1"->"com.twidroid.SendTweet" [color=red] ;
+"1280724600_CNET_Scan_Shop_1.1.1"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "1280672046_ShopSavvy_3.6.6"[shape=box] 
+"1280672046_ShopSavvy_3.6.6"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "4a2eed2e-ecce-102d-a194-6ec07c99d928"[shape=box] 
+"4a2eed2e-ecce-102d-a194-6ec07c99d928"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "4974154e-9ca6-102d-823a-12313b000c93"[shape=box] 
+"4974154e-9ca6-102d-823a-12313b000c93"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "1270993896_Cardex_1.2"[shape=box] 
+"1270993896_Cardex_1.2"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "1284938262_Key_Ring_3.2.1"[shape=box] 
+"1284938262_Key_Ring_3.2.1"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "ff68c0e2-1c9b-102d-a134-12313a00d126"[shape=box] 
+"ff68c0e2-1c9b-102d-a134-12313a00d126"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "6e941d62-1f36-102d-a134-12313a00d126"[shape=box] 
+"6e941d62-1f36-102d-a134-12313a00d126"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "1281024026_CardStar_2.0.6"[shape=box] 
+"1281024026_CardStar_2.0.6"->"com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" [color=red, style=dotted] ;
+ "1282732976_Calorie_Counter_1.7.0"[shape=box] 
+"1282732976_Calorie_Counter_1.7.0"->"com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" [color=red, style=dotted] ;
+ "31c64c4e-7278-102d-97db-12313b000c93"[shape=box] 
+"31c64c4e-7278-102d-97db-12313b000c93"->"com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" [color=red, style=dotted] ;
+ "51fde2b8-58f8-102d-a134-12313a00d126"[shape=box] 
+"51fde2b8-58f8-102d-a134-12313a00d126"->"com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" [color=red, style=dotted] ;
+ "1283717915_barcoo_2.2"[shape=box] 
+"1283717915_barcoo_2.2"->"com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" [color=red, style=dotted] ;
+ "1280724600_CNET_Scan_Shop_1.1.1"[shape=box] 
+"1280724600_CNET_Scan_Shop_1.1.1"->"com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" [color=red, style=dotted] ;
+ "1280672046_ShopSavvy_3.6.6"[shape=box] 
+"1280672046_ShopSavvy_3.6.6"->"com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" [color=red, style=dotted] ;
+ "1284938262_Key_Ring_3.2.1"[shape=box] 
+"1284938262_Key_Ring_3.2.1"->"com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" [color=red, style=dotted] ;
+ "1272391487_BookPriceRussia"[shape=box] 
+"1272391487_BookPriceRussia"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1281024026_CardStar_2.0.6"[shape=box] 
+"1281024026_CardStar_2.0.6"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1278408765_PhiSq_Scanner_1.5"[shape=box] 
+"1278408765_PhiSq_Scanner_1.5"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1282732976_Calorie_Counter_1.7.0"[shape=box] 
+"1282732976_Calorie_Counter_1.7.0"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "31c64c4e-7278-102d-97db-12313b000c93"[shape=box] 
+"31c64c4e-7278-102d-97db-12313b000c93"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1280720629_Prisjakt_1.2.5"[shape=box] 
+"1280720629_Prisjakt_1.2.5"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "7b708c5e-e89f-102d-a194-6ec07c99d928"[shape=box] 
+"7b708c5e-e89f-102d-a194-6ec07c99d928"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1284893574_Transdroid_0.21.0"[shape=box] 
+"1284893574_Transdroid_0.21.0"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1283717915_barcoo_2.2"[shape=box] 
+"1283717915_barcoo_2.2"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "9aece042-5578-102d-a134-12313a00d126"[shape=box] 
+"9aece042-5578-102d-a134-12313a00d126"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "3ac7a348-8168-102d-97db-12313b000c93"[shape=box] 
+"3ac7a348-8168-102d-97db-12313b000c93"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1281699855_3banana_Notes_1.19"[shape=box] 
+"1281699855_3banana_Notes_1.19"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1270908243_ListBuddy"[shape=box] 
+"1270908243_ListBuddy"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1280724600_CNET_Scan_Shop_1.1.1"[shape=box] 
+"1280724600_CNET_Scan_Shop_1.1.1"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1280672046_ShopSavvy_3.6.6"[shape=box] 
+"1280672046_ShopSavvy_3.6.6"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1281046015_idealo_1.3"[shape=box] 
+"1281046015_idealo_1.3"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "07760fa4-c90f-102d-bded-6ec07c99d928"[shape=box] 
+"07760fa4-c90f-102d-bded-6ec07c99d928"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "b802111a-c64e-102d-bded-6ec07c99d928"[shape=box] 
+"b802111a-c64e-102d-bded-6ec07c99d928"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1281092675_Shopping_List_Plus_3.1.1"[shape=box] 
+"1281092675_Shopping_List_Plus_3.1.1"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "0d7ad6be-2d1b-102c-8875-000f4b0782e8"[shape=box] 
+"0d7ad6be-2d1b-102c-8875-000f4b0782e8"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "4a2eed2e-ecce-102d-a194-6ec07c99d928"[shape=box] 
+"4a2eed2e-ecce-102d-a194-6ec07c99d928"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "4974154e-9ca6-102d-823a-12313b000c93"[shape=box] 
+"4974154e-9ca6-102d-823a-12313b000c93"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1270993896_Cardex_1.2"[shape=box] 
+"1270993896_Cardex_1.2"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1284938262_Key_Ring_3.2.1"[shape=box] 
+"1284938262_Key_Ring_3.2.1"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1267389797_Appack_0.7"[shape=box] 
+"1267389797_Appack_0.7"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "ff68c0e2-1c9b-102d-a134-12313a00d126"[shape=box] 
+"ff68c0e2-1c9b-102d-a134-12313a00d126"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1281024026_CardStar_2.0.6"[shape=box] 
+"1281024026_CardStar_2.0.6"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "31c64c4e-7278-102d-97db-12313b000c93"[shape=box] 
+"31c64c4e-7278-102d-97db-12313b000c93"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "51fde2b8-58f8-102d-a134-12313a00d126"[shape=box] 
+"51fde2b8-58f8-102d-a134-12313a00d126"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "1283717915_barcoo_2.2"[shape=box] 
+"1283717915_barcoo_2.2"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "1280724600_CNET_Scan_Shop_1.1.1"[shape=box] 
+"1280724600_CNET_Scan_Shop_1.1.1"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "1280672046_ShopSavvy_3.6.6"[shape=box] 
+"1280672046_ShopSavvy_3.6.6"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "1284938262_Key_Ring_3.2.1"[shape=box] 
+"1284938262_Key_Ring_3.2.1"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "d3963e78-ccee-102d-a194-6ec07c99d928"[shape=box] 
+"d3963e78-ccee-102d-a194-6ec07c99d928"->"com.twidroid.SendTweet" [color=red, style=dotted] ;
+ "174b3e58-06a1-102d-a134-12313a00d126"[shape=box] 
+"174b3e58-06a1-102d-a134-12313a00d126"->"com.twidroid.SendTweet" [color=red, style=dotted] ;
+ "2ff6dd5c-29a8-102d-a134-12313a00d126"[shape=box] 
+"2ff6dd5c-29a8-102d-a134-12313a00d126"->"com.twidroid.SendTweet" [color=red, style=dotted] ;
+ "1280724600_CNET_Scan_Shop_1.1.1"[shape=box] 
+"1280724600_CNET_Scan_Shop_1.1.1"->"com.twidroid.SendTweet" [color=red, style=dotted] ;
+ "1280672046_ShopSavvy_3.6.6"[shape=box] 
+"1280672046_ShopSavvy_3.6.6"->"com.twidroid.SendTweet" [color=red, style=dotted] ;
+ "d7f07a72-e3e4-102c-a134-12313a00d126"[shape=box] 
+"d7f07a72-e3e4-102c-a134-12313a00d126"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "1282424006_Google_Translate_1.1.1"[shape=box] 
+"1282424006_Google_Translate_1.1.1"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "93427ff6-3a24-102d-a134-12313a00d126"[shape=box] 
+"93427ff6-3a24-102d-a134-12313a00d126"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "da8efc06-a20f-102d-820b-12313b000c93"[shape=box] 
+"da8efc06-a20f-102d-820b-12313b000c93"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "1265809516_AndNav2_0.8.8.2.1"[shape=box] 
+"1265809516_AndNav2_0.8.8.2.1"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "8acef8de-e967-102d-a194-6ec07c99d928"[shape=box] 
+"8acef8de-e967-102d-a194-6ec07c99d928"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "ddf81e1e-785b-102d-97db-12313b000c93"[shape=box] 
+"ddf81e1e-785b-102d-97db-12313b000c93"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "1282299011_SMS_Popup_1.0.9"[shape=box] 
+"1282299011_SMS_Popup_1.0.9"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "6b980a5e-8cd9-102d-823a-12313b000c93"[shape=box] 
+"6b980a5e-8cd9-102d-823a-12313b000c93"->"com.fsck.k9.service.CoreReceiver.wakeLockRelease" [color=red, style=dotted] ;
+ "6b980a5e-8cd9-102d-823a-12313b000c93"[shape=box] 
+"6b980a5e-8cd9-102d-823a-12313b000c93"->"com.fsck.k9.service.BroadcastReceiver.scheduleIntent" [color=red, style=dotted] ;
+ "004fee84-6d67-102c-9e11-12313a00d126"[shape=box] 
+"004fee84-6d67-102c-9e11-12313a00d126"->"net.jjc1138.android.scrobbler.action.MUSIC_STATUS" [color=red, style=dotted] ;
+ "a846b7b2-ce69-102d-a194-6ec07c99d928"[shape=box] 
+"a846b7b2-ce69-102d-a194-6ec07c99d928"->"net.jjc1138.android.scrobbler.action.MUSIC_STATUS" [color=red, style=dotted] ;
+ "1283589355_Meridian_Player_Pioneer_0.22.0"[shape=box] 
+"1283589355_Meridian_Player_Pioneer_0.22.0"->"net.jjc1138.android.scrobbler.action.MUSIC_STATUS" [color=red, style=dotted] ;
+ "1278398979_MixZing_2.4.0"[shape=box] 
+"1278398979_MixZing_2.4.0"->"net.jjc1138.android.scrobbler.action.MUSIC_STATUS" [color=red, style=dotted] ;
+ "2ec9e3bc-84ba-102d-97db-12313b000c93"[shape=box] 
+"2ec9e3bc-84ba-102d-97db-12313b000c93"->"net.jjc1138.android.scrobbler.action.MUSIC_STATUS" [color=red, style=dotted] ;
+ "101bd794-8277-102d-97db-12313b000c93"[shape=box] 
+"101bd794-8277-102d-97db-12313b000c93"->"net.jjc1138.android.scrobbler.action.MUSIC_STATUS" [color=red, style=dotted] ;
+ "1281837743_MortPlayer_Music_0.8.2"[shape=box] 
+"1281837743_MortPlayer_Music_0.8.2"->"net.jjc1138.android.scrobbler.action.MUSIC_STATUS" [color=red, style=dotted] ;
+ "1283589355_Meridian_Player_Pioneer_0.22.0"[shape=box] 
+"1283589355_Meridian_Player_Pioneer_0.22.0"->"org.iii.romulus.meridian.playstatechanged" [color=red, style=dotted] ;
+ "1284766912_PhoneUsage_2.2.2"[shape=box] 
+"1284766912_PhoneUsage_2.2.2"->"com.google.code.apndroid.intent.action.STATUS_REQUEST" [color=red, style=dotted] ;
+ "1284766150_PhoneUsage_Korean_2.1.4"[shape=box] 
+"1284766150_PhoneUsage_Korean_2.1.4"->"com.google.code.apndroid.intent.action.STATUS_REQUEST" [color=red, style=dotted] ;
+ "1284766912_PhoneUsage_2.2.2"[shape=box] 
+"1284766912_PhoneUsage_2.2.2"->"com.google.code.apndroid.intent.action.STATUS_CHANGED" [color=red, style=dotted] ;
+ "1284766150_PhoneUsage_Korean_2.1.4"[shape=box] 
+"1284766150_PhoneUsage_Korean_2.1.4"->"com.google.code.apndroid.intent.action.STATUS_CHANGED" [color=red, style=dotted] ;
+ "c3f58f40-36cc-102d-a134-12313a00d126"[shape=box] 
+"c3f58f40-36cc-102d-a134-12313a00d126"->"com.google.code.apndroid.intent.action.CHANGE_REQUEST" [color=red, style=dotted] ;
+ "1284766912_PhoneUsage_2.2.2"[shape=box] 
+"1284766912_PhoneUsage_2.2.2"->"com.google.code.apndroid.intent.action.CHANGE_REQUEST" [color=red, style=dotted] ;
+ "1284766150_PhoneUsage_Korean_2.1.4"[shape=box] 
+"1284766150_PhoneUsage_Korean_2.1.4"->"com.google.code.apndroid.intent.action.CHANGE_REQUEST" [color=red, style=dotted] ;
+ "0f023202-7ba8-102d-97db-12313b000c93"[shape=box] 
+"0f023202-7ba8-102d-97db-12313b000c93"->"com.xtralogic.logcollector.intent.action.SEND_LOG" [color=red, style=dotted] ;
+ "1284893574_Transdroid_0.21.0"[shape=box] 
+"1284893574_Transdroid_0.21.0"->"com.xtralogic.logcollector.intent.action.SEND_LOG" [color=red, style=dotted] ;
+ "1281647846_Foursquare_2010-08-05"[shape=box] 
+"1281647846_Foursquare_2010-08-05"->"com.xtralogic.logcollector.intent.action.SEND_LOG" [color=red, style=dotted] ;
+ "1283683688_Music_Online_Lite_1.9.16"[shape=box] 
+"1283683688_Music_Online_Lite_1.9.16"->"com.xtralogic.logcollector.intent.action.SEND_LOG" [color=red, style=dotted] ;
+ "2a6919ae-bc47-102d-9790-6ec07c99d928"[shape=box] 
+"2a6919ae-bc47-102d-9790-6ec07c99d928"->"com.xtralogic.logcollector.intent.action.SEND_LOG" [color=red, style=dotted] ;
+ "1283683688_Music_Online_Lite_1.9.16"[shape=box] 
+"1283683688_Music_Online_Lite_1.9.16"->"com.yyqidian.musiconlinelite.DownloadService" [color=red, style=dotted] ;
+ "1284595593_SoundHound_2.2.2b"[shape=box] 
+"1284595593_SoundHound_2.2.2b"->"com.amazon.mp3.action.EXTERNAL_EVENT" [color=red, style=dotted] ;
+ "1283977370_Last.fm_1.6.6"[shape=box] 
+"1283977370_Last.fm_1.6.6"->"com.amazon.mp3.action.EXTERNAL_EVENT" [color=red, style=dotted] ;
+ "1282692004_Pandora_1.4.1"[shape=box] 
+"1282692004_Pandora_1.4.1"->"com.amazon.mp3.action.EXTERNAL_EVENT" [color=red, style=dotted] ;
+ "cdf5f302-3f52-102d-a134-12313a00d126"[shape=box] 
+"cdf5f302-3f52-102d-a134-12313a00d126"->"net.laoyu.app_review.action.VIEW_TOPIC" [color=red, style=dotted] ;
+ "40d3382e-3f55-102d-a134-12313a00d126"[shape=box] 
+"40d3382e-3f55-102d-a134-12313a00d126"->"net.laoyu.app_review.action.VIEW_TOPIC" [color=red, style=dotted] ;
+ "1284858045_doubleTwist_Player_1.1"[shape=box] 
+"1284858045_doubleTwist_Player_1.1"->"fm.last.android.LOVE" [color=red, style=dotted] ;
+ "1284858045_doubleTwist_Player_1.1"[shape=box] 
+"1284858045_doubleTwist_Player_1.1"->"fm.last.android.playbackcomplete" [color=red, style=dotted] ;
+ "a203eed2-bd85-102d-9790-6ec07c99d928"[shape=box] 
+"a203eed2-bd85-102d-9790-6ec07c99d928"->"com.smartmadsoft.openwatch.command.BUTTON_FF" [color=red, style=dotted] ;
+ "a846b7b2-ce69-102d-a194-6ec07c99d928"[shape=box] 
+"a846b7b2-ce69-102d-a194-6ec07c99d928"->"com.adam.aslfms.notify.playstatechanged" [color=red, style=dotted] ;
+ "2ec9e3bc-84ba-102d-97db-12313b000c93"[shape=box] 
+"2ec9e3bc-84ba-102d-97db-12313b000c93"->"com.adam.aslfms.notify.playstatechanged" [color=red, style=dotted] ;
+ "1281837743_MortPlayer_Music_0.8.2"[shape=box] 
+"1281837743_MortPlayer_Music_0.8.2"->"com.adam.aslfms.notify.playstatechanged" [color=red, style=dotted] ;
+ "1284858045_doubleTwist_Player_1.1"[shape=box] 
+"1284858045_doubleTwist_Player_1.1"->"fm.last.android.playbackpaused" [color=red, style=dotted] ;
+ "1284858045_doubleTwist_Player_1.1"[shape=box] 
+"1284858045_doubleTwist_Player_1.1"->"fm.last.android.BAN" [color=red, style=dotted] ;
+ "1284858045_doubleTwist_Player_1.1"[shape=box] 
+"1284858045_doubleTwist_Player_1.1"->"fm.last.android.metachanged" [color=red, style=dotted] ;
+ "6b980a5e-8cd9-102d-823a-12313b000c93"[shape=box] 
+"6b980a5e-8cd9-102d-823a-12313b000c93"->"com.appventive.mailprovider.error" [color=red, style=dotted] ;
+ "6b980a5e-8cd9-102d-823a-12313b000c93"[shape=box] 
+"6b980a5e-8cd9-102d-823a-12313b000c93"->"com.appventive.mailprovider.goodAccount" [color=red, style=dotted] ;
+ "6b980a5e-8cd9-102d-823a-12313b000c93"[shape=box] 
+"6b980a5e-8cd9-102d-823a-12313b000c93"->"com.appventive.mailprovider.intent.action.EMAIL_RECEIVED" [color=red, style=dotted] ;
+ "6b980a5e-8cd9-102d-823a-12313b000c93"[shape=box] 
+"6b980a5e-8cd9-102d-823a-12313b000c93"->"com.appventive.ExecAssist.updateEmail" [color=red, style=dotted] ;
+ "ad7083d4-201e-102d-a134-12313a00d126"[shape=box] 
+"ad7083d4-201e-102d-a134-12313a00d126"->"org.abrantes.filex" [color=red, style=dotted] ;
+ "46207e7a-f58e-102b-9253-000f4b0782e8"[shape=box] 
+"46207e7a-f58e-102b-9253-000f4b0782e8"->"org.openintents.action.SET_SHARE_SETTINGS" [color=red, style=dotted] ;
+ "46207e7a-f58e-102b-9253-000f4b0782e8"[shape=box] 
+"46207e7a-f58e-102b-9253-000f4b0782e8"->"org.openintents.action.ADD_LOCATION_ALERT" [color=red, style=dotted] ;
+ "1281185483_Favorite_Recipes_2.4.1"[shape=box] 
+"1281185483_Favorite_Recipes_2.4.1"->"com.snaptic.intent.action.VIEW" [color=red, style=dotted] ;
+ "1280752075_Tip_Calculator_1.3"[shape=box] 
+"1280752075_Tip_Calculator_1.3"->"com.snaptic.intent.action.VIEW" [color=red, style=dotted] ;
+ "1284812926_BBC_News_2.5.3"[shape=box] 
+"1284812926_BBC_News_2.5.3"->"com.snaptic.intent.action.VIEW" [color=red, style=dotted] ;
+ "1284600329_DailyHoroscope_1.8.1"[shape=box] 
+"1284600329_DailyHoroscope_1.8.1"->"com.snaptic.intent.action.VIEW" [color=red, style=dotted] ;
+ "87954b42-46f0-102d-a134-12313a00d126"[shape=box] 
+"87954b42-46f0-102d-a134-12313a00d126"->"com.snaptic.intent.action.VIEW" [color=red, style=dotted] ;
+ "c981e4b0-1423-102e-9405-6ec07c99d928"[shape=box] 
+"c981e4b0-1423-102e-9405-6ec07c99d928"->"com.snaptic.intent.action.VIEW" [color=red, style=dotted] ;
+ "374d566a-f620-102b-9253-000f4b0782e8"[shape=box] 
+"374d566a-f620-102b-9253-000f4b0782e8"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red, style=dotted] ;
+ "aade0482-d705-102c-a134-12313a00d126"[shape=box] 
+"aade0482-d705-102c-a134-12313a00d126"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red, style=dotted] ;
+ "1284833148_Free_Dictionary_Org_2.3.1"[shape=box] 
+"1284833148_Free_Dictionary_Org_2.3.1"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red, style=dotted] ;
+ "31ab9b9a-d6f8-102c-a134-12313a00d126"[shape=box] 
+"31ab9b9a-d6f8-102c-a134-12313a00d126"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red, style=dotted] ;
+ "1284590496_Compass_1.1"[shape=box] 
+"1284590496_Compass_1.1"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red, style=dotted] ;
+ "2e9bdac0-d705-102c-a134-12313a00d126"[shape=box] 
+"2e9bdac0-d705-102c-a134-12313a00d126"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red, style=dotted] ;
+ "1284812926_BBC_News_2.5.3"[shape=box] 
+"1284812926_BBC_News_2.5.3"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red, style=dotted] ;
+ "1283173676_Calvin_and_Hobbes_1.0.6"[shape=box] 
+"1283173676_Calvin_and_Hobbes_1.0.6"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red, style=dotted] ;
+ "2a533ab6-d706-102c-a134-12313a00d126"[shape=box] 
+"2a533ab6-d706-102c-a134-12313a00d126"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red, style=dotted] ;
+ "04cad9c2-d6fa-102c-a134-12313a00d126"[shape=box] 
+"04cad9c2-d6fa-102c-a134-12313a00d126"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red, style=dotted] ;
+ "931f4cd8-d706-102c-a134-12313a00d126"[shape=box] 
+"931f4cd8-d706-102c-a134-12313a00d126"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red, style=dotted] ;
+ "051c53bc-d707-102c-a134-12313a00d126"[shape=box] 
+"051c53bc-d707-102c-a134-12313a00d126"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red, style=dotted] ;
+ "1264212787_10001_Cocktails_4.1"[shape=box] 
+"1264212787_10001_Cocktails_4.1"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red, style=dotted] ;
+ "1281185483_Favorite_Recipes_2.4.1"[shape=box] 
+"1281185483_Favorite_Recipes_2.4.1"->"com.snaptic.intent.action.ADD" [color=red, style=dotted] ;
+ "1280752075_Tip_Calculator_1.3"[shape=box] 
+"1280752075_Tip_Calculator_1.3"->"com.snaptic.intent.action.ADD" [color=red, style=dotted] ;
+ "1282832598_PicSay_1.3.0.8"[shape=box] 
+"1282832598_PicSay_1.3.0.8"->"com.snaptic.intent.action.ADD" [color=red, style=dotted] ;
+ "1284812926_BBC_News_2.5.3"[shape=box] 
+"1284812926_BBC_News_2.5.3"->"com.snaptic.intent.action.ADD" [color=red, style=dotted] ;
+ "1284600329_DailyHoroscope_1.8.1"[shape=box] 
+"1284600329_DailyHoroscope_1.8.1"->"com.snaptic.intent.action.ADD" [color=red, style=dotted] ;
+ "87954b42-46f0-102d-a134-12313a00d126"[shape=box] 
+"87954b42-46f0-102d-a134-12313a00d126"->"com.snaptic.intent.action.ADD" [color=red, style=dotted] ;
+ "c981e4b0-1423-102e-9405-6ec07c99d928"[shape=box] 
+"c981e4b0-1423-102e-9405-6ec07c99d928"->"com.snaptic.intent.action.ADD" [color=red, style=dotted] ;
+ "374d566a-f620-102b-9253-000f4b0782e8"[shape=box] 
+"374d566a-f620-102b-9253-000f4b0782e8"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red, style=dotted] ;
+ "aade0482-d705-102c-a134-12313a00d126"[shape=box] 
+"aade0482-d705-102c-a134-12313a00d126"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red, style=dotted] ;
+ "1284833148_Free_Dictionary_Org_2.3.1"[shape=box] 
+"1284833148_Free_Dictionary_Org_2.3.1"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red, style=dotted] ;
+ "31ab9b9a-d6f8-102c-a134-12313a00d126"[shape=box] 
+"31ab9b9a-d6f8-102c-a134-12313a00d126"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red, style=dotted] ;
+ "1284590496_Compass_1.1"[shape=box] 
+"1284590496_Compass_1.1"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red, style=dotted] ;
+ "2e9bdac0-d705-102c-a134-12313a00d126"[shape=box] 
+"2e9bdac0-d705-102c-a134-12313a00d126"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red, style=dotted] ;
+ "1284812926_BBC_News_2.5.3"[shape=box] 
+"1284812926_BBC_News_2.5.3"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red, style=dotted] ;
+ "1283173676_Calvin_and_Hobbes_1.0.6"[shape=box] 
+"1283173676_Calvin_and_Hobbes_1.0.6"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red, style=dotted] ;
+ "2a533ab6-d706-102c-a134-12313a00d126"[shape=box] 
+"2a533ab6-d706-102c-a134-12313a00d126"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red, style=dotted] ;
+ "04cad9c2-d6fa-102c-a134-12313a00d126"[shape=box] 
+"04cad9c2-d6fa-102c-a134-12313a00d126"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red, style=dotted] ;
+ "931f4cd8-d706-102c-a134-12313a00d126"[shape=box] 
+"931f4cd8-d706-102c-a134-12313a00d126"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red, style=dotted] ;
+ "051c53bc-d707-102c-a134-12313a00d126"[shape=box] 
+"051c53bc-d707-102c-a134-12313a00d126"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red, style=dotted] ;
+ "1264212787_10001_Cocktails_4.1"[shape=box] 
+"1264212787_10001_Cocktails_4.1"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red, style=dotted] ;
+ "78222074-0bec-102e-9405-6ec07c99d928"[shape=box] 
+"78222074-0bec-102e-9405-6ec07c99d928"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "6db0102c-5514-102d-a134-12313a00d126"[shape=box] 
+"6db0102c-5514-102d-a134-12313a00d126"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "f3144db2-1c49-102e-b4a5-6ec07c99d928"[shape=box] 
+"f3144db2-1c49-102e-b4a5-6ec07c99d928"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "260d9d1e-e526-102d-a194-6ec07c99d928"[shape=box] 
+"260d9d1e-e526-102d-a194-6ec07c99d928"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "c8a699c2-0bc3-102e-9405-6ec07c99d928"[shape=box] 
+"c8a699c2-0bc3-102e-9405-6ec07c99d928"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "2eabbc40-a763-102d-9303-12313b000c93"[shape=box] 
+"2eabbc40-a763-102d-9303-12313b000c93"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "bed9d136-61c1-102d-8168-12313b000c93"[shape=box] 
+"bed9d136-61c1-102d-8168-12313b000c93"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "1265807613_OI_Notepad_1.1.3"[shape=box] 
+"1265807613_OI_Notepad_1.1.3"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "1264293443_Aldiko_Book_Reader_1.2.6"[shape=box] 
+"1264293443_Aldiko_Book_Reader_1.2.6"->"aldiko.intent.action.ADD_BOOKS_TO_LABEL" [color=red, style=dotted] ;
+ "1264293443_Aldiko_Book_Reader_1.2.6"[shape=box] 
+"1264293443_Aldiko_Book_Reader_1.2.6"->"aldiko.intent.action.VIEW_BOOKS_BY_AUTHOR" [color=red, style=dotted] ;
+ "1264293443_Aldiko_Book_Reader_1.2.6"[shape=box] 
+"1264293443_Aldiko_Book_Reader_1.2.6"->"aldiko.intent.action.ADD_COLLECTIONS_TO_BOOK" [color=red, style=dotted] ;
+ "1264293443_Aldiko_Book_Reader_1.2.6"[shape=box] 
+"1264293443_Aldiko_Book_Reader_1.2.6"->"aldiko.intent.action.VIEW_BOOKS_IN_LABEL" [color=red, style=dotted] ;
+ "1264293443_Aldiko_Book_Reader_1.2.6"[shape=box] 
+"1264293443_Aldiko_Book_Reader_1.2.6"->"aldiko.intent.action.VIEW_BOOKS_IN_COLLECTION" [color=red, style=dotted] ;
+ "1264293443_Aldiko_Book_Reader_1.2.6"[shape=box] 
+"1264293443_Aldiko_Book_Reader_1.2.6"->"aldiko.intent.action.ADD_LABELS_TO_BOOK" [color=red, style=dotted] ;
+ "1264293443_Aldiko_Book_Reader_1.2.6"[shape=box] 
+"1264293443_Aldiko_Book_Reader_1.2.6"->"aldiko.intent.action.ADD_BOOKS_TO_COLLECTION" [color=red, style=dotted] ;
+ "1264293443_Aldiko_Book_Reader_1.2.6"[shape=box] 
+"1264293443_Aldiko_Book_Reader_1.2.6"->"aldiko.intent.action.VIEW_LABELS_WITH_BOOK" [color=red, style=dotted] ;
+ "1264293443_Aldiko_Book_Reader_1.2.6"[shape=box] 
+"1264293443_Aldiko_Book_Reader_1.2.6"->"aldiko.intent.action.VIEW_COLLECTIONS_WITH_BOOK" [color=red, style=dotted] ;
+ "ce1ac646-b838-102d-9790-6ec07c99d928"[shape=box] 
+"ce1ac646-b838-102d-9790-6ec07c99d928"->"mobi.bbase.ahome.THEME" [color=red, style=dotted] ;
+ "6b0417f2-101b-102e-9405-6ec07c99d928"[shape=box] 
+"6b0417f2-101b-102e-9405-6ec07c99d928"->"com.carl.askastranger.AUTH_SUCCESS" [color=red, style=dotted] ;
+ "6b0417f2-101b-102e-9405-6ec07c99d928"[shape=box] 
+"6b0417f2-101b-102e-9405-6ec07c99d928"->"com.carl.askastranger.QUEST_ADDLIST" [color=red, style=dotted] ;
+ "bd5f2f12-e2f0-102d-a194-6ec07c99d928"[shape=box] 
+"bd5f2f12-e2f0-102d-a194-6ec07c99d928"->"europe.de.ftdevelop.aviation.snowtamdecoder.ACTION_SNOWTAM_DECODE" [color=red, style=dotted] ;
+ "556cff08-a92d-102d-9303-12313b000c93"[shape=box] 
+"556cff08-a92d-102d-9303-12313b000c93"->"com.aunndroid.klove.KplayerInterface" [color=red, style=dotted] ;
+ "556cff08-a92d-102d-9303-12313b000c93"[shape=box] 
+"556cff08-a92d-102d-9303-12313b000c93"->"com.aunndroid.klove.KLOVE_VIEWER" [color=red, style=dotted] ;
+ "3772bdaa-8bf3-102d-97db-12313b000c93"[shape=box] 
+"3772bdaa-8bf3-102d-97db-12313b000c93"->"com.asksven.xtremepp.intent.action.MESSAGE_RECEIVED" [color=red, style=dotted] ;
+ "1281819701_K-9_Mail_3.001"[shape=box] 
+"1281819701_K-9_Mail_3.001"->"com.fsck.k9.intent.action.EMAIL_RECEIVED" [color=red, style=dotted] ;
+ "1278437978_youcast"[shape=box] 
+"1278437978_youcast"->"com.fsck.k9.intent.action.EMAIL_RECEIVED" [color=red, style=dotted] ;
+ "3772bdaa-8bf3-102d-97db-12313b000c93"[shape=box] 
+"3772bdaa-8bf3-102d-97db-12313b000c93"->"com.asksven.systemsettings.action.EXECUTE_COMMAND" [color=red, style=dotted] ;
+ "dad5f14c-30a9-102d-a134-12313a00d126"[shape=box] 
+"dad5f14c-30a9-102d-a134-12313a00d126"->"com.appventive.actions.EditEmailAccount" [color=red, style=dotted] ;
+ "dad5f14c-30a9-102d-a134-12313a00d126"[shape=box] 
+"dad5f14c-30a9-102d-a134-12313a00d126"->"com.appventive.action.UpdateMail" [color=red, style=dotted] ;
+ "dad5f14c-30a9-102d-a134-12313a00d126"[shape=box] 
+"dad5f14c-30a9-102d-a134-12313a00d126"->"com.appventive.actions.CreateEmailAccount" [color=red, style=dotted] ;
+ "1284893574_Transdroid_0.21.0"[shape=box] 
+"1284893574_Transdroid_0.21.0"->"org.openintents.remote.intent.action.VIEW" [color=red, style=dotted] ;
+"d7f07a72-e3e4-102c-a134-12313a00d126"[shape=box] 
+"d7f07a72-e3e4-102c-a134-12313a00d126"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "1282424006_Google_Translate_1.1.1"[shape=box] 
+"1282424006_Google_Translate_1.1.1"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "93427ff6-3a24-102d-a134-12313a00d126"[shape=box] 
+"93427ff6-3a24-102d-a134-12313a00d126"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "da8efc06-a20f-102d-820b-12313b000c93"[shape=box] 
+"da8efc06-a20f-102d-820b-12313b000c93"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "1265809516_AndNav2_0.8.8.2.1"[shape=box] 
+"1265809516_AndNav2_0.8.8.2.1"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "8acef8de-e967-102d-a194-6ec07c99d928"[shape=box] 
+"8acef8de-e967-102d-a194-6ec07c99d928"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "ddf81e1e-785b-102d-97db-12313b000c93"[shape=box] 
+"ddf81e1e-785b-102d-97db-12313b000c93"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "1282299011_SMS_Popup_1.0.9"[shape=box] 
+"1282299011_SMS_Popup_1.0.9"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "46207e7a-f58e-102b-9253-000f4b0782e8"[shape=box] 
+"46207e7a-f58e-102b-9253-000f4b0782e8"->"org.openintents.category.SETTINGS" [color=chocolate, style=dotted] ;
+ "1280693202_OI_Shopping_list_1.2.4"[shape=box] 
+"1280693202_OI_Shopping_list_1.2.4"->"org.openintents.category.SETTINGS" [color=chocolate, style=dotted] ;
 }
