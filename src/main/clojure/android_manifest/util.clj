@@ -8,11 +8,11 @@
   "Remove all key-values where value is empty."
   (into {} (for [[k v] m :when (not (empty? v))] [k v])))
 
-(defn distinct-fn
+(defn distinct-by
   "Returns a lazy sequence of object with duplicates removed,
   where duplicates are defined by applying the function func to each item.
-  Calling (distinct-apps _ identity) is equivalent to (clojure.core/distinct _)."
-  [coll func]
+  Calling (distinct-by _ identity) is equivalent to (clojure.core/distinct _)."
+  [func coll]
     (let [step (fn step [xs seen]
                  (lazy-seq
                    ((fn [[f :as xs] seen]

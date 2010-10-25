@@ -4,20 +4,22 @@
      [clojure.contrib.pprint :only (pprint)]
      [clojure.set :only (map-invert)]))
 
-(defn filter-references [ref-map name-app-map]
+(defn filter-references [ref-map name-app-map key]
   "Retain only apps that call an intent that is not defined within their own
    manifest.xml."
   (into {}
     (for [[action dependent-apps] ref-map]
-      (let [filtered-refs (remove #(contains? (get-in name-app-map  [% :actions]) action) dependent-apps)]
+      (let [filtered-refs (remove #(contains? (get-in name-app-map  [% key]) action) dependent-apps)]
         [action filtered-refs]))))
 
 (defn filter-included-actions [r]
   "Retain only apps that call an intent that is not defined within their own
    manifest.xml."
   (let [name-app-map (into {} (map #(hash-map (:name %) %) r))]
-    (for [{refs :references-from :as m} r]
-      (assoc m :references-from (filter-references refs name-app-map)))))
+    (for [{arefs :action-refs crefs :category-refs :as m} r]
+      (assoc m 
+        :action-refs (filter-references arefs name-app-map :actions)
+        :category-refs (filter-references crefs name-app-map :categories)))))
     
 
 ;;;;;;;;;;;;;;;; GraphVIZ ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -25,18 +27,18 @@
   (< 1 (count (filter #(= % \.)  s))))
 
 
-(defn get-ref-strings [all-apps]
+(defn get-ref-strings [all-apps slot-value color]
   (distinct (flatten
-    (for [{app-name :name refs :references-from} all-apps]
+    (for [{app-name :name refs slot-value} all-apps]
       (for [[action dep-apps] refs :when (valid-action? action)]
         (for [dep-app dep-apps]
           (str
             \" dep-app \" "[shape=box] \n"
-            \" dep-app \" "->" \" action \" " [color=red] ;\n")))))))
+            \" dep-app \" "->" \" action \" " [color=" color ", style=dotted] ;\n")))))))
 
 
-(defn get-action-def-strings [all-apps]
-  (let [action-defs (for [{name :name refs :references-from} all-apps]
+(defn get-def-strings [all-apps slot-name color]
+  (let [action-defs (for [{name :name refs slot-name} all-apps]
                        [name
                         (for [[action dependent-apps] refs :when (not-empty dependent-apps)]
                          action)])]
@@ -47,24 +49,27 @@
         \" name \" "->{"
         (apply str (for [action actions]
                      (str "\"" action "\" ")))
-        "} [color=green] ; \n"))))
+        "} [color=" color ",arrowhead=\"diamond\"] ; \n"))))
            
 
 (defn graphviz [real-external-refs]
   (str 
     "digraph {\n"
     ;; app to action strings
-    (apply str (interpose " " (get-action-def-strings real-external-refs)))
+    (apply str (interpose " " (get-def-strings real-external-refs :action-refs "green")))
+    (apply str (interpose " " (get-def-strings real-external-refs :category-refs "blue")))
     ;; dependent apps to action strings
-    (apply str (interpose " " (get-ref-strings real-external-refs)))
+    (apply str (interpose " " (get-ref-strings real-external-refs :action-refs "red")))
+    (apply str (interpose " " (get-ref-strings real-external-refs :category-refs "chocolate")))
     "}"))
 ;;;;;;;;;;;;;;;; GraphVIZ ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 (defn print-findings [real-external-refs all-apps manifest-files]
-  (let [openintents (distinct (filter #(.contains % "openintent") (mapcat #(keys (:references-from %)) real-external-refs)))
-      action-call-freq (apply merge-with + (flatten
-                                             (for [m (map :references-from real-external-refs)]
+  (let [openintent-actions (distinct (filter #(.contains % "openintent") (mapcat #(keys (:action-refs %)) real-external-refs)))
+        openintent-categories (distinct (filter #(.contains % "openintent") (mapcat #(keys (:action-refs %)) real-external-refs)))
+        action-call-freq (apply merge-with + (flatten
+                                             (for [m (map :action-refs real-external-refs)]
                                                (for [[k v] m :when (valid-action? k)]
                                                  {k (count v)}))))
       sorted-freq (into (sorted-map-by (fn [k1 k2] (compare (get action-call-freq k2) (get action-call-freq k1))))
@@ -72,9 +77,12 @@
   (println 
     "# manifests: " (count manifest-files)
     "\n# unique Apps: " (count all-apps)
-    "\n# of actions called from foreign apps: " (count (distinct (mapcat #(keys (:references-from %)) real-external-refs)))
-    "\n# apps calling foreing actions: " (count (distinct (mapcat #(vals (:references-from %)) real-external-refs)))
-    "\n# openintents: " (count openintents) openintents
+    "\n# of actions offered from apps: " (count (distinct (mapcat #(keys (:action-refs %)) real-external-refs)))
+    "\n# apps calling foreign actions: " (count (distinct (mapcat #(vals (:action-refs %)) real-external-refs)))
+    "\n# openintents (actions): " (count openintent-actions) openintent-actions
+    "\n# of categories offered from apps: " (count (distinct (mapcat #(keys (:category-refs %)) real-external-refs)))
+    "\n# apps calling foreign categories: " (count (distinct (mapcat #(vals (:category-refs %)) real-external-refs)))
+    "\n# openintents (category): " (count openintent-categories) openintent-categories
     "\nMost called actions: " (take 3 sorted-freq))))
 
 (comment
@@ -83,7 +91,9 @@
 
 (def real-external-refs 
   (filter 
-    #(not-empty (:references-from %)) 
+    #(or 
+       (not-empty (:category-refs %)) 
+       (not-empty (:action-refs %)))
     (filter-included-actions android-apps)))
   
 (binding [*print-length* 10]
