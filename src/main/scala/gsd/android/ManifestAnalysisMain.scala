@@ -57,6 +57,7 @@ object ManifestAnalysisMain extends Rewriter{
                             map( x => ( (x\"@package") text, x ) ): _* )
 
     println( "Duplicates: " + ( manifests.size - manifestXMLs.size ) )
+    println( "Unique Apps: " + manifestXMLs.size )
 
     // scala XML can get quite ugly, especially getting attributes...
 
