@@ -154,6 +154,22 @@
 	      <groupId>org.apache.lucene</groupId>
 	      <artifactId>lucene-core</artifactId>
 	      <version>3.0.2</version>
+	    </dependency>
+	    
+	    <!-- Android market interaction -->        
+	    <dependency>
+	      <groupId>com.gc.android</groupId>
+	      <artifactId>androidmarketapi</artifactId>
+	      <version>0.3</version>
+	      <scope>system</scope>
+	      <systemPath>${basedir}/src/main/etc/androidmarketapi-0.3.jar</systemPath>
 	    </dependency>        
+	    <dependency>
+	    	<groupId>com.google.protobuf</groupId>
+	    	<artifactId>protobuf-java</artifactId>
+	    	<version>2.3.0</version>
+	    	<type>jar</type>
+	    	<scope>compile</scope>
+	    </dependency>
   </dependencies>
 </project>
