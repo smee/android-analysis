@@ -3,7 +3,8 @@
     [clojure.contrib.java-utils :only (read-properties)]
     [clojure.string :only (join)]
     [clojure.contrib.duck-streams :only (copy append-spit)]
-    android-manifest.serialization)
+    android-manifest.serialization
+    [android-manifest.util :only (try-times)])
   (:import 
     java.net.URLEncoder
     [com.gc.android.market.api MarketSession MarketSession$Callback]
@@ -45,26 +46,26 @@
                            "TRAVEL"])
 
 
-(defn- apps-request [query app-type view-type order-type cat-id start-idx entries-count]
+(defn- apps-request [query app-type view-type order-type cat-id start-idx entries-count extended?]
   "Private function that sets all properties of a market request."
   (.build 
     (doto (Market$AppsRequest/newBuilder)
       ;(.setQuery query)
-      (.setAppType app-type)
+      ;(.setAppType app-type)
       (.setViewType view-type)
-      (.setOrderType order-type)
-      ;(.setCategoryId cat-id)
+      (.setOrderType order-type) 
+      (.setCategoryId cat-id)
       (.setStartIndex start-idx)
       (.setEntriesCount entries-count)
-      ;(.setWithExtendedInfo true)
+      (.setWithExtendedInfo extended?)
       )))
 
 
-(defn create-apps-request [{:keys [query app-type view-type order-type category start-idx entries-count extended-info], 
+(defn create-apps-request [{:keys [query app-type view-type order-type category start-idx entries-count extended?], 
                            :or {query nil,app-type Market$AppType/APPLICATION, view-type Market$AppsRequest$ViewType/FREE, 
-                                order-type Market$AppsRequest$OrderType/NEWEST, category "COMMUNICATION", start-idx 0, entries-count 10, extended-info true}}]
+                                order-type Market$AppsRequest$OrderType/NEWEST, category "COMMUNICATION", start-idx 0, entries-count 10, extended? true}}]
   "Use a map to specify an arbitrary subset of market request parameters."
-  (apps-request query app-type view-type order-type category start-idx entries-count))
+  (apps-request query app-type view-type order-type category start-idx entries-count extended?))
 
 (defn- call-market [session req res-fn]
   "Call android market api, returns (res-fn response) wrapped in a promise."
@@ -76,7 +77,7 @@
       (doto session
         (.append req callback)
         (.flush))
-      result)))
+      @result)))
 
 (defn fetch-categories [session]
   "Return reference to list of Category. Dereference with @."
@@ -86,16 +87,24 @@
     (fn [resp] (.getCategoriesList resp))))      
 
 
+(defn- extract-app-infos [app]
+  (let [m           (bean app)
+        app-type    (.name (.getAppType app))
+        ex          (bean (.getExtendedInfo app))
+        permissions (into [] (:permissionIdList ex))]
+    (dissoc    
+      (assoc (merge ex m)
+        :permissionIdList permissions
+        :appType app-type)
+      :extendedInfo :allFields :descriptorForType :defaultInstanceForType :unknownFields :serializedSize :promoText :class)))
+
 (defn fetch-app-infos [session m]
   "Return reference to sequence of application details. Dereference with @."
   (call-market 
     session
     (create-apps-request m)
     (fn [resp] (map 
-                 #(update-in ;;use enum value name for apptype 
-                    (select-keys (bean %) [:creator :versionCode :version :title :id :price :appType])
-                    [:appType]
-                    (memfn name))
+                 extract-app-infos
                  (.getAppList resp)))))
 
 
@@ -127,24 +136,59 @@
 (defn sleep-random [min max]
   (Thread/sleep (+ min (.nextInt (java.util.Random.) (- max min)))))
 
-(comment
+(defn- init-session [credentials]
+  (doto (new MarketSession)
+    (.login (get credentials "username") (get credentials "password"))))
+
+(defn fetch-all-apps [category credentials]
+  (let [session (atom (init-session credentials))
+        results (map #(delay 
+                        (sleep-random 1000 3000) 
+                        (fetch-app-infos @session {:start-idx (* % 10) :entries-count 10 :category category}))
+                    (range 0 79))]
+        (doseq [result results]
+          (try
+            (serialize (str "results/market-apps/apps-" category) (deref result) true)
+            (catch Exception e
+              (println "Caught exception in " category)
+              (reset! session (init-session credentials)))))))
+
+(defn not-exists? [category id]
+  (not (.exists (java.io.File. (str "results/market-apps/" category \/ id)))))
+
+#_(comment
   
   (def credentials (read-properties "marketcredentials.properties"))
+  (map #(fetch-all-apps % credentials) all-known-categories)
+
   (def session (doto (new MarketSession)
                  (.login (get credentials "username") (get credentials "password"))))
+  
+  
+  (def cat (second all-known-categories))
+  (def leech-them 
+    (map #(delay 
+            (sleep-random 1000 3000) 
+            (fetch-app-infos session {:start-idx (* % 10) :category cat}))
+      (range 0 79)))
+  
+  
+  (doall (map #(serialize (str "apps-" cat) (deref %) true) leech-them))
+  
   (def authtoken (.getAuthSubToken session))
   
-  
-  
-  (def leech-them 
-    (map #(do (time (sleep-random 2000 3000)) (fetch-app-infos session {:start-idx (* % 10)})) [0 1 2 3 4 5 6 7 8 9 10]))
-  
-  ;(doall (map #(append-spit "apps" %) leech-them))
-  
-  
+  (doall (for [category all-known-categories]  
+           (do 
+             (println "starting " category)
+             (doall 
+               (for [id (map :id (flatten (deserialize (str "results/market-apps/apps-" category))))
+                     :when (not-present? category id)]
+                 (do
+                   (println "downloading " category \space id)
+                   (download-app id authtoken credentials (str "results/market-apps/" category "/" id))))))))
   
   (def request (create-apps-request {:query "open"}))
   (fetch-app-infos session {:query "open" :category "COMMUNICATION"})
   (download-app "-1515770811183552303" authtoken credentials (str (java.lang.System/nanoTime) ".apk"))
-  (def cats (fetch-categories session))  
-  )
+  (def cats (fetch-categories session))
+)

@@ -2,7 +2,8 @@
   (:use 
     android-manifest.serialization
      [clojure.contrib.pprint :only (pprint)]
-     [clojure.set :only (map-invert)]))
+     [clojure.set :only (map-invert)]
+     android-manifest.util))
 
 (defn filter-references [ref-map name-app-map key]
   "Retain only apps that call an intent that is not defined within their own
@@ -20,7 +21,10 @@
       (assoc app 
         :action-refs   (filter-references arefs name-app-map :actions)
         :category-refs (filter-references crefs name-app-map :categories)))))
-    
+
+(defn find-app [like]
+  ""
+  (fn [app] (.contains (:name app) like)))
 
 ;;;;;;;;;;;;;;;; GraphVIZ ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn valid-action? [s]
@@ -77,17 +81,17 @@
   (println 
     "# manifests: "                         (count manifest-files)
     "\n# unique Apps: "                     (count all-apps)
-    "\n# of actions offered from apps: "    (count (distinct (mapcat #(keys (:action-refs %)) real-external-refs)))
+    "\n# of actions offered from apps: "    (count (distinct (mapcat #(keys (remove-empty-values (:action-refs %))) real-external-refs)))
     "\n# apps calling foreign actions: "    (count (distinct (mapcat #(vals (:action-refs %)) real-external-refs)))
     "\n# openintents (actions): "           (count openintent-actions) openintent-actions
-    "\n# of categories offered from apps: " (count (distinct (mapcat #(keys (:category-refs %)) real-external-refs)))
+    "\n# of categories offered from apps: " (count (distinct (mapcat #(keys (remove-empty-values (:category-refs %))) real-external-refs)))
     "\n# apps calling foreign categories: " (count (distinct (mapcat #(vals (:category-refs %)) real-external-refs)))
     "\n# openintents (category): "          (count openintent-categories) openintent-categories
     "\nMost called actions: "               (take 3 sorted-freq))))
 
 (comment
 ;; script start
-(def android-apps (deserialize "results/refs.x"))
+(def android-apps (deserialize "results/unique-refs.clj"))
 
 (def real-external-refs 
   (filter 
