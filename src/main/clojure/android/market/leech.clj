@@ -159,7 +159,7 @@
 #_(comment
   
   (def credentials (read-properties "marketcredentials.properties"))
-  (map #(fetch-all-apps % credentials) all-known-categories)
+  ;(map #(fetch-all-apps % credentials) all-known-categories)
 
   (def session (doto (new MarketSession)
                  (.login (get credentials "username") (get credentials "password"))))
@@ -182,7 +182,7 @@
              (println "starting " category)
              (doall 
                (for [id (map :id (flatten (deserialize (str "results/market-apps/apps-" category))))
-                     :when (not-present? category id)]
+                     :when (not-exists? category id)]
                  (do
                    (println "downloading " category \space id)
                    (download-app id authtoken credentials (str "results/market-apps/" category "/" id))))))))
