@@ -9,6 +9,8 @@
     [clojure.contrib.duck-streams :only (copy)]
     [clojure.contrib.java-utils :only (read-properties)]))
 
+(def *path* "d:/android/apps/original")
+
 (defn url-encode
   "Wrapper around java.net.URLEncoder returning a (UTF-8) URL encoded
    representation of text."
@@ -56,7 +58,7 @@
                   
 
 (defn load-apps-metadata [category]
-  (flatten (deserialize (str "results/market-apps/apps-" category))))
+  (flatten (deserialize (str *path* "/apps-" category))))
 
 
 (defn download-all-apps [& credentials-files]
@@ -65,7 +67,7 @@
         workers           (agent 0)]
     (doseq [category ml/all-known-categories]
       (let [apps (load-apps-metadata category)
-            output-dir (str "results/market-apps/" category)]
+            output-dir (str *path* "/" category)]
         (printf "got %d apps to download into %s \n" (count apps) output-dir)
         (doall
           (pmap #(leech-apps %1 %2 output-dir) apps (cycle avail-credentials)))))))
