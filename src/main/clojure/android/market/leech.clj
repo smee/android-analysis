@@ -2,11 +2,9 @@
   (:use 
     [clojure.contrib.java-utils :only (read-properties)]
     [clojure.string :only (join)]
-    [clojure.contrib.duck-streams :only (copy append-spit)]
     android-manifest.serialization
     [android-manifest.util :only (try-times)])
   (:import 
-    java.net.URLEncoder
     [com.gc.android.market.api MarketSession MarketSession$Callback]
     [com.gc.android.market.api.model 
      Market$App 
@@ -108,31 +106,6 @@
                  (.getAppList resp)))))
 
 
-(defn url-encode
-  "Wrapper around java.net.URLEncoder returning a (UTF-8) URL encoded
-   representation of text."
-  [text]
-  (URLEncoder/encode text "UTF-8"))
-
-(defn leech-category [cat session]
-  )
-
-(defn download-app [assetid authtoken credentials filename]
-  "Download app from the official google market."
-  (let [cookie   (str "ANDROID=" authtoken)
-        userid   (get credentials "userid")
-        deviceid (get credentials "deviceid")
-        request  (str 
-                   "?assetId=" (url-encode assetid)
-                   "&userId="   (url-encode userid)
-                   "&deviceId=" (url-encode deviceid))
-        url      (java.net.URL. (str "http://android.clients.google.com/market/download/Download" request))
-        conn     (doto (.openConnection url)
-                   (.setRequestMethod "GET")
-                   (.setRequestProperty "User-Agent" "Android-Market/2 (dream DRC85)")
-                   (.setRequestProperty "cookie" cookie))]
-    (copy (.getInputStream conn) (java.io.File. filename))))
-
 (defn sleep-random [min max]
   (Thread/sleep (+ min (.nextInt (java.util.Random.) (- max min)))))
 
@@ -153,13 +126,10 @@
               (println "Caught exception in " category)
               (reset! session (init-session credentials)))))))
 
-(defn not-exists? [category id]
-  (not (.exists (java.io.File. (str "results/market-apps/" category \/ id)))))
 
 #_(comment
   
   (def credentials (read-properties "marketcredentials.properties"))
-  ;(map #(fetch-all-apps % credentials) all-known-categories)
 
   (def session (doto (new MarketSession)
                  (.login (get credentials "username") (get credentials "password"))))
@@ -175,17 +145,7 @@
   
   (doall (map #(serialize (str "apps-" cat) (deref %) true) leech-them))
   
-  (def authtoken (.getAuthSubToken session))
   
-  (doall (for [category all-known-categories]  
-           (do 
-             (println "starting " category)
-             (doall 
-               (for [id (map :id (flatten (deserialize (str "results/market-apps/apps-" category))))
-                     :when (not-exists? category id)]
-                 (do
-                   (println "downloading " category \space id)
-                   (download-app id authtoken credentials (str "results/market-apps/" category "/" id))))))))
   
   (def request (create-apps-request {:query "open"}))
   (fetch-app-infos session {:query "open" :category "COMMUNICATION"})
