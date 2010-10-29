@@ -34,7 +34,7 @@ the regular expression pattern"
      (.startsWith s "com.google.android.")))
 
 (defn load-android-app [manifest-file]
-  (let [xml                 (xml-seq (xml/parse manifest-file))
+  (let [xml                 (do (println "parsing " manifest-file )(xml-seq (xml/parse manifest-file)))
         app-name            (-> manifest-file .getParentFile .getName)
         package-name        (-> xml first :attrs :package)
         version             (-> xml first :attrs :android:versionName)
@@ -68,7 +68,7 @@ the regular expression pattern"
            (set 
              (map 
                ;; my index was created on a directory hierarchy where the app was at depth 8
-               (partial extract-path-part 8) 
+               (partial extract-path-part 5) 
                (search-lucene lucene-index-dir s))))])))
 
 
@@ -104,13 +104,14 @@ the regular expression pattern"
 (comment
    
   (set! *print-length* 15)
-  (def app-sources "D:/android/decompiled")
-  (def index-dir "D:/android/lucene-index")
+  (def app-sources "h:/android")
+  (def index-dir "h:/lucene-index-all")
  
  ;; or
+ (def manifest-files (find-file app-sources #".*AndroidManifest.xml"))
+ (def manifest-files (map #(File. %) (deserialize "d:/android/all-manifests")))
  (def real-external-refs
-   (let  [manifest-files (map #(File. %) (deserialize "d:/android/all-manifests"))
-          all-refs (find-all-references manifest-files index-dir)
+   (let  [all-refs (find-all-references manifest-files index-dir)
           all-apps (foreign-refs-only all-refs)
           real-external-refs (filter #(or (not-empty (remove-empty-values (:category-refs %))) (not-empty (remove-empty-values (:action-refs %)))) (filter-included-actions all-apps))]
      (do 

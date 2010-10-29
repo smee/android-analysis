@@ -81,8 +81,8 @@
   (println 
     "# manifests: "                         (count manifest-files)
     "\n# unique Apps: "                     (count all-apps)
-    "\n# of actions offered from apps: "    (count (distinct (mapcat #(keys (remove-empty-values (:action-refs %))) real-external-refs)))
-    "\n# apps calling foreign actions: "    (count (distinct (mapcat #(vals (:action-refs %)) real-external-refs)))
+    "\n# of externally used actions offered from apps: "    (count (distinct (mapcat #(keys (remove-empty-values (:action-refs %))) real-external-refs)))
+    "\n# apps calling external actions: "    (count (distinct (mapcat #(vals (:action-refs %)) real-external-refs)))
     "\n# openintents (actions): "           (count openintent-actions) openintent-actions
     "\n# of categories offered from apps: " (count (distinct (mapcat #(keys (remove-empty-values (:category-refs %))) real-external-refs)))
     "\n# apps calling foreign categories: " (count (distinct (mapcat #(vals (:category-refs %)) real-external-refs)))
@@ -108,7 +108,7 @@
   (use 'clojure.contrib.json)
   ;; write output as json file
   (binding [*print-length* nil]
-    (spit "results/real-refs-unique.json" (with-out-str (pprint-json real-external-refs))))
+    (spit "results/real-refs-16k.json" (with-out-str (pprint-json real-external-refs))))
   ;; visualize results via graphviz
   (spit "results/real-external-refs-unique.dot" (graphviz real-external-refs))
   )

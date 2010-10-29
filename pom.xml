@@ -155,7 +155,6 @@
 	      <artifactId>lucene-core</artifactId>
 	      <version>3.0.2</version>
 	    </dependency>
-	    
 	    <!-- Android market interaction -->        
 	    <dependency>
 	      <groupId>com.gc.android</groupId>
@@ -171,5 +170,21 @@
 	    	<type>jar</type>
 	    	<scope>compile</scope>
 	    </dependency>
+	    <!-- android app decompilation -->
+<!--        
+	    <dependency>
+	      <groupId>unknown</groupId>
+	      <artifactId>axml</artifactId>
+	      <version>1.0</version>
+	      <scope>system</scope>
+	      <systemPath>${basedir}/src/main/etc/axml-1.0.jar</systemPath>
+	    </dependency>        
+	    --><dependency>
+	      <groupId>unknown</groupId>
+	      <artifactId>apktool</artifactId>
+	      <version>1.0</version>
+	      <scope>system</scope>
+	      <systemPath>${basedir}/src/main/etc/apktool.jar</systemPath>
+	    </dependency>        
   </dependencies>
 </project>

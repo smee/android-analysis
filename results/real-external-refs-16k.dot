@@ -1,0 +1,2360 @@
+digraph {
+"-1048108861834498520"[shape=box] ; 
+"-1048108861834498520"->{"kr.co.shiftworks.send" } [color=green,arrowhead="diamond"] ; 
+ "5801819601705224700"[shape=box] ; 
+"5801819601705224700"->{"kr.co.shiftworks.send" } [color=green,arrowhead="diamond"] ; 
+ "7465330205588157991"[shape=box] ; 
+"7465330205588157991"->{"share" } [color=green,arrowhead="diamond"] ; 
+ "7825590026823629710"[shape=box] ; 
+"7825590026823629710"->{"org.openintents.action.AR_VIEW" } [color=green,arrowhead="diamond"] ; 
+ "-858872581654435426"[shape=box] ; 
+"-858872581654435426"->{"com.uc.browser.intent.action.LOADBUFFER" "com.uc.browser.intent.action.LOADURL" "com.uc.browser.intent.action.WEBSEARCH" } [color=green,arrowhead="diamond"] ; 
+ "5934840807959439978"[shape=box] ; 
+"5934840807959439978"->{"com.uc.browser.intent.action.LOADBUFFER" "com.uc.browser.intent.action.LOADURL" "com.uc.browser.intent.action.WEBSEARCH" } [color=green,arrowhead="diamond"] ; 
+ "-5758612115280321242"[shape=box] ; 
+"-5758612115280321242"->{"com.google.zxing.client.android.SCAN" } [color=green,arrowhead="diamond"] ; 
+ "-2990203980673629644"[shape=box] ; 
+"-2990203980673629644"->{"DEVICE_ADMIN" } [color=green,arrowhead="diamond"] ; 
+ "5618624409499836873"[shape=box] ; 
+"5618624409499836873"->{"org.openintents.action.PICK_FILE" } [color=green,arrowhead="diamond"] ; 
+ "6377684971351170382"[shape=box] ; 
+"6377684971351170382"->{"com.ngc.fora.action.ADDPACKAGE" } [color=green,arrowhead="diamond"] ; 
+ "1205784139269973631"[shape=box] ; 
+"1205784139269973631"->{"action.MAIN" } [color=green,arrowhead="diamond"] ; 
+ "5104609445895450100"[shape=box] ; 
+"5104609445895450100"->{"com.twidroid.SendTweet" } [color=green,arrowhead="diamond"] ; 
+ "-3641517136804863435"[shape=box] ; 
+"-3641517136804863435"->{"com.google.zxing.client.android.ENCODE" "com.google.zxing.client.android.SCAN" } [color=green,arrowhead="diamond"] ; 
+ "8686768683221291521"[shape=box] ; 
+"8686768683221291521"->{"kr.co.shiftworks.send" } [color=green,arrowhead="diamond"] ; 
+ "-4744979691038002177"[shape=box] ; 
+"-4744979691038002177"->{"com.cadreworks.intent.action.BROWSER" } [color=green,arrowhead="diamond"] ; 
+ "2258633642027591029"[shape=box] ; 
+"2258633642027591029"->{"com.eclipsim.gpsstatus.VIEW" "PREFERENCES" } [color=green,arrowhead="diamond"] ; 
+ "6052847544709153917"[shape=box] ; 
+"6052847544709153917"->{"com.google.zxing.client.android.ENCODE" "com.google.zxing.client.android.SCAN" "com.google.zxing.client.android.SHARE" } [color=green,arrowhead="diamond"] ; 
+ "-1435155739808887754"[shape=box] ; 
+"-1435155739808887754"->{"com.fsck.k9.K9RemoteControl.set" "com.fsck.k9.K9RemoteControl.requestAccounts" } [color=green,arrowhead="diamond"] ; 
+ "-2480491736766698944"[shape=box] ; 
+"-2480491736766698944"->{"de.ub0r.android.websms.connector.INFO" } [color=green,arrowhead="diamond"] ; 
+ "3121406915366521525"[shape=box] ; 
+"3121406915366521525"->{"com.flikie.plugin.MANAGE_PLUG_INS" } [color=green,arrowhead="diamond"] ; 
+ "-486128951894974731"[shape=box] ; 
+"-486128951894974731"->{"com.google.intent.action.START_TTS_SERVICE_BETA" "com.google.tts.makeBagel" } [color=green,arrowhead="diamond"] ; 
+ "3554786298305430741"[shape=box] ; 
+"3554786298305430741"->{"poi_detail" "event_detail" } [color=green,arrowhead="diamond"] ; 
+ "-1473842518780223860"[shape=box] ; 
+"-1473842518780223860"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "-7242469296433426187"[shape=box] ; 
+"-7242469296433426187"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "-5974499727002421172"[shape=box] ; 
+"-5974499727002421172"->{"de.ub0r.android.callmeter.SAVE_WEBSMS" } [color=green,arrowhead="diamond"] ; 
+ "-6961294827853753124"[shape=box] ; 
+"-6961294827853753124"->{"org.iii.romulus.meridian.playstatechanged" } [color=green,arrowhead="diamond"] ; 
+ "-7603566846162504893"[shape=box] ; 
+"-7603566846162504893"->{"com.adam.aslfms.notify.playstatechanged" } [color=green,arrowhead="diamond"] ; 
+ "4807215204703469228"[shape=box] ; 
+"4807215204703469228"->{"com.dataviz.stargate.StargateView" } [color=green,arrowhead="diamond"] ; 
+ "7751648226762859729"[shape=box] ; 
+"7751648226762859729"->{"com.fsck.k9.intent.action.EMAIL_RECEIVED" } [color=green,arrowhead="diamond"] ; 
+ "6356704477779075772"[shape=box] ; 
+"6356704477779075772"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "4875782077196217247"[shape=box] ; 
+"4875782077196217247"->{"com.google.zxing.client.android.SCAN" } [color=green,arrowhead="diamond"] ; 
+ "-6805150435712554770"[shape=box] ; 
+"-6805150435712554770"->{"com.google.zxing.client.android.SCAN" } [color=green,arrowhead="diamond"] ; 
+ "3468093295444413870"[shape=box] ; 
+"3468093295444413870"->{"HTC" } [color=green,arrowhead="diamond"] ; 
+ "-1283804740046211044"[shape=box] ; 
+"-1283804740046211044"->{"HTC" } [color=green,arrowhead="diamond"] ; 
+ "744812211117797127"[shape=box] ; 
+"744812211117797127"->{"HTC" } [color=green,arrowhead="diamond"] ; 
+ "8924262810745893321"[shape=box] ; 
+"8924262810745893321"->{"HTC" } [color=green,arrowhead="diamond"] ; 
+ "-4703570385798773990"[shape=box] ; 
+"-4703570385798773990"->{"mobi.bbase.ahome.THEME" } [color=green,arrowhead="diamond"] ; 
+ "-3402581029077185892"[shape=box] ; 
+"-3402581029077185892"->{"com.lib.wink.show" "com.lib.wink.list" } [color=green,arrowhead="diamond"] ; 
+ "3814440151602706818"[shape=box] ; 
+"3814440151602706818"->{"act_login" } [color=green,arrowhead="diamond"] ; 
+ "-3693952779094154246"[shape=box] ; 
+"-3693952779094154246"->{"start_service" } [color=green,arrowhead="diamond"] ; 
+ "-6702105523121653625"[shape=box] ; 
+"-6702105523121653625"->{"com.slackersoft.android.rss.action.SYNCH_NOW" } [color=green,arrowhead="diamond"] ; 
+ "6787061499404109742"[shape=box] ; 
+"6787061499404109742"->{"kr.mobilefirst.carrierplan.action.RELOAD" } [color=green,arrowhead="diamond"] ; 
+ "1535274873926803422"[shape=box] ; 
+"1535274873926803422"->{"com.autonavi.minimap.ACTION" } [color=green,arrowhead="diamond"] ; 
+ "3041948031007152637"[shape=box] ; 
+"3041948031007152637"->{"com.snaptic.intent.action.VIEW" "com.threebanana.notes.NoteEditor.ACTION_GEONOTE" "com.snaptic.intent.action.ADD" "com.threebanana.notes.Notes.ACTION_FILTER_NOTES" } [color=green,arrowhead="diamond"] ; 
+ "5525097493505861074"[shape=box] ; 
+"5525097493505861074"->{"mobi.mgeek.TunnyBrowser.action.list_themes" } [color=green,arrowhead="diamond"] ; 
+ "2581876998774305651"[shape=box] ; 
+"2581876998774305651"->{"mobi.mgeek.TunnyBrowser.action.list_themes" } [color=green,arrowhead="diamond"] ; 
+ "-2855234790093132055"[shape=box] ; 
+"-2855234790093132055"->{"mobi.mgeek.TunnyBrowser.action.list_themes" } [color=green,arrowhead="diamond"] ; 
+ "6224368080008783079"[shape=box] ; 
+"6224368080008783079"->{"com.google.zxing.client.android.SCAN" } [color=green,arrowhead="diamond"] ; 
+ "-4601175111718405104"[shape=box] ; 
+"-4601175111718405104"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "-8443703330065781155"[shape=box] ; 
+"-8443703330065781155"->{"kr.co.shiftworks.send" } [color=green,arrowhead="diamond"] ; 
+ "-3059413268448403403"[shape=box] ; 
+"-3059413268448403403"->{"share" } [color=green,arrowhead="diamond"] ; 
+ "4227745445175194043"[shape=box] ; 
+"4227745445175194043"->{"com.googlecode.chartdroid.intent.action.PLOT" } [color=green,arrowhead="diamond"] ; 
+ "-2453010867800807978"[shape=box] ; 
+"-2453010867800807978"->{"org.openintents.action.PICK_FILE" } [color=green,arrowhead="diamond"] ; 
+ "-8457962363534745902"[shape=box] ; 
+"-8457962363534745902"->{"org.adw.launcher.icons.ACTION_PICK_ICON" "org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "1902253985306369337"[shape=box] ; 
+"1902253985306369337"->{"com.google.zxing.client.android.SCAN" } [color=green,arrowhead="diamond"] ; 
+ "-6250165820302647402"[shape=box] ; 
+"-6250165820302647402"->{"com.amazon.mp3.action.EXTERNAL_EVENT" } [color=green,arrowhead="diamond"] ; 
+ "4695958951967655797"[shape=box] ; 
+"4695958951967655797"->{"org.iii.romulus.meridian.playbackcomplete" "org.iii.romulus.meridian.playstatechanged" "org.iii.romulus.meridian.metachanged" } [color=green,arrowhead="diamond"] ; 
+ "1562333230232589992"[shape=box] ; 
+"1562333230232589992"->{"com.google.zxing.client.android.ENCODE" "com.google.zxing.client.android.SCAN" "com.google.zxing.client.android.SHARE" } [color=green,arrowhead="diamond"] ; 
+ "-3813685358444328990"[shape=box] ; 
+"-3813685358444328990"->{"fm.last.android.LOVE" "fm.last.android.playbackcomplete" "com.smartmadsoft.openwatch.command.BUTTON_FF" "com.adam.aslfms.notify.playstatechanged" "fm.last.android.playbackpaused" "fm.last.android.BAN" "fm.last.android.metachanged" } [color=green,arrowhead="diamond"] ; 
+ "1713244450846008361"[shape=box] ; 
+"1713244450846008361"->{"com.levelup.touiteur.intent.action.GET_STATUS" } [color=green,arrowhead="diamond"] ; 
+ "-578371623177941377"[shape=box] ; 
+"-578371623177941377"->{"com.appventive.mailprovider.error" "com.appventive.mailprovider.goodAccount" "com.appventive.ExecAssist.updateEmail" } [color=green,arrowhead="diamond"] ; 
+ "-1789321786145528884"[shape=box] ; 
+"-1789321786145528884"->{"com.uc.news.UC_BROWSER_NEWS_COMPLETED" } [color=green,arrowhead="diamond"] ; 
+ "-4661068135102226677"[shape=box] ; 
+"-4661068135102226677"->{"com.google.zxing.client.android.SCAN" } [color=green,arrowhead="diamond"] ; 
+ "-7308796998307529252"[shape=box] ; 
+"-7308796998307529252"->{"com.betterandroid.betterkeyboard.skins" } [color=green,arrowhead="diamond"] ; 
+ "-3348785881658850339"[shape=box] ; 
+"-3348785881658850339"->{"com.example.android.apis.app.IRemoteService" "com.example.android.apis.app.ISecondary" } [color=green,arrowhead="diamond"] ; 
+ "1276225839957553843"[shape=box] ; 
+"1276225839957553843"->{"APPWIDGET_UPDATE" } [color=green,arrowhead="diamond"] ; 
+ "1810141658044847155"[shape=box] ; 
+"1810141658044847155"->{"com.hauri.ViRobotMobile.StopService" } [color=green,arrowhead="diamond"] ; 
+ "4767133504241348433"[shape=box] ; 
+"4767133504241348433"->{"se.sorlov.operatorcheck.PLUGIN_REQUEST" } [color=green,arrowhead="diamond"] ; 
+ "2998613782288855761"[shape=box] ; 
+"2998613782288855761"->{"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" "com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" } [color=green,arrowhead="diamond"] ; 
+ "7726639795228158593"[shape=box] ; 
+"7726639795228158593"->{"ru.yandex.yandexmaps.action.SHOW_POINT_ON_MAP" "ru.yandex.yandexmaps.action.ASK_POINT_TO_SEND" } [color=green,arrowhead="diamond"] ; 
+ "4206676925878524886"[shape=box] ; 
+"4206676925878524886"->{"org.adw.launcher.icons.ACTION_PICK_ICON" "org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "-8605520631059096611"[shape=box] ; 
+"-8605520631059096611"->{"org.adw.launcher.icons.ACTION_PICK_ICON" "org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "-6038956253812874997"[shape=box] ; 
+"-6038956253812874997"->{"org.adw.launcher.icons.ACTION_PICK_ICON" "org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "-1692703265041402342"[shape=box] ; 
+"-1692703265041402342"->{"com.xtify.android.sdk.SAVE_REGISTERED_CP_ID" "com.xtify.android.sdk.SAVE_USER_KEY" } [color=green,arrowhead="diamond"] ; 
+ "-1066061490154466310"[shape=box] ; 
+"-1066061490154466310"->{"org.openintents.action.INSERT_FROM_EXTRAS" } [color=green,arrowhead="diamond"] ; 
+ "6504917061182978813"[shape=box] ; 
+"6504917061182978813"->{"se.petersson.prisjakt.ZapsPrisjakt.SEARCH" } [color=green,arrowhead="diamond"] ; 
+ "-6990294206318660941"[shape=box] ; 
+"-6990294206318660941"->{"org.coolcode.service.download.IDownloadService" } [color=green,arrowhead="diamond"] ; 
+ "3858405109237410364"[shape=box] ; 
+"3858405109237410364"->{"com.zong.mobile.PAYMENT" } [color=green,arrowhead="diamond"] ; 
+ "3134285189182481192"[shape=box] ; 
+"3134285189182481192"->{".Captcha" } [color=green,arrowhead="diamond"] ; 
+ "8987629808474536816"[shape=box] ; 
+"8987629808474536816"->{"kr.co.shiftworks.send" } [color=green,arrowhead="diamond"] ; 
+ "7716438324600721080"[shape=box] ; 
+"7716438324600721080"->{"kr.co.shiftworks.send" } [color=green,arrowhead="diamond"] ; 
+ "-4476347007031456236"[shape=box] ; 
+"-4476347007031456236"->{"com.sportstracklive.android.ZEPHYR" } [color=green,arrowhead="diamond"] ; 
+ "-5659897795387111513"[shape=box] ; 
+"-5659897795387111513"->{"org.openintents.action.INSERT_FROM_EXTRAS" } [color=green,arrowhead="diamond"] ; 
+ "-5079869689857679697"[shape=box] ; 
+"-5079869689857679697"->{"com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "-5118186018543618807"[shape=box] ; 
+"-5118186018543618807"->{"com.google.zxing.client.android.SCAN" } [color=green,arrowhead="diamond"] ; 
+ "-7206041480678389729"[shape=box] ; 
+"-7206041480678389729"->{"org.openintents.action.PICK_FILE" "org.openintents.action.PICK_DIRECTORY" } [color=green,arrowhead="diamond"] ; 
+ "2136244925334239661"[shape=box] ; 
+"2136244925334239661"->{"com.yahoo.mobile.client.android.APP_STARTUP" } [color=green,arrowhead="diamond"] ; 
+ "-8340558298385610364"[shape=box] ; 
+"-8340558298385610364"->{"com.tmobile.pluto.snapi.ACCOUNT_REMOVED" "com.tmobile.pluto.snapi.NEW_UPDATES_AVAILABLE" } [color=green,arrowhead="diamond"] ; 
+ "1177555855543783548"[shape=box] ; 
+"1177555855543783548"->{"com.google.zxing.client.android.ENCODE" "com.google.zxing.client.android.SCAN" "com.google.zxing.client.android.SHARE" } [color=green,arrowhead="diamond"] ; 
+ "-5703069976280489409"[shape=box] ; 
+"-5703069976280489409"->{"com.tmobile.pluto.snapi.SET_SYNC_INTERVAL" } [color=green,arrowhead="diamond"] ; 
+ "4842451733007378860"[shape=box] ; 
+"4842451733007378860"->{"com.xtify.android.sdk.SAVE_REGISTERED_CP_ID" "com.xtify.android.sdk.SAVE_USER_KEY" } [color=green,arrowhead="diamond"] ; 
+ "-5219239215593222597"[shape=box] ; 
+"-5219239215593222597"->{"com.xtify.android.sdk.SAVE_REGISTERED_CP_ID" "com.xtify.android.sdk.SAVE_USER_KEY" } [color=green,arrowhead="diamond"] ; 
+ "-1785614984443655108"[shape=box] ; 
+"-1785614984443655108"->{"se.sorlov.operatorcheck.PLUGIN_REQUEST" } [color=green,arrowhead="diamond"] ; 
+ "5330737408710641247"[shape=box] ; 
+"5330737408710641247"->{"com.bingo.rom_gripper.action.ROM_LIST" } [color=green,arrowhead="diamond"] ; 
+ "-4729932398382794885"[shape=box] ; 
+"-4729932398382794885"->{"com.jacklrb.game.pacman" } [color=green,arrowhead="diamond"] ; 
+ "-9144186862027577105"[shape=box] ; 
+"-9144186862027577105"->{"com.google.zxing.client.android.ENCODE" "com.google.zxing.client.android.SCAN" "com.google.zxing.client.android.SHARE" } [color=green,arrowhead="diamond"] ; 
+ "5808441068150463284"[shape=box] ; 
+"5808441068150463284"->{"org.adw.launcher.icons.ACTION_PICK_ICON" "org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "94719493003054497"[shape=box] ; 
+"94719493003054497"->{"com.google.zxing.client.android.ENCODE" "com.google.zxing.client.android.SCAN" "com.google.zxing.client.android.SHARE" } [color=green,arrowhead="diamond"] ; 
+ "6582939284143511187"[shape=box] ; 
+"6582939284143511187"->{"bera.lee.cards.PACKAGE" } [color=green,arrowhead="diamond"] ; 
+ "-4451413647311889560"[shape=box] ; 
+"-4451413647311889560"->{"bera.lee.cards.PACKAGE" } [color=green,arrowhead="diamond"] ; 
+ "-2915107744510347704"[shape=box] ; 
+"-2915107744510347704"->{"bera.lee.cards.PACKAGE" } [color=green,arrowhead="diamond"] ; 
+ "7442461530908425995"[shape=box] ; 
+"7442461530908425995"->{"kr.co.shiftworks.send" } [color=green,arrowhead="diamond"] ; 
+ "2927615219194852710"[shape=box] ; 
+"2927615219194852710"->{"kr.co.shiftworks.send" } [color=green,arrowhead="diamond"] ; 
+ "-4278567336436942596"[shape=box] ; 
+"-4278567336436942596"->{"kr.co.shiftworks.send" } [color=green,arrowhead="diamond"] ; 
+ "-2221717412747819152"[shape=box] ; 
+"-2221717412747819152"->{"com.uangel.appwidget.NEXT" "com.uangel.appwidget.PREV" "kr.co.shiftworks.send" } [color=green,arrowhead="diamond"] ; 
+ "-5767396646916180858"[shape=box] ; 
+"-5767396646916180858"->{"org.adw.launcher.icons.ACTION_PICK_ICON" "org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "-3371984014886104365"[shape=box] ; 
+"-3371984014886104365"->{"com.google.zxing.client.android.SCAN" } [color=green,arrowhead="diamond"] ; 
+ "-5987461866289220304"[shape=box] ; 
+"-5987461866289220304"->{"org.adw.launcher.icons.ACTION_PICK_ICON" "org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "7724784818008553591"[shape=box] ; 
+"7724784818008553591"->{"ym.mz.mG" "com.tunewiki.lyricplayer.android.event.STATUS_U" "com.smartmadsoft.openwatch.action.TEXT" "com.smartmadsoft.openwatch.action.ENVELOPE" "com.mixzing.music.metachanged" "com.smartmadsoft.openwatch.action.VIBRATE" "com.adam.aslfms.notify.playstatechanged" "cm.mz.mG" "org.iii.romulus.meridian.metachanged" "com.fsck.k9.intent.action.EMAIL_RECEIVED" } [color=green,arrowhead="diamond"] ; 
+ "5786768776125110279"[shape=box] ; 
+"5786768776125110279"->{"com.viquantran.puzzlebox.animals" } [color=green,arrowhead="diamond"] ; 
+ "3955084241285625582"[shape=box] ; 
+"3955084241285625582"->{"com.viquantran.puzzlebox.plants" } [color=green,arrowhead="diamond"] ; 
+ "-7067553062714098369"[shape=box] ; 
+"-7067553062714098369"->{"com.viquantran.puzzlebox.manga" } [color=green,arrowhead="diamond"] ; 
+ "3614331811219416825"[shape=box] ; 
+"3614331811219416825"->{"com.google.zxing.client.android.ENCODE" "com.google.zxing.client.android.SCAN" } [color=green,arrowhead="diamond"] ; 
+ "869135593959729941"[shape=box] ; 
+"869135593959729941"->{"com.viquantran.puzzlebox.sexyanimebabes" } [color=green,arrowhead="diamond"] ; 
+ "413438413764711524"[shape=box] ; 
+"413438413764711524"->{"com.viquantran.puzzlebox.hotasianbabes" } [color=green,arrowhead="diamond"] ; 
+ "3427174499260971399"[shape=box] ; 
+"3427174499260971399"->{"com.viquantran.puzzlebox.hotasianbikinibabes" } [color=green,arrowhead="diamond"] ; 
+ "1617019806014515280"[shape=box] ; 
+"1617019806014515280"->{"com.viquantran.puzzlebox.hotbikinibabes" } [color=green,arrowhead="diamond"] ; 
+ "1293099407864608768"[shape=box] ; 
+"1293099407864608768"->{"com.viquantran.puzzlebox.hotlingeriebabes" } [color=green,arrowhead="diamond"] ; 
+ "-3786968749117318439"[shape=box] ; 
+"-3786968749117318439"->{"com.viquantran.puzzlebox.hotasianlingeriebabes" } [color=green,arrowhead="diamond"] ; 
+ "7411362464166068072"[shape=box] ; 
+"7411362464166068072"->{"org.adw.launcher.icons.ACTION_PICK_ICON" "org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "-5964616386933320352"[shape=box] ; 
+"-5964616386933320352"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "3752734682144706179"[shape=box] ; 
+"3752734682144706179"->{"com.google.zxing.client.android.ENCODE" "com.google.zxing.client.android.SCAN" "com.google.zxing.client.android.SHARE" } [color=green,arrowhead="diamond"] ; 
+ "1743108829095365760"[shape=box] ; 
+"1743108829095365760"->{"com.google.zxing.client.android.ENCODE" "com.google.zxing.client.android.SCAN" "com.google.zxing.client.android.SHARE" } [color=green,arrowhead="diamond"] ; 
+ "3852559297169869616"[shape=box] ; 
+"3852559297169869616"->{"com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "1020068094143873752"[shape=box] ; 
+"1020068094143873752"->{"com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "702481476986945628"[shape=box] ; 
+"702481476986945628"->{"be.pingping.pay.merchant" } [color=green,arrowhead="diamond"] ; 
+ "-504642082658204504"[shape=box] ; 
+"-504642082658204504"->{"com.urbanairship.airmail.END_REGISTER" "com.urbanairship.airmail.NOTIFY" "com.urbanairship.airmail.ACCEPT_PUSH" } [color=green,arrowhead="diamond"] ; 
+ "4171373207877148885"[shape=box] ; 
+"4171373207877148885"->{"SMS_SENT" } [color=green,arrowhead="diamond"] ; 
+ "-611652048151385055"[shape=box] ; 
+"-611652048151385055"->{"com.jacklrb.game.bunnyhunt" } [color=green,arrowhead="diamond"] ; 
+ "-6371495024265078441"[shape=box] ; 
+"-6371495024265078441"->{"kr.co.shiftworks.send" } [color=green,arrowhead="diamond"] ; 
+ "-2652110318714237674"[shape=box] ; 
+"-2652110318714237674"->{"com.viquantran.puzzlebox.hotblondebabes" } [color=green,arrowhead="diamond"] ; 
+ "-1473302795527112969"[shape=box] ; 
+"-1473302795527112969"->{"com.viquantran.puzzlebox.landscapes" } [color=green,arrowhead="diamond"] ; 
+ "-9188749238976379610"[shape=box] ; 
+"-9188749238976379610"->{"com.viquantran.puzzlebox.hotbrunettebabes" } [color=green,arrowhead="diamond"] ; 
+ "-6879422013935712041"[shape=box] ; 
+"-6879422013935712041"->{"org.abrantix.rockon.rockonnggl.RockOnNextGenGL" } [color=green,arrowhead="diamond"] ; 
+ "-1287113862717399474"[shape=box] ; 
+"-1287113862717399474"->{"kr.co.shiftworks.send" } [color=green,arrowhead="diamond"] ; 
+ "5591792804729568952"[shape=box] ; 
+"5591792804729568952"->{"com.viquantran.puzzlebox.hotguys" } [color=green,arrowhead="diamond"] ; 
+ "2288970703459334351"[shape=box] ; 
+"2288970703459334351"->{"com.simboly.puzzlebox.space" } [color=green,arrowhead="diamond"] ; 
+ "6164665768557118025"[shape=box] ; 
+"6164665768557118025"->{".About" } [color=green,arrowhead="diamond"] ; 
+ "-68074338050249880"[shape=box] ; 
+"-68074338050249880"->{"com.google.zxing.client.android.SCAN" } [color=green,arrowhead="diamond"] ; 
+ "-9059512070486470305"[shape=box] ; 
+"-9059512070486470305"->{"com.yahoo.mobile.client.android.APP_STARTUP" } [color=green,arrowhead="diamond"] ; 
+ "5892562639095325500"[shape=box] ; 
+"5892562639095325500"->{"com.simboly.puzzlebox.hote3babes2009" } [color=green,arrowhead="diamond"] ; 
+ "7500717825007701944"[shape=box] ; 
+"7500717825007701944"->{"com.google.zxing.client.android.SCAN" } [color=green,arrowhead="diamond"] ; 
+ "1936176220976338692"[shape=box] ; 
+"1936176220976338692"->{"jp.r246.twicca.ACTION_PLUGIN_SETTINGS" } [color=green,arrowhead="diamond"] ; 
+ "3859714242262912222"[shape=box] ; 
+"3859714242262912222"->{"com.urbanairship.airmail.END_REGISTER" "com.urbanairship.airmail.NOTIFY" "com.urbanairship.airmail.ACCEPT_PUSH" } [color=green,arrowhead="diamond"] ; 
+ "3245586578686438"[shape=box] ; 
+"3245586578686438"->{"com.google.zxing.client.android.SCAN" } [color=green,arrowhead="diamond"] ; 
+ "-6429449250566190786"[shape=box] ; 
+"-6429449250566190786"->{"com.google.zxing.client.android.SCAN" } [color=green,arrowhead="diamond"] ; 
+ "-1863867183765583092"[shape=box] ; 
+"-1863867183765583092"->{"org.adw.launcher.icons.ACTION_PICK_ICON" "org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "-4077115747245070404"[shape=box] ; 
+"-4077115747245070404"->{"com.carl.askastranger.AUTH_SUCCESS" "com.carl.askastranger.QUEST_ADDLIST" } [color=green,arrowhead="diamond"] ; 
+ "2308423984455123463"[shape=box] ; 
+"2308423984455123463"->{"com.opentable.action.RESERVE" } [color=green,arrowhead="diamond"] ; 
+ "-102159763728475197"[shape=box] ; 
+"-102159763728475197"->{"com.google.zxing.client.android.ENCODE" "com.google.zxing.client.android.SCAN" "com.google.zxing.client.android.SHARE" } [color=green,arrowhead="diamond"] ; 
+ "-8976726905033804553"[shape=box] ; 
+"-8976726905033804553"->{"org.mashupOrganizer.SHOW_ORGANIZER" } [color=green,arrowhead="diamond"] ; 
+ "2481374602190954259"[shape=box] ; 
+"2481374602190954259"->{"mobi.bbase.ahome.THEME" } [color=green,arrowhead="diamond"] ; 
+ "-1068294111156249731"[shape=box] ; 
+"-1068294111156249731"->{"com.google.zxing.client.android.CaptureActivity" "org.odk.collect.android.action.FormEntry" } [color=green,arrowhead="diamond"] ; 
+ "-7718696392562606063"[shape=box] ; 
+"-7718696392562606063"->{"org.openintents.action.DELETED" } [color=green,arrowhead="diamond"] ; 
+ "-2312301474632687052"[shape=box] ; 
+"-2312301474632687052"->{"org.openintents.action.SHOW_ABOUT_DIALOG" } [color=green,arrowhead="diamond"] ; 
+ "3710812352213535580"[shape=box] ; 
+"3710812352213535580"->{"com.wsl.CardioTrainer.EXERCISE_INFO_CHANGED" } [color=green,arrowhead="diamond"] ; 
+ "-935781171681448032"[shape=box] ; 
+"-935781171681448032"->{"org.freeworld.vapor.glue.RemoteRequest" } [color=green,arrowhead="diamond"] ; 
+ "9188623763026927981"[shape=box] ; 
+"9188623763026927981"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "9117421215532336746"[shape=box] ; 
+"9117421215532336746"->{"com.betterandroid.launcher2.icons" } [color=green,arrowhead="diamond"] ; 
+ "825301490455994376"[shape=box] ; 
+"825301490455994376"->{"com.betterandroid.betterkeyboard.skins" } [color=green,arrowhead="diamond"] ; 
+ "81733372964572080"[shape=box] ; 
+"81733372964572080"->{"com.betterandroid.launcher2.icons" } [color=green,arrowhead="diamond"] ; 
+ "7950704560065774940"[shape=box] ; 
+"7950704560065774940"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "7255482595740243486"[shape=box] ; 
+"7255482595740243486"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "6601326391875572545"[shape=box] ; 
+"6601326391875572545"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "6573800894110308633"[shape=box] ; 
+"6573800894110308633"->{"com.betterandroid.launcher2.icons" } [color=green,arrowhead="diamond"] ; 
+ "6346544880889419221"[shape=box] ; 
+"6346544880889419221"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "6342010348716990752"[shape=box] ; 
+"6342010348716990752"->{"com.betterandroid.launcher2.icons" } [color=green,arrowhead="diamond"] ; 
+ "5844543675107246181"[shape=box] ; 
+"5844543675107246181"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "5549611054619562008"[shape=box] ; 
+"5549611054619562008"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "5323810398538327374"[shape=box] ; 
+"5323810398538327374"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "4870885844781280442"[shape=box] ; 
+"4870885844781280442"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "4524370455150358643"[shape=box] ; 
+"4524370455150358643"->{"com.betterandroid.betterkeyboard.skins" } [color=green,arrowhead="diamond"] ; 
+ "4349075887975555988"[shape=box] ; 
+"4349075887975555988"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "4310940116581268199"[shape=box] ; 
+"4310940116581268199"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "4014632012429989932"[shape=box] ; 
+"4014632012429989932"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "3989003666978719377"[shape=box] ; 
+"3989003666978719377"->{"org.adw.launcher.icons.ACTION_PICK_ICON" "org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "3890772422808296503"[shape=box] ; 
+"3890772422808296503"->{"com.betterandroid.betterkeyboard.skins" } [color=green,arrowhead="diamond"] ; 
+ "3152878089882211828"[shape=box] ; 
+"3152878089882211828"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "3133158130923070680"[shape=box] ; 
+"3133158130923070680"->{"com.betterandroid.launcher2.icons" } [color=green,arrowhead="diamond"] ; 
+ "2040992328965881884"[shape=box] ; 
+"2040992328965881884"->{"com.betterandroid.launcher2.icons" } [color=green,arrowhead="diamond"] ; 
+ "1980246030522015247"[shape=box] ; 
+"1980246030522015247"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "1617930959985725228"[shape=box] ; 
+"1617930959985725228"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "1573191853953176677"[shape=box] ; 
+"1573191853953176677"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "1497029008987844438"[shape=box] ; 
+"1497029008987844438"->{"org.adw.launcher.icons.ACTION_PICK_ICON" "org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "-868823896424816374"[shape=box] ; 
+"-868823896424816374"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "-771926658373678732"[shape=box] ; 
+"-771926658373678732"->{"com.betterandroid.launcher2.icons" } [color=green,arrowhead="diamond"] ; 
+ "-6214832729844123410"[shape=box] ; 
+"-6214832729844123410"->{"org.adw.launcher.icons.ACTION_PICK_ICON" "org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "-5774215839355602936"[shape=box] ; 
+"-5774215839355602936"->{"org.adw.launcher.icons.ACTION_PICK_ICON" "org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "-5334123416476144372"[shape=box] ; 
+"-5334123416476144372"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "-5172058195731261359"[shape=box] ; 
+"-5172058195731261359"->{"com.betterandroid.launcher2.icons" } [color=green,arrowhead="diamond"] ; 
+ "-5126119836854667165"[shape=box] ; 
+"-5126119836854667165"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "-4614623871948187652"[shape=box] ; 
+"-4614623871948187652"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "-4448483611201805006"[shape=box] ; 
+"-4448483611201805006"->{"com.betterandroid.launcher2.icons" } [color=green,arrowhead="diamond"] ; 
+ "-4278189027189338101"[shape=box] ; 
+"-4278189027189338101"->{"org.adw.launcher.icons.ACTION_PICK_ICON" "org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "-4214132694642286339"[shape=box] ; 
+"-4214132694642286339"->{"org.adw.launcher.icons.ACTION_PICK_ICON" "org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "-4023412415706783132"[shape=box] ; 
+"-4023412415706783132"->{"com.betterandroid.launcher2.icons" } [color=green,arrowhead="diamond"] ; 
+ "-3565773493577003901"[shape=box] ; 
+"-3565773493577003901"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "-3319193944559777710"[shape=box] ; 
+"-3319193944559777710"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "-3251303100019237309"[shape=box] ; 
+"-3251303100019237309"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "-3221945238280879650"[shape=box] ; 
+"-3221945238280879650"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "-2910360139395293246"[shape=box] ; 
+"-2910360139395293246"->{"com.betterandroid.launcher2.icons" } [color=green,arrowhead="diamond"] ; 
+ "-2808666600226339247"[shape=box] ; 
+"-2808666600226339247"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "-2284289860824427646"[shape=box] ; 
+"-2284289860824427646"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "-2234680649320420460"[shape=box] ; 
+"-2234680649320420460"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "-1771118807435895465"[shape=box] ; 
+"-1771118807435895465"->{"com.betterandroid.launcher2.icons" } [color=green,arrowhead="diamond"] ; 
+ "-258892233355748073"[shape=box] ; 
+"-258892233355748073"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "-2127962682154732237"[shape=box] ; 
+"-2127962682154732237"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "-2162336570350829086"[shape=box] ; 
+"-2162336570350829086"->{"com.google.zxing.client.android.SCAN" } [color=green,arrowhead="diamond"] ; 
+ "1546673276613767525"[shape=box] ; 
+"1546673276613767525"->{"com.google.zxing.client.android.SCAN" } [color=green,arrowhead="diamond"] ; 
+ "-7857283458733627567"[shape=box] ; 
+"-7857283458733627567"->{"com.google.zxing.client.android.ENCODE" "com.google.zxing.client.android.SCAN" "com.google.zxing.client.android.SHARE" } [color=green,arrowhead="diamond"] ; 
+ "265206371268541017"[shape=box] ; 
+"265206371268541017"->{"org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "1700273942437808133"[shape=box] ; 
+"1700273942437808133"->{"com.wordplayer.ReadChapter" } [color=green,arrowhead="diamond"] ; 
+ "139813443893063910"[shape=box] ; 
+"139813443893063910"->{"com.betterandroid.launcher2.icons" } [color=green,arrowhead="diamond"] ; 
+ "132933725049455747"[shape=box] ; 
+"132933725049455747"->{"com.betterandroid.launcher2.icons" } [color=green,arrowhead="diamond"] ; 
+ "-8668705355239183041"[shape=box] ; 
+"-8668705355239183041"->{"com.betterandroid.betterkeyboard.skins" } [color=green,arrowhead="diamond"] ; 
+ "-7841070862232054537"[shape=box] ; 
+"-7841070862232054537"->{"com.betterandroid.betterkeyboard.skins" } [color=green,arrowhead="diamond"] ; 
+ "-7465851870990791210"[shape=box] ; 
+"-7465851870990791210"->{"net.thinkingspace.cloud.ICloudInterface" } [color=green,arrowhead="diamond"] ; 
+ "-7281651508108624658"[shape=box] ; 
+"-7281651508108624658"->{"com.wordplayer.ReadChapter" } [color=green,arrowhead="diamond"] ; 
+ "-6428085338735722020"[shape=box] ; 
+"-6428085338735722020"->{"com.betterandroid.betterkeyboard.skins" } [color=green,arrowhead="diamond"] ; 
+ "-5718828992046668711"[shape=box] ; 
+"-5718828992046668711"->{"com.betterandroid.betterkeyboard.skins" } [color=green,arrowhead="diamond"] ; 
+ "-4941298796788320174"[shape=box] ; 
+"-4941298796788320174"->{"com.betterandroid.launcher2.icons" } [color=green,arrowhead="diamond"] ; 
+ "-4283379490287577654"[shape=box] ; 
+"-4283379490287577654"->{"com.betterandroid.betterkeyboard.skins" } [color=green,arrowhead="diamond"] ; 
+ "-3933304522058108676"[shape=box] ; 
+"-3933304522058108676"->{"com.betterandroid.betterkeyboard.skins" } [color=green,arrowhead="diamond"] ; 
+ "-3472182276507081702"[shape=box] ; 
+"-3472182276507081702"->{"org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "-3236439023047155376"[shape=box] ; 
+"-3236439023047155376"->{"com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "-1575141383395995561"[shape=box] ; 
+"-1575141383395995561"->{"com.betterandroid.betterkeyboard.skins" } [color=green,arrowhead="diamond"] ; 
+ "7550017277046828723"[shape=box] ; 
+"7550017277046828723"->{"com.nd.android.pandahome.theme" "mobi.bbase.ahome.THEME" "com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "-4586763543126557139"[shape=box] ; 
+"-4586763543126557139"->{"com.xtify.android.sdk.SAVE_REGISTERED_CP_ID" "com.xtify.android.sdk.SAVE_USER_KEY" } [color=green,arrowhead="diamond"] ; 
+ "-1198847335476055109"[shape=box] ; 
+"-1198847335476055109"->{"kr.co.shiftworks.send" } [color=green,arrowhead="diamond"] ; 
+ "-509508715904565002"[shape=box] ; 
+"-509508715904565002"->{"com.google.zxing.client.android.SCAN" } [color=green,arrowhead="diamond"] ; 
+ "-4646214089057873644"[shape=box] ; 
+"-4646214089057873644"->{"About" } [color=green,arrowhead="diamond"] ; 
+ "6871188473671711677"[shape=box] ; 
+"6871188473671711677"->{"com.zong.mobile.PAYMENT" } [color=green,arrowhead="diamond"] ; 
+ "330683292245134440"[shape=box] ; 
+"330683292245134440"->{"com.zong.mobile.PAYMENT" } [color=green,arrowhead="diamond"] ; 
+ "1699315564142788835"[shape=box] ; 
+"1699315564142788835"->{"com.zong.mobile.PAYMENT" } [color=green,arrowhead="diamond"] ; 
+ "-4538976940987731725"[shape=box] ; 
+"-4538976940987731725"->{"com.zong.mobile.PAYMENT" } [color=green,arrowhead="diamond"] ; 
+ "-1440456387100602569"[shape=box] ; 
+"-1440456387100602569"->{"com.zong.mobile.PAYMENT" } [color=green,arrowhead="diamond"] ; 
+ "-863116104545183898"[shape=box] ; 
+"-863116104545183898"->{"com.zong.mobile.PAYMENT" } [color=green,arrowhead="diamond"] ; 
+ "-7556513521850859559"[shape=box] ; 
+"-7556513521850859559"->{"com.zong.mobile.PAYMENT" } [color=green,arrowhead="diamond"] ; 
+ "-7514004677122119556"[shape=box] ; 
+"-7514004677122119556"->{"com.zong.mobile.PAYMENT" } [color=green,arrowhead="diamond"] ; 
+ "-4708392039691140524"[shape=box] ; 
+"-4708392039691140524"->{"com.zong.mobile.PAYMENT" } [color=green,arrowhead="diamond"] ; 
+ "-1129842784948581823"[shape=box] ; 
+"-1129842784948581823"->{"com.zong.mobile.PAYMENT" } [color=green,arrowhead="diamond"] ; 
+ "6904095274517893699"[shape=box] ; 
+"6904095274517893699"->{"de.leihwelt.android.droidkoban.CUSTOMIZE_PLAYER" } [color=green,arrowhead="diamond"] ; 
+ "-5161734962164974218"[shape=box] ; 
+"-5161734962164974218"->{"org.adw.launcher.icons.ACTION_PICK_ICON" "org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "8977069708208213839"[shape=box] ; 
+"8977069708208213839"->{"com.urbanairship.airmail.END_REGISTER" "com.urbanairship.airmail.NOTIFY" "com.urbanairship.airmail.ACCEPT_PUSH" } [color=green,arrowhead="diamond"] ; 
+ "832550236281121342"[shape=box] ; 
+"832550236281121342"->{"com.betterandroid.launcher2.skins" } [color=green,arrowhead="diamond"] ; 
+ "4740580527840137826"[shape=box] ; 
+"4740580527840137826"->{"se.sorlov.operatorcheck.PLUGIN_RESPONSE" } [color=green,arrowhead="diamond"] ; 
+ "-5561624027020657349"[shape=box] ; 
+"-5561624027020657349"->{"com.slackersoft.android.rss.action.SYNCH_NOW" } [color=green,arrowhead="diamond"] ; 
+ "-7179459322934800427"[shape=box] ; 
+"-7179459322934800427"->{"com.google.zxing.client.android.SCAN" } [color=green,arrowhead="diamond"] ; 
+ "-1362017220567228496"[shape=box] ; 
+"-1362017220567228496"->{"com.niftyware.alex.core.CALL_ACTION" } [color=green,arrowhead="diamond"] ; 
+ "8879384978260375919"[shape=box] ; 
+"8879384978260375919"->{"org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "8683568123002624287"[shape=box] ; 
+"8683568123002624287"->{"org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "7088623878724074194"[shape=box] ; 
+"7088623878724074194"->{"org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "6403900454290386558"[shape=box] ; 
+"6403900454290386558"->{"org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "5539406237967438339"[shape=box] ; 
+"5539406237967438339"->{"org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "4840754854240264026"[shape=box] ; 
+"4840754854240264026"->{"org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "4484299421689011914"[shape=box] ; 
+"4484299421689011914"->{"org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "3321790895251556367"[shape=box] ; 
+"3321790895251556367"->{"org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "3168394510563809203"[shape=box] ; 
+"3168394510563809203"->{"org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "2270947649548066208"[shape=box] ; 
+"2270947649548066208"->{"org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "2220004838911033132"[shape=box] ; 
+"2220004838911033132"->{"org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "-7897290595796675303"[shape=box] ; 
+"-7897290595796675303"->{"org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "-3875156542471439772"[shape=box] ; 
+"-3875156542471439772"->{"org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "-1281820198300645997"[shape=box] ; 
+"-1281820198300645997"->{"org.adw.launcher.THEMES" } [color=green,arrowhead="diamond"] ; 
+ "3756314844620045604"[shape=box] ; 
+"3756314844620045604"->{"fm.last.android.playbackcomplete" "com.adam.aslfms.notify.playstatechanged" "fm.last.android.playbackpaused" "fm.last.android.metachanged" } [color=green,arrowhead="diamond"] ; 
+ "-7188031448344624467"[shape=box] ; 
+"-7188031448344624467"->{"com.smartmadsoft.openwatch.command.BUTTON_FF" "com.smartmadsoft.openwatch.command.BUTTON_RW" } [color=green,arrowhead="diamond"] ; 
+ "2416808782990029964"[shape=box] ; 
+"2416808782990029964"->{"com.slackersoft.android.rss.action.SYNCH_NOW" } [color=green,arrowhead="diamond"] ; 
+ "7192134661384493344"[shape=box] ; 
+"7192134661384493344"->{"com.xtify.android.sdk.SAVE_REGISTERED_CP_ID" "com.xtify.android.sdk.SAVE_USER_KEY" } [color=green,arrowhead="diamond"] ; 
+ "2348045586586553900"[shape=box] ; 
+"2348045586586553900"->{"com.slackersoft.android.rss.action.SYNCH_NOW" } [color=green,arrowhead="diamond"] ; 
+ "-830099702656697639"[shape=box] ; 
+"-830099702656697639"->{"com.slackersoft.android.rss.action.SYNCH_NOW" } [color=green,arrowhead="diamond"] ; 
+ "5804899606631068690"[shape=box] ; 
+"5804899606631068690"->{"sms_sent" } [color=green,arrowhead="diamond"] ; 
+ "-2253282705194473296"[shape=box] ; 
+"-2253282705194473296"->{"com.appventive.actions.EditEmailAccount" "com.appventive.action.UpdateMail" "com.appventive.actions.CreateEmailAccount" } [color=green,arrowhead="diamond"] ; 
+ "1661755011889915266"[shape=box] ; 
+"1661755011889915266"->{"com.slackersoft.android.rss.action.SYNCH_NOW" } [color=green,arrowhead="diamond"] ; 
+ "-4563887505927584796"[shape=box] ; 
+"-4563887505927584796"->{"com.slackersoft.android.rss.action.SYNCH_NOW" } [color=green,arrowhead="diamond"] ; 
+ "-3198063128914467684"[shape=box] ; 
+"-3198063128914467684"->{"jp.r246.twicca.ACTION_SHOW_USER" } [color=green,arrowhead="diamond"] ; 
+ "-5248095610107103923"[shape=box] ; 
+"-5248095610107103923"->{"jp.r246.twicca.ACTION_SHOW_USER" "jp.r246.twicca.ACTION_PLUGIN_SETTINGS" } [color=green,arrowhead="diamond"] ; 
+ "-8107887506041381965"[shape=box] ; 
+"-8107887506041381965"->{"jp.r246.twicca.ACTION_PLUGIN_SETTINGS" "jp.r246.twicca.ACTION_PICK_TREND" } [color=green,arrowhead="diamond"] ; 
+ "5901463310491883556"[shape=box] ; 
+"5901463310491883556"->{"jp.r246.twicca.ACTION_PLUGIN_SETTINGS" } [color=green,arrowhead="diamond"] ; 
+ "-7459959353762749624"[shape=box] ; 
+"-7459959353762749624"->{"jp.r246.twicca.ACTION_SHOW_USER" "jp.r246.twicca.ACTION_PLUGIN_SETTINGS" } [color=green,arrowhead="diamond"] ; 
+ "-3332968525236930000"[shape=box] ; 
+"-3332968525236930000"->{"jp.r246.twicca.ACTION_SHOW_USER" "jp.r246.twicca.ACTION_PLUGIN_SETTINGS" } [color=green,arrowhead="diamond"] ; 
+ "1657292747174182252"[shape=box] ; 
+"1657292747174182252"->{"org.openintents.indiclash.CREATE_FLASHCARD" } [color=green,arrowhead="diamond"] ; 
+"7836983829157292145"[shape=box] ; 
+"7836983829157292145"->{"com.appspot.swisscodemonkeys.apps" } [color=blue,arrowhead="diamond"] ; 
+ "-486128951894974731"[shape=box] ; 
+"-486128951894974731"->{"com.google.intent.category.TTS_BETA" } [color=blue,arrowhead="diamond"] ; 
+ "-8029891154977165808"[shape=box] ; 
+"-8029891154977165808"->{"com.netgate.android.category.notification" "com.netgate.android.CATEGORY" "com.netgate.android.category.travel" } [color=blue,arrowhead="diamond"] ; 
+ "-3198063128914467684"[shape=box] ; 
+"-3198063128914467684"->{"jp.r246.twicca.category.USER" "jp.r246.twicca.category.OWNER" } [color=blue,arrowhead="diamond"] ; 
+ "-5248095610107103923"[shape=box] ; 
+"-5248095610107103923"->{"jp.r246.twicca.category.OWNER" } [color=blue,arrowhead="diamond"] ; 
+ "-7459959353762749624"[shape=box] ; 
+"-7459959353762749624"->{"jp.r246.twicca.category.USER" "jp.r246.twicca.category.OWNER" } [color=blue,arrowhead="diamond"] ; 
+ "-3332968525236930000"[shape=box] ; 
+"-3332968525236930000"->{"jp.r246.twicca.category.USER" "jp.r246.twicca.category.OWNER" } [color=blue,arrowhead="diamond"] ; 
+"5172799965723283841"[shape=box] 
+"5172799965723283841"->"kr.co.shiftworks.send" [color=red, style=dotted] ;
+ "7412578447012357017"[shape=box] 
+"7412578447012357017"->"kr.co.shiftworks.send" [color=red, style=dotted] ;
+ "-8618593943228728777"[shape=box] 
+"-8618593943228728777"->"kr.co.shiftworks.send" [color=red, style=dotted] ;
+ "-3852507276815996864"[shape=box] 
+"-3852507276815996864"->"kr.co.shiftworks.send" [color=red, style=dotted] ;
+ "878474806118391668"[shape=box] 
+"878474806118391668"->"kr.co.shiftworks.send" [color=red, style=dotted] ;
+ "-511082261610742349"[shape=box] 
+"-511082261610742349"->"org.openintents.action.AR_VIEW" [color=red, style=dotted] ;
+ "2306045810974696659"[shape=box] 
+"2306045810974696659"->"org.openintents.action.AR_VIEW" [color=red, style=dotted] ;
+ "8961461152084303229"[shape=box] 
+"8961461152084303229"->"org.openintents.action.AR_VIEW" [color=red, style=dotted] ;
+ "-8643890992808678515"[shape=box] 
+"-8643890992808678515"->"org.openintents.action.AR_VIEW" [color=red, style=dotted] ;
+ "3224398418717069203"[shape=box] 
+"3224398418717069203"->"org.openintents.action.AR_VIEW" [color=red, style=dotted] ;
+ "3501808425546088143"[shape=box] 
+"3501808425546088143"->"org.openintents.action.AR_VIEW" [color=red, style=dotted] ;
+ "-1789321786145528884"[shape=box] 
+"-1789321786145528884"->"com.uc.browser.intent.action.LOADBUFFER" [color=red, style=dotted] ;
+ "-1789321786145528884"[shape=box] 
+"-1789321786145528884"->"com.uc.browser.intent.action.LOADURL" [color=red, style=dotted] ;
+ "-1789321786145528884"[shape=box] 
+"-1789321786145528884"->"com.uc.browser.intent.action.WEBSEARCH" [color=red, style=dotted] ;
+ "7170734212260896744"[shape=box] 
+"7170734212260896744"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "3677506542611680432"[shape=box] 
+"3677506542611680432"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-7505373983017404239"[shape=box] 
+"-7505373983017404239"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1614817156445165217"[shape=box] 
+"1614817156445165217"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "809820763402124959"[shape=box] 
+"809820763402124959"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "7174956970327969026"[shape=box] 
+"7174956970327969026"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-2937121408347282506"[shape=box] 
+"-2937121408347282506"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "6082498121352876812"[shape=box] 
+"6082498121352876812"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1818497535395577769"[shape=box] 
+"1818497535395577769"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-2074903220245252559"[shape=box] 
+"-2074903220245252559"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-6559815607668137165"[shape=box] 
+"-6559815607668137165"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-4886520236425250290"[shape=box] 
+"-4886520236425250290"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1005312376219264868"[shape=box] 
+"1005312376219264868"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "7337824474496185766"[shape=box] 
+"7337824474496185766"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-5512239390253935064"[shape=box] 
+"-5512239390253935064"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-5530851382970958980"[shape=box] 
+"-5530851382970958980"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-3499211399379582360"[shape=box] 
+"-3499211399379582360"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-1731100109622314927"[shape=box] 
+"-1731100109622314927"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-4045491637697582700"[shape=box] 
+"-4045491637697582700"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "422379594121189566"[shape=box] 
+"422379594121189566"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-8123698476471418776"[shape=box] 
+"-8123698476471418776"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "8843974161103570378"[shape=box] 
+"8843974161103570378"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-3993665623329434362"[shape=box] 
+"-3993665623329434362"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-311887448465709933"[shape=box] 
+"-311887448465709933"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "3335578624271510199"[shape=box] 
+"3335578624271510199"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "7659456791343958150"[shape=box] 
+"7659456791343958150"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-6554601553424218043"[shape=box] 
+"-6554601553424218043"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "8213224161487543901"[shape=box] 
+"8213224161487543901"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "7759772758201724139"[shape=box] 
+"7759772758201724139"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-6660064502745454176"[shape=box] 
+"-6660064502745454176"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-5088942815721395183"[shape=box] 
+"-5088942815721395183"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "5521836590970770873"[shape=box] 
+"5521836590970770873"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-7680813935123978223"[shape=box] 
+"-7680813935123978223"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "2209892459271597916"[shape=box] 
+"2209892459271597916"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-5990701659931328960"[shape=box] 
+"-5990701659931328960"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-2194443453015948314"[shape=box] 
+"-2194443453015948314"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-1446725250029270819"[shape=box] 
+"-1446725250029270819"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-4041728155844586617"[shape=box] 
+"-4041728155844586617"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "7719021225341384026"[shape=box] 
+"7719021225341384026"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "5122871928563444277"[shape=box] 
+"5122871928563444277"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "8201028796089262817"[shape=box] 
+"8201028796089262817"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-5599611034312817659"[shape=box] 
+"-5599611034312817659"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1502168006574422762"[shape=box] 
+"1502168006574422762"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-4949644901061803982"[shape=box] 
+"-4949644901061803982"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-8156035697974447992"[shape=box] 
+"-8156035697974447992"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-6824179864148248926"[shape=box] 
+"-6824179864148248926"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "8363874637150716236"[shape=box] 
+"8363874637150716236"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-3386258588011250187"[shape=box] 
+"-3386258588011250187"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "7228888518609293901"[shape=box] 
+"7228888518609293901"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "5862214715660212110"[shape=box] 
+"5862214715660212110"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-5146778853900774370"[shape=box] 
+"-5146778853900774370"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-93615559251664324"[shape=box] 
+"-93615559251664324"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "164721341602749655"[shape=box] 
+"164721341602749655"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "8466616121946366586"[shape=box] 
+"8466616121946366586"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "2322130040183545157"[shape=box] 
+"2322130040183545157"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-3830600665526010295"[shape=box] 
+"-3830600665526010295"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "7570983003164261707"[shape=box] 
+"7570983003164261707"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "674613968694849095"[shape=box] 
+"674613968694849095"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "5848668577359948610"[shape=box] 
+"5848668577359948610"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-934095507940718672"[shape=box] 
+"-934095507940718672"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-4880031846617741888"[shape=box] 
+"-4880031846617741888"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-8931551998812156535"[shape=box] 
+"-8931551998812156535"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-5739976395557510213"[shape=box] 
+"-5739976395557510213"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-1269108671156031043"[shape=box] 
+"-1269108671156031043"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "6328703497072825589"[shape=box] 
+"6328703497072825589"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-4466960293000181380"[shape=box] 
+"-4466960293000181380"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1036083512504147542"[shape=box] 
+"1036083512504147542"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "5526695566911865011"[shape=box] 
+"5526695566911865011"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-8640948917167435217"[shape=box] 
+"-8640948917167435217"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "6976198440648937584"[shape=box] 
+"6976198440648937584"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-1374543973112025967"[shape=box] 
+"-1374543973112025967"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-88399778624892502"[shape=box] 
+"-88399778624892502"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "7803814848143066386"[shape=box] 
+"7803814848143066386"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-6944321161417802721"[shape=box] 
+"-6944321161417802721"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-6370284411495194650"[shape=box] 
+"-6370284411495194650"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "8220964297916079045"[shape=box] 
+"8220964297916079045"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1676443722815963174"[shape=box] 
+"1676443722815963174"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "553309117477523815"[shape=box] 
+"553309117477523815"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-3864325858644060864"[shape=box] 
+"-3864325858644060864"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1360274844675325114"[shape=box] 
+"1360274844675325114"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-5657234005880083428"[shape=box] 
+"-5657234005880083428"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-4864308461350341970"[shape=box] 
+"-4864308461350341970"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "6167334358479018260"[shape=box] 
+"6167334358479018260"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-5198214139339786674"[shape=box] 
+"-5198214139339786674"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "7010497907530771662"[shape=box] 
+"7010497907530771662"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-557685481310064790"[shape=box] 
+"-557685481310064790"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "7865574082043645460"[shape=box] 
+"7865574082043645460"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-5477919887236833036"[shape=box] 
+"-5477919887236833036"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-5617428573626129624"[shape=box] 
+"-5617428573626129624"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "2931587055220174295"[shape=box] 
+"2931587055220174295"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-3061413679338731256"[shape=box] 
+"-3061413679338731256"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "3393480544399634864"[shape=box] 
+"3393480544399634864"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-1725953664749037208"[shape=box] 
+"-1725953664749037208"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "4467553524986974322"[shape=box] 
+"4467553524986974322"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "2005752842039869857"[shape=box] 
+"2005752842039869857"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-4351166343347777747"[shape=box] 
+"-4351166343347777747"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "472407393466331086"[shape=box] 
+"472407393466331086"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "784606542658951633"[shape=box] 
+"784606542658951633"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-1495108571384714718"[shape=box] 
+"-1495108571384714718"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-1197905847059326969"[shape=box] 
+"-1197905847059326969"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "4122084702494071765"[shape=box] 
+"4122084702494071765"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "490596460987547899"[shape=box] 
+"490596460987547899"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-736126362452231348"[shape=box] 
+"-736126362452231348"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "6379115666825905125"[shape=box] 
+"6379115666825905125"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "3039111030736339055"[shape=box] 
+"3039111030736339055"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "2335122540974058475"[shape=box] 
+"2335122540974058475"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "6399222439210841737"[shape=box] 
+"6399222439210841737"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "717153738342650518"[shape=box] 
+"717153738342650518"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-9217298216625347809"[shape=box] 
+"-9217298216625347809"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "559688270605196213"[shape=box] 
+"559688270605196213"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "5105842225221626738"[shape=box] 
+"5105842225221626738"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "4831512476237517876"[shape=box] 
+"4831512476237517876"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-2540392079609083595"[shape=box] 
+"-2540392079609083595"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-4397767573943740563"[shape=box] 
+"-4397767573943740563"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-8579084401869871929"[shape=box] 
+"-8579084401869871929"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-5930381509014479964"[shape=box] 
+"-5930381509014479964"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "662133207613978022"[shape=box] 
+"662133207613978022"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "7398182958244408192"[shape=box] 
+"7398182958244408192"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "5397291342203942526"[shape=box] 
+"5397291342203942526"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "7411272928929089224"[shape=box] 
+"7411272928929089224"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "795451586596557451"[shape=box] 
+"795451586596557451"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "9023175582336935332"[shape=box] 
+"9023175582336935332"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "454582437974369892"[shape=box] 
+"454582437974369892"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "5485283493851724832"[shape=box] 
+"5485283493851724832"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-7258302258811264547"[shape=box] 
+"-7258302258811264547"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-881694212471060469"[shape=box] 
+"-881694212471060469"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-199719939979568996"[shape=box] 
+"-199719939979568996"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "4389542846708449216"[shape=box] 
+"4389542846708449216"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-8091632125576713854"[shape=box] 
+"-8091632125576713854"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "754501730392610346"[shape=box] 
+"754501730392610346"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-4369084488359108056"[shape=box] 
+"-4369084488359108056"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "7035997533048898598"[shape=box] 
+"7035997533048898598"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "3041948031007152637"[shape=box] 
+"3041948031007152637"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "9014263284967219056"[shape=box] 
+"9014263284967219056"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-233949060439081679"[shape=box] 
+"-233949060439081679"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "8842583894213510746"[shape=box] 
+"8842583894213510746"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "6540987723125895696"[shape=box] 
+"6540987723125895696"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-8365035190642984986"[shape=box] 
+"-8365035190642984986"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "5624899441500002068"[shape=box] 
+"5624899441500002068"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-5806258917590096846"[shape=box] 
+"-5806258917590096846"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-1542084428731961247"[shape=box] 
+"-1542084428731961247"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "6111911539226668734"[shape=box] 
+"6111911539226668734"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "665219237275981480"[shape=box] 
+"665219237275981480"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-1509927829686013200"[shape=box] 
+"-1509927829686013200"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-3846801776169539233"[shape=box] 
+"-3846801776169539233"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-8781632075579327526"[shape=box] 
+"-8781632075579327526"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-2250156172738254188"[shape=box] 
+"-2250156172738254188"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "2065211211467514208"[shape=box] 
+"2065211211467514208"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1238490327634903288"[shape=box] 
+"1238490327634903288"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "6055578753555710544"[shape=box] 
+"6055578753555710544"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "7626467501254145907"[shape=box] 
+"7626467501254145907"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1233329057075577803"[shape=box] 
+"1233329057075577803"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-8399167841364659373"[shape=box] 
+"-8399167841364659373"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-2066534998185911872"[shape=box] 
+"-2066534998185911872"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-4579069196351700790"[shape=box] 
+"-4579069196351700790"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-4290334682626660560"[shape=box] 
+"-4290334682626660560"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-4298477839684589213"[shape=box] 
+"-4298477839684589213"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "8987274185822083394"[shape=box] 
+"8987274185822083394"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-9172043549399759582"[shape=box] 
+"-9172043549399759582"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-2020104142773143408"[shape=box] 
+"-2020104142773143408"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-5650624857711847072"[shape=box] 
+"-5650624857711847072"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "6504917061182978813"[shape=box] 
+"6504917061182978813"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-8227431508184792468"[shape=box] 
+"-8227431508184792468"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "5296650609082918418"[shape=box] 
+"5296650609082918418"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "1790674460855451250"[shape=box] 
+"1790674460855451250"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-7543213615037914665"[shape=box] 
+"-7543213615037914665"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "5990039010149474073"[shape=box] 
+"5990039010149474073"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-7061771189580927363"[shape=box] 
+"-7061771189580927363"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-1068294111156249731"[shape=box] 
+"-1068294111156249731"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "7451015899854472168"[shape=box] 
+"7451015899854472168"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-264712051672558947"[shape=box] 
+"-264712051672558947"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "6007359012320182872"[shape=box] 
+"6007359012320182872"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "5651443021021020414"[shape=box] 
+"5651443021021020414"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-7885020203661242891"[shape=box] 
+"-7885020203661242891"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "6938029712223898161"[shape=box] 
+"6938029712223898161"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "-360005872286287729"[shape=box] 
+"-360005872286287729"->"com.google.zxing.client.android.SCAN" [color=red, style=dotted] ;
+ "7764911347886054633"[shape=box] 
+"7764911347886054633"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "2484139100957893135"[shape=box] 
+"2484139100957893135"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "-2177796228259346730"[shape=box] 
+"-2177796228259346730"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "-1545088598791388819"[shape=box] 
+"-1545088598791388819"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "4613569137156876393"[shape=box] 
+"4613569137156876393"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "2335869969650987599"[shape=box] 
+"2335869969650987599"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "170832102833445273"[shape=box] 
+"170832102833445273"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "-2856766180622815207"[shape=box] 
+"-2856766180622815207"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "-7270535544873328750"[shape=box] 
+"-7270535544873328750"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "7865574082043645460"[shape=box] 
+"7865574082043645460"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "6889972772381075016"[shape=box] 
+"6889972772381075016"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "-4529052486690640111"[shape=box] 
+"-4529052486690640111"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "-151095234744671024"[shape=box] 
+"-151095234744671024"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "8429780843685916391"[shape=box] 
+"8429780843685916391"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "-3037542209541038155"[shape=box] 
+"-3037542209541038155"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "1944074732376973074"[shape=box] 
+"1944074732376973074"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "-2711607877903088319"[shape=box] 
+"-2711607877903088319"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "57402271286387137"[shape=box] 
+"57402271286387137"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "-7551818777343487717"[shape=box] 
+"-7551818777343487717"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "7036800893989674040"[shape=box] 
+"7036800893989674040"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "-1324567338252246974"[shape=box] 
+"-1324567338252246974"->"org.openintents.action.PICK_FILE" [color=red, style=dotted] ;
+ "6065360373134210380"[shape=box] 
+"6065360373134210380"->"com.ngc.fora.action.ADDPACKAGE" [color=red, style=dotted] ;
+ "5043817640332963684"[shape=box] 
+"5043817640332963684"->"com.twidroid.SendTweet" [color=red, style=dotted] ;
+ "1005312376219264868"[shape=box] 
+"1005312376219264868"->"com.twidroid.SendTweet" [color=red, style=dotted] ;
+ "6049537517360517785"[shape=box] 
+"6049537517360517785"->"com.twidroid.SendTweet" [color=red, style=dotted] ;
+ "164721341602749655"[shape=box] 
+"164721341602749655"->"com.twidroid.SendTweet" [color=red, style=dotted] ;
+ "-6833213450168160062"[shape=box] 
+"-6833213450168160062"->"com.twidroid.SendTweet" [color=red, style=dotted] ;
+ "-3864325858644060864"[shape=box] 
+"-3864325858644060864"->"com.twidroid.SendTweet" [color=red, style=dotted] ;
+ "7437118375578192837"[shape=box] 
+"7437118375578192837"->"com.twidroid.SendTweet" [color=red, style=dotted] ;
+ "-2915072437718127074"[shape=box] 
+"-2915072437718127074"->"com.twidroid.SendTweet" [color=red, style=dotted] ;
+ "2009632790223683771"[shape=box] 
+"2009632790223683771"->"com.twidroid.SendTweet" [color=red, style=dotted] ;
+ "6404008505147233732"[shape=box] 
+"6404008505147233732"->"com.twidroid.SendTweet" [color=red, style=dotted] ;
+ "5624899441500002068"[shape=box] 
+"5624899441500002068"->"com.twidroid.SendTweet" [color=red, style=dotted] ;
+ "-8665293915599985533"[shape=box] 
+"-8665293915599985533"->"com.twidroid.SendTweet" [color=red, style=dotted] ;
+ "-705683685382212412"[shape=box] 
+"-705683685382212412"->"com.twidroid.SendTweet" [color=red, style=dotted] ;
+ "7708311647033411562"[shape=box] 
+"7708311647033411562"->"com.twidroid.SendTweet" [color=red, style=dotted] ;
+ "-7505373983017404239"[shape=box] 
+"-7505373983017404239"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "1614817156445165217"[shape=box] 
+"1614817156445165217"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "809820763402124959"[shape=box] 
+"809820763402124959"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "7174956970327969026"[shape=box] 
+"7174956970327969026"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-2937121408347282506"[shape=box] 
+"-2937121408347282506"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "1818497535395577769"[shape=box] 
+"1818497535395577769"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-2074903220245252559"[shape=box] 
+"-2074903220245252559"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "1005312376219264868"[shape=box] 
+"1005312376219264868"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-5512239390253935064"[shape=box] 
+"-5512239390253935064"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-5530851382970958980"[shape=box] 
+"-5530851382970958980"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-3499211399379582360"[shape=box] 
+"-3499211399379582360"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-8123698476471418776"[shape=box] 
+"-8123698476471418776"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "8843974161103570378"[shape=box] 
+"8843974161103570378"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-3993665623329434362"[shape=box] 
+"-3993665623329434362"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "3335578624271510199"[shape=box] 
+"3335578624271510199"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "7659456791343958150"[shape=box] 
+"7659456791343958150"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-6554601553424218043"[shape=box] 
+"-6554601553424218043"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "5521836590970770873"[shape=box] 
+"5521836590970770873"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-7680813935123978223"[shape=box] 
+"-7680813935123978223"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "2209892459271597916"[shape=box] 
+"2209892459271597916"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "7719021225341384026"[shape=box] 
+"7719021225341384026"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "6224368080008783079"[shape=box] 
+"6224368080008783079"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "8201028796089262817"[shape=box] 
+"8201028796089262817"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "1502168006574422762"[shape=box] 
+"1502168006574422762"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-4949644901061803982"[shape=box] 
+"-4949644901061803982"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-8156035697974447992"[shape=box] 
+"-8156035697974447992"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-6824179864148248926"[shape=box] 
+"-6824179864148248926"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "3245586578686438"[shape=box] 
+"3245586578686438"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "7228888518609293901"[shape=box] 
+"7228888518609293901"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "5862214715660212110"[shape=box] 
+"5862214715660212110"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-4661068135102226677"[shape=box] 
+"-4661068135102226677"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "164721341602749655"[shape=box] 
+"164721341602749655"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "1902253985306369337"[shape=box] 
+"1902253985306369337"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "674613968694849095"[shape=box] 
+"674613968694849095"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-68074338050249880"[shape=box] 
+"-68074338050249880"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-4880031846617741888"[shape=box] 
+"-4880031846617741888"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-8931551998812156535"[shape=box] 
+"-8931551998812156535"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-1269108671156031043"[shape=box] 
+"-1269108671156031043"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-4466960293000181380"[shape=box] 
+"-4466960293000181380"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "6976198440648937584"[shape=box] 
+"6976198440648937584"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-8036761552976858007"[shape=box] 
+"-8036761552976858007"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-6370284411495194650"[shape=box] 
+"-6370284411495194650"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "1676443722815963174"[shape=box] 
+"1676443722815963174"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "553309117477523815"[shape=box] 
+"553309117477523815"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-3864325858644060864"[shape=box] 
+"-3864325858644060864"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "1360274844675325114"[shape=box] 
+"1360274844675325114"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "6167334358479018260"[shape=box] 
+"6167334358479018260"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-557685481310064790"[shape=box] 
+"-557685481310064790"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-3371984014886104365"[shape=box] 
+"-3371984014886104365"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "2931587055220174295"[shape=box] 
+"2931587055220174295"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-3061413679338731256"[shape=box] 
+"-3061413679338731256"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-1725953664749037208"[shape=box] 
+"-1725953664749037208"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-4318438436407273894"[shape=box] 
+"-4318438436407273894"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "2005752842039869857"[shape=box] 
+"2005752842039869857"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "7934496585667714304"[shape=box] 
+"7934496585667714304"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "3567257107644349735"[shape=box] 
+"3567257107644349735"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "784606542658951633"[shape=box] 
+"784606542658951633"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-1495108571384714718"[shape=box] 
+"-1495108571384714718"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-1197905847059326969"[shape=box] 
+"-1197905847059326969"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "490596460987547899"[shape=box] 
+"490596460987547899"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-736126362452231348"[shape=box] 
+"-736126362452231348"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "6379115666825905125"[shape=box] 
+"6379115666825905125"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "3039111030736339055"[shape=box] 
+"3039111030736339055"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-9217298216625347809"[shape=box] 
+"-9217298216625347809"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "1546673276613767525"[shape=box] 
+"1546673276613767525"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "4831512476237517876"[shape=box] 
+"4831512476237517876"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-2540392079609083595"[shape=box] 
+"-2540392079609083595"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-4397767573943740563"[shape=box] 
+"-4397767573943740563"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-5930381509014479964"[shape=box] 
+"-5930381509014479964"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "662133207613978022"[shape=box] 
+"662133207613978022"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "7398182958244408192"[shape=box] 
+"7398182958244408192"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "7411272928929089224"[shape=box] 
+"7411272928929089224"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-881694212471060469"[shape=box] 
+"-881694212471060469"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-199719939979568996"[shape=box] 
+"-199719939979568996"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-6805150435712554770"[shape=box] 
+"-6805150435712554770"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-8091632125576713854"[shape=box] 
+"-8091632125576713854"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-8722761548818361823"[shape=box] 
+"-8722761548818361823"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "754501730392610346"[shape=box] 
+"754501730392610346"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-4369084488359108056"[shape=box] 
+"-4369084488359108056"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "7035997533048898598"[shape=box] 
+"7035997533048898598"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-5758612115280321242"[shape=box] 
+"-5758612115280321242"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "3041948031007152637"[shape=box] 
+"3041948031007152637"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "9014263284967219056"[shape=box] 
+"9014263284967219056"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-233949060439081679"[shape=box] 
+"-233949060439081679"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "7300696783902899891"[shape=box] 
+"7300696783902899891"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "5624899441500002068"[shape=box] 
+"5624899441500002068"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "665219237275981480"[shape=box] 
+"665219237275981480"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-8781632075579327526"[shape=box] 
+"-8781632075579327526"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-2250156172738254188"[shape=box] 
+"-2250156172738254188"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "6055578753555710544"[shape=box] 
+"6055578753555710544"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-8399167841364659373"[shape=box] 
+"-8399167841364659373"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-4290334682626660560"[shape=box] 
+"-4290334682626660560"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "8987274185822083394"[shape=box] 
+"8987274185822083394"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-5650624857711847072"[shape=box] 
+"-5650624857711847072"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-8227431508184792468"[shape=box] 
+"-8227431508184792468"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "7500717825007701944"[shape=box] 
+"7500717825007701944"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-2162336570350829086"[shape=box] 
+"-2162336570350829086"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "1790674460855451250"[shape=box] 
+"1790674460855451250"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "5990039010149474073"[shape=box] 
+"5990039010149474073"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-1068294111156249731"[shape=box] 
+"-1068294111156249731"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "2258633642027591029"[shape=box] 
+"2258633642027591029"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-264712051672558947"[shape=box] 
+"-264712051672558947"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "6007359012320182872"[shape=box] 
+"6007359012320182872"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-5118186018543618807"[shape=box] 
+"-5118186018543618807"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "5651443021021020414"[shape=box] 
+"5651443021021020414"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-7885020203661242891"[shape=box] 
+"-7885020203661242891"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-360005872286287729"[shape=box] 
+"-360005872286287729"->"com.google.zxing.client.android.ENCODE" [color=red, style=dotted] ;
+ "-8581884812036602423"[shape=box] 
+"-8581884812036602423"->"com.cadreworks.intent.action.BROWSER" [color=red, style=dotted] ;
+ "6450268681435169260"[shape=box] 
+"6450268681435169260"->"com.cadreworks.intent.action.BROWSER" [color=red, style=dotted] ;
+ "-4548502810296012684"[shape=box] 
+"-4548502810296012684"->"com.cadreworks.intent.action.BROWSER" [color=red, style=dotted] ;
+ "2822597744246757377"[shape=box] 
+"2822597744246757377"->"com.eclipsim.gpsstatus.VIEW" [color=red, style=dotted] ;
+ "-3375766222286125014"[shape=box] 
+"-3375766222286125014"->"com.eclipsim.gpsstatus.VIEW" [color=red, style=dotted] ;
+ "7591071246768843152"[shape=box] 
+"7591071246768843152"->"com.eclipsim.gpsstatus.VIEW" [color=red, style=dotted] ;
+ "3481819190669620862"[shape=box] 
+"3481819190669620862"->"com.eclipsim.gpsstatus.VIEW" [color=red, style=dotted] ;
+ "-1324567338252246974"[shape=box] 
+"-1324567338252246974"->"com.eclipsim.gpsstatus.VIEW" [color=red, style=dotted] ;
+ "1818497535395577769"[shape=box] 
+"1818497535395577769"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "-2074903220245252559"[shape=box] 
+"-2074903220245252559"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "-5530851382970958980"[shape=box] 
+"-5530851382970958980"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "7659456791343958150"[shape=box] 
+"7659456791343958150"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "-6554601553424218043"[shape=box] 
+"-6554601553424218043"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "2209892459271597916"[shape=box] 
+"2209892459271597916"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "6224368080008783079"[shape=box] 
+"6224368080008783079"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "1502168006574422762"[shape=box] 
+"1502168006574422762"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "3245586578686438"[shape=box] 
+"3245586578686438"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "5862214715660212110"[shape=box] 
+"5862214715660212110"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "-4661068135102226677"[shape=box] 
+"-4661068135102226677"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "164721341602749655"[shape=box] 
+"164721341602749655"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "1902253985306369337"[shape=box] 
+"1902253985306369337"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "-68074338050249880"[shape=box] 
+"-68074338050249880"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "-1269108671156031043"[shape=box] 
+"-1269108671156031043"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "-4466960293000181380"[shape=box] 
+"-4466960293000181380"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "6976198440648937584"[shape=box] 
+"6976198440648937584"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "-6370284411495194650"[shape=box] 
+"-6370284411495194650"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "1676443722815963174"[shape=box] 
+"1676443722815963174"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "553309117477523815"[shape=box] 
+"553309117477523815"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "-3864325858644060864"[shape=box] 
+"-3864325858644060864"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "-3371984014886104365"[shape=box] 
+"-3371984014886104365"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "3614331811219416825"[shape=box] 
+"3614331811219416825"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "-4318438436407273894"[shape=box] 
+"-4318438436407273894"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "7934496585667714304"[shape=box] 
+"7934496585667714304"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "3567257107644349735"[shape=box] 
+"3567257107644349735"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "6379115666825905125"[shape=box] 
+"6379115666825905125"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "3039111030736339055"[shape=box] 
+"3039111030736339055"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "1546673276613767525"[shape=box] 
+"1546673276613767525"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "4831512476237517876"[shape=box] 
+"4831512476237517876"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "-5930381509014479964"[shape=box] 
+"-5930381509014479964"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "662133207613978022"[shape=box] 
+"662133207613978022"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "-6805150435712554770"[shape=box] 
+"-6805150435712554770"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "7035997533048898598"[shape=box] 
+"7035997533048898598"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "-5758612115280321242"[shape=box] 
+"-5758612115280321242"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "665219237275981480"[shape=box] 
+"665219237275981480"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "-8781632075579327526"[shape=box] 
+"-8781632075579327526"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "6055578753555710544"[shape=box] 
+"6055578753555710544"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "7500717825007701944"[shape=box] 
+"7500717825007701944"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "-2162336570350829086"[shape=box] 
+"-2162336570350829086"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "1790674460855451250"[shape=box] 
+"1790674460855451250"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "-1068294111156249731"[shape=box] 
+"-1068294111156249731"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "-5118186018543618807"[shape=box] 
+"-5118186018543618807"->"com.google.zxing.client.android.SHARE" [color=red, style=dotted] ;
+ "-8458781873689848772"[shape=box] 
+"-8458781873689848772"->"com.fsck.k9.K9RemoteControl.set" [color=red, style=dotted] ;
+ "-8458781873689848772"[shape=box] 
+"-8458781873689848772"->"com.fsck.k9.K9RemoteControl.requestAccounts" [color=red, style=dotted] ;
+ "5406519252009365377"[shape=box] 
+"5406519252009365377"->"de.ub0r.android.websms.connector.INFO" [color=red, style=dotted] ;
+ "-6218942354991937914"[shape=box] 
+"-6218942354991937914"->"de.ub0r.android.websms.connector.INFO" [color=red, style=dotted] ;
+ "-1565514943088391220"[shape=box] 
+"-1565514943088391220"->"de.ub0r.android.websms.connector.INFO" [color=red, style=dotted] ;
+ "979932453872952829"[shape=box] 
+"979932453872952829"->"de.ub0r.android.websms.connector.INFO" [color=red, style=dotted] ;
+ "2158145413352773576"[shape=box] 
+"2158145413352773576"->"de.ub0r.android.websms.connector.INFO" [color=red, style=dotted] ;
+ "5881378173806973912"[shape=box] 
+"5881378173806973912"->"de.ub0r.android.websms.connector.INFO" [color=red, style=dotted] ;
+ "-3354467958250080608"[shape=box] 
+"-3354467958250080608"->"de.ub0r.android.websms.connector.INFO" [color=red, style=dotted] ;
+ "-1722368073444885408"[shape=box] 
+"-1722368073444885408"->"de.ub0r.android.websms.connector.INFO" [color=red, style=dotted] ;
+ "5077971009916885365"[shape=box] 
+"5077971009916885365"->"de.ub0r.android.websms.connector.INFO" [color=red, style=dotted] ;
+ "-5548433238233543555"[shape=box] 
+"-5548433238233543555"->"de.ub0r.android.websms.connector.INFO" [color=red, style=dotted] ;
+ "-4212562031167748298"[shape=box] 
+"-4212562031167748298"->"de.ub0r.android.websms.connector.INFO" [color=red, style=dotted] ;
+ "6937378156485777025"[shape=box] 
+"6937378156485777025"->"com.flikie.plugin.MANAGE_PLUG_INS" [color=red, style=dotted] ;
+ "-2821899259872600692"[shape=box] 
+"-2821899259872600692"->"com.flikie.plugin.MANAGE_PLUG_INS" [color=red, style=dotted] ;
+ "3976238519580991230"[shape=box] 
+"3976238519580991230"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "748120342834297974"[shape=box] 
+"748120342834297974"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "-1730054521317768601"[shape=box] 
+"-1730054521317768601"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "-1635489512994144688"[shape=box] 
+"-1635489512994144688"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "-8823550751491650517"[shape=box] 
+"-8823550751491650517"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "2971396989264883697"[shape=box] 
+"2971396989264883697"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "-8713528825624034482"[shape=box] 
+"-8713528825624034482"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "-335361603319337248"[shape=box] 
+"-335361603319337248"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "5556333254987808240"[shape=box] 
+"5556333254987808240"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "-8546431851346422335"[shape=box] 
+"-8546431851346422335"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "7041964705729064366"[shape=box] 
+"7041964705729064366"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "-389740806689246953"[shape=box] 
+"-389740806689246953"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "-8424423577565536612"[shape=box] 
+"-8424423577565536612"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "8258750922152587586"[shape=box] 
+"8258750922152587586"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "-1173984437529854594"[shape=box] 
+"-1173984437529854594"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "554947843043033968"[shape=box] 
+"554947843043033968"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "-2233009276471661224"[shape=box] 
+"-2233009276471661224"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "-7845056164326124943"[shape=box] 
+"-7845056164326124943"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "7428892276550184596"[shape=box] 
+"7428892276550184596"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "-4690274720528950536"[shape=box] 
+"-4690274720528950536"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "2416677717749150474"[shape=box] 
+"2416677717749150474"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "573675094091839541"[shape=box] 
+"573675094091839541"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "2590601763144479242"[shape=box] 
+"2590601763144479242"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "3326434199345453596"[shape=box] 
+"3326434199345453596"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "5558000572259349933"[shape=box] 
+"5558000572259349933"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "-2852209522495909562"[shape=box] 
+"-2852209522495909562"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "6159590161203914836"[shape=box] 
+"6159590161203914836"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "-5197335761117078843"[shape=box] 
+"-5197335761117078843"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "8469310749473629076"[shape=box] 
+"8469310749473629076"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "-6860038164825616607"[shape=box] 
+"-6860038164825616607"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "8725309169642445764"[shape=box] 
+"8725309169642445764"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "3522617165292751845"[shape=box] 
+"3522617165292751845"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "7751648226762859729"[shape=box] 
+"7751648226762859729"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "-9191787225886157677"[shape=box] 
+"-9191787225886157677"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "2149635060981178587"[shape=box] 
+"2149635060981178587"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "1050745701993798605"[shape=box] 
+"1050745701993798605"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "-762254649842729512"[shape=box] 
+"-762254649842729512"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "4077768908967784418"[shape=box] 
+"4077768908967784418"->"com.google.intent.action.START_TTS_SERVICE_BETA" [color=red, style=dotted] ;
+ "7759772758201724139"[shape=box] 
+"7759772758201724139"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "-5088942815721395183"[shape=box] 
+"-5088942815721395183"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "-4041728155844586617"[shape=box] 
+"-4041728155844586617"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "-3386258588011250187"[shape=box] 
+"-3386258588011250187"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "-934095507940718672"[shape=box] 
+"-934095507940718672"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "6328703497072825589"[shape=box] 
+"6328703497072825589"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "-6944321161417802721"[shape=box] 
+"-6944321161417802721"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "-5657234005880083428"[shape=box] 
+"-5657234005880083428"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "-5477919887236833036"[shape=box] 
+"-5477919887236833036"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "717153738342650518"[shape=box] 
+"717153738342650518"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "5105842225221626738"[shape=box] 
+"5105842225221626738"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "5485283493851724832"[shape=box] 
+"5485283493851724832"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "8842583894213510746"[shape=box] 
+"8842583894213510746"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "-8365035190642984986"[shape=box] 
+"-8365035190642984986"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "-5806258917590096846"[shape=box] 
+"-5806258917590096846"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "7626467501254145907"[shape=box] 
+"7626467501254145907"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "1233329057075577803"[shape=box] 
+"1233329057075577803"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "-2066534998185911872"[shape=box] 
+"-2066534998185911872"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "-4579069196351700790"[shape=box] 
+"-4579069196351700790"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "-4298477839684589213"[shape=box] 
+"-4298477839684589213"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "-9172043549399759582"[shape=box] 
+"-9172043549399759582"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "5296650609082918418"[shape=box] 
+"5296650609082918418"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "-7543213615037914665"[shape=box] 
+"-7543213615037914665"->"com.google.tts.makeBagel" [color=red, style=dotted] ;
+ "-3044453214328846237"[shape=box] 
+"-3044453214328846237"->"com.nd.android.pandahome.theme" [color=red, style=dotted] ;
+ "-3044453214328846237"[shape=box] 
+"-3044453214328846237"->"mobi.bbase.ahome.THEME" [color=red, style=dotted] ;
+ "-3044453214328846237"[shape=box] 
+"-3044453214328846237"->"com.betterandroid.launcher2.skins" [color=red, style=dotted] ;
+ "-2480491736766698944"[shape=box] 
+"-2480491736766698944"->"de.ub0r.android.callmeter.SAVE_WEBSMS" [color=red, style=dotted] ;
+ "950937715878928515"[shape=box] 
+"950937715878928515"->"org.iii.romulus.meridian.playstatechanged" [color=red, style=dotted] ;
+ "-6879422013935712041"[shape=box] 
+"-6879422013935712041"->"com.adam.aslfms.notify.playstatechanged" [color=red, style=dotted] ;
+ "-5634417687632404895"[shape=box] 
+"-5634417687632404895"->"com.adam.aslfms.notify.playstatechanged" [color=red, style=dotted] ;
+ "-3176059451103106154"[shape=box] 
+"-3176059451103106154"->"com.adam.aslfms.notify.playstatechanged" [color=red, style=dotted] ;
+ "7266296492585107701"[shape=box] 
+"7266296492585107701"->"com.adam.aslfms.notify.playstatechanged" [color=red, style=dotted] ;
+ "9076360095078684202"[shape=box] 
+"9076360095078684202"->"com.adam.aslfms.notify.playstatechanged" [color=red, style=dotted] ;
+ "-3539449123455203332"[shape=box] 
+"-3539449123455203332"->"com.dataviz.stargate.StargateView" [color=red, style=dotted] ;
+ "-1435155739808887754"[shape=box] 
+"-1435155739808887754"->"com.fsck.k9.intent.action.EMAIL_RECEIVED" [color=red, style=dotted] ;
+ "-7206041480678389729"[shape=box] 
+"-7206041480678389729"->"com.fsck.k9.intent.action.EMAIL_RECEIVED" [color=red, style=dotted] ;
+ "-8458781873689848772"[shape=box] 
+"-8458781873689848772"->"com.fsck.k9.intent.action.EMAIL_RECEIVED" [color=red, style=dotted] ;
+ "-736783315786647897"[shape=box] 
+"-736783315786647897"->"com.lib.wink.show" [color=red, style=dotted] ;
+ "-6631889846633215067"[shape=box] 
+"-6631889846633215067"->"com.lib.wink.show" [color=red, style=dotted] ;
+ "2940052253240522601"[shape=box] 
+"2940052253240522601"->"com.lib.wink.show" [color=red, style=dotted] ;
+ "2399477152192854758"[shape=box] 
+"2399477152192854758"->"com.lib.wink.show" [color=red, style=dotted] ;
+ "-6788069816644443181"[shape=box] 
+"-6788069816644443181"->"com.lib.wink.show" [color=red, style=dotted] ;
+ "-1122510701318044709"[shape=box] 
+"-1122510701318044709"->"com.lib.wink.show" [color=red, style=dotted] ;
+ "-119621829154053893"[shape=box] 
+"-119621829154053893"->"com.lib.wink.show" [color=red, style=dotted] ;
+ "-736783315786647897"[shape=box] 
+"-736783315786647897"->"com.lib.wink.list" [color=red, style=dotted] ;
+ "-6631889846633215067"[shape=box] 
+"-6631889846633215067"->"com.lib.wink.list" [color=red, style=dotted] ;
+ "2940052253240522601"[shape=box] 
+"2940052253240522601"->"com.lib.wink.list" [color=red, style=dotted] ;
+ "2399477152192854758"[shape=box] 
+"2399477152192854758"->"com.lib.wink.list" [color=red, style=dotted] ;
+ "-6788069816644443181"[shape=box] 
+"-6788069816644443181"->"com.lib.wink.list" [color=red, style=dotted] ;
+ "-1122510701318044709"[shape=box] 
+"-1122510701318044709"->"com.lib.wink.list" [color=red, style=dotted] ;
+ "-119621829154053893"[shape=box] 
+"-119621829154053893"->"com.lib.wink.list" [color=red, style=dotted] ;
+ "4006949411708531762"[shape=box] 
+"4006949411708531762"->"com.slackersoft.android.rss.action.SYNCH_NOW" [color=red, style=dotted] ;
+ "3481247974098841178"[shape=box] 
+"3481247974098841178"->"com.slackersoft.android.rss.action.SYNCH_NOW" [color=red, style=dotted] ;
+ "-2361537296603134697"[shape=box] 
+"-2361537296603134697"->"com.slackersoft.android.rss.action.SYNCH_NOW" [color=red, style=dotted] ;
+ "-8667943753215872227"[shape=box] 
+"-8667943753215872227"->"kr.mobilefirst.carrierplan.action.RELOAD" [color=red, style=dotted] ;
+ "-9117293581077979634"[shape=box] 
+"-9117293581077979634"->"com.autonavi.minimap.ACTION" [color=red, style=dotted] ;
+ "-1446725250029270819"[shape=box] 
+"-1446725250029270819"->"com.snaptic.intent.action.VIEW" [color=red, style=dotted] ;
+ "7346074042169908037"[shape=box] 
+"7346074042169908037"->"com.snaptic.intent.action.VIEW" [color=red, style=dotted] ;
+ "8902450887953553176"[shape=box] 
+"8902450887953553176"->"com.snaptic.intent.action.VIEW" [color=red, style=dotted] ;
+ "5845901319331557962"[shape=box] 
+"5845901319331557962"->"com.snaptic.intent.action.VIEW" [color=red, style=dotted] ;
+ "8623238307329270949"[shape=box] 
+"8623238307329270949"->"com.snaptic.intent.action.VIEW" [color=red, style=dotted] ;
+ "-5198214139339786674"[shape=box] 
+"-5198214139339786674"->"com.snaptic.intent.action.VIEW" [color=red, style=dotted] ;
+ "8776738280946023033"[shape=box] 
+"8776738280946023033"->"com.snaptic.intent.action.VIEW" [color=red, style=dotted] ;
+ "-7644287800432490933"[shape=box] 
+"-7644287800432490933"->"com.snaptic.intent.action.VIEW" [color=red, style=dotted] ;
+ "-1188259081265813899"[shape=box] 
+"-1188259081265813899"->"com.snaptic.intent.action.VIEW" [color=red, style=dotted] ;
+ "6449197016940123767"[shape=box] 
+"6449197016940123767"->"com.snaptic.intent.action.VIEW" [color=red, style=dotted] ;
+ "9014671621391692479"[shape=box] 
+"9014671621391692479"->"com.snaptic.intent.action.VIEW" [color=red, style=dotted] ;
+ "5058876882776103495"[shape=box] 
+"5058876882776103495"->"com.snaptic.intent.action.VIEW" [color=red, style=dotted] ;
+ "-5938034678310346448"[shape=box] 
+"-5938034678310346448"->"com.snaptic.intent.action.VIEW" [color=red, style=dotted] ;
+ "8302721741434176412"[shape=box] 
+"8302721741434176412"->"com.snaptic.intent.action.VIEW" [color=red, style=dotted] ;
+ "5636723340822786766"[shape=box] 
+"5636723340822786766"->"com.threebanana.notes.NoteEditor.ACTION_GEONOTE" [color=red, style=dotted] ;
+ "-1446725250029270819"[shape=box] 
+"-1446725250029270819"->"com.snaptic.intent.action.ADD" [color=red, style=dotted] ;
+ "7346074042169908037"[shape=box] 
+"7346074042169908037"->"com.snaptic.intent.action.ADD" [color=red, style=dotted] ;
+ "8902450887953553176"[shape=box] 
+"8902450887953553176"->"com.snaptic.intent.action.ADD" [color=red, style=dotted] ;
+ "5845901319331557962"[shape=box] 
+"5845901319331557962"->"com.snaptic.intent.action.ADD" [color=red, style=dotted] ;
+ "8623238307329270949"[shape=box] 
+"8623238307329270949"->"com.snaptic.intent.action.ADD" [color=red, style=dotted] ;
+ "-5198214139339786674"[shape=box] 
+"-5198214139339786674"->"com.snaptic.intent.action.ADD" [color=red, style=dotted] ;
+ "8776738280946023033"[shape=box] 
+"8776738280946023033"->"com.snaptic.intent.action.ADD" [color=red, style=dotted] ;
+ "-7644287800432490933"[shape=box] 
+"-7644287800432490933"->"com.snaptic.intent.action.ADD" [color=red, style=dotted] ;
+ "-1188259081265813899"[shape=box] 
+"-1188259081265813899"->"com.snaptic.intent.action.ADD" [color=red, style=dotted] ;
+ "6449197016940123767"[shape=box] 
+"6449197016940123767"->"com.snaptic.intent.action.ADD" [color=red, style=dotted] ;
+ "9014671621391692479"[shape=box] 
+"9014671621391692479"->"com.snaptic.intent.action.ADD" [color=red, style=dotted] ;
+ "5058876882776103495"[shape=box] 
+"5058876882776103495"->"com.snaptic.intent.action.ADD" [color=red, style=dotted] ;
+ "-5938034678310346448"[shape=box] 
+"-5938034678310346448"->"com.snaptic.intent.action.ADD" [color=red, style=dotted] ;
+ "8302721741434176412"[shape=box] 
+"8302721741434176412"->"com.snaptic.intent.action.ADD" [color=red, style=dotted] ;
+ "5636723340822786766"[shape=box] 
+"5636723340822786766"->"com.threebanana.notes.Notes.ACTION_FILTER_NOTES" [color=red, style=dotted] ;
+ "-6979186140754487968"[shape=box] 
+"-6979186140754487968"->"mobi.mgeek.TunnyBrowser.action.list_themes" [color=red, style=dotted] ;
+ "5848668577359948610"[shape=box] 
+"5848668577359948610"->"com.googlecode.chartdroid.intent.action.PLOT" [color=red, style=dotted] ;
+ "6107331208712563998"[shape=box] 
+"6107331208712563998"->"com.googlecode.chartdroid.intent.action.PLOT" [color=red, style=dotted] ;
+ "5203131033602399421"[shape=box] 
+"5203131033602399421"->"com.googlecode.chartdroid.intent.action.PLOT" [color=red, style=dotted] ;
+ "7185102753050783794"[shape=box] 
+"7185102753050783794"->"org.adw.launcher.icons.ACTION_PICK_ICON" [color=red, style=dotted] ;
+ "-3044453214328846237"[shape=box] 
+"-3044453214328846237"->"org.adw.launcher.THEMES" [color=red, style=dotted] ;
+ "7185102753050783794"[shape=box] 
+"7185102753050783794"->"org.adw.launcher.THEMES" [color=red, style=dotted] ;
+ "-1027594042513354787"[shape=box] 
+"-1027594042513354787"->"com.amazon.mp3.action.EXTERNAL_EVENT" [color=red, style=dotted] ;
+ "3483280575825368156"[shape=box] 
+"3483280575825368156"->"com.amazon.mp3.action.EXTERNAL_EVENT" [color=red, style=dotted] ;
+ "-3813685358444328990"[shape=box] 
+"-3813685358444328990"->"com.amazon.mp3.action.EXTERNAL_EVENT" [color=red, style=dotted] ;
+ "950937715878928515"[shape=box] 
+"950937715878928515"->"org.iii.romulus.meridian.playbackcomplete" [color=red, style=dotted] ;
+ "950937715878928515"[shape=box] 
+"950937715878928515"->"org.iii.romulus.meridian.metachanged" [color=red, style=dotted] ;
+ "2643597999616919686"[shape=box] 
+"2643597999616919686"->"fm.last.android.LOVE" [color=red, style=dotted] ;
+ "6622430522410316313"[shape=box] 
+"6622430522410316313"->"fm.last.android.LOVE" [color=red, style=dotted] ;
+ "-2646200549505149130"[shape=box] 
+"-2646200549505149130"->"fm.last.android.LOVE" [color=red, style=dotted] ;
+ "2643597999616919686"[shape=box] 
+"2643597999616919686"->"fm.last.android.playbackcomplete" [color=red, style=dotted] ;
+ "6622430522410316313"[shape=box] 
+"6622430522410316313"->"fm.last.android.playbackcomplete" [color=red, style=dotted] ;
+ "-3697655496418982156"[shape=box] 
+"-3697655496418982156"->"fm.last.android.playbackcomplete" [color=red, style=dotted] ;
+ "-2646200549505149130"[shape=box] 
+"-2646200549505149130"->"fm.last.android.playbackcomplete" [color=red, style=dotted] ;
+ "7962867029015661008"[shape=box] 
+"7962867029015661008"->"fm.last.android.playbackcomplete" [color=red, style=dotted] ;
+ "7724784818008553591"[shape=box] 
+"7724784818008553591"->"com.smartmadsoft.openwatch.command.BUTTON_FF" [color=red, style=dotted] ;
+ "-3697655496418982156"[shape=box] 
+"-3697655496418982156"->"fm.last.android.playbackpaused" [color=red, style=dotted] ;
+ "-2646200549505149130"[shape=box] 
+"-2646200549505149130"->"fm.last.android.playbackpaused" [color=red, style=dotted] ;
+ "2643597999616919686"[shape=box] 
+"2643597999616919686"->"fm.last.android.BAN" [color=red, style=dotted] ;
+ "6622430522410316313"[shape=box] 
+"6622430522410316313"->"fm.last.android.BAN" [color=red, style=dotted] ;
+ "2643597999616919686"[shape=box] 
+"2643597999616919686"->"fm.last.android.metachanged" [color=red, style=dotted] ;
+ "6622430522410316313"[shape=box] 
+"6622430522410316313"->"fm.last.android.metachanged" [color=red, style=dotted] ;
+ "-3697655496418982156"[shape=box] 
+"-3697655496418982156"->"fm.last.android.metachanged" [color=red, style=dotted] ;
+ "-2646200549505149130"[shape=box] 
+"-2646200549505149130"->"fm.last.android.metachanged" [color=red, style=dotted] ;
+ "7962867029015661008"[shape=box] 
+"7962867029015661008"->"fm.last.android.metachanged" [color=red, style=dotted] ;
+ "-5917385756369893005"[shape=box] 
+"-5917385756369893005"->"com.levelup.touiteur.intent.action.GET_STATUS" [color=red, style=dotted] ;
+ "-2253282705194473296"[shape=box] 
+"-2253282705194473296"->"com.appventive.mailprovider.error" [color=red, style=dotted] ;
+ "-2253282705194473296"[shape=box] 
+"-2253282705194473296"->"com.appventive.mailprovider.goodAccount" [color=red, style=dotted] ;
+ "-2253282705194473296"[shape=box] 
+"-2253282705194473296"->"com.appventive.ExecAssist.updateEmail" [color=red, style=dotted] ;
+ "5934840807959439978"[shape=box] 
+"5934840807959439978"->"com.uc.news.UC_BROWSER_NEWS_COMPLETED" [color=red, style=dotted] ;
+ "-858872581654435426"[shape=box] 
+"-858872581654435426"->"com.uc.news.UC_BROWSER_NEWS_COMPLETED" [color=red, style=dotted] ;
+ "-3389313103393120456"[shape=box] 
+"-3389313103393120456"->"com.betterandroid.betterkeyboard.skins" [color=red, style=dotted] ;
+ "1335527031459697900"[shape=box] 
+"1335527031459697900"->"com.example.android.apis.app.IRemoteService" [color=red, style=dotted] ;
+ "1335527031459697900"[shape=box] 
+"1335527031459697900"->"com.example.android.apis.app.ISecondary" [color=red, style=dotted] ;
+ "-8618593943228728777"[shape=box] 
+"-8618593943228728777"->"com.hauri.ViRobotMobile.StopService" [color=red, style=dotted] ;
+ "4740580527840137826"[shape=box] 
+"4740580527840137826"->"se.sorlov.operatorcheck.PLUGIN_REQUEST" [color=red, style=dotted] ;
+ "7817380778026148027"[shape=box] 
+"7817380778026148027"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "1289989168974135900"[shape=box] 
+"1289989168974135900"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "2096447982710644998"[shape=box] 
+"2096447982710644998"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "7653502055812653487"[shape=box] 
+"7653502055812653487"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-5152463678175798489"[shape=box] 
+"-5152463678175798489"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-6660874517983812774"[shape=box] 
+"-6660874517983812774"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "8531533655521461218"[shape=box] 
+"8531533655521461218"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "2566118961141081958"[shape=box] 
+"2566118961141081958"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "8090794104710048058"[shape=box] 
+"8090794104710048058"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-3418592170141244338"[shape=box] 
+"-3418592170141244338"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-2581912513072207305"[shape=box] 
+"-2581912513072207305"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "7486608353685235850"[shape=box] 
+"7486608353685235850"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "8682102573405640685"[shape=box] 
+"8682102573405640685"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "1100141897277888695"[shape=box] 
+"1100141897277888695"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-1189983998378270492"[shape=box] 
+"-1189983998378270492"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "2948472549501873548"[shape=box] 
+"2948472549501873548"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-8188978928673411651"[shape=box] 
+"-8188978928673411651"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "8240477923409299689"[shape=box] 
+"8240477923409299689"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "4230732266300072324"[shape=box] 
+"4230732266300072324"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-6618599013544950259"[shape=box] 
+"-6618599013544950259"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-3082936590737310376"[shape=box] 
+"-3082936590737310376"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-968149347494115946"[shape=box] 
+"-968149347494115946"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-1206524114784285433"[shape=box] 
+"-1206524114784285433"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "8449386508273243327"[shape=box] 
+"8449386508273243327"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "7230710758837432935"[shape=box] 
+"7230710758837432935"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "1954864409774131695"[shape=box] 
+"1954864409774131695"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "8817092234658658911"[shape=box] 
+"8817092234658658911"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-3714750908087079385"[shape=box] 
+"-3714750908087079385"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-1981827047542446794"[shape=box] 
+"-1981827047542446794"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-4478223878676041216"[shape=box] 
+"-4478223878676041216"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-4313077364656448814"[shape=box] 
+"-4313077364656448814"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-1771726014699364150"[shape=box] 
+"-1771726014699364150"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "5116261119555160154"[shape=box] 
+"5116261119555160154"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "1191670476522916795"[shape=box] 
+"1191670476522916795"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "2792452045206649670"[shape=box] 
+"2792452045206649670"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-4792866690042212430"[shape=box] 
+"-4792866690042212430"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "2811663730491261766"[shape=box] 
+"2811663730491261766"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-2129256452118588916"[shape=box] 
+"-2129256452118588916"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-8395054762537660484"[shape=box] 
+"-8395054762537660484"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "3870127693200132080"[shape=box] 
+"3870127693200132080"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-5339261271660819200"[shape=box] 
+"-5339261271660819200"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "5940044052006278381"[shape=box] 
+"5940044052006278381"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "3238599394683230053"[shape=box] 
+"3238599394683230053"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-5584929359726215163"[shape=box] 
+"-5584929359726215163"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-781035388825931542"[shape=box] 
+"-781035388825931542"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "7915282846256039094"[shape=box] 
+"7915282846256039094"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "4552042881984558339"[shape=box] 
+"4552042881984558339"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "7894625069065266020"[shape=box] 
+"7894625069065266020"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "4065972583885727784"[shape=box] 
+"4065972583885727784"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "1613490225052824455"[shape=box] 
+"1613490225052824455"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "5812275684233289915"[shape=box] 
+"5812275684233289915"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "1921784486535282067"[shape=box] 
+"1921784486535282067"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-5841943453698531319"[shape=box] 
+"-5841943453698531319"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-1327447397769792219"[shape=box] 
+"-1327447397769792219"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-4033660114729145702"[shape=box] 
+"-4033660114729145702"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-7862893982252825671"[shape=box] 
+"-7862893982252825671"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "7318657175179880000"[shape=box] 
+"7318657175179880000"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "4495115965961421536"[shape=box] 
+"4495115965961421536"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "1087802963155110773"[shape=box] 
+"1087802963155110773"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "213969892755372989"[shape=box] 
+"213969892755372989"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "317451778667203648"[shape=box] 
+"317451778667203648"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "7437166716861501082"[shape=box] 
+"7437166716861501082"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-8933113710097842972"[shape=box] 
+"-8933113710097842972"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "3927496934592789878"[shape=box] 
+"3927496934592789878"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "1022002133356685702"[shape=box] 
+"1022002133356685702"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "6663936451121034251"[shape=box] 
+"6663936451121034251"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "3450648300771330111"[shape=box] 
+"3450648300771330111"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "106547680198634551"[shape=box] 
+"106547680198634551"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "6719974727903285829"[shape=box] 
+"6719974727903285829"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-9205070459854501974"[shape=box] 
+"-9205070459854501974"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-4225870328307439840"[shape=box] 
+"-4225870328307439840"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "6569762497807302775"[shape=box] 
+"6569762497807302775"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "4408862632434638074"[shape=box] 
+"4408862632434638074"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-6705124085592941300"[shape=box] 
+"-6705124085592941300"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-5579357830173457920"[shape=box] 
+"-5579357830173457920"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "3530157905122649036"[shape=box] 
+"3530157905122649036"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "-5712796388261161470"[shape=box] 
+"-5712796388261161470"->"com.socialin.android.ui.SEND_BY_CONTACTS_ACTION" [color=red, style=dotted] ;
+ "7817380778026148027"[shape=box] 
+"7817380778026148027"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "1289989168974135900"[shape=box] 
+"1289989168974135900"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "2096447982710644998"[shape=box] 
+"2096447982710644998"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "7653502055812653487"[shape=box] 
+"7653502055812653487"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-5152463678175798489"[shape=box] 
+"-5152463678175798489"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-6660874517983812774"[shape=box] 
+"-6660874517983812774"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "2566118961141081958"[shape=box] 
+"2566118961141081958"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "8090794104710048058"[shape=box] 
+"8090794104710048058"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-3418592170141244338"[shape=box] 
+"-3418592170141244338"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "7486608353685235850"[shape=box] 
+"7486608353685235850"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "8682102573405640685"[shape=box] 
+"8682102573405640685"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "1100141897277888695"[shape=box] 
+"1100141897277888695"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-1189983998378270492"[shape=box] 
+"-1189983998378270492"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "2948472549501873548"[shape=box] 
+"2948472549501873548"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "8240477923409299689"[shape=box] 
+"8240477923409299689"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "4230732266300072324"[shape=box] 
+"4230732266300072324"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-6618599013544950259"[shape=box] 
+"-6618599013544950259"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-3082936590737310376"[shape=box] 
+"-3082936590737310376"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-968149347494115946"[shape=box] 
+"-968149347494115946"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-1206524114784285433"[shape=box] 
+"-1206524114784285433"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "8449386508273243327"[shape=box] 
+"8449386508273243327"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "7230710758837432935"[shape=box] 
+"7230710758837432935"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "1954864409774131695"[shape=box] 
+"1954864409774131695"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-3714750908087079385"[shape=box] 
+"-3714750908087079385"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-1981827047542446794"[shape=box] 
+"-1981827047542446794"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-4478223878676041216"[shape=box] 
+"-4478223878676041216"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-4313077364656448814"[shape=box] 
+"-4313077364656448814"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-1771726014699364150"[shape=box] 
+"-1771726014699364150"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "5116261119555160154"[shape=box] 
+"5116261119555160154"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "1191670476522916795"[shape=box] 
+"1191670476522916795"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "2792452045206649670"[shape=box] 
+"2792452045206649670"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-2129256452118588916"[shape=box] 
+"-2129256452118588916"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-8395054762537660484"[shape=box] 
+"-8395054762537660484"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "3870127693200132080"[shape=box] 
+"3870127693200132080"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "5940044052006278381"[shape=box] 
+"5940044052006278381"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-5584929359726215163"[shape=box] 
+"-5584929359726215163"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-781035388825931542"[shape=box] 
+"-781035388825931542"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "7915282846256039094"[shape=box] 
+"7915282846256039094"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "4552042881984558339"[shape=box] 
+"4552042881984558339"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "7894625069065266020"[shape=box] 
+"7894625069065266020"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "4065972583885727784"[shape=box] 
+"4065972583885727784"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "1613490225052824455"[shape=box] 
+"1613490225052824455"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "5812275684233289915"[shape=box] 
+"5812275684233289915"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "1921784486535282067"[shape=box] 
+"1921784486535282067"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-5841943453698531319"[shape=box] 
+"-5841943453698531319"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-1327447397769792219"[shape=box] 
+"-1327447397769792219"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-4033660114729145702"[shape=box] 
+"-4033660114729145702"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-7862893982252825671"[shape=box] 
+"-7862893982252825671"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "7318657175179880000"[shape=box] 
+"7318657175179880000"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "4495115965961421536"[shape=box] 
+"4495115965961421536"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "1087802963155110773"[shape=box] 
+"1087802963155110773"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "317451778667203648"[shape=box] 
+"317451778667203648"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "7437166716861501082"[shape=box] 
+"7437166716861501082"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-8933113710097842972"[shape=box] 
+"-8933113710097842972"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "3927496934592789878"[shape=box] 
+"3927496934592789878"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "1022002133356685702"[shape=box] 
+"1022002133356685702"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "6663936451121034251"[shape=box] 
+"6663936451121034251"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "3450648300771330111"[shape=box] 
+"3450648300771330111"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "6719974727903285829"[shape=box] 
+"6719974727903285829"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-9205070459854501974"[shape=box] 
+"-9205070459854501974"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-4225870328307439840"[shape=box] 
+"-4225870328307439840"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "6569762497807302775"[shape=box] 
+"6569762497807302775"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "4408862632434638074"[shape=box] 
+"4408862632434638074"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-5579357830173457920"[shape=box] 
+"-5579357830173457920"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "3530157905122649036"[shape=box] 
+"3530157905122649036"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-5712796388261161470"[shape=box] 
+"-5712796388261161470"->"com.socialin.android.ui.contact.SET_AS_CONTACT_PHOTO_ACTION" [color=red, style=dotted] ;
+ "-2674961515831948937"[shape=box] 
+"-2674961515831948937"->"ru.yandex.yandexmaps.action.SHOW_POINT_ON_MAP" [color=red, style=dotted] ;
+ "-2674961515831948937"[shape=box] 
+"-2674961515831948937"->"ru.yandex.yandexmaps.action.ASK_POINT_TO_SEND" [color=red, style=dotted] ;
+ "-8860192468678591580"[shape=box] 
+"-8860192468678591580"->"com.xtify.android.sdk.SAVE_REGISTERED_CP_ID" [color=red, style=dotted] ;
+ "4104432226419701162"[shape=box] 
+"4104432226419701162"->"com.xtify.android.sdk.SAVE_REGISTERED_CP_ID" [color=red, style=dotted] ;
+ "-5953758625849247226"[shape=box] 
+"-5953758625849247226"->"com.xtify.android.sdk.SAVE_REGISTERED_CP_ID" [color=red, style=dotted] ;
+ "9040013144692359393"[shape=box] 
+"9040013144692359393"->"com.xtify.android.sdk.SAVE_REGISTERED_CP_ID" [color=red, style=dotted] ;
+ "-8775156536829248939"[shape=box] 
+"-8775156536829248939"->"com.xtify.android.sdk.SAVE_REGISTERED_CP_ID" [color=red, style=dotted] ;
+ "-3846801776169539233"[shape=box] 
+"-3846801776169539233"->"com.xtify.android.sdk.SAVE_REGISTERED_CP_ID" [color=red, style=dotted] ;
+ "-1022201986699800386"[shape=box] 
+"-1022201986699800386"->"com.xtify.android.sdk.SAVE_REGISTERED_CP_ID" [color=red, style=dotted] ;
+ "-8860192468678591580"[shape=box] 
+"-8860192468678591580"->"com.xtify.android.sdk.SAVE_USER_KEY" [color=red, style=dotted] ;
+ "4104432226419701162"[shape=box] 
+"4104432226419701162"->"com.xtify.android.sdk.SAVE_USER_KEY" [color=red, style=dotted] ;
+ "-5953758625849247226"[shape=box] 
+"-5953758625849247226"->"com.xtify.android.sdk.SAVE_USER_KEY" [color=red, style=dotted] ;
+ "9040013144692359393"[shape=box] 
+"9040013144692359393"->"com.xtify.android.sdk.SAVE_USER_KEY" [color=red, style=dotted] ;
+ "-8775156536829248939"[shape=box] 
+"-8775156536829248939"->"com.xtify.android.sdk.SAVE_USER_KEY" [color=red, style=dotted] ;
+ "-3846801776169539233"[shape=box] 
+"-3846801776169539233"->"com.xtify.android.sdk.SAVE_USER_KEY" [color=red, style=dotted] ;
+ "-1022201986699800386"[shape=box] 
+"-1022201986699800386"->"com.xtify.android.sdk.SAVE_USER_KEY" [color=red, style=dotted] ;
+ "8363874637150716236"[shape=box] 
+"8363874637150716236"->"org.openintents.action.INSERT_FROM_EXTRAS" [color=red, style=dotted] ;
+ "-1731100109622314927"[shape=box] 
+"-1731100109622314927"->"se.petersson.prisjakt.ZapsPrisjakt.SEARCH" [color=red, style=dotted] ;
+ "-3712734703801852470"[shape=box] 
+"-3712734703801852470"->"org.coolcode.service.download.IDownloadService" [color=red, style=dotted] ;
+ "7532178431153877795"[shape=box] 
+"7532178431153877795"->"com.zong.mobile.PAYMENT" [color=red, style=dotted] ;
+ "-862337978949634542"[shape=box] 
+"-862337978949634542"->"com.zong.mobile.PAYMENT" [color=red, style=dotted] ;
+ "4693294166616769951"[shape=box] 
+"4693294166616769951"->"com.zong.mobile.PAYMENT" [color=red, style=dotted] ;
+ "-6379252568030586639"[shape=box] 
+"-6379252568030586639"->"com.sportstracklive.android.ZEPHYR" [color=red, style=dotted] ;
+ "-7702803102884542319"[shape=box] 
+"-7702803102884542319"->"com.sportstracklive.android.ZEPHYR" [color=red, style=dotted] ;
+ "8585027307694619560"[shape=box] 
+"8585027307694619560"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "-2177796228259346730"[shape=box] 
+"-2177796228259346730"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "8280111792489050056"[shape=box] 
+"8280111792489050056"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "-2856766180622815207"[shape=box] 
+"-2856766180622815207"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "-557685481310064790"[shape=box] 
+"-557685481310064790"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "6889972772381075016"[shape=box] 
+"6889972772381075016"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "-7689669719087876382"[shape=box] 
+"-7689669719087876382"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "-4529052486690640111"[shape=box] 
+"-4529052486690640111"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "8429780843685916391"[shape=box] 
+"8429780843685916391"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "-3037542209541038155"[shape=box] 
+"-3037542209541038155"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "1944074732376973074"[shape=box] 
+"1944074732376973074"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "3443243870770043449"[shape=box] 
+"3443243870770043449"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "-2453010867800807978"[shape=box] 
+"-2453010867800807978"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "-7551818777343487717"[shape=box] 
+"-7551818777343487717"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "7036800893989674040"[shape=box] 
+"7036800893989674040"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "-1324567338252246974"[shape=box] 
+"-1324567338252246974"->"org.openintents.action.PICK_DIRECTORY" [color=red, style=dotted] ;
+ "-955099019726834477"[shape=box] 
+"-955099019726834477"->"com.yahoo.mobile.client.android.APP_STARTUP" [color=red, style=dotted] ;
+ "-6157818718933204274"[shape=box] 
+"-6157818718933204274"->"com.yahoo.mobile.client.android.APP_STARTUP" [color=red, style=dotted] ;
+ "8104631390791113179"[shape=box] 
+"8104631390791113179"->"com.yahoo.mobile.client.android.APP_STARTUP" [color=red, style=dotted] ;
+ "-5703069976280489409"[shape=box] 
+"-5703069976280489409"->"com.tmobile.pluto.snapi.ACCOUNT_REMOVED" [color=red, style=dotted] ;
+ "-5703069976280489409"[shape=box] 
+"-5703069976280489409"->"com.tmobile.pluto.snapi.NEW_UPDATES_AVAILABLE" [color=red, style=dotted] ;
+ "-8340558298385610364"[shape=box] 
+"-8340558298385610364"->"com.tmobile.pluto.snapi.SET_SYNC_INTERVAL" [color=red, style=dotted] ;
+ "-9067912491342353218"[shape=box] 
+"-9067912491342353218"->"com.bingo.rom_gripper.action.ROM_LIST" [color=red, style=dotted] ;
+ "2685921730171137"[shape=box] 
+"2685921730171137"->"com.bingo.rom_gripper.action.ROM_LIST" [color=red, style=dotted] ;
+ "2307506287532098398"[shape=box] 
+"2307506287532098398"->"com.bingo.rom_gripper.action.ROM_LIST" [color=red, style=dotted] ;
+ "-6728347547592971996"[shape=box] 
+"-6728347547592971996"->"com.bingo.rom_gripper.action.ROM_LIST" [color=red, style=dotted] ;
+ "1936455147443843112"[shape=box] 
+"1936455147443843112"->"com.jacklrb.game.pacman" [color=red, style=dotted] ;
+ "1024210454361792081"[shape=box] 
+"1024210454361792081"->"com.jacklrb.game.pacman" [color=red, style=dotted] ;
+ "426128394203543757"[shape=box] 
+"426128394203543757"->"com.jacklrb.game.pacman" [color=red, style=dotted] ;
+ "4386101075487359081"[shape=box] 
+"4386101075487359081"->"com.jacklrb.game.pacman" [color=red, style=dotted] ;
+ "-1877456086968188404"[shape=box] 
+"-1877456086968188404"->"com.jacklrb.game.pacman" [color=red, style=dotted] ;
+ "465127860263292106"[shape=box] 
+"465127860263292106"->"bera.lee.cards.PACKAGE" [color=red, style=dotted] ;
+ "7442461530908425995"[shape=box] 
+"7442461530908425995"->"com.uangel.appwidget.NEXT" [color=red, style=dotted] ;
+ "2927615219194852710"[shape=box] 
+"2927615219194852710"->"com.uangel.appwidget.NEXT" [color=red, style=dotted] ;
+ "-4278567336436942596"[shape=box] 
+"-4278567336436942596"->"com.uangel.appwidget.NEXT" [color=red, style=dotted] ;
+ "7442461530908425995"[shape=box] 
+"7442461530908425995"->"com.uangel.appwidget.PREV" [color=red, style=dotted] ;
+ "2927615219194852710"[shape=box] 
+"2927615219194852710"->"com.uangel.appwidget.PREV" [color=red, style=dotted] ;
+ "-4278567336436942596"[shape=box] 
+"-4278567336436942596"->"com.uangel.appwidget.PREV" [color=red, style=dotted] ;
+ "-6788069816644443181"[shape=box] 
+"-6788069816644443181"->"ym.mz.mG" [color=red, style=dotted] ;
+ "-6246832605807349178"[shape=box] 
+"-6246832605807349178"->"com.tunewiki.lyricplayer.android.event.STATUS_U" [color=red, style=dotted] ;
+ "6407275911044331880"[shape=box] 
+"6407275911044331880"->"com.smartmadsoft.openwatch.action.TEXT" [color=red, style=dotted] ;
+ "-3813685358444328990"[shape=box] 
+"-3813685358444328990"->"com.smartmadsoft.openwatch.action.TEXT" [color=red, style=dotted] ;
+ "-5746618928026048290"[shape=box] 
+"-5746618928026048290"->"com.smartmadsoft.openwatch.action.TEXT" [color=red, style=dotted] ;
+ "6407275911044331880"[shape=box] 
+"6407275911044331880"->"com.smartmadsoft.openwatch.action.ENVELOPE" [color=red, style=dotted] ;
+ "-6961294827853753124"[shape=box] 
+"-6961294827853753124"->"com.mixzing.music.metachanged" [color=red, style=dotted] ;
+ "6407275911044331880"[shape=box] 
+"6407275911044331880"->"com.smartmadsoft.openwatch.action.VIBRATE" [color=red, style=dotted] ;
+ "-5746618928026048290"[shape=box] 
+"-5746618928026048290"->"com.smartmadsoft.openwatch.action.VIBRATE" [color=red, style=dotted] ;
+ "2399477152192854758"[shape=box] 
+"2399477152192854758"->"cm.mz.mG" [color=red, style=dotted] ;
+ "-2881037061090822190"[shape=box] 
+"-2881037061090822190"->"com.viquantran.puzzlebox.animals" [color=red, style=dotted] ;
+ "-2881037061090822190"[shape=box] 
+"-2881037061090822190"->"com.viquantran.puzzlebox.plants" [color=red, style=dotted] ;
+ "-2881037061090822190"[shape=box] 
+"-2881037061090822190"->"com.viquantran.puzzlebox.manga" [color=red, style=dotted] ;
+ "5711937692141401489"[shape=box] 
+"5711937692141401489"->"com.viquantran.puzzlebox.sexyanimebabes" [color=red, style=dotted] ;
+ "5711937692141401489"[shape=box] 
+"5711937692141401489"->"com.viquantran.puzzlebox.hotasianbabes" [color=red, style=dotted] ;
+ "5711937692141401489"[shape=box] 
+"5711937692141401489"->"com.viquantran.puzzlebox.hotasianbikinibabes" [color=red, style=dotted] ;
+ "5711937692141401489"[shape=box] 
+"5711937692141401489"->"com.viquantran.puzzlebox.hotbikinibabes" [color=red, style=dotted] ;
+ "5711937692141401489"[shape=box] 
+"5711937692141401489"->"com.viquantran.puzzlebox.hotlingeriebabes" [color=red, style=dotted] ;
+ "5711937692141401489"[shape=box] 
+"5711937692141401489"->"com.viquantran.puzzlebox.hotasianlingeriebabes" [color=red, style=dotted] ;
+ "-1904830175015340195"[shape=box] 
+"-1904830175015340195"->"be.pingping.pay.merchant" [color=red, style=dotted] ;
+ "7165006375129499426"[shape=box] 
+"7165006375129499426"->"com.urbanairship.airmail.END_REGISTER" [color=red, style=dotted] ;
+ "-3432870631309325366"[shape=box] 
+"-3432870631309325366"->"com.urbanairship.airmail.END_REGISTER" [color=red, style=dotted] ;
+ "-2915072437718127074"[shape=box] 
+"-2915072437718127074"->"com.urbanairship.airmail.END_REGISTER" [color=red, style=dotted] ;
+ "7165006375129499426"[shape=box] 
+"7165006375129499426"->"com.urbanairship.airmail.NOTIFY" [color=red, style=dotted] ;
+ "-3432870631309325366"[shape=box] 
+"-3432870631309325366"->"com.urbanairship.airmail.NOTIFY" [color=red, style=dotted] ;
+ "-2915072437718127074"[shape=box] 
+"-2915072437718127074"->"com.urbanairship.airmail.NOTIFY" [color=red, style=dotted] ;
+ "7165006375129499426"[shape=box] 
+"7165006375129499426"->"com.urbanairship.airmail.ACCEPT_PUSH" [color=red, style=dotted] ;
+ "-3432870631309325366"[shape=box] 
+"-3432870631309325366"->"com.urbanairship.airmail.ACCEPT_PUSH" [color=red, style=dotted] ;
+ "-2915072437718127074"[shape=box] 
+"-2915072437718127074"->"com.urbanairship.airmail.ACCEPT_PUSH" [color=red, style=dotted] ;
+ "1936455147443843112"[shape=box] 
+"1936455147443843112"->"com.jacklrb.game.bunnyhunt" [color=red, style=dotted] ;
+ "1024210454361792081"[shape=box] 
+"1024210454361792081"->"com.jacklrb.game.bunnyhunt" [color=red, style=dotted] ;
+ "426128394203543757"[shape=box] 
+"426128394203543757"->"com.jacklrb.game.bunnyhunt" [color=red, style=dotted] ;
+ "-4879166143754676807"[shape=box] 
+"-4879166143754676807"->"com.jacklrb.game.bunnyhunt" [color=red, style=dotted] ;
+ "4229399550287232488"[shape=box] 
+"4229399550287232488"->"com.jacklrb.game.bunnyhunt" [color=red, style=dotted] ;
+ "-4729932398382794885"[shape=box] 
+"-4729932398382794885"->"com.jacklrb.game.bunnyhunt" [color=red, style=dotted] ;
+ "5711937692141401489"[shape=box] 
+"5711937692141401489"->"com.viquantran.puzzlebox.hotblondebabes" [color=red, style=dotted] ;
+ "-2881037061090822190"[shape=box] 
+"-2881037061090822190"->"com.viquantran.puzzlebox.landscapes" [color=red, style=dotted] ;
+ "5711937692141401489"[shape=box] 
+"5711937692141401489"->"com.viquantran.puzzlebox.hotbrunettebabes" [color=red, style=dotted] ;
+ "1824598036440944522"[shape=box] 
+"1824598036440944522"->"org.abrantix.rockon.rockonnggl.RockOnNextGenGL" [color=red, style=dotted] ;
+ "5711937692141401489"[shape=box] 
+"5711937692141401489"->"com.viquantran.puzzlebox.hotguys" [color=red, style=dotted] ;
+ "-2881037061090822190"[shape=box] 
+"-2881037061090822190"->"com.simboly.puzzlebox.space" [color=red, style=dotted] ;
+ "5711937692141401489"[shape=box] 
+"5711937692141401489"->"com.simboly.puzzlebox.hote3babes2009" [color=red, style=dotted] ;
+ "-144508108559388585"[shape=box] 
+"-144508108559388585"->"jp.r246.twicca.ACTION_PLUGIN_SETTINGS" [color=red, style=dotted] ;
+ "683156848291707192"[shape=box] 
+"683156848291707192"->"com.carl.askastranger.AUTH_SUCCESS" [color=red, style=dotted] ;
+ "683156848291707192"[shape=box] 
+"683156848291707192"->"com.carl.askastranger.QUEST_ADDLIST" [color=red, style=dotted] ;
+ "5939448992376358462"[shape=box] 
+"5939448992376358462"->"com.opentable.action.RESERVE" [color=red, style=dotted] ;
+ "1676443722815963174"[shape=box] 
+"1676443722815963174"->"com.opentable.action.RESERVE" [color=red, style=dotted] ;
+ "3018288789073383517"[shape=box] 
+"3018288789073383517"->"com.opentable.action.RESERVE" [color=red, style=dotted] ;
+ "2769052223085478154"[shape=box] 
+"2769052223085478154"->"com.opentable.action.RESERVE" [color=red, style=dotted] ;
+ "-8577060186190119874"[shape=box] 
+"-8577060186190119874"->"org.mashupOrganizer.SHOW_ORGANIZER" [color=red, style=dotted] ;
+ "-5118186018543618807"[shape=box] 
+"-5118186018543618807"->"com.google.zxing.client.android.CaptureActivity" [color=red, style=dotted] ;
+ "54888591230032673"[shape=box] 
+"54888591230032673"->"org.odk.collect.android.action.FormEntry" [color=red, style=dotted] ;
+ "-5659897795387111513"[shape=box] 
+"-5659897795387111513"->"org.openintents.action.DELETED" [color=red, style=dotted] ;
+ "5043817640332963684"[shape=box] 
+"5043817640332963684"->"org.openintents.action.SHOW_ABOUT_DIALOG" [color=red, style=dotted] ;
+ "6407275911044331880"[shape=box] 
+"6407275911044331880"->"org.openintents.action.SHOW_ABOUT_DIALOG" [color=red, style=dotted] ;
+ "-3790181069086476735"[shape=box] 
+"-3790181069086476735"->"org.openintents.action.SHOW_ABOUT_DIALOG" [color=red, style=dotted] ;
+ "-5659897795387111513"[shape=box] 
+"-5659897795387111513"->"org.openintents.action.SHOW_ABOUT_DIALOG" [color=red, style=dotted] ;
+ "-7206041480678389729"[shape=box] 
+"-7206041480678389729"->"org.openintents.action.SHOW_ABOUT_DIALOG" [color=red, style=dotted] ;
+ "-396665222768980284"[shape=box] 
+"-396665222768980284"->"org.openintents.action.SHOW_ABOUT_DIALOG" [color=red, style=dotted] ;
+ "-2453010867800807978"[shape=box] 
+"-2453010867800807978"->"org.openintents.action.SHOW_ABOUT_DIALOG" [color=red, style=dotted] ;
+ "-7188031448344624467"[shape=box] 
+"-7188031448344624467"->"org.openintents.action.SHOW_ABOUT_DIALOG" [color=red, style=dotted] ;
+ "-6128454326373676140"[shape=box] 
+"-6128454326373676140"->"com.wsl.CardioTrainer.EXERCISE_INFO_CHANGED" [color=red, style=dotted] ;
+ "-9160450741656560743"[shape=box] 
+"-9160450741656560743"->"org.freeworld.vapor.glue.RemoteRequest" [color=red, style=dotted] ;
+ "-3044453214328846237"[shape=box] 
+"-3044453214328846237"->"com.betterandroid.launcher2.icons" [color=red, style=dotted] ;
+ "4613569137156876393"[shape=box] 
+"4613569137156876393"->"com.wordplayer.ReadChapter" [color=red, style=dotted] ;
+ "5204377456263255067"[shape=box] 
+"5204377456263255067"->"net.thinkingspace.cloud.ICloudInterface" [color=red, style=dotted] ;
+ "-3574539964520172298"[shape=box] 
+"-3574539964520172298"->"net.thinkingspace.cloud.ICloudInterface" [color=red, style=dotted] ;
+ "-3856343646639740695"[shape=box] 
+"-3856343646639740695"->"de.leihwelt.android.droidkoban.CUSTOMIZE_PLAYER" [color=red, style=dotted] ;
+ "4767133504241348433"[shape=box] 
+"4767133504241348433"->"se.sorlov.operatorcheck.PLUGIN_RESPONSE" [color=red, style=dotted] ;
+ "-1785614984443655108"[shape=box] 
+"-1785614984443655108"->"se.sorlov.operatorcheck.PLUGIN_RESPONSE" [color=red, style=dotted] ;
+ "-3250641134391108673"[shape=box] 
+"-3250641134391108673"->"com.niftyware.alex.core.CALL_ACTION" [color=red, style=dotted] ;
+ "7724784818008553591"[shape=box] 
+"7724784818008553591"->"com.smartmadsoft.openwatch.command.BUTTON_RW" [color=red, style=dotted] ;
+ "-578371623177941377"[shape=box] 
+"-578371623177941377"->"com.appventive.actions.EditEmailAccount" [color=red, style=dotted] ;
+ "-578371623177941377"[shape=box] 
+"-578371623177941377"->"com.appventive.action.UpdateMail" [color=red, style=dotted] ;
+ "-578371623177941377"[shape=box] 
+"-578371623177941377"->"com.appventive.actions.CreateEmailAccount" [color=red, style=dotted] ;
+ "-144508108559388585"[shape=box] 
+"-144508108559388585"->"jp.r246.twicca.ACTION_SHOW_USER" [color=red, style=dotted] ;
+ "-144508108559388585"[shape=box] 
+"-144508108559388585"->"jp.r246.twicca.ACTION_PICK_TREND" [color=red, style=dotted] ;
+ "-3530790680654092145"[shape=box] 
+"-3530790680654092145"->"org.openintents.indiclash.CREATE_FLASHCARD" [color=red, style=dotted] ;
+"-7045443663570194680"[shape=box] 
+"-7045443663570194680"->"com.appspot.swisscodemonkeys.apps" [color=chocolate, style=dotted] ;
+ "-1745889488299738459"[shape=box] 
+"-1745889488299738459"->"com.appspot.swisscodemonkeys.apps" [color=chocolate, style=dotted] ;
+ "3976238519580991230"[shape=box] 
+"3976238519580991230"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "748120342834297974"[shape=box] 
+"748120342834297974"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "-1730054521317768601"[shape=box] 
+"-1730054521317768601"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "-1635489512994144688"[shape=box] 
+"-1635489512994144688"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "-8823550751491650517"[shape=box] 
+"-8823550751491650517"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "2971396989264883697"[shape=box] 
+"2971396989264883697"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "-8713528825624034482"[shape=box] 
+"-8713528825624034482"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "-335361603319337248"[shape=box] 
+"-335361603319337248"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "5556333254987808240"[shape=box] 
+"5556333254987808240"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "-8546431851346422335"[shape=box] 
+"-8546431851346422335"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "7041964705729064366"[shape=box] 
+"7041964705729064366"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "-389740806689246953"[shape=box] 
+"-389740806689246953"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "-8424423577565536612"[shape=box] 
+"-8424423577565536612"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "8258750922152587586"[shape=box] 
+"8258750922152587586"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "-1173984437529854594"[shape=box] 
+"-1173984437529854594"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "554947843043033968"[shape=box] 
+"554947843043033968"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "-2233009276471661224"[shape=box] 
+"-2233009276471661224"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "-7845056164326124943"[shape=box] 
+"-7845056164326124943"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "7428892276550184596"[shape=box] 
+"7428892276550184596"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "-4690274720528950536"[shape=box] 
+"-4690274720528950536"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "2416677717749150474"[shape=box] 
+"2416677717749150474"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "573675094091839541"[shape=box] 
+"573675094091839541"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "2590601763144479242"[shape=box] 
+"2590601763144479242"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "3326434199345453596"[shape=box] 
+"3326434199345453596"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "5558000572259349933"[shape=box] 
+"5558000572259349933"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "-2852209522495909562"[shape=box] 
+"-2852209522495909562"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "6159590161203914836"[shape=box] 
+"6159590161203914836"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "-5197335761117078843"[shape=box] 
+"-5197335761117078843"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "8469310749473629076"[shape=box] 
+"8469310749473629076"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "-6860038164825616607"[shape=box] 
+"-6860038164825616607"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "8725309169642445764"[shape=box] 
+"8725309169642445764"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "3522617165292751845"[shape=box] 
+"3522617165292751845"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "7751648226762859729"[shape=box] 
+"7751648226762859729"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "-9191787225886157677"[shape=box] 
+"-9191787225886157677"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "2149635060981178587"[shape=box] 
+"2149635060981178587"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "1050745701993798605"[shape=box] 
+"1050745701993798605"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "-762254649842729512"[shape=box] 
+"-762254649842729512"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "4077768908967784418"[shape=box] 
+"4077768908967784418"->"com.google.intent.category.TTS_BETA" [color=chocolate, style=dotted] ;
+ "-531825431013522924"[shape=box] 
+"-531825431013522924"->"com.netgate.android.category.notification" [color=chocolate, style=dotted] ;
+ "-531825431013522924"[shape=box] 
+"-531825431013522924"->"com.netgate.android.CATEGORY" [color=chocolate, style=dotted] ;
+ "-531825431013522924"[shape=box] 
+"-531825431013522924"->"com.netgate.android.category.travel" [color=chocolate, style=dotted] ;
+ "-144508108559388585"[shape=box] 
+"-144508108559388585"->"jp.r246.twicca.category.USER" [color=chocolate, style=dotted] ;
+ "-144508108559388585"[shape=box] 
+"-144508108559388585"->"jp.r246.twicca.category.OWNER" [color=chocolate, style=dotted] ;
+}
