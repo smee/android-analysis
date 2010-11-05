@@ -6,12 +6,13 @@
   "Serialize the native clojure datastructure obj to file."
   ([file-name obj] (serialize file-name obj false))  
   ([file-name obj append?]
-    (dorun
-      (with-open [w (java.io.FileWriter. (java.io.File. file-name) append?)] 
-        (binding [*out* w 
-                  *print-dup* true
-                  *print-length* nil] 
-          (pprint obj))))))
+    (with-open [w (java.io.FileWriter. (java.io.File. file-name) append?)] 
+      (binding [*out* w 
+                *print-dup* true
+                *print-length* nil] 
+          (if (seq? obj)
+            (dorun (map prn obj)) ;;make sure members of sequences may be garbage collected upon realization
+            (prn obj))))))
 
 
 (defn deserialize [filename]

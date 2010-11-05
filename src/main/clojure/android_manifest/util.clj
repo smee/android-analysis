@@ -46,3 +46,8 @@
   [n & body]
   `(try-times* ~n (fn [] ~@body)))
 
+(defn seq-counter 
+  "calls callback after every n'th entry in sequence is evaluated with current index as parameter."
+  [sequence n callback]
+  (map #(do (if (= (rem %1 n) 0) (callback %1)) %2) (iterate inc 1) sequence))
+  
