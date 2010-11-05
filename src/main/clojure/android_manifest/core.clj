@@ -10,7 +10,7 @@
   (:import java.io.File))
 
 
-(defrecord Android-App [name version package actions categories action-refs category-refs])
+(defrecord Android-App [name version package actions categories action-refs category-refs sdkversion])
 
 (defn find-file [dirpath pattern]
   "Traverse directory dirpath depth first, return all files matching
@@ -40,6 +40,7 @@ the regular expression pattern"
         package-name        (-> xml first :attrs :package)
         version             (-> xml first :attrs :android:versionName)
         all-actions         (collect-android:name xml :action)
+        sdkversion          (or (->> xml (filter #(= :uses-sdk (:tag %))) first :attrs :android:minSdkVersion) "1")
         non-android-actions (into #{} (remove android-specific? all-actions))
         all-categories      (collect-android:name xml :category)
         non-android-categories (into #{} (remove android-specific? all-categories))]
@@ -50,7 +51,8 @@ the regular expression pattern"
       non-android-actions
       non-android-categories
       {}
-      {})))
+      {}
+      sdkversion)))
 
  (defn extract-path-part [idx path]
    (let [paths (.split path "\\\\")
@@ -152,8 +154,8 @@ the regular expression pattern"
                                                     (for [m (map :action-refs real-external-refs)]
                                                       (for [[k v] m :when (valid-action? k)]
                                                         {k (count v)}))))
-      sorted-freq              (into (sorted-map-by (fn [k1 k2] (compare (get action-call-freq k2) (get action-call-freq k1))))
-                                 action-call-freq)]
+        sorted-freq              (into (sorted-map-by (fn [k1 k2] (compare (get action-call-freq k2) (get action-call-freq k1))))
+                                   action-call-freq)]
   (println 
     "# manifests: "                         (count manifest-files)
     "\n# unique Apps: "                     (count all-apps)
@@ -163,7 +165,8 @@ the regular expression pattern"
     "\n# of categories offered from apps: " (count (distinct (mapcat #(keys (remove-empty-values (:category-refs %))) real-external-refs)))
     "\n# apps calling foreign categories: " (count (distinct (mapcat #(vals (:category-refs %)) real-external-refs)))
     "\n# openintents (category): "          (count openintent-categories) openintent-categories
-    "\nMost called actions: "               (take 3 sorted-freq))))
+    "\nMost called actions: "               (take 3 sorted-freq)
+    "\nMin. SDK Versions (version no./count: " (frequencies (map :sdkversion all-apps)))))
 
 (comment
    
