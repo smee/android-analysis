@@ -107,7 +107,6 @@
 "android.intent.action.INPUT"
 "android.intent.action.INPUT_METHOD_CHANGED"
 "android.intent.action.INSERT"
-"com.android.launcher.action.INSTALL_SHORTCUT"
 "android.intent.action.LABELVIEW"
 "android.intent.action.LAUNCH"
 "android.intent.action.LOCALE_CHANGED"
@@ -253,7 +252,10 @@
 "android.speech.tts.engine.GET_SAMPLE_TEXT"
 "android.speech.tts.engine.INSTALL_TTS_DATA"
 "android.speech.tts.engine.TTS_DATA_INSTALLED"
-"com.android.vending.INSTALL_REFERRER"}
+"com.android.contacts.action.FILTER_CONTACTS"
+"com.android.launcher.action.INSTALL_SHORTCUT"
+"com.android.vending.INSTALL_REFERRER"
+"com.google.android.c2dm.intent.RECEIVE"}
      s))
 
 (defn file-exists [file]
@@ -407,5 +409,7 @@ in loading android apps without duplicates (same package, lower versions)."
 
   (use 'android-manifest.graphviz)
   (spit (str "d:/android/results/refviz-" (date-string) ".dot") (graphviz r3))
+  (binding [*print-length* nil]
+    (spit "d:/android/results/real-refs-20k.json" (with-out-str (pprint-json r3))))
   )
 
