@@ -3,7 +3,7 @@
     [clojure.contrib.java-utils :only (read-properties)]
     [clojure.string :only (join)]
     android-manifest.serialization
-    [android-manifest.util :only (try-times)])
+    [android-manifest.util])
   (:import 
     [com.gc.android.market.api MarketSession MarketSession$Callback]
     [com.gc.android.market.api.model 
@@ -93,7 +93,8 @@
     (dissoc    
       (assoc (merge ex m)
         :permissionIdList permissions
-        :appType app-type)
+        :appType app-type
+        :timestamp (System/currentTimeMillis))
       :extendedInfo :allFields :descriptorForType :defaultInstanceForType :unknownFields :serializedSize :promoText :class)))
 
 (defn fetch-app-infos [session m]
@@ -113,18 +114,20 @@
   (doto (new MarketSession)
     (.login (get credentials "username") (get credentials "password"))))
 
-(defn fetch-all-apps [category credentials]
+(defn fetch-all-apps [category credentials directory]
+  (println "fetching category " category)
   (let [session (atom (init-session credentials))
         results (map #(delay 
                         (sleep-random 1000 3000) 
                         (fetch-app-infos @session {:start-idx (* % 10) :entries-count 10 :category category}))
                     (range 0 79))]
-        (doseq [result results]
-          (try
-            (serialize (str "results/market-apps/apps-" category) (deref result) true)
-            (catch Exception e
-              (println "Caught exception in " category)
-              (reset! session (init-session credentials)))))))
+    (doseq [result results]
+      (try
+        (serialize (str directory "/apps-" category) (deref result) true)
+        (catch Exception e
+          (println "Caught exception in " category)
+          (.printStackTrace e)
+          (reset! session (init-session credentials)))))))
 
 
 #_(comment
@@ -149,6 +152,17 @@
   
   (def request (create-apps-request {:query "open"}))
   (fetch-app-infos session {:query "open" :category "COMMUNICATION"})
-  (download-app "-1515770811183552303" authtoken credentials (str (java.lang.System/nanoTime) ".apk"))
+  (def authtoken (.getAuthSubToken session))
+  (download-app "3543009218990312084" authtoken (get credentials "userid") (get credentials "deviceid") (str (java.lang.System/nanoTime) ".apk"))
   (def cats (fetch-categories session))
+  
+  (let [date (date-string)
+        dir (str "results/market-apps/" date)]
+    (when
+      (.mkdirs (java.io.File. dir))
+      (doall 
+        (map 
+          #(fetch-all-apps %1 %2 dir) 
+          (drop 10 all-known-categories) 
+          (cycle (map read-properties ["marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties"]))))))
 )

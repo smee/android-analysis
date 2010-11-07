@@ -1,6 +1,6 @@
-(ns android-manifest.process
+(ns android.market.process
   (:use 
-    [android-manifest.scribble :only (valid-action?)]
+    [android-manifest.core :only (valid-action?)]
     clojure.contrib.java-utils
     [clojure.contrib.io :only (copy to-byte-array)])
   (:import
@@ -33,7 +33,7 @@
 
 (defn- process-file [main-dir-f outp-dir-f filename process-fn file]
   (let [rel-path (extract-relative-path main-dir-f file)
-          outfile  (File. (File. outp-dir-f rel-path) filename)]
+        outfile  (File. (File. outp-dir-f rel-path) filename)]
       (recreate-dirs-in rel-path outp-dir-f)
       (when (and (.isFile file) (not (.exists outfile)))
         (if-let [contents (first (extract-zip file filename))]
@@ -44,7 +44,7 @@
 (defn- extract-and-convert [main-dir outp-dir filename process-fn]
     (let [main-dir-f (as-file main-dir)
           outp-dir-f (as-file outp-dir)]
-      (map
+      (pmap
         (partial process-file main-dir-f outp-dir-f filename process-fn)
         (file-seq main-dir-f))))
 
@@ -71,7 +71,12 @@
 (defn printable? [ch]
   "Is this character in [33..126]?"
   (let [val (int ch)]
-    (and (> val 32) (< val 127))))
+    (or 
+      (and (>= val (int \a)) (<= val (int \z)))
+      (and (>= val (int \A)) (<= val (int \Z)))
+      (and (>= val (int \0)) (<= val (int \9)))
+      (contains? #{\. \- \_} ch)
+      )))
 
 (defn possible-android-identifiers [contents]
   "Extract all strings from a binary dexfile (dalvik bytecode)
@@ -80,8 +85,10 @@
     String.
     (partition-by printable?)
     (remove (comp not printable? first))
-    (remove (comp not valid-action?))
+    (remove #(>= 6 (count %)))
+    (filter valid-action?)
     (map (partial apply str))
+    ;(filter (re-find #"([.a-zA-Z0-9]+)"))
     distinct))
 
 
@@ -89,7 +96,7 @@
   (extract-and-convert 
     main-dir 
     outp-dir 
-    "classes.dex" 
+    "classes.dex"                       
     (fn [byte-arr] (prn-str (possible-android-identifiers (String. byte-arr))))))
 
 (comment
@@ -97,9 +104,14 @@
   (possible-android-identifiers (String. (to-byte-array (java.io.File. "h:/classes.dex"))))
   
    (doall (extract-android-manifests "D:\\android\\apps\\original" "h:/android"))
-  (doall (extract-smali "D:\\android\\apps\\original\\" "t:/android/market"))
+  (doall (extract-smali "D:\\android\\apps\\original\\" "h:/android"))
   
   (def contents (to-byte-array (java.io.File. "h:/classes.dex")))
+  
+  (dorun
+    (for [f (find-file "h:/android" #".*classes.dex")] 
+      (let [s (slurp f)] 
+        (spit f (vec (possible-android-identifiers s))))))
 
   )
       

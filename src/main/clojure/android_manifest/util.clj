@@ -51,3 +51,16 @@
   [sequence n callback]
   (map #(do (if (= (rem %1 n) 0) (callback %1)) %2) (iterate inc 1) sequence))
   
+(defn find-file [dirpath pattern]
+  "Traverse directory dirpath depth first, return all files matching
+the regular expression pattern"
+  (for [file (-> dirpath java.io.File. file-seq) 
+        :when (re-matches pattern (.getName file))]
+    file))
+
+(defn date-string 
+  "Get date as string with format yyyyMMdd."
+  ([]
+    (date-string (java.util.Date.)))
+  ([date]
+    (.format (java.text.SimpleDateFormat. "yyyyMMdd") date)))
