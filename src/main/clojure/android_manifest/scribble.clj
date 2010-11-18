@@ -1,37 +1,23 @@
 (ns android-manifest.scribble
-  (:use 
-    android-manifest.serialization
-     [clojure.contrib.pprint :only (pprint)]
-     [clojure.set :only (map-invert)]
-     android-manifest.util))
+  (:require 
+    [clojure.contrib.zip-filter :as zf]
+    [clojure.contrib.zip-filter.xml :as zfx]
+    [clojure.zip :as zip]
+    [clojure.xml :as xml]))
+
+
+(defn xml-zipper [s]
+  "Create zipper from xml."
+  (zip/xml-zip (xml/parse (new org.xml.sax.InputSource
+                               (new java.io.StringReader s)))))
 
 
 (comment
-;; script start
-(def android-apps (deserialize "results/unique-refs.clj"))
 
-(def real-external-refs 
-  (filter 
-    #(or 
-       (not-empty (remove-empty-values (:category-refs %))) 
-       (not-empty (remove-empty-values (:action-refs %))))
-    (filter-included-actions android-apps)))
-  
-(binding [*print-length* 10]
-  (pprint (take 10 real-external-refs)))
-(printf "Got %d real references between apps.\n" (count real-external-refs))
+(def x (xml-zipper (slurp "H:\\android\\LIBRARIES\\127597760486969162\\AndroidManifest.xml")))
 
-
-  (use 'clojure.contrib.json)
-  ;; write output as json file
-  (binding [*print-length* nil]
-    (spit "results/real-refs-16k.json" (with-out-str (pprint-json real-external-refs))))
-  ;; visualize results via graphviz
-  (spit "results/real-external-refs-unique.dot" (graphviz real-external-refs))
-  )
-
-
-
-
-;; total number of referenced intents?
-;; # of openintents?
+(zfx/xml1-> x (zfx/attr :package))
+(zfx/xml1-> x (zfx/attr :android:versionName))
+(zfx/xml-> x zf/descendants :intent-filter :action (zfx/attr :android:name))
+(zfx/xml1-> x zf/children :uses-sdk (zfx/attr :android:minSdkVersion))
+)

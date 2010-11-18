@@ -1,6 +1,7 @@
 (ns android.market.leech
   (:use 
     [clojure.contrib.java-utils :only (read-properties)]
+    [clojure.stacktrace :only (root-cause)]
     [clojure.string :only (join)]
     android-manifest.serialization
     [android-manifest.util])
@@ -45,7 +46,9 @@
 
 
 (defn- apps-request [query app-type view-type order-type cat-id start-idx entries-count extended?]
-  "Private function that sets all properties of a market request."
+"Private function that sets all properties of a market request.
+TODO: use setters only if parameter is given (There is a difference between not setting a value
+and setting it to null.)"
   (.build 
     (doto (Market$AppsRequest/newBuilder)
       ;(.setQuery query)
@@ -126,7 +129,7 @@
         (serialize (str directory "/apps-" category) (deref result) true)
         (catch Exception e
           (println "Caught exception in " category)
-          (.printStackTrace e)
+          (println (root-cause e))
           (reset! session (init-session credentials)))))))
 
 
@@ -158,11 +161,10 @@
   
   (let [date (date-string)
         dir (str "results/market-apps/" date)]
-    (when
-      (.mkdirs (java.io.File. dir))
-      (doall 
-        (map 
-          #(fetch-all-apps %1 %2 dir) 
-          all-known-categories 
-          (cycle (map read-properties ["marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties"]))))))
+    (.mkdirs (java.io.File. dir))
+    (doall 
+      (map 
+        #(fetch-all-apps %1 %2 dir) 
+        all-known-categories 
+        (cycle (map read-properties ["marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties"])))))
 )
