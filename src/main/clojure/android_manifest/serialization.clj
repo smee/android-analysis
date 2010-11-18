@@ -8,10 +8,13 @@
   ([file-name obj append?]
     (with-open [w (java.io.FileWriter. (java.io.File. file-name) append?)] 
       (binding [*out* w 
-                *print-dup* true
                 *print-length* nil] 
           (if (seq? obj)
-            (dorun (map prn obj)) ;;make sure members of sequences may be garbage collected upon realization
+            ;;serialize big sequences without retaining its head...
+            (do
+              (print \()
+              (dorun (map prn obj)) ;;make sure members of sequences may be garbage collected upon realization
+              (print \)))  
             (prn obj))))))
 
 
