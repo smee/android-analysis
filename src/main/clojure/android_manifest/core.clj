@@ -1,12 +1,16 @@
 (ns android-manifest.core
-  (:use [clojure.xml :as xml]
-        ;;[clojure.contrib.zip-filter.xml :as zip]
-        [clojure.set :only [intersection difference union map-invert]]
-        [clojure.pprint :only (pprint)]
-        [clojure.contrib.seq-utils :only (separate)]
-        android-manifest.lucene
-        android-manifest.serialization
-        android-manifest.util)
+  (:use 
+    [clojure.set :only [intersection difference union map-invert]]
+    [clojure.pprint :only (pprint)]
+    [clojure.contrib.seq-utils :only (separate)]
+    [clojure.contrib.zip-filter.xml :only (xml-> xml1-> attr)]
+    android-manifest.lucene
+    android-manifest.serialization
+    android-manifest.util)
+  (:require
+    [clojure.contrib.zip-filter :as zf]
+    [clojure.contrib.zip-filter.xml :as zfx]
+    [clojure.zip :as zip])
   (:import java.io.File))
 
 
@@ -20,6 +24,7 @@
         (filter #(= tag (:tag %)) xml))))) 
 
 (defn android-specific? [s]
+  (or (.contains s "android.intent") (.contains s "com.google.android")
   (contains? 
     #{"android.accounts.AccountAuthenticator"      
        "android.accounts.LOGIN_ACCOUNTS_CHANGED"
@@ -255,22 +260,23 @@
 "com.android.contacts.action.FILTER_CONTACTS"
 "com.android.launcher.action.INSTALL_SHORTCUT"
 "com.android.vending.INSTALL_REFERRER"
-"com.google.android.c2dm.intent.RECEIVE"}
-     s))
+"com.google.android.c2dm.intent.RECEIVE"
+"com.android.camera.action.CROP"}
+     s)))
 
 (defn file-exists [file]
   (and (.exists file) (< 0 (.length file))))
-  
+
 (defn load-android-app [manifest-file]
   "Parse android app manifest."
-  (let [xml                 (do #_(println "parsing " manifest-file )(xml-seq (xml/parse manifest-file)))
+  (let [x                   (do #_(println "parsing " manifest-file )(zip/xml-zip (xml/parse manifest-file)))
         app-name            (-> manifest-file .getParentFile .getName)
-        package-name        (-> xml first :attrs :package)
-        version             (-> xml first :attrs :android:versionName)
-        all-actions         (collect-android:name xml :action)
-        sdkversion          (or (->> xml (filter #(= :uses-sdk (:tag %))) first :attrs :android:minSdkVersion) "1")
+        package-name        (xml1-> x (attr :package))
+        version             (xml1-> x (attr :android:versionName))
+        all-actions         (xml-> x zf/descendants :intent-filter :action (attr :android:name))
+        sdkversion          (or (xml1-> x zf/children :uses-sdk (attr :android:minSdkVersion)) "1")
         non-android-actions (into #{} (remove android-specific? all-actions))
-        all-categories      (collect-android:name xml :category)
+        all-categories      (xml-> x zf/descendants :intent-filter :category (attr :android:name))
         non-android-categories (into #{} (remove android-specific? all-categories))
         classes-dex         (File. (.getParentFile manifest-file) "classes.dex")
         possible-action-calls (if (file-exists classes-dex) (deserialize (.toString classes-dex)) '())]
@@ -289,7 +295,7 @@
 (defn load-unique-apps [manifest-files]
   "Sort by descending version, filter all apps where version and path are equals. Should result
 in loading android apps without duplicates (same package, lower versions)."
-  (let [android-apps (map load-android-app manifest-files)]
+  (let [android-apps (pmap load-android-app manifest-files)]
     (distinct-by :package (reverse (sort-by :version android-apps)))))
 
 (defn unique-app-names [apps]
@@ -408,7 +414,7 @@ in loading android apps without duplicates (same package, lower versions)."
   ;(print-findings r3 apps (range 0 24000))
 
   (use 'android-manifest.graphviz)
-  (spit (str "d:/android/results/refviz-" (date-string) ".dot") (graphviz r3))
+  (spit (str "d:/android/results/refviz-25k-" (date-string) ".dot") (graphviz r3))
   (binding [*print-length* nil]
     (spit "d:/android/results/real-refs-20k.json" (with-out-str (pprint-json r3))))
   )
