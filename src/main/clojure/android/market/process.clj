@@ -7,49 +7,37 @@
     [clojure.contrib.io :only (copy to-byte-array)])
   (:import
     [java.io File ByteArrayInputStream]
-    [java.util.zip ZipInputStream ZipEntry]))
+    [java.util.zip ZipInputStream ZipEntry ZipFile]))
 
 (defn extract-relative-path [^File dir ^File file]
   (-> dir .toURI (.relativize (.toURI file)) .getPath))
 
-(defn recreate-dirs-in [rel-path dir]
-  (.mkdirs (file dir rel-path)))
-
 (defn extract-zipentry
   "Extract file from zip, returns byte[]."
-  [instream filename]
-  (ignore-exceptions
-    (with-open [zip-stream (ZipInputStream. instream)]
-      (loop [entry (.getNextEntry zip-stream)]
-        (when (not (nil? entry))
-          (if (.endsWith (.getName entry) filename)
-            (to-byte-array zip-stream)
-            (recur (.getNextEntry zip-stream))))))))
+  [zipfile filename]
+  (with-open [zf (ZipFile. zipfile)]
+    (if-let [entry (.getEntry zf filename)]
+      (to-byte-array (.getInputStream zf entry)))))
 
-(defn extract-zip [from & files-in-zip]
-  "Sequence of byte[] of zip entries. Return value undefined if any file does not exist"
-  (for [filename files-in-zip]
-    (do
-      (println "extracting from" from "the files:" files-in-zip)
-      (with-open [instream (-> from java.io.FileInputStream. java.io.BufferedInputStream.)]
-        (extract-zipentry instream filename)))))
-
-(defn- process-file [main-dir-f outp-dir-f filename process-fn input-file]
-  (let [rel-path (extract-relative-path main-dir-f input-file)
+(defn- process-app [main-dir-f outp-dir-f filename process-fn zip-file]
+  (let [rel-path (extract-relative-path main-dir-f zip-file)
         outfile  (file outp-dir-f rel-path filename)]
       (make-parents outfile)
       (when (not (.exists outfile))
-        (if-let [contents (first (extract-zip input-file filename))]
-          (copy 
-            (process-fn contents) 
-            outfile)))))
+        (do (println "processing" filename "in" zip-file)
+          (if-let [contents (extract-zipentry zip-file filename)]
+            (copy 
+              (process-fn contents) 
+              outfile))))))
 
-(defn- extract-and-convert [main-dir outp-dir filename process-fn]
+(defn- extract-and-convert [main-dir outp-dir file-in-app process-fn]
     (let [main-dir-f (file main-dir)
           outp-dir-f (file outp-dir)]
-      (pmap
-        #(ignore-exceptions (process-file main-dir-f outp-dir-f filename process-fn %))
-        (filter #(.isFile %) (file-seq main-dir-f)))))
+      (dorun
+        (pmap
+          #(ignore-exceptions 
+             (process-app main-dir-f outp-dir-f file-in-app process-fn %))
+          (filter #(.isFile %) (file-seq main-dir-f))))))
 
 (defn decode-binary-xml [instream]
   "Decode android manifest files."
@@ -78,8 +66,7 @@
       (and (>= val (int \a)) (<= val (int \z)))
       (and (>= val (int \A)) (<= val (int \Z)))
       (and (>= val (int \0)) (<= val (int \9)))
-      (contains? #{\. \- \_} ch)
-      )))
+      (contains? #{\. \- \_} ch))))
 
 (defn possible-android-identifiers [contents]
   "Extract all strings from a binary dexfile (dalvik bytecode)
@@ -87,13 +74,16 @@
   (->> contents 
     String.
     (partition-by printable?)
-    (remove (comp not printable? first))
     (remove #(>= 6 (count %)))
+    (remove (comp not printable? first))
     (filter valid-action?)
-    (map (partial apply str))
     ;(filter (re-find #"([.a-zA-Z0-9]+)"))
-    distinct))
+    distinct
+    (map (partial apply str))))
 
+(defn possible-android-identifiers-unrolled [contents]
+  "Handmade loop instead of sequence abstractions only, should help perfomance in this special case."
+  (loop [result #{} ]))
 
 (defn extract-smali [main-dir outp-dir]
   (extract-and-convert 
@@ -106,8 +96,8 @@
   
   (possible-android-identifiers (String. (to-byte-array (java.io.File. "h:/classes.dex"))))
   
-   (doall (extract-android-manifests "D:\\android\\apps\\original" "h:/android"))
-  (doall (extract-smali "D:\\android\\apps\\original\\" "h:/android"))
+  (extract-android-manifests "D:\\android\\apps\\original" "h:/android")
+  (extract-smali "D:\\android\\apps\\original\\" "h:/android")
   
   (def contents (to-byte-array (java.io.File. "h:/classes.dex")))
   
@@ -117,4 +107,3 @@
         (spit f (vec (possible-android-identifiers s))))))
 
   )
-      
