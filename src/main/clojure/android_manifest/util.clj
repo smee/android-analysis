@@ -1,4 +1,5 @@
-(ns android-manifest.util)
+(ns android-manifest.util
+  (:use [clojure.stacktrace :only (root-cause)]))
 
 (defn map-values [f m]
   "Change all map values by applying f to each one."
@@ -64,3 +65,9 @@ the regular expression pattern"
     (date-string (java.util.Date.)))
   ([date]
     (.format (java.text.SimpleDateFormat. "yyyyMMdd") date)))
+
+(defmacro ignore-exceptions [ & body ]
+  "Catch any exception and print the message of its root cause."
+  `(try 
+     ~@body
+     (catch Exception e# (println (root-cause e#)))))

@@ -163,6 +163,6 @@
       (doall 
         (map 
           #(fetch-all-apps %1 %2 dir) 
-          (drop 10 all-known-categories) 
+          all-known-categories 
           (cycle (map read-properties ["marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties"]))))))
 )

@@ -1,7 +1,9 @@
 (ns android.market.process
   (:use 
     [android-manifest.core :only (valid-action?)]
-    clojure.contrib.java-utils
+    [android-manifest.util :only (ignore-exceptions)]
+    ;clojure.contrib.java-utils
+    [clojure.java.io :only (file make-parents)]
     [clojure.contrib.io :only (copy to-byte-array)])
   (:import
     [java.io File ByteArrayInputStream]
@@ -11,42 +13,43 @@
   (-> dir .toURI (.relativize (.toURI file)) .getPath))
 
 (defn recreate-dirs-in [rel-path dir]
-  (.mkdirs (File. dir rel-path)))
+  (.mkdirs (file dir rel-path)))
 
 (defn extract-zipentry
   "Extract file from zip, returns byte[]."
   [instream filename]
-  (with-open [zip-stream (ZipInputStream. instream)]
-    (loop [entry (.getNextEntry zip-stream)]
-      (when (not (nil? entry))
-        (if (.endsWith (.getName entry) filename)
-          (to-byte-array zip-stream)
-          (recur (.getNextEntry zip-stream)))))))
+  (ignore-exceptions
+    (with-open [zip-stream (ZipInputStream. instream)]
+      (loop [entry (.getNextEntry zip-stream)]
+        (when (not (nil? entry))
+          (if (.endsWith (.getName entry) filename)
+            (to-byte-array zip-stream)
+            (recur (.getNextEntry zip-stream))))))))
 
 (defn extract-zip [from & files-in-zip]
   "Sequence of byte[] of zip entries. Return value undefined if any file does not exist"
   (for [filename files-in-zip]
     (do
-      (println from)
-      (with-open [instream (java.io.FileInputStream. from)]
+      (println "extracting from" from "the files:" files-in-zip)
+      (with-open [instream (-> from java.io.FileInputStream. java.io.BufferedInputStream.)]
         (extract-zipentry instream filename)))))
 
-(defn- process-file [main-dir-f outp-dir-f filename process-fn file]
-  (let [rel-path (extract-relative-path main-dir-f file)
-        outfile  (File. (File. outp-dir-f rel-path) filename)]
-      (recreate-dirs-in rel-path outp-dir-f)
-      (when (and (.isFile file) (not (.exists outfile)))
-        (if-let [contents (first (extract-zip file filename))]
+(defn- process-file [main-dir-f outp-dir-f filename process-fn input-file]
+  (let [rel-path (extract-relative-path main-dir-f input-file)
+        outfile  (file outp-dir-f rel-path filename)]
+      (make-parents outfile)
+      (when (not (.exists outfile))
+        (if-let [contents (first (extract-zip input-file filename))]
           (copy 
             (process-fn contents) 
             outfile)))))
 
 (defn- extract-and-convert [main-dir outp-dir filename process-fn]
-    (let [main-dir-f (as-file main-dir)
-          outp-dir-f (as-file outp-dir)]
+    (let [main-dir-f (file main-dir)
+          outp-dir-f (file outp-dir)]
       (pmap
-        (partial process-file main-dir-f outp-dir-f filename process-fn)
-        (file-seq main-dir-f))))
+        #(ignore-exceptions (process-file main-dir-f outp-dir-f filename process-fn %))
+        (filter #(.isFile %) (file-seq main-dir-f)))))
 
 (defn decode-binary-xml [instream]
   "Decode android manifest files."

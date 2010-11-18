@@ -5,6 +5,7 @@
     com.gc.android.market.api.MarketSession)
   (:use 
     android-manifest.serialization
+    [android-manifest.util :only (ignore-exceptions)]
     [android.market.leech :as ml]
     [clojure.contrib.duck-streams :only (copy)]
     [clojure.contrib.java-utils :only (read-properties)]))
@@ -53,8 +54,8 @@
     ;(println app-id \tab output-file)
     (when-not (.exists (File. output-file))
       (println "downloading into " output-dir " " app-id)
-      (download-app app-id authtoken userid deviceid output-file)
-      :ok)))
+      (ignore-exceptions
+        (download-app app-id authtoken userid deviceid output-file)))))
                   
 
 (defn load-apps-metadata [category]
@@ -76,5 +77,5 @@
   #_(printf "%s %s %s\n" %1 %2 output-dir)
   #_(leech-apps %1 %2 output-dir)
   (set! *print-length* 10)
-  (doall (download-all-apps "marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties"))
+ (download-all-apps "marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties")
 )
