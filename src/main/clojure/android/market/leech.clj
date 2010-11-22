@@ -1,10 +1,11 @@
 (ns android.market.leech
   (:use 
     [clojure.contrib.java-utils :only (read-properties)]
+    [clojure.contrib.io :only (as-file)]
     [clojure.stacktrace :only (root-cause)]
     [clojure.string :only (join)]
     android-manifest.serialization
-    [android-manifest.util])
+    android-manifest.util)
   (:import 
     [com.gc.android.market.api MarketSession MarketSession$Callback]
     [com.gc.android.market.api.model 
@@ -46,25 +47,34 @@
 
 
 (defn- apps-request [query app-type view-type order-type cat-id start-idx entries-count extended?]
-"Private function that sets all properties of a market request.
-TODO: use setters only if parameter is given (There is a difference between not setting a value
-and setting it to null.)"
-  (.build 
-    (doto (Market$AppsRequest/newBuilder)
-      ;(.setQuery query)
-      ;(.setAppType app-type)
-      (.setViewType view-type)
-      (.setOrderType order-type) 
-      (.setCategoryId cat-id)
-      (.setStartIndex start-idx)
-      (.setEntriesCount entries-count)
-      (.setWithExtendedInfo extended?)
-      )))
+"Private function that sets all properties of a market request."
+;use setters only if parameter is given (There is a difference between not setting a value
+; and setting it to null.)
+(let [b (Market$AppsRequest/newBuilder)]
+  (do
+    (when query
+      (.setQuery b query))
+    (when app-type
+      (.setAppType b app-type))
+    (when view-type
+      (.setViewType b view-type))
+    (when order-type
+      (.setOrderType b order-type))
+    (when cat-id
+      (.setCategoryId b cat-id))
+    (when start-idx
+      (.setStartIndex b start-idx))
+    (when entries-count
+      (.setEntriesCount b entries-count))
+    (when extended?
+      (.setWithExtendedInfo b extended?))
+      
+    (.build b))))
 
 
 (defn create-apps-request [{:keys [query app-type view-type order-type category start-idx entries-count extended?], 
                            :or {query nil,app-type Market$AppType/APPLICATION, view-type Market$AppsRequest$ViewType/FREE, 
-                                order-type Market$AppsRequest$OrderType/NEWEST, category "COMMUNICATION", start-idx 0, entries-count 10, extended? true}}]
+                                order-type Market$AppsRequest$OrderType/NEWEST, category nil, start-idx 0, entries-count 10, extended? true}}]
   "Use a map to specify an arbitrary subset of market request parameters."
   (apps-request query app-type view-type order-type category start-idx entries-count extended?))
 
@@ -113,32 +123,64 @@ and setting it to null.)"
 (defn sleep-random [min max]
   (Thread/sleep (+ min (.nextInt (java.util.Random.) (- max min)))))
 
-(defn- init-session [credentials]
-  (doto (new MarketSession)
-    (.login (get credentials "username") (get credentials "password"))))
+(defn init-session [credentials]
+  (let [session  (new MarketSession)
+        username (get credentials "username")
+        password (get credentials "password")]
+  (do
+    ; login
+    (doto session
+      (.login username password)
+      (.setLocale java.util.Locale/US))
+      
+    ; we are on an US carrier using a froyo device....
+    (doto (.getContext session)
+      (.setAuthSubToken (.getAuthSubToken session))
+      (.setUnknown1 0)
+      (.setVersion 1002)
+      ;(.setAndroidId "0000000000000000")
+      (.setDeviceAndSdkVersion "sapphire:8")
+      (.setUserLanguage "de");"en")
+      (.setUserCountry "de");"us")
+      (.setOperatorAlpha "Vodafone");"T-Mobile USA")
+      (.setOperatorNumeric "26202")
+      (.setSimOperatorAlpha "Vodafone");"T-Mobile USA")
+      (.setSimOperatorNumeric "26202"))
+    ; return
+    session)))
 
 (defn fetch-all-apps [category credentials directory]
   (println "fetching category " category)
   (let [session (atom (init-session credentials))
         results (map #(delay 
-                        (sleep-random 1000 3000) 
-                        (fetch-app-infos @session {:start-idx (* % 10) :entries-count 10 :category category}))
+                        (sleep-random 100 1000) 
+                        (fetch-app-infos @session {:start-idx (* % 10) :entries-count 10 :category category :app-type nil}))
                     (range 0 79))]
-    (doseq [result results]
-      (try
-        (serialize (str directory "/apps-" category) (deref result) true)
-        (catch Exception e
-          (println "Caught exception in " category)
-          (println (root-cause e))
-          (reset! session (init-session credentials)))))))
+    (serialize (str directory "/apps-" category)
+      (filter map?  
+        (flatten (doall 
+                   (for [result results]
+                     (try
+                       (deref result)
+                       (catch Exception e
+                         (println "Caught exception in " category)
+                         (println (root-cause e))
+                         (reset! session (init-session credentials)))))))))))
 
+(defn load-authors [input-dir]
+  (let [authors (into #{} (flatten (map #(map :creatorId (deserialize (str input-dir "/apps-" %))) all-known-categories)))]
+      authors))
+
+(defn leech-apps-per-author [session downloaded-apps-dir]
+  (let [authors (load-authors downloaded-apps-dir)
+        downloaded-apps (into #{} (map #(.getName %) (file-seq (as-file downloaded-apps-dir))))]
+    (for [author authors]
+      (remove #(contains? downloaded-apps %) (fetch-app-infos session {:query (str "pub:" author)})))))
 
 #_(comment
   
   (def credentials (read-properties "marketcredentials.properties"))
-
-  (def session (doto (new MarketSession)
-                 (.login (get credentials "username") (get credentials "password"))))
+  (def session (init-session credentials))
   
   
   (def cat (second all-known-categories))
@@ -149,12 +191,10 @@ and setting it to null.)"
       (range 0 79)))
   
   
-  (doall (map #(serialize (str "apps-" cat) (deref %) true) leech-them))
   
   
-  
-  (def request (create-apps-request {:query "open"}))
-  (fetch-app-infos session {:query "open" :category "COMMUNICATION"})
+  (def request (create-apps-request {:query "NihongoUp" :view-type Market$AppsRequest$ViewType/PAID}))
+  (fetch-app-infos session {:query "pub:\"Games HUB\"" })
   (def authtoken (.getAuthSubToken session))
   (download-app "3543009218990312084" authtoken (get credentials "userid") (get credentials "deviceid") (str (java.lang.System/nanoTime) ".apk"))
   (def cats (fetch-categories session))

@@ -8,7 +8,8 @@
     [android-manifest.util :only (ignore-exceptions)]
     [android.market.leech :as ml]
     [clojure.contrib.duck-streams :only (copy)]
-    [clojure.contrib.java-utils :only (read-properties)]))
+    [clojure.contrib.java-utils :only (read-properties)]
+    ))
 
 (def *path* "d:/android/apps/original")
 
@@ -29,7 +30,7 @@
         url      (URL. (str "http://android.clients.google.com/market/download/Download" request))
         conn     (doto (.openConnection url)
                    (.setRequestMethod "GET")
-                   (.setRequestProperty "User-Agent" "Android-Market/2 (dream DRC85)")
+                   (.setRequestProperty "User-Agent" "AndroidDownloadManager")
                    (.setRequestProperty "cookie" cookie))]
     (copy (.getInputStream conn) (File. filename))))
 
@@ -64,18 +65,25 @@
 
 (defn download-all-apps [& credentials-files]
   (let [properties        (map #(into {} (read-properties %)) credentials-files)
-        avail-credentials (map #(assoc % "authtoken" (get-auth-token %)) properties)
-        workers           (agent 0)]
+        avail-credentials (map #(assoc % "authtoken" (get-auth-token %)) properties)]
     (doseq [category ml/all-known-categories]
       (let [apps (load-apps-metadata category)
             output-dir (str *path* "/" category)]
         (printf "got %d apps to download into %s \n" (count apps) output-dir)
         (doall
           (pmap #(leech-apps %1 %2 output-dir) apps (cycle avail-credentials)))))))
-  
+
 (comment
   #_(printf "%s %s %s\n" %1 %2 output-dir)
   #_(leech-apps %1 %2 output-dir)
   (set! *print-length* 10)
  (download-all-apps "marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties")
+ 
+ (let [c (read-properties "marketcredentials3.properties")
+       userid      (get c "userid")
+       deviceid    (get c "deviceid")
+       authtoken   (get-auth-token c)
+       app-id      "-6230861955167956295"]
+   (download-app app-id authtoken userid deviceid (str app-id ".apk")))
+ (count (deserialize "d:/android/apps/original/apps-BRAIN"))
 )

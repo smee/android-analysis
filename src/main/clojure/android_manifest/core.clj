@@ -10,7 +10,8 @@
   (:require
     [clojure.contrib.zip-filter :as zf]
     [clojure.contrib.zip-filter.xml :as zfx]
-    [clojure.zip :as zip])
+    [clojure.zip :as zip]
+    [clojure.xml :as xml])
   (:import java.io.File))
 
 
