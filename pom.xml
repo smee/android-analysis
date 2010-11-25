@@ -161,7 +161,7 @@
 	      <artifactId>androidmarketapi</artifactId>
 	      <version>0.3</version>
 	      <scope>system</scope>
-	      <systemPath>${basedir}/src/main/etc/androidmarketapi-0.3.jar</systemPath>
+	      <systemPath>${basedir}/src/main/etc/androidmarketapi-fixed-1.0-SNAPSHOT.jar</systemPath>
 	    </dependency>        
 	    <dependency>
 	    	<groupId>com.google.protobuf</groupId>

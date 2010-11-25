@@ -7,7 +7,7 @@
     android-manifest.serialization
     android-manifest.util)
   (:import 
-    [com.gc.android.market.api MarketSession MarketSession$Callback]
+    [com.gc.android.market.api AndroidMarketApi]
     [com.gc.android.market.api.model 
      Market$App 
      Market$AppType 
@@ -78,31 +78,13 @@
   "Use a map to specify an arbitrary subset of market request parameters."
   (apps-request query app-type view-type order-type category start-idx entries-count extended?))
 
-(defn- call-market [session req res-fn]
-  "Call android market api, returns (res-fn response) wrapped in a promise."
-  (let [result   (promise)
-        callback (proxy [MarketSession$Callback] []
-                   (onResult [ctx, resp]
-                     (deliver result (res-fn resp))))]
-    (do
-      (doto session
-        (.append req callback)
-        (.flush))
-      @result)))
-
-(defn fetch-categories [session]
-  "Return reference to list of Category. Dereference with @."
-  (call-market 
-    session
-    (.build (Market$CategoriesRequest/newBuilder))
-    (fn [resp] (.getCategoriesList resp))))      
-
 
 (defn- extract-app-infos [app]
   (let [m           (bean app)
         app-type    (.name (.getAppType app))
         ex          (bean (.getExtendedInfo app))
         permissions (into [] (:permissionIdList ex))]
+    (println app)
     (dissoc    
       (assoc (merge ex m)
         :permissionIdList permissions
@@ -110,63 +92,39 @@
         :timestamp (System/currentTimeMillis))
       :extendedInfo :allFields :descriptorForType :defaultInstanceForType :unknownFields :serializedSize :promoText :class)))
 
-(defn fetch-app-infos [session m]
-  "Return reference to sequence of application details. Dereference with @."
-  (call-market 
-    session
-    (create-apps-request m)
-    (fn [resp] (map 
-                 extract-app-infos
-                 (.getAppList resp)))))
+(defn create-market-api [credentials]
+  (AndroidMarketApi. (get credentials "username") (get credentials "password") false))
 
 
-(defn sleep-random [min max]
-  (Thread/sleep (+ min (.nextInt (java.util.Random.) (- max min)))))
+(defn fetch-app-infos [m market-api]
+  (map extract-app-infos 
+    (.executeRequest market-api (create-apps-request m))))
 
-(defn init-session [credentials]
-  (let [session  (new MarketSession)
-        username (get credentials "username")
-        password (get credentials "password")]
-  (do
-    ; login
-    (doto session
-      (.login username password)
-      (.setLocale java.util.Locale/US))
-      
-    ; we are on an US carrier using a froyo device....
-    (doto (.getContext session)
-      (.setAuthSubToken (.getAuthSubToken session))
-      (.setUnknown1 0)
-      (.setVersion 1002)
-      ;(.setAndroidId "0000000000000000")
-      (.setDeviceAndSdkVersion "sapphire:8")
-      (.setUserLanguage "de");"en")
-      (.setUserCountry "de");"us")
-      (.setOperatorAlpha "Vodafone");"T-Mobile USA")
-      (.setOperatorNumeric "26202")
-      (.setSimOperatorAlpha "Vodafone");"T-Mobile USA")
-      (.setSimOperatorNumeric "26202"))
-    ; return
-    session)))
 
-(defn fetch-all-apps [category credentials directory]
-  (println "fetching category " category)
-  (let [session (atom (init-session credentials))
-        results (map #(delay 
-                        (sleep-random 100 1000) 
-                        (fetch-app-infos @session {:start-idx (* % 10) :entries-count 10 :category category :app-type nil}))
-                    (range 0 79))]
-    (serialize (str directory "/apps-" category)
-      (filter map?  
-        (flatten (doall 
-                   (for [result results]
-                     (try
-                       (deref result)
-                       (catch Exception e
-                         (println "Caught exception in " category)
-                         (println (root-cause e))
-                         (reset! session (init-session credentials)))))))))))
-
+(defn fetch-all-apps [query-template-map credentials]
+  (let [api (atom (create-market-api credentials))
+        queries (map #(assoc query-template-map :start-idx (* % 10) :entries-count 10) (range 0 3))]
+    (filter map?
+      (flatten
+        (for [query queries]
+          (try
+            (sleep-random 100 1000) 
+            (fetch-app-infos query @api)
+            (catch Exception e
+              (println (root-cause e))
+              (reset! api (create-market-api credentials)))))))))
+  
+(defn fetch-all-newest-apps [ & cred-files]
+  (let [date (date-string)
+        dir (str "results/market-apps/" date)]
+    (.mkdirs (java.io.File. dir))
+    (dorun 
+      (map 
+        (fn [cat cred]
+          (serialize (str dir "/apps-" cat) (fetch-all-apps {:category cat :app-type nil} cred)))
+        all-known-categories
+        (cycle (map read-properties cred-files))))))
+  
 (defn load-authors [input-dir]
   (let [authors (into #{} (flatten (map #(map :creatorId (deserialize (str input-dir "/apps-" %))) all-known-categories)))]
       authors))
@@ -179,32 +137,15 @@
 
 #_(comment
   
-  (def credentials (read-properties "marketcredentials.properties"))
-  (def session (init-session credentials))
+  (def credentials (read-properties "marketcredentials2.properties"))
   
-  
-  (def cat (second all-known-categories))
-  (def leech-them 
-    (map #(delay 
-            (sleep-random 1000 3000) 
-            (fetch-app-infos session {:start-idx (* % 10) :category cat}))
-      (range 0 79)))
-  
-  
-  
+
   
   (def request (create-apps-request {:query "NihongoUp" :view-type Market$AppsRequest$ViewType/PAID}))
-  (fetch-app-infos session {:query "pub:\"Games HUB\"" })
+  (def api (create-market-api credentials))
+  (fetch-app-infos {:query "Open"} api)
   (def authtoken (.getAuthSubToken session))
-  (download-app "3543009218990312084" authtoken (get credentials "userid") (get credentials "deviceid") (str (java.lang.System/nanoTime) ".apk"))
-  (def cats (fetch-categories session))
+
+  (fetch-all-newest-apps "marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties")
   
-  (let [date (date-string)
-        dir (str "results/market-apps/" date)]
-    (.mkdirs (java.io.File. dir))
-    (doall 
-      (map 
-        #(fetch-all-apps %1 %2 dir) 
-        all-known-categories 
-        (cycle (map read-properties ["marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties"])))))
 )

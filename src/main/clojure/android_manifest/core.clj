@@ -402,8 +402,7 @@ in loading android apps without duplicates (same package, lower versions)."
   (def manifest-files (find-file app-sources #".*AndroidManifest.xml"))
   (def apps (load-unique-apps manifest-files))
   
-  (serialize (str "d:/android/results/raw-" (date-string) ".clj") (map (partial into {}) apps))
-  ;(def apps (deserialize "d:/android/results/raw-20101107.clj"))
+  ;(serialize (str "d:/android/results/raw-" (date-string) ".clj") (map (partial into {}) apps))
   
   (def trimmed-apps (trim-possible-action-calls apps))
   (def r (find-possible-references trimmed-apps))

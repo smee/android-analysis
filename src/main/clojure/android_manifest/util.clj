@@ -71,3 +71,13 @@ the regular expression pattern"
   `(try 
      ~@body
      (catch Exception e# (println (root-cause e#)))))
+
+(defn unchunk [s]
+  "Disable the chunking behaviour introduced in clojure 1.1"
+  (when (seq s)
+    (lazy-seq
+      (cons (first s)
+        (unchunk (next s))))))
+
+(defn sleep-random [min max]
+  (Thread/sleep (+ min (.nextInt (java.util.Random.) (- max min)))))
