@@ -84,7 +84,6 @@
         app-type    (.name (.getAppType app))
         ex          (bean (.getExtendedInfo app))
         permissions (into [] (:permissionIdList ex))]
-    (println app)
     (dissoc    
       (assoc (merge ex m)
         :permissionIdList permissions
@@ -93,7 +92,10 @@
       :extendedInfo :allFields :descriptorForType :defaultInstanceForType :unknownFields :serializedSize :promoText :class)))
 
 (defn create-market-api [credentials]
-  (AndroidMarketApi. (get credentials "username") (get credentials "password") false))
+  (let [api (AndroidMarketApi. (get credentials "username") (get credentials "password") false)]
+    (do
+      (.setAndroidId api (get credentials "androidid"))
+      api)))
 
 
 (defn fetch-app-infos [m market-api]
@@ -103,7 +105,7 @@
 
 (defn fetch-all-apps [query-template-map credentials]
   (let [api (atom (create-market-api credentials))
-        queries (map #(assoc query-template-map :start-idx (* % 10) :entries-count 10) (range 0 3))]
+        queries (map #(assoc query-template-map :start-idx (* % 10) :entries-count 10) (range 0 80))]
     (filter map?
       (flatten
         (for [query queries]
@@ -111,7 +113,7 @@
             (sleep-random 100 1000) 
             (fetch-app-infos query @api)
             (catch Exception e
-              (println (root-cause e))
+              ;(println (root-cause e))
               (reset! api (create-market-api credentials)))))))))
   
 (defn fetch-all-newest-apps [ & cred-files]
@@ -137,7 +139,7 @@
 
 #_(comment
   
-  (def credentials (read-properties "marketcredentials2.properties"))
+  (def credentials (read-properties "marketcredentials4.properties"))
   
 
   
@@ -146,6 +148,7 @@
   (fetch-app-infos {:query "Open"} api)
   (def authtoken (.getAuthSubToken session))
 
-  (fetch-all-newest-apps "marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties")
+  (fetch-all-newest-apps "marketcredentials4.properties")
+  (fetch-all-newest-apps "marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties" "marketcredentials4.properties")
   
 )
