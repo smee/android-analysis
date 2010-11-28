@@ -7,6 +7,7 @@
     android-manifest.serialization
     [android-manifest.util :only (ignore-exceptions sleep-random)]
     [android.market.leech :as ml]
+    [clojure.contrib.io :only (as-file)]
     [clojure.contrib.duck-streams :only (copy)]
     [clojure.contrib.java-utils :only (read-properties)]
     ))
@@ -27,12 +28,33 @@
                    "?assetId=" (url-encode assetid)
                    "&userId="   (url-encode userid)
                    "&deviceId=" (url-encode deviceid))
-        url      (URL. (str "http://android.clients.google.com/market/download/Download" request))
-        conn     (doto (.openConnection url)
-                   (.setRequestMethod "GET")
-                   (.setRequestProperty "User-Agent" "AndroidDownloadManager")
-                   (.setRequestProperty "cookie" cookie))]
-    (copy (.getInputStream conn) (File. filename))))
+        url      (URL. (str "http://android.clients.google.com/market/download/Download" request))]
+    (try
+      (copy (.getInputStream (doto (.openConnection url)
+                               (.setRequestMethod "GET")
+                               (.setRequestProperty "User-Agent" "Android-Market/2")
+                               (.setRequestProperty "cookie" cookie))) 
+        (as-file filename))
+      (catch java.io.IOException e
+        (.createNewFile (as-file (str filename ".403")))))))
+
+(defn download-app-secure [assetid authtoken userid deviceid filename]
+  "Download app from the official google market."
+  (let [cookie   (str "MarketDA=" "17889847518369858470")
+        request  (str 
+                   "?assetId=" (url-encode assetid)
+                   "&userId="   (url-encode userid)
+                   "&deviceId=" (url-encode deviceid)
+                   "&sig=AOGrW-wAAAAATPghJDx4KBmYHEqdsxeApQ8ql7AzpEzn")
+        url      (URL. (str "https://android.clients.google.com/market/download/Download" request))]
+    (try
+      (copy (.getInputStream (doto (.openConnection url)
+                               (.setRequestMethod "GET")
+                               (.setRequestProperty "User-Agent" "Android-Market/2")
+                               (.setRequestProperty "cookie" cookie))) 
+        (as-file filename))
+      (catch java.io.IOException e
+        (.createNewFile (as-file (str filename ".403")))))))
 
 
 (defn get-auth-token [credentials]
@@ -40,8 +62,12 @@
   (let [username (get credentials "username")
         password (get credentials "password")
         session  (doto (new MarketSession)
-                   (.login username password))]
+                   (.login username password #_MarketSession/SERVICE_SECURE))]
     (.getAuthSubToken session)))
+
+(defn- downloaded? [f]
+  (let [f (as-file f)]
+    (or (.exists f) (.exists (as-file (str (.toString f) ".403"))))))
 
 (defn leech-apps [app credentials output-dir]
   "Download all android applications described in apps into output-dir
@@ -53,7 +79,7 @@
         output-file (str output-dir \/ app-id)]
     
     ;(println app-id \tab output-file)
-    (when-not (.exists (File. output-file))
+    (when-not (downloaded? output-file)
       (println "downloading into " output-dir " " app-id)
       (ignore-exceptions
         ;(sleep-random 5000 20000)
@@ -80,11 +106,17 @@
   (set! *print-length* 10)
  (download-all-apps "marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties" "marketcredentials4.properties")
  
- (let [c (read-properties "marketcredentials3.properties")
+ (let [c (read-properties "marketcredentials4.properties")
        userid      (get c "userid")
-       deviceid    (get c "deviceid")x`
+       deviceid    (get c "deviceid")
        authtoken   (get-auth-token c)
-       app-id      "-6230861955167956295"]
-   (download-app app-id authtoken userid deviceid (str app-id ".apk")))
+       app-id      "4332943286439977254"]
+   (download-app-secure app-id authtoken userid deviceid (str app-id ".apk")))
+ 
  (count (deserialize "d:/android/apps/original/apps-BRAIN"))
+ 
+ ;; disable https certificate verification
+ (javax.net.ssl.HttpsURLConnection/setDefaultHostnameVerifier 
+   (proxy [javax.net.ssl.HostnameVerifier] [] 
+     (verify [hostname session] true)))
 )

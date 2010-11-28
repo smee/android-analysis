@@ -24,20 +24,22 @@
         outfile  (file outp-dir-f rel-path filename)]
       (make-parents outfile)
       (when (not (.exists outfile))
-        (do (println "processing" filename "in" zip-file)
+        (do 
+          (println "processing" filename "in" zip-file)
           (if-let [contents (extract-zipentry zip-file filename)]
             (copy 
               (process-fn contents) 
-              outfile))))))
+              outfile)
+            :success)))))
 
 (defn- extract-and-convert [main-dir outp-dir file-in-app process-fn]
     (let [main-dir-f (file main-dir)
           outp-dir-f (file outp-dir)]
-      (dorun
-        (pmap
-          #(ignore-exceptions 
-             (process-app main-dir-f outp-dir-f file-in-app process-fn %))
-          (filter #(.isFile %) (file-seq main-dir-f))))))
+      (count (filter identity
+               (pmap
+                 #(ignore-exceptions 
+                    (process-app main-dir-f outp-dir-f file-in-app process-fn %))
+                 (filter #(.isFile %) (file-seq main-dir-f)))))))
 
 (defn decode-binary-xml [instream]
   "Decode android manifest files."
@@ -96,8 +98,8 @@
   
   (possible-android-identifiers (String. (to-byte-array (java.io.File. "h:/classes.dex"))))
   
-  (extract-android-manifests "D:\\android\\apps\\original" "h:/android")
-  (extract-smali "D:\\android\\apps\\original\\" "h:/android")
+  (println "new manifests: " (extract-android-manifests "D:\\android\\apps\\original" "h:/android"))
+  (println "new classes.dex: " (extract-smali "D:\\android\\apps\\original\\" "h:/android"))
   
   (def contents (to-byte-array (java.io.File. "h:/classes.dex")))
   
