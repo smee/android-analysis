@@ -15,17 +15,10 @@
   (:import java.io.File))
 
 
-(defrecord Android-App [name version package actions categories action-refs category-refs sdkversion possible-action-calls])
-
-(defn collect-android:name [xml tag]
-  (distinct
-    (filter identity
-      (map 
-        #(-> % :attrs :android:name)
-        (filter #(= tag (:tag %)) xml))))) 
+(defrecord Android-App [name version package actions categories services sdkversion possible-action-calls])
 
 (defn android-specific? [s]
-  (or (.contains s "android.intent") (.contains s "com.google.android")
+  (or (.contains s "android.intent") (.contains s "com.google.android") (.startsWith s "android.bluetooth.intent.action.")
   (contains? 
     #{"android.accounts.AccountAuthenticator"      
        "android.accounts.LOGIN_ACCOUNTS_CHANGED"
@@ -52,11 +45,14 @@
 "android.bluetooth.device.action.ACL_CONNECTED"
 "android.bluetooth.device.action.FOUND"
 "android.bluetooth.headset.action.STATE_CHANGED"
+"android.bluetooth.intent.action.DISABLED"
+"android.bluetooth.intent.action.ENABLED"
 "android.bluetooth.intent.action.NAME_CHANGED"
 "android.bluetooth.intent.action.PAIRING_CANCEL"
 "android.bluetooth.intent.action.PAIRING_REQUEST"
 "android.bluetooth.intent.action.REMOTE_DEVICE_CLASS_UPDATED"
 "android.bluetooth.intent.action.REMOTE_DEVICE_DISCONNECTED"
+"android.bluetooth.adapter.action.REQUEST_ENABLE"
 "android.content.SyncAdapter"
 "android.credentials.UNLOCK"
 "android.intent.action.ABOUT"
@@ -266,19 +262,28 @@
      s)))
 
 (defn file-exists [file]
+  "Does file exist and is not empty?"
   (and (.exists file) (< 0 (.length file))))
+
+(defn- find-names-of
+  "Find all android components, for example activities or services from 
+androidmanifest.xml files using zipper traversals."
+  ([xml tg] (find-names-of xml tg :action))
+  ([xml tg tg2] 
+    (into #{} 
+      (remove android-specific? 
+        (xml-> xml :application tg :intent-filter tg2 (attr :android:name))))))
 
 (defn load-android-app [manifest-file]
   "Parse android app manifest."
-  (let [x                   (do #_(println "parsing " manifest-file )(zip/xml-zip (xml/parse manifest-file)))
+  (let [x                   (zip/xml-zip (xml/parse manifest-file))
         app-name            (-> manifest-file .getParentFile .getName)
         package-name        (xml1-> x (attr :package))
-        version             (xml1-> x (attr :android:versionName))
-        all-actions         (xml-> x zf/descendants :intent-filter :action (attr :android:name))
-        sdkversion          (or (xml1-> x zf/children :uses-sdk (attr :android:minSdkVersion)) "1")
-        non-android-actions (into #{} (remove android-specific? all-actions))
-        all-categories      (xml-> x zf/descendants :intent-filter :category (attr :android:name))
-        non-android-categories (into #{} (remove android-specific? all-categories))
+        version             (xml1-> x (attr :android:versionCode))
+        sdkversion          (or (xml1-> x :uses-sdk (attr :android:minSdkVersion)) "0")
+        actions             (find-names-of x :activity)
+        categories          (find-names-of x :activity :category)
+        services            (find-names-of x :service)
         classes-dex         (File. (.getParentFile manifest-file) "classes.dex")
         possible-action-calls (if (file-exists classes-dex) (deserialize (.toString classes-dex)) '())]
     
@@ -286,10 +291,9 @@
       app-name 
       version 
       package-name
-      non-android-actions
-      non-android-categories
-      {}
-      {}
+      actions
+      categories
+      services
       sdkversion
       possible-action-calls)))
  
@@ -299,8 +303,6 @@ in loading android apps without duplicates (same package, lower versions)."
   (let [android-apps (pmap load-android-app manifest-files)]
     (distinct-by :package (reverse (sort-by :version android-apps)))))
 
-(defn unique-app-names [apps]
-  (set (map :name apps)))
 
 (defn- possible-action-call-map [apps]
   "Create map of all action references in decompiled apps to app names that seem to call these actions."
@@ -372,7 +374,7 @@ in loading android apps without duplicates (same package, lower versions)."
     "\n# of defined actions: "              no-defined-actions
     "\n# of externally used actions offered from apps: " no-external-actions-offered    
     "\n# apps calling external actions: "   no-apps-calling-external    
-    "\n% of apps involved in real intent based relationships: <=" (double (* 100 (/ no-apps-calling-external (count all-apps))))
+    "\n% of apps relying on intent based relationships: <=" (double (* 100 (/ no-apps-calling-external (count all-apps))))
     "\n# openintents (actions): "           (count openintent-actions) openintent-actions
     "\n# of categories offered from apps: " (count (distinct (mapcat #(keys (remove-empty-values (:category-refs %))) real-external-refs)))
     "\n# apps calling foreign categories: " (count (distinct (mapcat #(vals (:category-refs %)) real-external-refs)))
