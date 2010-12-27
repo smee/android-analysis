@@ -31,10 +31,12 @@
     "digraph {" \newline
     ;"overlap=\"compress\"" \newline
     ;; app to action strings
-    (apply str (interpose " " (get-def-strings real-external-refs :action-refs "green")))
-    (apply str (interpose " " (get-def-strings real-external-refs :category-refs "blue")))
+    ;(apply str (interpose " " (get-def-strings real-external-refs :action-refs "green")))
+    ;(apply str (interpose " " (get-def-strings real-external-refs :category-refs "blue")))
+    (apply str (interpose " " (get-def-strings real-external-refs :service-refs "blue")))
     ;; dependent apps to action strings
-    (apply str (interpose " " (get-ref-strings real-external-refs :action-refs "red")))
-    (apply str (interpose " " (get-ref-strings real-external-refs :category-refs "chocolate")))
+    ;(apply str (interpose " " (get-ref-strings real-external-refs :action-refs "red")))
+    ;(apply str (interpose " " (get-ref-strings real-external-refs :category-refs "chocolate")))
+    (apply str (interpose " " (get-ref-strings real-external-refs :service-refs "chocolate")))
     "}"))
 
