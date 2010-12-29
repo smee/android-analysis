@@ -94,6 +94,7 @@
     "classes.dex"                       
     (fn [byte-arr] (prn-str (possible-android-identifiers (String. byte-arr))))))
 
+(defn 
 (comment
   
   (possible-android-identifiers (String. (to-byte-array (java.io.File. "h:/classes.dex"))))

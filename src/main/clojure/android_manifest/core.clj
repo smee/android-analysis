@@ -6,7 +6,8 @@
     [clojure.contrib.zip-filter.xml :only (xml-> xml1-> attr)]
     android-manifest.lucene
     android-manifest.serialization
-    android-manifest.util)
+    android-manifest.util
+    android-manifest.sdk)
   (:require
     [clojure.contrib.zip-filter :as zf]
     [clojure.contrib.zip-filter.xml :as zfx]
@@ -17,251 +18,8 @@
     [java.util.zip ZipInputStream ZipEntry ZipFile]))
 
 
-(defrecord Android-App [name version package actions categories services sdkversion maybe-refs])
+(defrecord Android-App [name version package actions categories services receivers sdkversion maybe-refs])
 
-(defn android-specific? [s]
-  (or (.contains s "android.intent") (.contains s "com.google.android") (.startsWith s "android.bluetooth.intent.action.")
-  (contains? 
-    #{"android.accounts.AccountAuthenticator"      
-       "android.accounts.LOGIN_ACCOUNTS_CHANGED"
-       "android.app.action.DEVICE_ADMIN_ENABLED"     
-       "android.app.action.ENTER_CAR_MODE"
-       "android.appwidget.action.ALARM_ACTION"     
-       "android.appwidget.action.APPWIDGET_CONFIGURE"
-       "android.appwidget.action.APPWIDGET_DELETED"    
-       "android.appwidget.action.APPWIDGET_DISABLED"
-       "android.appwidget.action.APPWIDGET_ENABLED"    
-       "android.appwidget.action.APPWIDGET_PICK"
-       "android.appwidget.action.APPWIDGET_UPDATE"    
-       "android.appwidget.action.CLICK_WIDGET_01"
-       "android.appwidget.action.CLICK_WIDGET_02"   
-       "android.appwidget.action.CLICK_WIDGET_03"
-       "android.appwidget.action.CLICK_WIDGET_04"
-       "android.appwidget.action.CLICK_WIDGET_05"
-"android.appwidget.action.LEFTBUTTON"
-"android.appwidget.action.LOADNETWORK"
-"android.appwidget.action.RIGHTBUTTON"
-"android.appwidget.action.UPDATE_WIDGET_ALL"
-"android.appwidget.action.UPDATE_WIDGET_ME"
-"android.bluetooth.adapter.action.STATE_CHANGED"
-"android.bluetooth.device.action.ACL_CONNECTED"
-"android.bluetooth.device.action.FOUND"
-"android.bluetooth.headset.action.STATE_CHANGED"
-"android.bluetooth.intent.action.DISABLED"
-"android.bluetooth.intent.action.ENABLED"
-"android.bluetooth.intent.action.NAME_CHANGED"
-"android.bluetooth.intent.action.PAIRING_CANCEL"
-"android.bluetooth.intent.action.PAIRING_REQUEST"
-"android.bluetooth.intent.action.REMOTE_DEVICE_CLASS_UPDATED"
-"android.bluetooth.intent.action.REMOTE_DEVICE_DISCONNECTED"
-"android.bluetooth.adapter.action.REQUEST_ENABLE"
-"android.content.SyncAdapter"
-"android.credentials.UNLOCK"
-"android.intent.action.ABOUT"
-"android.intent.action.ACTION_APPROTECT"
-"android.intent.action.ACTION_APPROTECT_CLR"
-"android.intent.action.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE"
-"android.intent.action.ACTION_POWER_CONNECTED"
-"android.intent.action.ACTION_POWER_DISCONNECTED"
-"android.intent.action.ACTION_SHUTDOWN"
-"android.intent.action.ACTIVE_WORKOUT"
-"android.intent.action.AIRPLANE_MODE"
-"android.intent.action.ALARM"
-"android.intent.action.ALARM_CHANGED"
-"android.intent.action.ALL_APPS"
-"android.intent.action.ANSWER"
-"android.intent.action.ANY_DATA_STATE"
-"android.intent.action.ATTACH_DATA"
-"android.intent.action.BATTERY_CHANGED"
-"android.intent.action.BATTERY_LOW"
-"android.intent.action.BATTERY_OKAY"
-"android.intent.action.BOOT"
-"android.intent.action.BOOT_COMPLETED"
-"android.intent.action.CALL"
-"android.intent.action.CALL_BUTTON"
-"android.intent.action.CALL_PRIVILEGED"
-"android.intent.action.CAMERA_BUTTON"
-"android.intent.action.CATEGORIESLIST"
-"android.intent.action.CHOOSER"
-"android.intent.action.CLOSE_SYSTEM_DIALOGS"
-"android.intent.action.COMMENTSLIST"
-"android.intent.action.CONFIGURATION3"
-"android.intent.action.CONFIGURATION_CHANGED"
-"android.intent.action.CONTENT_CHANGED"
-"android.intent.action.CREATE_LIVE_FOLDER"
-"android.intent.action.CREATE_SHORTCUT"
-"android.intent.action.DATA_SMS_RECEIVED"
-"android.intent.action.DATE_CHANGED"
-"android.intent.action.DELETE"
-"android.intent.action.DETAILS"
-"android.intent.action.DEVICE_STORAGE_LOW"
-"android.intent.action.DEVICE_STORAGE_OK"
-"android.intent.action.DIAL"
-"android.intent.action.DOCK_EVENT"
-"android.intent.action.DOWNLOAD_COMPLETED"
-"android.intent.action.EDIT"
-"android.intent.action.EVENT_REMINDER"
-"android.intent.action.Edit"
-"android.intent.action.GET_CONTENT"
-"android.intent.action.GOAL_START"
-"android.intent.action.GTALK_CONNECTED"
-"android.intent.action.HEADSET_PLUG"
-"android.intent.action.HOME"
-"android.intent.action.INITIAL_VIEW"
-"android.intent.action.INPUT"
-"android.intent.action.INPUT_METHOD_CHANGED"
-"android.intent.action.INSERT"
-"android.intent.action.LABELVIEW"
-"android.intent.action.LAUNCH"
-"android.intent.action.LOCALE_CHANGED"
-"android.intent.action.LOCATION"
-"android.intent.action.LOGIN"
-"android.intent.action.MAIN"
-"android.intent.action.MAP"
-"android.intent.action.MEDIA_BAD_REMOVAL"
-"android.intent.action.MEDIA_BUTTON"
-"android.intent.action.MEDIA_CHECKING"
-"android.intent.action.MEDIA_EJECT"
-"android.intent.action.MEDIA_MOUNTED"
-"android.intent.action.MEDIA_NOFS"
-"android.intent.action.MEDIA_REMOVED"
-"android.intent.action.MEDIA_SCANNER_FINISHED"
-"android.intent.action.MEDIA_SCANNER_STARTED"
-"android.intent.action.MEDIA_SEARCH"
-"android.intent.action.MEDIA_SHARED"
-"android.intent.action.MEDIA_UNMOUNTABLE"
-"android.intent.action.MEDIA_UNMOUNTED"
-"android.intent.action.MUSIC_PLAYER"
-"android.intent.action.Map"
-"android.intent.action.NEW_OUTGOING_CALL"
-"android.intent.action.PACKAGE_ADDED"
-"android.intent.action.PACKAGE_CHANGED"
-"android.intent.action.PACKAGE_DATA_CLEARED"
-"android.intent.action.PACKAGE_INSTALL"
-"android.intent.action.PACKAGE_REMOVED"
-"android.intent.action.PACKAGE_REPLACED"
-"android.intent.action.PACKAGE_RESTARTED"
-"android.intent.action.PHONE_STATE"
-"android.intent.action.PHOTO"
-"android.intent.action.PHOTO_ALBUM"
-"android.intent.action.PICK"
-"android.intent.action.PICK_ACTIVITY"
-"android.intent.action.PICK_AUTORUN_KILLER"
-"android.intent.action.PICK_AUTORUN_KILLER2"
-"android.intent.action.PICK_EASY_KILLER2"
-"android.intent.action.PICK_EASY_PROTECTOR"
-"android.intent.action.PICK_QUICK_KILLER"
-"android.intent.action.PICK_SAVE_BATTERY_KILLER"
-"android.intent.action.PICK_SECURITY_MANAGER"
-"android.intent.action.PICK_TASK_MANAGER"
-"android.intent.action.PRODUCTDESCRIPTION"
-"android.intent.action.PROVIDER_CHANGED"
-"android.intent.action.PROXY_CHANGE"
-"android.intent.action.Pick"
-"android.intent.action.REBOOT"
-"android.intent.action.REFERENCE"
-"android.intent.action.REMOTE_INTENT"
-"android.intent.action.RINGTONE_PICKER"
-"android.intent.action.RUN"
-"android.intent.action.SCAN"
-"android.intent.action.SCAN_WIFINETWORK"
-"android.intent.action.SCREEN_OFF"
-"android.intent.action.SCREEN_ON"
-"android.intent.action.SCREEN_RECEIVER"
-"android.intent.action.SEARCH"
-"android.intent.action.SEARCHLIST"
-"android.intent.action.SEARCH_HURO"
-"android.intent.action.SEARCH_LONG_PRESS"
-"android.intent.action.SEARCH_NAME_LIST"
-"android.intent.action.SEARCH_NAME_LIST_DETAILS"
-"android.intent.action.SEARCH_SYOKUJI"
-"android.intent.action.SEARCH_YADO"
-"android.intent.action.SECURITY_GUARDER_SERVICE"
-"android.intent.action.SELECTION3"
-"android.intent.action.SEND"
-"android.intent.action.SENDTO"
-"android.intent.action.SEND_MULTIPLE"
-"android.intent.action.SERVICE_STATE"
-"android.intent.action.SET_WALLPAPER"
-"android.intent.action.SHOPPING3"
-"android.intent.action.SHOW"
-"android.intent.action.SHOW_ALL"
-"android.intent.action.SHUTDOWN"
-"android.intent.action.SIM_STATE_CHANGED"
-"android.intent.action.SPLASH"
-"android.intent.action.STARTSCREEN3"
-"android.intent.action.START_TTS_ENGINE"
-"android.intent.action.SUBSTITUTIONS3"
-"android.intent.action.SYNC"
-"android.intent.action.SYNC_STATE_CHANGED"
-"android.intent.action.Search"
-"android.intent.action.TIMEZONE_CHANGED"
-"android.intent.action.TIME_SET"
-"android.intent.action.TIME_TICK"
-"android.intent.action.TOOLS"
-"android.intent.action.TWITTER"
-"android.intent.action.TWITTER_FOLLOW"
-"android.intent.action.TWITTER_PROFILE"
-"android.intent.action.UMS_CONNECTED"
-"android.intent.action.UMS_DISCONNECTED"
-"android.intent.action.USERS"
-"android.intent.action.USER_PRESENT"
-"android.intent.action.USE_TTS"
-"android.intent.action.VIEW"
-"android.intent.action.VIEW_DETAIL"
-"android.intent.action.VOICE_COMMAND"
-"android.intent.action.View"
-"android.intent.action.WALLPAPER_CHANGED"
-"android.intent.action.WEBVIEW"
-"android.intent.action.WEB_SEARCH"
-"android.intent.action.WIDGET_RECEIVER"
-"android.intent.action.WIZARDSETTINGS3"
-"android.intent.action.WIZARDTWITTERQ3"
-"android.intent.action.edit"
-"android.intent.action.view"
-"android.intent.action.web"
-"android.intent.category.EMBED"
-"android.intent.category.DEFAULT"
-"android.intent.category.LAUNCHER"
-"android.location.GPS_FIX_CHANGE"
-"android.media.AUDIO_BECOMING_NOISY"
-"android.media.RINGER_MODE_CHANGED"
-"android.media.VIBRATE_SETTING_CHANGED"
-"android.media.action.IMAGE_CAPTURE"
-"android.media.action.MEDIA_PLAY_FROM_SEARCH"
-"android.media.action.STILL_IMAGE_CAMERA"
-"android.media.action.VIDEO_CAMERA"
-"android.media.action.VIDEO_CAPTURE"
-"android.net.conn.CONNECTIVITY_CHANGE"
-"android.net.http.NETWORK_STATE"
-"android.net.wifi.RSSI_CHANGED"
-"android.net.wifi.SCAN_RESULTS"
-"android.net.wifi.STATE_CHANGE"
-"android.net.wifi.WIFI_AP_STATE_CHANGED"
-"android.net.wifi.WIFI_STATE_CHANGED"
-"android.net.wifi.supplicant.CONNECTION_CHANGE"
-"android.net.wifi.supplicant.STATE_CHANGE"
-"android.pineone.intent.action.PUSH_CLIENT"
-"android.provider.Telephony.MMS_RECEIVED"
-"android.provider.Telephony.SECRET_CODE"
-"android.provider.Telephony.SIM_FULL"
-"android.provider.Telephony.SMS_RECEIVED"
-"android.provider.Telephony.SMS_REJECTED"
-"android.provider.Telephony.WAP_PUSH_RECEIVED"
-"android.settings.DATE_SETTINGS"
-"android.settings.LOCATION_SOURCE_SETTINGS"
-"android.settings.SETTINGS"
-"android.settings.WIRELESS_SETTINGS"
-"android.speech.tts.engine.CHECK_TTS_DATA"
-"android.speech.tts.engine.GET_SAMPLE_TEXT"
-"android.speech.tts.engine.INSTALL_TTS_DATA"
-"android.speech.tts.engine.TTS_DATA_INSTALLED"
-"com.android.contacts.action.FILTER_CONTACTS"
-"com.android.launcher.action.INSTALL_SHORTCUT"
-"com.android.vending.INSTALL_REFERRER"
-"com.google.android.c2dm.intent.RECEIVE"
-"com.android.camera.action.CROP"}
-     s)))
 
 (defn file-exists [file]
   "Does file exist and is not empty?"
@@ -273,8 +31,8 @@ androidmanifest.xml files using zipper traversals."
   ([xml tg] (find-names-of xml tg :action))
   ([xml tg tg2] 
     (into #{} 
-      (remove android-specific? 
-        (xml-> xml :application tg :intent-filter tg2 (attr :android:name))))))
+      ;(remove android-specific? 
+        (xml-> xml :application tg :intent-filter tg2 (attr :android:name)))));)
 
 (defn load-android-app [app-name manifest maybe-refs]
   "Parse android app manifest."
@@ -284,7 +42,8 @@ androidmanifest.xml files using zipper traversals."
         sdkversion    (or (xml1-> x :uses-sdk (attr :android:minSdkVersion)) "0")
         actions       (find-names-of x :activity)
         categories    (find-names-of x :activity :category)
-        services      (find-names-of x :service)]
+        services      (find-names-of x :service)
+        receivers     (find-names-of x :receiver)];;TODO providers
     (Android-App. 
       app-name 
       version 
@@ -292,6 +51,7 @@ androidmanifest.xml files using zipper traversals."
       actions
       categories
       services
+      receivers
       sdkversion
       maybe-refs)))
  
@@ -302,49 +62,57 @@ in loading android apps without duplicates (same package, lower versions)."
     (reverse 
       (sort-by :version apps)))) 
   
-(defn load-apps-from-archive [zip-archive]
+;;(defn load-apps-from-archive [zip-archive]
   
 (defn load-apps-from-disk [manifest-files]
-  (for [f manifest-files]
-    (let [app-name     (-> f .getParentFile .getName)
-          classes-dex  (File. (.getParentFile f) "classes.dex")
-          maybe-refs   (if (file-exists classes-dex) (deserialize (.toString classes-dex)) '())]
-      (load-android-app app-name f maybe-refs))))
+  (pmap 
+    (fn [f]
+      (let [app-name     (-> f .getParentFile .getName)
+            classes-dex  (File. (.getParentFile f) "classes.dex")
+            maybe-refs   (if (file-exists classes-dex) (deserialize (.toString classes-dex)) '())]
+        (load-android-app app-name f maybe-refs)))
+  manifest-files))
 
-(defn- possible-action-call-map [apps]
-  "Create map of all action references in decompiled apps to app names that seem to call these actions."
+(defn- possible-call-map [apps]
+  "Create map of all references in decompiled apps to app names that seem to call these actions."
   (reduce 
-    (fn [m app] (reduce 
-                  #(update-in %1 [%2] conj (:name app)) 
-                  m 
-                  (:maybe-refs app)))
+    (fn [m app] 
+      (reduce 
+        #(update-in %1 [%2] conj (:name app)) 
+        m 
+        (:maybe-refs app)))
     {} 
     apps))
 
 (defn- query-references [actions calls-action?-map]
-  (reduce (fn [res action] (assoc res action (get calls-action?-map action #{}))) {} actions))
+  (reduce 
+    (fn [m action] 
+      (assoc m action (get calls-action?-map action #{}))) 
+    {}
+    actions))
 
 (defn find-possible-references [apps]
-  (let [calls-action?-map (possible-action-call-map apps)]
-  (map 
-    (fn [{actions :actions categories :categories services :services :as app}]
+  (let [calls-action?-map (possible-call-map apps)]
+  (pmap 
+    (fn [{actions :actions categories :categories services :services receivers :receivers :as app}]
       (assoc app 
         :action-refs   (query-references actions calls-action?-map)
         :category-refs (query-references categories calls-action?-map)
-        :service-refs  (query-references services calls-action?-map)))
+        :service-refs  (query-references services calls-action?-map)
+        :receiver-refs (query-references receivers calls-action?-map)))
     apps)))
 
  (defn valid-action? [s]
   (< 1 (count (filter #(= % \.)  s))))
  
  
- (defn- filter-references [ref-map name-app-map k]
+ (defn- filter-references [ref-map name-app-map component-type]
   "Retain only apps that call an intent that is not defined within their own
    manifest.xml."
   (remove-empty-values
     (into {}
     (for [[action apps-calling-action] ref-map]
-      (let [filtered-refs (remove #(contains? (get-in name-app-map  [% k]) action) apps-calling-action)]
+      (let [filtered-refs (remove #(contains? (get-in name-app-map  [% component-type]) action) apps-calling-action)]
         [action filtered-refs])))))
 
  (defn- name-app-map [apps]
@@ -354,11 +122,14 @@ in loading android apps without duplicates (same package, lower versions)."
   "Retain only apps that call an intent that is not defined within their own
    manifest.xml."
   (let [name-app-map (name-app-map apps)]
-    (for [{arefs :action-refs crefs :category-refs srefs :service-refs :as app} apps]
-      (assoc app 
-        :action-refs   (filter-references arefs name-app-map :actions)
-        :category-refs (filter-references crefs name-app-map :categories)
-        :service-refs  (filter-references srefs name-app-map :services)))))
+    (pmap
+      (fn [{arefs :action-refs crefs :category-refs srefs :service-refs rrefs :receiver-refs :as app}]
+        (assoc app 
+          :action-refs   (filter-references arefs name-app-map :actions)
+          :category-refs (filter-references crefs name-app-map :categories)
+          :service-refs  (filter-references srefs name-app-map :services)
+          :receiver-refs (filter-references rrefs name-app-map :receivers)))
+      apps)))
 
 (defn find-app [like]
   ""
@@ -399,7 +170,7 @@ in loading android apps without duplicates (same package, lower versions)."
 
 (defn- trim-maybe-refs [apps]
   "Remove all strings that are no known action name."
-   (let [existing-actions (into #{} (concat (mapcat :actions apps) (mapcat :services apps)))]
+   (let [existing-actions (into #{} (concat (mapcat :actions apps) (mapcat :services apps) (mapcat :categories apps) (mapcat :receivers apps)))]
      (for [{p-a-c :maybe-refs :as app} apps]
        (assoc app :maybe-refs (filter existing-actions p-a-c)))))
 
@@ -407,12 +178,16 @@ in loading android apps without duplicates (same package, lower versions)."
     (def manifest-files (map #(File. %) (deserialize "d:/android/results/manifest-files-20101106.clj")))
 )
 
+
 (comment
   
   (set! *print-length* 15)
   (def app-sources "h:/android")
   (def manifest-files (find-file app-sources #".*AndroidManifest.xml"))
-  (def apps (load-unique-apps-from-disk manifest-files))
+  (def apps (unique-apps (load-apps-from-disk manifest-files)))
+  (def actions 
+      (filter valid-action? 
+        (distinct (mapcat :actions apps))))
   
   ;(serialize (str "d:/android/results/raw-" (date-string) ".clj") (map (partial into {}) apps))
   
@@ -431,3 +206,12 @@ in loading android apps without duplicates (same package, lower versions)."
     (spit "d:/android/results/real-refs-20k.json" (with-out-str (pprint-json r3))))
   )
 
+
+(comment
+  (defn sl [action]
+    (search-lucene "t:\\Downloads\\android\\sdk-lucene" action))
+  )
+
+;; - export flag=true fuer activity ohne intent-filter vorhanden?
+;; - abhaengigkeiten ohne filtern der android-actions durchfuehren, performance analysieren
+;; - 

@@ -25,18 +25,18 @@
         "} [color=" color ",arrowhead=\"diamond\"] ; \n"))))
            
 
-(defn graphviz [real-external-refs]
+(defn graphviz [apps]
   "Render potential android application activitiy references."
   (str 
     "digraph {" \newline
     ;"overlap=\"compress\"" \newline
     ;; app to action strings
-    ;(apply str (interpose " " (get-def-strings real-external-refs :action-refs "green")))
-    ;(apply str (interpose " " (get-def-strings real-external-refs :category-refs "blue")))
-    (apply str (interpose " " (get-def-strings real-external-refs :service-refs "blue")))
+    (apply str (interpose " " (get-def-strings apps :action-refs "green")))
+    (apply str (interpose " " (get-def-strings apps :category-refs "blue")))
+    (apply str (interpose " " (get-def-strings apps :service-refs "chocolate")))
     ;; dependent apps to action strings
-    ;(apply str (interpose " " (get-ref-strings real-external-refs :action-refs "red")))
-    ;(apply str (interpose " " (get-ref-strings real-external-refs :category-refs "chocolate")))
-    (apply str (interpose " " (get-ref-strings real-external-refs :service-refs "chocolate")))
+    (apply str (interpose " " (get-ref-strings apps :action-refs "green")))
+    (apply str (interpose " " (get-ref-strings apps :category-refs "blue")))
+    (apply str (interpose " " (get-ref-strings apps :service-refs "chocolate")))
     "}"))
 

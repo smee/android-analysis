@@ -12,10 +12,11 @@
 
 (defn- index-file [index-writer file]
 ;; TODO add Field for the app name, remove path fiddling code from core
-  (when (.contains (.getCanonicalPath file) "classes.dex")
+  ;(when (.contains (.getCanonicalPath file) "classes.dex")
     (.addDocument index-writer (doto (Document.)
                                  (.add (Field. "path" (.toString file) Field$Store/YES,Field$Index/NOT_ANALYZED))
-                                 (.add (Field. "contents" (FileReader. file)))))))
+                                 (.add (Field. "contents" (FileReader. file))))))
+;)
 
 (defn- index-smali-file [index-writer file]
 ;; TODO add Field for the app name, remove path fiddling code from core
