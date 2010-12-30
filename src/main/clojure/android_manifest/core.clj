@@ -7,7 +7,8 @@
     android-manifest.lucene
     android-manifest.serialization
     android-manifest.util
-    android-manifest.sdk)
+    android-manifest.sdk
+    [clojure.contrib.datalog.util :only (reverse-map)])
   (:require
     [clojure.contrib.zip-filter :as zf]
     [clojure.contrib.zip-filter.xml :as zfx]
@@ -31,8 +32,8 @@ androidmanifest.xml files using zipper traversals."
   ([xml tg] (find-names-of xml tg :action))
   ([xml tg tg2] 
     (into #{} 
-      ;(remove android-specific? 
-        (xml-> xml :application tg :intent-filter tg2 (attr :android:name)))));)
+      (remove android-specific? 
+        (xml-> xml :application tg :intent-filter tg2 (attr :android:name))))))
 
 (defn load-android-app [app-name manifest maybe-refs]
   "Parse android app manifest."
@@ -131,15 +132,19 @@ in loading android apps without duplicates (same package, lower versions)."
           :receiver-refs (filter-references rrefs name-app-map :receivers)))
       apps)))
 
-(defn find-app [like]
-  ""
-  (fn [app] (.contains (:name app) like)))
+
+(defn- trim-maybe-refs [apps]
+  "Remove all strings that are no known action name."
+   (let [existing-actions (into #{} (concat (mapcat :actions apps) (mapcat :services apps) (mapcat :categories apps) (mapcat :receivers apps)))]
+     (for [{p-a-c :maybe-refs :as app} apps]
+       (assoc app :maybe-refs (filter existing-actions p-a-c)))))
 
 
 (defn- print-statistics [apps name def-symbol ref-symbol]
   (let [action-refs           (apply merge (map ref-symbol apps))
         openintent-actions    (filter #(.contains % "openintent") (keys action-refs))
-        no-apps-calling-external-a (count (distinct (apply concat (vals action-refs))))]
+        no-apps-calling-external-a (count (distinct (apply concat (vals action-refs))))
+        call-freq (into (sorted-map-by >) (reverse-map (map-values count action-refs)))]
     
     (println 
       (str name ":\n" (apply str (repeat (count name) "-")))
@@ -148,6 +153,7 @@ in loading android apps without duplicates (same package, lower versions)."
       "\n# apps calling:"       no-apps-calling-external-a
       "\n% of apps relying on intent based relationships: <=" (double (* 100 (/ no-apps-calling-external-a (count apps))))
       "\n# openintents:"           (count openintent-actions) openintent-actions
+      "\ntop freq. called:" (take 5 call-freq)
       "\n")))
 
 (defn print-findings [all-apps manifest-files]
@@ -161,13 +167,14 @@ in loading android apps without duplicates (same package, lower versions)."
   (print-statistics all-apps "Services" :services :service-refs)
   (print-statistics all-apps "Receivers" :receivers :receiver-refs))
 
-
-(defn- trim-maybe-refs [apps]
-  "Remove all strings that are no known action name."
-   (let [existing-actions (into #{} (concat (mapcat :actions apps) (mapcat :services apps) (mapcat :categories apps) (mapcat :receivers apps)))]
-     (for [{p-a-c :maybe-refs :as app} apps]
-       (assoc app :maybe-refs (filter existing-actions p-a-c)))))
-
+(defn sdk-actions [lucene-dir apps ref-key]
+  "Return map of action strings to seq of documentation files that contain this string."
+  (let [action-refs (apply merge (map ref-key apps))
+        action-doc-map (into {}
+                         (for [a (keys action-refs)] 
+                           [a (search-lucene lucene-dir a)]))]
+  (keys 
+    (dissoc (remove-empty-values action-doc-map) 0))))
 
 (comment
   
@@ -186,7 +193,6 @@ in loading android apps without duplicates (same package, lower versions)."
   (def r2 (filter-included-actions r))
   (def r3 (map #(dissoc % :maybe-refs) r2))
   
-  ;(def r4 (foreign-refs-only r3))
   (print-findings r3 manifest-files)
 
   (use 'android-manifest.graphviz :reload)
@@ -196,9 +202,16 @@ in loading android apps without duplicates (same package, lower versions)."
   )
 
 
+
 (comment
-  (defn sl [action]
-    (search-lucene "t:\\Downloads\\android\\sdk-lucene" action))
+  ;; 
+  (def lucene-dir "t:\\Downloads\\android\\sdk-lucene")
+  (def sdk-defined
+    (concat
+      (sdk-actions lucene-dir r3 :action-refs)
+      (sdk-actions lucene-dir r3 :category-refs)
+      (sdk-actions lucene-dir r3 :service-refs)
+      (sdk-actions lucene-dir r3 :receiver-refs)))
   )
 
 ;; - export flag=true fuer activity ohne intent-filter vorhanden?
