@@ -69,7 +69,7 @@ in loading android apps without duplicates (same package, lower versions)."
     (fn [f]
       (let [app-name     (-> f .getParentFile .getName)
             classes-dex  (File. (.getParentFile f) "classes.dex")
-            maybe-refs   (if (file-exists classes-dex) (deserialize (.toString classes-dex)) '())]
+            maybe-refs   (set (if (file-exists classes-dex) (deserialize (.toString classes-dex)) '()))]
         (load-android-app app-name f maybe-refs)))
   manifest-files))
 
@@ -136,47 +136,37 @@ in loading android apps without duplicates (same package, lower versions)."
   (fn [app] (.contains (:name app) like)))
 
 
-(defn print-findings [real-external-refs all-apps manifest-files]
-  (let [openintent-actions    (distinct (filter #(.contains % "openintent") (mapcat #(keys (:action-refs %)) real-external-refs)))
-        openintent-categories (distinct (filter #(.contains % "openintent") (mapcat #(keys (:category-refs %)) real-external-refs)))
-        action-call-freq      (apply merge (flatten
-                                             (for [m (map :action-refs real-external-refs)]
-                                               (for [[k v] m]
-                                                 {k (count v)}))))
-        sorted-freq              (into (sorted-map-by (fn [k1 k2] (compare (get action-call-freq k2) (get action-call-freq k1))))
-                                   action-call-freq)
-        no-defined-actions          (count (distinct (mapcat :actions all-apps)))
-        no-external-actions-offered  (count (distinct (mapcat #(keys (remove-empty-values (:action-refs %))) real-external-refs)))
-        no-external-services-offered (count (distinct (mapcat #(keys (remove-empty-values (:service-refs %))) real-external-refs)))
-        no-apps-calling-external-action  (count (distinct (apply concat (mapcat #(vals (:action-refs %)) real-external-refs))))
-        no-apps-calling-external-service (count (distinct (apply concat (mapcat #(vals (:service-refs %)) real-external-refs))))
-        ]
+(defn- print-statistics [apps name def-symbol ref-symbol]
+  (let [action-refs           (apply merge (map ref-symbol apps))
+        openintent-actions    (filter #(.contains % "openintent") (keys action-refs))
+        no-apps-calling-external-a (count (distinct (apply concat (vals action-refs))))]
+    
+    (println 
+      (str name ":\n" (apply str (repeat (count name) "-")))
+      "\n# of definitions:"      (count (distinct (mapcat def-symbol apps)))
+      "\n# of externally used:"  (count action-refs)    
+      "\n# apps calling:"       no-apps-calling-external-a
+      "\n% of apps relying on intent based relationships: <=" (double (* 100 (/ no-apps-calling-external-a (count apps))))
+      "\n# openintents:"           (count openintent-actions) openintent-actions
+      "\n")))
+
+(defn print-findings [all-apps manifest-files]
   (println 
     "# manifests: "                         (count manifest-files)
     "\n# unique Apps: "                     (count all-apps)
-    "\n# of defined actions: "              no-defined-actions
-    "\n# of externally used actions offered from apps: " no-external-actions-offered    
-    "\n# of externally used services offered from apps: " no-external-services-offered    
-    "\n# apps calling external actions: "   no-apps-calling-external-action    
-    "\n# apps calling external services: "   no-apps-calling-external-service    
-    "\n% of apps relying on intent based relationships: <=" (double (* 100 (/ no-apps-calling-external-action (count all-apps))))
-    "\n# openintents (actions): "           (count openintent-actions) openintent-actions
-    "\n# of categories offered from apps: " (count (distinct (mapcat #(keys (remove-empty-values (:category-refs %))) real-external-refs)))
-    "\n# apps calling foreign categories: " (count (distinct (mapcat #(vals (:category-refs %)) real-external-refs)))
-    "\n# openintents (category): "          (count openintent-categories) openintent-categories
-    "\nMost called actions: "               (take 3 sorted-freq)
-    "\nMin. SDK Versions (version no./count: " (sort (frequencies (map :sdkversion all-apps)))
-    )))
+    ;"\nMost called actions: "               (take 3 sorted-freq)
+    "\nMin. SDK Versions (version no./count: " (sort (frequencies (map :sdkversion all-apps))))
+  (print-statistics all-apps "Actions" :actions :action-refs)
+  (print-statistics all-apps "Categories" :categories :category-refs)
+  (print-statistics all-apps "Services" :services :service-refs)
+  (print-statistics all-apps "Receivers" :receivers :receiver-refs))
+
 
 (defn- trim-maybe-refs [apps]
   "Remove all strings that are no known action name."
    (let [existing-actions (into #{} (concat (mapcat :actions apps) (mapcat :services apps) (mapcat :categories apps) (mapcat :receivers apps)))]
      (for [{p-a-c :maybe-refs :as app} apps]
        (assoc app :maybe-refs (filter existing-actions p-a-c)))))
-
-(comment
-    (def manifest-files (map #(File. %) (deserialize "d:/android/results/manifest-files-20101106.clj")))
-)
 
 
 (comment
@@ -197,8 +187,7 @@ in loading android apps without duplicates (same package, lower versions)."
   (def r3 (map #(dissoc % :maybe-refs) r2))
   
   ;(def r4 (foreign-refs-only r3))
-  (print-findings r3 apps manifest-files)
-  ;(print-findings r3 apps (range 0 24000))
+  (print-findings r3 manifest-files)
 
   (use 'android-manifest.graphviz :reload)
   (spit (str "d:/android/results/refviz-33k-" (date-string) ".dot") (graphviz r3))
