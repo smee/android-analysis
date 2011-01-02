@@ -1,79 +1,79 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <groupId>gsd.android</groupId>
-  <artifactId>AndroidAnalysisTools</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+	<groupId>gsd.android</groupId>
+	<artifactId>AndroidAnalysisTools</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	<scala.version>2.7.7</scala.version>
-  </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<scala.version>2.7.7</scala.version>
+	</properties>
 
-    <repositories>
-        <repository>
-            <id>scala-tools</id>
-            <name>Scala Tools Repository</name>
-            <url>http://www.scala-tools.org/repo-releases/</url>
-        </repository>
-	    <repository>
-	      <id>clojure</id>
-	      <url>http://build.clojure.org/releases</url>
-	    </repository>
-	    <repository>
-	      <id>clojure-snapshots</id>
-	      <url>http://build.clojure.org/snapshots</url>
-	    </repository>
-	    <repository>
-	      <id>clojars</id>
-	      <url>http://clojars.org/repo/</url>
-	    </repository>        
-    </repositories>
+	<repositories>
+		<repository>
+			<id>scala-tools</id>
+			<name>Scala Tools Repository</name>
+			<url>http://www.scala-tools.org/repo-releases/</url>
+		</repository>
+		<repository>
+			<id>clojure</id>
+			<url>http://build.clojure.org/releases</url>
+		</repository>
+		<repository>
+			<id>clojure-snapshots</id>
+			<url>http://build.clojure.org/snapshots</url>
+		</repository>
+		<repository>
+			<id>clojars</id>
+			<url>http://clojars.org/repo/</url>
+		</repository>
+	</repositories>
 
 	<build>
 		<plugins>
-            <plugin>
-                <groupId>org.scala-tools</groupId>
-                <artifactId>maven-scala-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <goals>
-                        <goal>compile</goal>
-                        </goals>
-                        <phase>compile</phase>
-                    </execution>
+			<plugin>
+				<groupId>org.scala-tools</groupId>
+				<artifactId>maven-scala-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>compile</id>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+						<phase>compile</phase>
+					</execution>
 
-                    <execution>
-                        <id>test-compile</id>
-                        <goals>
-                        <goal>testCompile</goal>
-                        </goals>
-                        <phase>test-compile</phase>
-                    </execution>
+					<execution>
+						<id>test-compile</id>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+						<phase>test-compile</phase>
+					</execution>
 
-                    <execution>
-                        <phase>process-resources</phase>
-                        <goals>
-                        <goal>compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
+					<execution>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
 
-                <configuration>
-                    <scalaVersion>${scala.version}</scalaVersion>
-                    <jvmArgs>
-                        <jvmArg>-Xmx1400m</jvmArg>
-                        <jvmArg>-Xss10m</jvmArg>
-                    </jvmArgs>
-                    <args>
-                        <arg>-target:jvm-1.5</arg>
-                    </args>
-                </configuration>
-                
-            </plugin>
+				<configuration>
+					<scalaVersion>${scala.version}</scalaVersion>
+					<jvmArgs>
+						<jvmArg>-Xmx1400m</jvmArg>
+						<jvmArg>-Xss10m</jvmArg>
+					</jvmArgs>
+					<args>
+						<arg>-target:jvm-1.5</arg>
+					</args>
+				</configuration>
+
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -83,108 +83,134 @@
 				</configuration>
 			</plugin>
 			<plugin>
-                <groupId>com.theoryinpractise</groupId>
-                <artifactId>clojure-maven-plugin</artifactId>
-                <version>1.3.3</version>
-                <extensions>true</extensions>
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-			
+				<groupId>com.theoryinpractise</groupId>
+				<artifactId>clojure-maven-plugin</artifactId>
+				<version>1.3.3</version>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<id>compile</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
-	</build> 
-	
-  <dependencies>
-          <!-- scala dependencies starting here -->
-        <dependency>
-          <groupId>org.scala-lang</groupId>
-          <artifactId>scala-library</artifactId>
-          <version>${scala.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>org.scalatest</groupId>
-          <artifactId>scalatest</artifactId>
-          <version>1.0.1</version>
-          <scope>test</scope>
-        </dependency>
-        <dependency>
-          <groupId>org.scalacheck</groupId>
-          <artifactId>scalacheck</artifactId>
-          <version>1.5</version>
-          <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.googlecode</groupId>
-            <artifactId>kiama</artifactId>
-            <version>0.9.0</version>
-        </dependency>
-        <dependency>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-api</artifactId>
-          <version>1.5.8</version>
-          <type>jar</type>
-          <scope>compile</scope>
-        </dependency>
-        <dependency>
+	</build>
+
+	<dependencies>
+		<!-- scala dependencies starting here -->
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>${scala.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.scalatest</groupId>
+			<artifactId>scalatest</artifactId>
+			<version>1.0.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.scalacheck</groupId>
+			<artifactId>scalacheck</artifactId>
+			<version>1.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode</groupId>
+			<artifactId>kiama</artifactId>
+			<version>0.9.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.5.8</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>0.9.15</version>
 			<type>jar</type>
 			<scope>compile</scope>
-        </dependency>
-        <!-- clojure dependencies starting here -->
-	    <dependency>
-	      <groupId>org.clojure</groupId>
-	      <artifactId>clojure</artifactId>
-	      <version>1.2.0</version>
-	    </dependency>
-	    <dependency>
-	      <groupId>org.clojure</groupId>
-	      <artifactId>clojure-contrib</artifactId>
-	      <version>1.2.0</version>
-	    </dependency>
-	    <dependency>
-	      <groupId>org.apache.lucene</groupId>
-	      <artifactId>lucene-core</artifactId>
-	      <version>3.0.2</version>
-	    </dependency>
-	    <!-- Android market interaction -->        
-	    <dependency>
-	      <groupId>com.gc.android</groupId>
-	      <artifactId>androidmarketapi</artifactId>
-	      <version>0.3</version>
-	      <scope>system</scope>
-	      <systemPath>${basedir}/src/main/etc/androidmarketapi-fixed-1.0-SNAPSHOT.jar</systemPath>
-	    </dependency>        
-	    <dependency>
-	    	<groupId>com.google.protobuf</groupId>
-	    	<artifactId>protobuf-java</artifactId>
-	    	<version>2.3.0</version>
-	    	<type>jar</type>
-	    	<scope>compile</scope>
-	    </dependency>
-	    <!-- android app decompilation -->
-<!--        
-	    <dependency>
-	      <groupId>unknown</groupId>
-	      <artifactId>axml</artifactId>
-	      <version>1.0</version>
-	      <scope>system</scope>
-	      <systemPath>${basedir}/src/main/etc/axml-1.0.jar</systemPath>
-	    </dependency>        
-	    --><dependency>
-	      <groupId>unknown</groupId>
-	      <artifactId>apktool</artifactId>
-	      <version>1.0</version>
-	      <scope>system</scope>
-	      <systemPath>${basedir}/src/main/etc/apktool.jar</systemPath>
-	    </dependency>        
-  </dependencies>
+		</dependency>
+		<!-- clojure dependencies starting here -->
+		<dependency>
+			<groupId>org.clojure</groupId>
+			<artifactId>clojure</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.clojure</groupId>
+			<artifactId>clojure-contrib</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-core</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+		<!-- Android market interaction -->
+		<dependency>
+			<groupId>com.gc.android</groupId>
+			<artifactId>androidmarketapi</artifactId>
+			<version>0.3</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/etc/androidmarketapi-fixed-1.0-SNAPSHOT.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+			<version>2.3.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<!-- android app decompilation -->
+		<!--
+			<dependency> <groupId>unknown</groupId> <artifactId>axml</artifactId>
+			<version>1.0</version> <scope>system</scope>
+			<systemPath>${basedir}/src/main/etc/axml-1.0.jar</systemPath>
+			</dependency>
+		-->
+		<dependency>
+			<groupId>unknown</groupId>
+			<artifactId>apktool</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/etc/apktool.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>unknown</groupId>
+			<artifactId>dex2jar</artifactId>
+			<version>0.7.7</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/etc/dex2jar-0.0.7.7-SNAPSHOT.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.5.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.5.6</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm-debug-all</artifactId>
+			<version>3.2</version>
+		</dependency>
+	</dependencies>
 </project>

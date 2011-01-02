@@ -39,7 +39,7 @@
                (pmap
                  #(ignore-exceptions 
                     (process-app main-dir-f outp-dir-f file-in-app process-fn %))
-                 (filter #(.isFile %) (file-seq main-dir-f)))))))
+                 (filter #(and (.isFile %) (not (.endsWith (.getName %) ".403")) (.contains (.getPath %) "COMMUN")) (file-seq main-dir-f)))))))
 
 (defn decode-binary-xml [instream]
   "Decode android manifest files."
@@ -58,6 +58,21 @@
     outp-dir 
     "AndroidManifest.xml" 
     (fn [byte-arr] (decode-binary-xml (ByteArrayInputStream. byte-arr)))))
+
+(defn convert-dex-2-jar [byte-arr]
+  (let [tempfile (java.io.File/createTempFile "dex" "jar")]
+    (do
+      (pxb.android.dex2jar.v3.Main/doData byte-arr tempfile)
+      (let [result (to-byte-array tempfile)]
+        (.delete tempfile)
+        result))))
+
+(defn dex2jar [main-dir outp-dir]
+  (extract-and-convert 
+    main-dir 
+    outp-dir 
+    "classes.dex" 
+    (fn [byte-arr] (convert-dex-2-jar byte-arr))))
 
 
 
@@ -83,9 +98,6 @@
     distinct
     (map (partial apply str))))
 
-(defn possible-android-identifiers-unrolled [contents]
-  "Handmade loop instead of sequence abstractions only, should help perfomance in this special case."
-  (loop [result #{} ]))
 
 (defn extract-smali [main-dir outp-dir]
   (extract-and-convert 
@@ -94,13 +106,13 @@
     "classes.dex"                       
     (fn [byte-arr] (prn-str (possible-android-identifiers (String. byte-arr))))))
 
-(defn 
 (comment
   
   (possible-android-identifiers (String. (to-byte-array (java.io.File. "h:/classes.dex"))))
   
   (println "new manifests: " (extract-android-manifests "D:\\android\\apps\\original" "h:/android"))
   (println "new classes.dex: " (extract-smali "D:\\android\\apps\\original\\" "h:/android"))
+  (println "dex2jar: " (dex2jar "D:\\android\\apps\\original\\" "d:/android//apps/jars"))
   
   (def contents (to-byte-array (java.io.File. "h:/classes.dex")))
   

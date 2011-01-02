@@ -32,8 +32,8 @@ androidmanifest.xml files using zipper traversals."
   ([xml tg] (find-names-of xml tg :action))
   ([xml tg tg2] 
     (into #{} 
-      (remove android-specific? 
-        (xml-> xml :application tg :intent-filter tg2 (attr :android:name))))))
+      ;(remove android-specific? 
+        (xml-> xml :application tg :intent-filter tg2 (attr :android:name)))));)
 
 (defn load-android-app [app-name manifest maybe-refs]
   "Parse android app manifest."
@@ -141,8 +141,9 @@ in loading android apps without duplicates (same package, lower versions)."
 
 
 (defn- print-statistics [apps name def-symbol ref-symbol]
-  (let [action-refs           (apply merge (map ref-symbol apps))
-        openintent-actions    (filter #(.contains % "openintent") (keys action-refs))
+  (let [no-action-defining-apps (count (remove empty? (map ref-symbol apps)))
+        action-refs             (apply merge (map ref-symbol apps))
+        openintent-actions      (filter #(.contains % "openintent") (keys action-refs))
         no-apps-calling-external-a (count (distinct (apply concat (vals action-refs))))
         call-freq (into (sorted-map-by >) (reverse-map (map-values count action-refs)))]
     
@@ -150,6 +151,7 @@ in loading android apps without duplicates (same package, lower versions)."
       (str name ":\n" (apply str (repeat (count name) "-")))
       "\n# of definitions:"      (count (distinct (mapcat def-symbol apps)))
       "\n# of externally used:"  (count action-refs)    
+      "\n# apps defining:"      no-action-defining-apps
       "\n# apps calling:"       no-apps-calling-external-a
       "\n% of apps relying on intent based relationships: <=" (double (* 100 (/ no-apps-calling-external-a (count apps))))
       "\n# openintents:"           (count openintent-actions) openintent-actions
@@ -166,6 +168,7 @@ in loading android apps without duplicates (same package, lower versions)."
   (print-statistics all-apps "Categories" :categories :category-refs)
   (print-statistics all-apps "Services" :services :service-refs)
   (print-statistics all-apps "Receivers" :receivers :receiver-refs))
+
 
 (defn sdk-actions [lucene-dir apps ref-key]
   "Return map of action strings to seq of documentation files that contain this string."
