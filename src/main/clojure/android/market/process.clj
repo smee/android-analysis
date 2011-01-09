@@ -39,7 +39,7 @@
                (pmap
                  #(ignore-exceptions 
                     (process-app main-dir-f outp-dir-f file-in-app process-fn %))
-                 (filter #(and (.isFile %) (not (.endsWith (.getName %) ".403")) (.contains (.getPath %) "COMMUN")) (file-seq main-dir-f)))))))
+                 (filter #(and (.isFile %) (not (.endsWith (.getName %) ".403")) #_(.contains (.getPath %) "COMMUN")) (file-seq main-dir-f)))))))
 
 (defn decode-binary-xml [instream]
   "Decode android manifest files."

@@ -187,9 +187,9 @@
 		<dependency>
 			<groupId>unknown</groupId>
 			<artifactId>dex2jar</artifactId>
-			<version>0.7.7</version>
+			<version>0.7.8</version>
 			<scope>system</scope>
-			<systemPath>${basedir}/src/main/etc/dex2jar-0.0.7.7-SNAPSHOT.jar</systemPath>
+d			<systemPath>${basedir}/src/main/etc/dex2jar-0.0.7.8-SNAPSHOT.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
