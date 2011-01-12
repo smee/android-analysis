@@ -53,6 +53,9 @@
 
 
 (defn extract-android-manifests [main-dir outp-dir]
+  "Extract and decrypt all AndroidManifest.xml files from all android apps
+found in main-dir and copy the results into a mirrored folder hierarchy at
+outp-dir."
   (extract-and-convert 
     main-dir 
     outp-dir 
@@ -60,6 +63,7 @@
     (fn [byte-arr] (decode-binary-xml (ByteArrayInputStream. byte-arr)))))
 
 (defn convert-dex-2-jar [byte-arr]
+  "Convert classes.dex to java bytecode using dex2jar"
   (let [tempfile (java.io.File/createTempFile "dex" "jar")]
     (do
       (pxb.android.dex2jar.v3.Main/doData byte-arr tempfile)
@@ -68,6 +72,8 @@
         result))))
 
 (defn dex2jar [main-dir outp-dir]
+  "Extract dalvik bytecode (classes.dex) from android apps and convert
+them to java bytecode."
   (extract-and-convert 
     main-dir 
     outp-dir 
@@ -99,20 +105,25 @@
     (map (partial apply str))))
 
 
-(defn extract-smali [main-dir outp-dir]
+(defn extract-bytecode-strings [main-dir outp-dir]
   (extract-and-convert 
     main-dir 
     outp-dir 
     "classes.dex"                       
     (fn [byte-arr] (prn-str (possible-android-identifiers (String. byte-arr))))))
 
+(defn find-intents [app-file]
+  (read-string (analyze.AnalyzeAndroidApps/findIntents (file app-file))))
+
 (comment
   
   (possible-android-identifiers (String. (to-byte-array (java.io.File. "h:/classes.dex"))))
   
   (println "new manifests: " (extract-android-manifests "D:\\android\\apps\\original" "h:/android"))
-  (println "new classes.dex: " (extract-smali "D:\\android\\apps\\original\\" "h:/android"))
+  (println "new classes.dex: " (extract-bytecode-strings "D:\\android\\apps\\original\\" "h:/android"))
   (println "dex2jar: " (dex2jar "D:\\android\\apps\\original\\" "d:/android//apps/jars"))
+  
+  (find-intents "D:\\android\\jars\\PRODUCTIVITY\\-1084558843411678631\\classes.dex")
   
   (def contents (to-byte-array (java.io.File. "h:/classes.dex")))
   
@@ -122,3 +133,4 @@
         (spit f (vec (possible-android-identifiers s))))))
 
   )
+

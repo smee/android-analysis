@@ -150,7 +150,7 @@
 
   
   (def request (create-apps-request {:query "NihongoUp" :view-type Market$AppsRequest$ViewType/FREE}))
-  (fetch-app-infos {:query "Open"} api)
+  (count (fetch-app-infos {:query "a" :start-idx 600} api))
   (def authtoken (.getAuthSubToken session))
 
   (fetch-all-newest-apps "marketcredentials4.properties")
