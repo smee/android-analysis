@@ -7,18 +7,13 @@
     [clojure.java.io :only (file make-parents)]
     [clojure.contrib.io :only (copy to-byte-array)])
   (:import
-    [java.io File ByteArrayInputStream]
-    [java.util.zip ZipInputStream ZipEntry ZipFile]))
+    [java.io File ByteArrayInputStream])
+  (:require
+    [android.market.archive :as archive]))
 
 (defn extract-relative-path [^File dir ^File file]
   (-> dir .toURI (.relativize (.toURI file)) .getPath))
 
-(defn extract-zipentry
-  "Extract file from zip, returns byte[]."
-  [zipfile filename]
-  (with-open [zf (ZipFile. zipfile)]
-    (if-let [entry (.getEntry zf filename)]
-      (to-byte-array (.getInputStream zf entry)))))
 
 (defn- process-app [main-dir-f outp-dir-f filename process-fn zip-file]
   (let [rel-path (extract-relative-path main-dir-f zip-file)
@@ -27,7 +22,7 @@
       (when (not (.exists outfile))
         (do 
           (println "processing" filename "in" zip-file)
-          (if-let [contents (extract-zipentry zip-file filename)]
+          (if-let [contents (archive/extract-zipentry zip-file filename)]
             (copy 
               (process-fn contents) 
               outfile)
@@ -127,7 +122,7 @@ Uses static analysis via the findbugs infrastructure."
         (make-parents outfile)
         (when (not (.exists outfile))
           (do 
-            (println "processing" f)
+            (println "processing" f "into" outfile)
             (serialize outfile (find-intents f))))))))
 
 (comment
@@ -137,7 +132,7 @@ Uses static analysis via the findbugs infrastructure."
   (println "new manifests: " (extract-android-manifests "D:\\android\\apps\\original" "h:/android"))
   (println "new classes.dex: " (extract-bytecode-strings "D:\\android\\apps\\original\\" "h:/android"))
   (println "dex2jar: " (dex2jar "D:\\android\\apps\\original\\" "d:/android//apps/jars"))
-  (println "find intents: "  (extract-intents "D:\\android\\jars" "d:/android/intents"))
+  (println "find intents: "  (extract-intents "D:\\android\\jars" "d:/android/jars"))
   
   (serialize "d:/temp/foo" (find-intents (file "D:\\android\\jars\\ARCADE\\-1007597263548681988\\classes.dex")))
   
