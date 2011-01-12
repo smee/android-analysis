@@ -1,5 +1,6 @@
 (ns android-manifest.util
-  (:use [clojure.stacktrace :only (root-cause)]))
+  (:use [clojure.stacktrace :only (root-cause)]
+        [clojure.java.io :only (file)]))
 
 (defn map-values [f m]
   "Change all map values by applying f to each one."
@@ -55,7 +56,7 @@
 (defn find-file [dirpath pattern]
   "Traverse directory dirpath depth first, return all files matching
 the regular expression pattern"
-  (for [file (-> dirpath java.io.File. file-seq) 
+  (for [file (-> dirpath file file-seq) 
         :when (re-matches pattern (.getName file))]
     file))
 
