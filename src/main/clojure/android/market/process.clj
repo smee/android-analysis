@@ -118,12 +118,15 @@ Uses static analysis via the findbugs infrastructure."
           jar-files (find-file main-dir-f #".*classes.dex")]
     (doseq [f jar-files]
       (let [rel-path (extract-relative-path main-dir-f (.getParentFile f))
-            outfile  (file outp-dir rel-path "intents.clj")]
+            outfile  (file outp-dir rel-path "intents.clj")
+            lockfile (file outp-dir rel-path ".lock")]
         (make-parents outfile)
-        (when (not (.exists outfile))
+        (when (and (not (.exists outfile)) (not (.exists lockfile)))
           (do 
+            (.createNewFile lockfile)
             (println "processing" f "into" outfile)
-            (serialize outfile (find-intents f))))))))
+            (serialize outfile (find-intents f))
+            (.delete lockfile)))))))
 
 (comment
   
@@ -132,7 +135,7 @@ Uses static analysis via the findbugs infrastructure."
   (println "new manifests: " (extract-android-manifests "D:\\android\\apps\\original" "h:/android"))
   (println "new classes.dex: " (extract-bytecode-strings "D:\\android\\apps\\original\\" "h:/android"))
   (println "dex2jar: " (dex2jar "D:\\android\\apps\\original\\" "d:/android//apps/jars"))
-  (println "find intents: "  (extract-intents "D:\\android\\jars" "d:/android/jars"))
+  (println "find intents: " (extract-intents "D:\\android\\jars" "d:/android/jars"))
   
   (serialize "d:/temp/foo" (find-intents (file "D:\\android\\jars\\ARCADE\\-1007597263548681988\\classes.dex")))
   
