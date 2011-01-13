@@ -19,7 +19,7 @@
             (prn obj))))))
 
 
-(defn deserialize [file]
+(defn deserialize [f]
   "Read clojure datastructure from file."
-  (with-open [r (PushbackReader. (FileReader. (file file)))]
+  (with-open [r (PushbackReader. (FileReader. (file f)))]
     (read r)))
