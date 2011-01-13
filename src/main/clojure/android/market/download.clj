@@ -5,9 +5,9 @@
     com.gc.android.market.api.MarketSession)
   (:use 
     android-manifest.serialization
-    [android-manifest.util :only (ignore-exceptions sleep-random)]
+    [android-manifest.util :only (ignore-exceptions sleep-random date-string)]
     [android.market.leech :as ml]
-    [clojure.contrib.io :only (as-file)]
+    [clojure.contrib.io :only (file make-parents)]
     [clojure.contrib.duck-streams :only (copy)]
     [clojure.contrib.java-utils :only (read-properties)]
     ))
@@ -28,15 +28,17 @@
                    "?assetId=" (url-encode assetid)
                    "&userId="   (url-encode userid)
                    "&deviceId=" (url-encode deviceid))
-        url      (URL. (str "http://android.clients.google.com/market/download/Download" request))]
+        url      (URL. (str "http://android.clients.google.com/market/download/Download" request))
+        out-file (file filename)]
     (try
+      (make-parents out-file)
       (copy (.getInputStream (doto (.openConnection url)
                                (.setRequestMethod "GET")
                                (.setRequestProperty "User-Agent" "Android-Market/2")
                                (.setRequestProperty "cookie" cookie))) 
-        (as-file filename))
+        out-file)
       (catch java.io.IOException e
-        (.createNewFile (as-file (str filename ".403")))))))
+        (.createNewFile (file (str filename ".403")))))))
 
 (defn download-app-secure [assetid authtoken userid deviceid filename]
   "Download app from the official google market."
@@ -52,9 +54,9 @@
                                (.setRequestMethod "GET")
                                (.setRequestProperty "User-Agent" "Android-Market/2")
                                (.setRequestProperty "cookie" cookie))) 
-        (as-file filename))
+        (file filename))
       (catch java.io.IOException e
-        (.createNewFile (as-file (str filename ".403")))))))
+        (.createNewFile (file (str filename ".403")))))))
 
 
 (defn get-auth-token [credentials]
@@ -66,8 +68,8 @@
     (.getAuthSubToken session)))
 
 (defn- downloaded? [f]
-  (let [f (as-file f)]
-    (or (.exists f) (.exists (as-file (str (.toString f) ".403"))))))
+  (let [f (file f)]
+    (or (.exists f) (.exists (file (str (.toString f) ".403"))))))
 
 (defn leech-apps [app credentials output-dir]
   "Download all android applications described in apps into output-dir
@@ -86,16 +88,16 @@
         (download-app app-id authtoken userid deviceid output-file)))))
                   
 
-(defn load-apps-metadata [category]
-  (flatten (deserialize (str *path* "/apps-" category))))
+(defn load-apps-metadata [dir category]
+  (flatten (deserialize (file dir (str "/apps-" category)))))
 
 
-(defn download-all-apps [& credentials-files]
+(defn download-all-apps [input-dir output-dir & credentials-files]
   (let [properties        (map #(into {} (read-properties %)) credentials-files)
         avail-credentials (map #(assoc % "authtoken" (get-auth-token %)) properties)]
     (doseq [category ml/all-known-categories]
-      (let [apps (load-apps-metadata category)
-            output-dir (str *path* "/" category)]
+      (let [apps (load-apps-metadata input-dir category)
+            output-dir (file output-dir category)]
         (printf "got %d apps to download into %s \n" (count apps) output-dir)
         (doall
           (map #(leech-apps %1 %2 output-dir) apps (cycle avail-credentials)))))))
@@ -104,7 +106,7 @@
   #_(printf "%s %s %s\n" %1 %2 output-dir)
   #_(leech-apps %1 %2 output-dir)
   (set! *print-length* 10)
- (download-all-apps "marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties" "marketcredentials4.properties")
+ (download-all-apps (file "results/market-apps" (date-string)) "d:/android/orig" "marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties" "marketcredentials4.properties")
  
  
  (let [c (read-properties "marketcredentials4.properties")
