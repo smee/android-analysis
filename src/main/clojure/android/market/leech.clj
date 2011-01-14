@@ -157,9 +157,9 @@ for as long as there are more than 0 results per request."
 (defn fetch-all-apps-author
   "Download metadata of all android apps of one author."
   [author credentials]
-  (fetch-all-apps {:app-type nil :query (str "pub:" author)} credentials))
+  (fetch-all-apps {:app-type nil :query (str "pub:" author) :order-type nil} credentials))
 
-(defn batch-download-newest [output-dir & cred-files]
+(defn batch-download-newest [& cred-files]
   (let [date (date-string)
         dir  (file (str "results/market-apps/" date))]
     (.mkdirs dir)
@@ -175,13 +175,13 @@ for as long as there are more than 0 results per request."
   (let [authors (->> input-dir file file-seq (filter #(.isFile %)) (mapcat deserialize) (map :creatorId) distinct)]
       authors))
 
-(defn leech-apps-per-author [apps-metadata-dir credentials]
+(defn leech-apps-per-author [apps-metadata-dir & credentials]
   (let [authors (load-authors apps-metadata-dir)]  
-    (mapcat #(fetch-all-apps-author % credentials) authors)))
+    (mapcat #(fetch-all-apps-author %1 %2) authors (cycle credentials))))
 
 (comment
-  
-  (def credentials (read-properties "marketcredentials4.properties"))
+  (def cred-files ["marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties" "marketcredentials4.properties"])
+  (def credentials (read-properties (first cred-files)))
   (def api (create-market-api credentials))
   
   (def input-dir "results/market-apps/20110113")
@@ -192,7 +192,6 @@ for as long as there are more than 0 results per request."
   (count (fetch-app-infos {:query "a" :start-idx 600} api))
   (def authtoken (.getAuthSubToken session))
 
-  (fetch-all-newest-apps "marketcredentials4.properties")
-  (fetch-all-newest-apps "marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties" "marketcredentials4.properties")
+  (apply batch-download-newest cred-files)
   
 )

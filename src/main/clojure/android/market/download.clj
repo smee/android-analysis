@@ -106,7 +106,10 @@
   #_(printf "%s %s %s\n" %1 %2 output-dir)
   #_(leech-apps %1 %2 output-dir)
   (set! *print-length* 10)
- (download-all-apps (file "results/market-apps" (date-string)) "d:/android/orig" "marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties" "marketcredentials4.properties")
+ (download-all-apps 
+   (file "results/market-apps" (date-string)) 
+   "d:/android/orig" 
+   "marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties" "marketcredentials4.properties")
  
  
  (let [c (read-properties "marketcredentials4.properties")

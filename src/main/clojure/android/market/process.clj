@@ -135,7 +135,9 @@ Uses static analysis via the findbugs infrastructure."
   (println "new manifests: " (extract-android-manifests "D:\\android\\apps\\original" "h:/android"))
   (println "new classes.dex: " (extract-bytecode-strings "D:\\android\\apps\\original\\" "h:/android"))
   (println "dex2jar: " (dex2jar "D:\\android\\apps\\original\\" "d:/android//apps/jars"))
-  (println "find intents: " (extract-intents "D:\\android\\jars" "d:/android/jars"))
+  (do
+    (println "find intents: " 
+      (extract-intents "D:\\android\\jars" "d:/android/jars")))
   
   (serialize "d:/temp/foo" (find-intents (file "D:\\android\\jars\\ARCADE\\-1007597263548681988\\classes.dex")))
   
