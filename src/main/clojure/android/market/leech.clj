@@ -1,7 +1,7 @@
 (ns android.market.leech
   (:use 
     [clojure.contrib.java-utils :only (read-properties)]
-    [clojure.contrib.io :only (as-file)]
+    [clojure.contrib.io :only (file)]
     [clojure.stacktrace :only (root-cause)]
     [clojure.string :only (join)]
     android-manifest.serialization
@@ -13,9 +13,6 @@
      Market$AppType 
      Market$AppsRequest 
      Market$AppsResponse 
-     Market$CategoriesRequest
-     Market$CategoriesResponse 
-     Market$Category 
      Market$ResponseContext 
      Market$AppsRequest$ViewType
      Market$AppsRequest$OrderType
@@ -92,14 +89,17 @@
     (.build b))))
 
 
-(defn create-apps-request [{:keys [query app-type view-type order-type category start-idx entries-count extended?], 
-                           :or {query nil,app-type nil #_Market$AppType/APPLICATION, view-type Market$AppsRequest$ViewType/FREE, 
-                                order-type Market$AppsRequest$OrderType/NEWEST, category nil, start-idx 0, entries-count 10, extended? true}}]
-  "Use a map to specify an arbitrary subset of market request parameters."
+(defn- create-apps-request 
+    "Use a map to specify an arbitrary subset of market request parameters."
+  [{:keys [query app-type view-type order-type category start-idx entries-count extended?], 
+    :or {query nil,app-type nil #_Market$AppType/APPLICATION, view-type Market$AppsRequest$ViewType/FREE, 
+         order-type Market$AppsRequest$OrderType/NEWEST, category nil, start-idx 0, entries-count 10, extended? true}}]
   (apps-request query app-type view-type order-type category start-idx entries-count extended?))
 
 
-(defn- extract-app-infos [app]
+(defn- extract-app-infos 
+  "Create map of relevant bean properties of one android app."
+  [app]
   (let [m           (bean app)
         app-type    (.name (.getAppType app))
         ex          (bean (.getExtendedInfo app))
@@ -111,7 +111,7 @@
         :timestamp (System/currentTimeMillis))
       :extendedInfo :allFields :descriptorForType :defaultInstanceForType :unknownFields :serializedSize :promoText :class)))
 
-(defn create-market-api [credentials]
+(defn- create-market-api [credentials]
   (let [user (get credentials "username")
         pw   (get credentials "password")]
     (doto (AndroidMarketApi. user pw true)
@@ -119,56 +119,75 @@
       (.fakeGermanCarrier))))
 
 
-(defn fetch-app-infos [m market-api]
+(defn- fetch-app-infos [m market-api]
   (map extract-app-infos 
     (.executeRequest market-api (create-apps-request m))))
   
 
-(defn create-metadata-fetcher [api queries] 
+(defn create-metadata-fetcher 
+"Create a lazy sequence of android app metadata by calling to the remote api
+for as long as there are more than 0 results per request."
+  [api queries] 
   (lazy-seq
     (if-let [q (first queries)]
-      (let [apps (fetch-app-infos q api)]
+      (let [apps (->> api (fetch-app-infos q) (filter map?))]
         (when (not-empty apps)
           (cons apps (create-metadata-fetcher api (rest queries))))))))
 
-(defn fetch-all-apps [query-template-map credentials]
-  (let [api (create-market-api credentials)
-        queries (map #(assoc query-template-map :start-idx (* % 10) :entries-count 10) (range 0 80))]
-    (filter map?
-      (flatten
-        (create-metadata-fetcher api queries)))))
+(defn- create-queries 
+  "Sequence of api queries 0..800"
+  [template]
+  (map #(assoc template 
+          :start-idx (* % 10) 
+          :entries-count 10) 
+    (range 0 80)))
+
+(defn fetch-all-apps 
+  "Download metadata of all android apps matching the query."
+  [query-template-map credentials]
+  (let [api     (create-market-api credentials)
+        queries (create-queries query-template-map)]
+    (create-metadata-fetcher api queries)))
   
-(defn fetch-all-newest-apps [ & cred-files]
+(defn fetch-all-newest-apps-category 
+  "Download metadata of all the newest android apps for a category."
+  [category credentials]
+  (fetch-all-apps {:category category :app-type nil :order-type Market$AppsRequest$OrderType/NEWEST} credentials))
+
+(defn fetch-all-apps-author
+  "Download metadata of all android apps of one author."
+  [author credentials]
+  (fetch-all-apps {:app-type nil :query (str "pub:" author)} credentials))
+
+(defn batch-download-newest [output-dir & cred-files]
   (let [date (date-string)
-        dir (str "results/market-apps/" date)]
-    (.mkdirs (java.io.File. dir))
+        dir  (file (str "results/market-apps/" date))]
+    (.mkdirs dir)
     (dorun 
       (pmap 
         (fn [cat cred]
-          (serialize (str dir "/apps-" cat) (fetch-all-apps {:category cat :app-type nil :order-type Market$AppsRequest$OrderType/NEWEST} cred)))
+          (serialize (str dir "/apps-" cat) 
+            (fetch-all-newest-apps-category cat cred)))
         all-known-categories
-        (cycle (map read-properties cred-files))))))
-  
+        (cycle (map read-properties cred-files)))))) 
+
 (defn load-authors [input-dir]
-  (let [authors (into #{} (flatten (map #(map :creatorId (deserialize (str input-dir "/apps-" %))) all-known-categories)))]
+  (let [authors (->> input-dir file file-seq (filter #(.isFile %)) (mapcat deserialize) (map :creatorId) distinct)]
       authors))
 
-(defn leech-apps-per-author [api downloaded-apps-dir]
-  (let [authors (load-authors downloaded-apps-dir)
-        downloaded-apps (into #{} (map #(.getName %) (file-seq (as-file downloaded-apps-dir))))]
-    (for [author authors]
-      ;(remove #(contains? downloaded-apps %) 
-      (do (println "fetching all apps of author" author)
-        (fetch-app-infos {:query (str "pub:" author) :app-type nil} api)))))
-;)
+(defn leech-apps-per-author [apps-metadata-dir credentials]
+  (let [authors (load-authors apps-metadata-dir)]  
+    (mapcat #(fetch-all-apps-author % credentials) authors)))
 
-#_(comment
+(comment
   
   (def credentials (read-properties "marketcredentials4.properties"))
   (def api (create-market-api credentials))
   
-
-  
+  (def input-dir "results/market-apps/20110113")
+  (def all-from-authors (leech-apps-per-author input-dir credentials))
+  (take 3 all-from-authors)
+    
   (def request (create-apps-request {:query "NihongoUp" :view-type Market$AppsRequest$ViewType/FREE}))
   (count (fetch-app-infos {:query "a" :start-idx 600} api))
   (def authtoken (.getAuthSubToken session))
