@@ -111,17 +111,27 @@
         :timestamp (System/currentTimeMillis))
       :extendedInfo :allFields :descriptorForType :defaultInstanceForType :unknownFields :serializedSize :promoText :class)))
 
-(defn- create-market-api [credentials]
-  (let [user (get credentials "username")
-        pw   (get credentials "password")]
-    (doto (AndroidMarketApi. user pw true)
-      (.setAndroidId (get credentials "androidid"))
-      (.fakeGermanCarrier))))
+(def api-cache (ref {}))
+
+(defn- create-market-api [cred]
+  (dosync
+    (if-let [api (get @api-cache cred)]
+      api
+      (let [user (get cred "username")
+            pw   (get cred "password")
+            api  (doto (AndroidMarketApi. user pw true)
+                   (.setAndroidId (get cred "androidid"))
+                   (.fakeGermanCarrier))]
+        (alter api-cache assoc cred api)
+        api))))
 
 
 (defn- fetch-app-infos [m market-api]
-  (map extract-app-infos 
-    (.executeRequest market-api (create-apps-request m))))
+  (map extract-app-infos
+    (filter identity
+      (try
+        (.executeRequest market-api (create-apps-request m))
+        (catch Exception e)))))
   
 
 (defn create-metadata-fetcher 
@@ -144,10 +154,10 @@ for as long as there are more than 0 results per request."
 
 (defn fetch-all-apps 
   "Download metadata of all android apps matching the query."
-  [query-template-map credentials]
-  (let [api     (create-market-api credentials)
+  [query-template-map cred]
+  (let [api     (create-market-api cred)
         queries (create-queries query-template-map)]
-    (create-metadata-fetcher api queries)))
+    (flatten (create-metadata-fetcher api queries))))
   
 (defn fetch-all-newest-apps-category 
   "Download metadata of all the newest android apps for a category."
@@ -156,8 +166,8 @@ for as long as there are more than 0 results per request."
 
 (defn fetch-all-apps-author
   "Download metadata of all android apps of one author."
-  [author credentials]
-  (fetch-all-apps {:app-type nil :query (str "pub:" author) :order-type nil} credentials))
+  [author cred]
+  (fetch-all-apps {:app-type nil :query (str "pub:" author) :order-type nil} cred))
 
 (defn batch-download-newest [& cred-files]
   (let [date (date-string)
@@ -175,23 +185,45 @@ for as long as there are more than 0 results per request."
   (let [authors (->> input-dir file file-seq (filter #(.isFile %)) (mapcat deserialize) (map :creatorId) distinct)]
       authors))
 
-(defn leech-apps-per-author [apps-metadata-dir & credentials]
+(defn leech-apps-per-author [apps-metadata-dir credentials]
   (let [authors (load-authors apps-metadata-dir)]  
-    (mapcat #(fetch-all-apps-author %1 %2) authors (cycle credentials))))
+    (pmap #(fetch-all-apps-author %1 %2) authors (cycle credentials))))
 
 (comment
   (def cred-files ["marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties" "marketcredentials4.properties"])
-  (def credentials (read-properties (first cred-files)))
-  (def api (create-market-api credentials))
+  (def credentials (map read-properties cred-files))
   
-  (def input-dir "results/market-apps/20110113")
-  (def all-from-authors (leech-apps-per-author input-dir credentials))
+  (let [input-dir (str "results/market-apps/" #_(date-string))
+        all-from-authors (leech-apps-per-author input-dir credentials)
+        outfile (str "results/author-" (date-string))]
+    (serialize outfile (remove empty? all-from-authors)))
+  
   (take 3 all-from-authors)
-    
   (def request (create-apps-request {:query "NihongoUp" :view-type Market$AppsRequest$ViewType/FREE}))
-  (count (fetch-app-infos {:query "a" :start-idx 600} api))
-  (def authtoken (.getAuthSubToken session))
+  (def api (create-market-api (first credentials)))
+  (count (fetch-app-infos {:query "a" :start-idx 0} api))
 
   (apply batch-download-newest cred-files)
   
+  (def files-to-fix
+    (filter identity
+      (for [f (filter #(.isFile %) (file-seq (file "results/market-apps")))]
+        (with-open [r (java.io.FileReader. (file f))]
+          (when (not= \( (char (.read r)))
+            f)))))
+  (doseq [f files-to-fix]
+    (spit f (str \( (slurp f) \))))
+  
+  (doseq [f (filter #(.isFile %) (file-seq (file "results/market-apps")))] (do (println f) (load-authors f)))
+  (def authors (load-authors "results/market-apps"))
+  (count authors)
+  
+  (with-open [rdr (clojure.java.io/reader "t:/downloads/apps.txt")]
+      (serialize "results/foo"
+        (remove empty?
+          (pmap
+            #(fetch-app-infos {:query (str "pname:" %1) :start-idx 0 :entries-count 1 :view-type nil} %2)
+            (line-seq rdr)
+            (cycle (map create-market-api credentials))))))
+
 )
