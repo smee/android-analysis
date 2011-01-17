@@ -75,10 +75,13 @@ in loading android apps without duplicates (same package, lower versions)."
     (hash-map app-name (deserialize arr))))
 
 (defn intent-call-stats [m]
-  (println "# apps:" (count m))
-  (println "#explicit calls:" (count (filter (comp :explicit? :called) (vals m)))
-  (println "#implicit calls:")
-  (println ""))
+  (let [explicits (filter :explicit? (mapcat :called (vals m)))
+        implicits (remove :explicit? (mapcat :called (vals m)))]
+    (println "# apps:" (count m))
+    (println "#explicit calls:" (count explicits))
+    (println "#implicit calls:" (count implicits))
+    (let [valid-implicit-calls (filter #(and (contains? % :action) (or (contains? % :categories) (contains? % :data))) implicits)]
+      (println "proably valid implicit calls:" (count valid-implicit-calls)))))
 
 (comment
   (def manifest (extract-entry "d:/android/reduced/android-20101127.zip" "android/TOOLS/-1119349709413775354/AndroidManifest.xml"))
@@ -87,5 +90,6 @@ in loading android apps without duplicates (same package, lower versions)."
   
   
     (def x (reduce merge (process-entries "d:/Projekte/Thorsten/waterloo/intents.zip" process-intent-calls #".*clj")))
+    (intent-call-stats x)
   )
 
