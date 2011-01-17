@@ -1,6 +1,6 @@
 (ns android-manifest.serialization
   (:use [clojure.pprint :only [pprint]]
-        [clojure.java.io :only (file)])
+        [clojure.java.io :only (file reader)])
   (:import [java.io File FileWriter FileReader PushbackReader]))
 
 (defn serialize 
@@ -21,5 +21,5 @@
 
 (defn deserialize [f]
   "Read clojure datastructure from file."
-  (with-open [r (PushbackReader. (FileReader. (file f)))]
+  (with-open [r (PushbackReader. (reader f))]
     (read r)))

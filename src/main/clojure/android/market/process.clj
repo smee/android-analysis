@@ -22,7 +22,7 @@
       (when (not (.exists outfile))
         (do 
           (println "processing" filename "in" zip-file)
-          (if-let [contents (archive/extract-zipentry zip-file filename)]
+          (if-let [contents (archive/extract-entry zip-file filename)]
             (copy 
               (process-fn contents) 
               outfile)

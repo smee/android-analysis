@@ -15,8 +15,7 @@
     [clojure.zip :as zip]
     [clojure.xml :as xml])
   (:import 
-    java.io.File
-    [java.util.zip ZipInputStream ZipEntry ZipFile]))
+    java.io.File))
 
 
 (defrecord Android-App [name version package actions categories services receivers sdkversion maybe-refs])
@@ -218,5 +217,4 @@ in loading android apps without duplicates (same package, lower versions)."
   )
 
 ;; - export flag=true fuer activity ohne intent-filter vorhanden?
-;; - abhaengigkeiten ohne filtern der android-actions durchfuehren, performance analysieren
 ;; - 
