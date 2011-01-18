@@ -64,24 +64,69 @@ in loading android apps without duplicates (same package, lower versions)."
     (reverse 
       (sort-by :version apps)))) 
 
+
 (defn find-manifests 
   "Find all AndroidManifest.xml files in any subdirectory of dir."
   [dir]
   (find-file dir #".*AndroidManifest.xml"))
 
-(defn- process-intent-calls [entry-name arr]
+
+(defn- process-intent-calls 
+  "Load intent calling data."
+  [entry-name arr]
   (let [[from to] (take-last 2 (keep-indexed #(when (= \/ %2) %1) entry-name))
         app-name  (subs entry-name (inc from) to)]
     (hash-map app-name (deserialize arr))))
 
-(defn intent-call-stats [m]
-  (let [explicits (filter :explicit? (mapcat :called (vals m)))
-        implicits (remove :explicit? (mapcat :called (vals m)))]
-    (println "# apps:" (count m))
-    (println "#explicit calls:" (count explicits))
-    (println "#implicit calls:" (count implicits))
-    (let [valid-implicit-calls (filter #(and (contains? % :action) (or (contains? % :categories) (contains? % :data))) implicits)]
-      (println "proably valid implicit calls:" (count valid-implicit-calls)))))
+
+(defn called-intents [m]
+  (mapcat :called (vals m)))
+
+
+(defn- x-of [m x]
+  (let [ci (called-intents m)]
+    (->> ci (map x) distinct)))
+
+
+(defn actions-of [m]
+  (x-of m :action))
+
+
+(defn uris-of [m]
+  (x-of m :uri))
+
+
+(defn mimetypes-of [m]
+  (x-of m :mimetype))
+
+
+(defn uri-schemes-of [m]
+  (->> m uris-of (filter (partial some #{\:})) (map #(subs % 0 (.indexOf % ":"))) distinct))
+  
+
+(defn- intent-stats 
+  [intents]
+  (let [explicits (filter :explicit? intents)
+        implicits (remove :explicit? intents)]
+    (println "#explicit intents:" (count explicits))
+    (println "#implicit intents:" (count implicits))
+    (let [valid-implicit-calls (filter #(and (contains? % :action) (or (contains? % :categories) (contains? % :data) (contains? % :uri))) implicits)]
+      (println "implicit intents with action + (category|data|uri):" (count valid-implicit-calls)))))
+
+
+(defn intent-call-stats 
+  "Show some statistics abount intent calling data."
+  [m]
+  (intent-stats (called-intents m)))
+
+
+(defn intent-query-stats 
+  "Show some statistics abount intent querying data."
+  [m]
+  (intent-stats (mapcat :queried (vals m))))
+
+
+
 
 (comment
   (def manifest (extract-entry "d:/android/reduced/android-20101127.zip" "android/TOOLS/-1119349709413775354/AndroidManifest.xml"))
@@ -91,5 +136,6 @@ in loading android apps without duplicates (same package, lower versions)."
   
     (def x (reduce merge (process-entries "d:/Projekte/Thorsten/waterloo/intents.zip" process-intent-calls #".*clj")))
     (intent-call-stats x)
+    (intent-query-stats x)
   )
 
