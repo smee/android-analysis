@@ -2,13 +2,22 @@
   (:use [clojure.stacktrace :only (root-cause)]
         [clojure.java.io :only (file)]))
 
-(defn map-values [f m]
+(defn map-values 
   "Change all map values by applying f to each one."
+  [f m]
   (into {} (for [[k v] m] [k (f v)])))
 
-(defn remove-empty-values [m]
+(defn remove-empty-values 
   "Remove all key-values where value is empty."
+  [m]
   (into {} (for [[k v] m :when (not (empty? v))] [k v])))
+
+(defn sort-by-value
+  "Sort map by values."
+  [my-map]
+  (into 
+    (sorted-map-by (fn [key1 key2] (compare (get my-map key1) (get my-map key2)))) 
+    my-map))
 
 (defn distinct-by
   "Returns a lazy sequence of object with duplicates removed,
@@ -53,9 +62,10 @@
   [sequence n callback]
   (map #(do (if (= (rem %1 n) 0) (callback %1)) %2) (iterate inc 1) sequence))
   
-(defn find-file [dirpath pattern]
+(defn find-file 
   "Traverse directory dirpath depth first, return all files matching
 the regular expression pattern"
+  [dirpath pattern]
   (for [file (-> dirpath file file-seq) 
         :when (re-matches pattern (.getName file))]
     file))
@@ -67,18 +77,23 @@ the regular expression pattern"
   ([date]
     (.format (java.text.SimpleDateFormat. "yyyyMMdd") date)))
 
-(defmacro ignore-exceptions [ & body ]
+(defmacro ignore-exceptions 
   "Catch any exception and print the message of its root cause."
+  [ & body ]
   `(try 
      ~@body
      (catch Exception e# (println (root-cause e#)))))
 
-(defn unchunk [s]
+(defn unchunk 
   "Disable the chunking behaviour introduced in clojure 1.1"
+  [s]
   (when (seq s)
     (lazy-seq
       (cons (first s)
         (unchunk (next s))))))
 
-(defn sleep-random [min max]
+(defn sleep-random 
+  "Sleep for a random amount of milliseconds between [min,max]."
+  [min max]
+  {:pre [(<= min max) (>= min 0)]}
   (Thread/sleep (+ min (.nextInt (java.util.Random.) (- max min)))))
