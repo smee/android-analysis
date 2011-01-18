@@ -1,6 +1,8 @@
 (ns android-manifest.util
   (:use [clojure.stacktrace :only (root-cause)]
-        [clojure.java.io :only (file)]))
+        [clojure.java.io :only (file)])
+  (:require
+    [clojure.string :as cs]))
 
 (defn map-values 
   "Change all map values by applying f to each one."
@@ -13,11 +15,20 @@
   (into {} (for [[k v] m :when (not (empty? v))] [k v])))
 
 (defn sort-by-value
-  "Sort map by values."
-  [my-map]
-  (into 
-    (sorted-map-by (fn [key1 key2] (compare (get my-map key1) (get my-map key2)))) 
-    my-map))
+  "Sort map by values. If two values are equal, sort by keys. Sort order may be 
+:ascending or :descending"
+  ([my-map] (sort-by-value my-map :ascending))
+  ([my-map sort-order]
+    (into 
+      (sorted-map-by (fn [key1 key2] 
+                       (let[val-res (compare (get my-map key1) (get my-map key2))
+                            res (if (zero? val-res)
+                                  (compare key1 key2)
+                                  val-res)]
+                         (if (= :ascending sort-order)
+                           res
+                           (* -1 res))))) 
+      my-map)))
 
 (defn distinct-by
   "Returns a lazy sequence of object with duplicates removed,
@@ -97,3 +108,9 @@ the regular expression pattern"
   [min max]
   {:pre [(<= min max) (>= min 0)]}
   (Thread/sleep (+ min (.nextInt (java.util.Random.) (- max min)))))
+
+(defn print-latex-table [a-map]
+  (letfn [(f [string] (cs/replace string "_" "\\_"))]
+    (str "\\begin{longtable}{lr}" \newline
+      (apply str (for [[k v] a-map] (str (f k) " & " (f v) " \\\\" \newline)))
+      "\\end{longtable}" \newline)))
