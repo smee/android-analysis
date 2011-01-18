@@ -1,4 +1,5 @@
 (ns android.analysis.intent
+  "Functions for inspecting the results of the intent calling static analysis of android apps."
   (:use 
     [clojure.java.io :only (input-stream)]
     android.market.archive
@@ -74,9 +75,6 @@
 
 
 (comment
-  (def manifest (extract-entry "d:/android/reduced/android-20101127.zip" "android/TOOLS/-1119349709413775354/AndroidManifest.xml"))
-  (def x (zip/xml-zip (xml/parse (input-stream manifest))))
-  (identity (xml-> x :application zf/descendants :intent-filter zip/up zip/node #(:tag %)))
   
     (def x (reduce merge (process-entries "d:/Projekte/Thorsten/waterloo/intents.zip" process-intent-calls #".*clj")))
     (def x (deserialize "d:/android/allintents.clj"))

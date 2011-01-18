@@ -138,3 +138,11 @@ in loading android apps without duplicates (same package, lower versions)."
 
 
 
+(comment
+  (def manifest (extract-entry "d:/android/reduced/android-20101127.zip" "android/TOOLS/-1119349709413775354/AndroidManifest.xml"))
+  (def x (zip/xml-zip (xml/parse (input-stream manifest))))
+  (identity (xml-> x :application zf/descendants :intent-filter zip/up zip/node #(:tag %)))
+
+  
+  )
+
