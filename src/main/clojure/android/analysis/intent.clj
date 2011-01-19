@@ -73,7 +73,6 @@
   (intent-stats (queried-intents m)))
 
 
-
 (comment
   
     (def x (reduce merge (process-entries "d:/Projekte/Thorsten/waterloo/intents.zip" process-intent-calls #".*clj")))
@@ -81,4 +80,5 @@
     
     (intent-call-stats x)
     (intent-query-stats x)
+    
   )
