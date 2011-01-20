@@ -108,24 +108,22 @@ in loading android apps without duplicates (same package, lower versions)."
   (let [step (fn [xpp]
                (condp = (.next xpp)
                  XmlPullParser/START_TAG
-                 (cons (keyword (.getName xpp))
+                 (cons {(keyword (.getName xpp)) (.getDepth xpp)}
                    (pull-step xpp))
                  XmlPullParser/END_TAG
-                 (cons (keyword (str "/" (.getName xpp)))
+                 (cons {(keyword (str "/" (.getName xpp))) (.getDepth xpp)}
                    (pull-step xpp))
                  XmlPullParser/TEXT
                  (let [text (.trim (.getText xpp))]
                    (if (empty? text)
                      (recur xpp)
-                     (cons text
+                     (cons {text (.getDepth xpp)}
                        (pull-step xpp))))
                  nil))]
     (lazy-seq (step xpp))))
 
 (defn- init-parser [filename]
-  (doto (org.kxml2.io.KXmlParser.) 
-    (.setFeature XmlPullParser/FEATURE_PROCESS_NAMESPACES true)
-    (.setInput (clojure.java.io/reader filename))))
+  filename)
 
 (defn create-intent-filters 
   "Extract all intent-filter definitions and create instances of android.IntentFilter.
