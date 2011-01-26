@@ -28,4 +28,13 @@
           (concat (range start (+ 10 start)) (make-lazy f (+ 10 start))))))
 
 (take 40 (make-lazy #(when (< (rand 100) 80) %) 0)) 
+
+  (def files-to-fix
+    (filter identity
+      (for [f (filter #(.isFile %) (file-seq (file "results/market-apps")))]
+        (with-open [r (java.io.FileReader. (file f))]
+          (when (not= \( (char (.read r)))
+            f)))))
+  (doseq [f files-to-fix]
+    (spit f (str \( (slurp f) \))))
 )

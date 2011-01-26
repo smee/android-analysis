@@ -1,13 +1,13 @@
 (ns android-manifest.serialization
   (:use [clojure.pprint :only [pprint]]
-        [clojure.java.io :only (file reader)])
+        [clojure.java.io :only (file reader writer)])
   (:import [java.io File FileWriter FileReader PushbackReader]))
 
 (defn serialize 
   "Serialize the native clojure datastructure obj to file."
   ([file-name obj] (serialize file-name obj false))  
   ([file-name obj append?]
-    (with-open [w (java.io.FileWriter. (file file-name) append?)] 
+    (with-open [w (writer (file file-name) :append append?)] 
       (binding [*out* w 
                 *print-length* nil] 
           (if (seq? obj)

@@ -3,6 +3,8 @@
     java.io.File
     [java.net URL URLEncoder]
     com.gc.android.market.api.MarketSession)
+  (:require 
+    [android.market.category :as cat])
   (:use 
     android-manifest.serialization
     [android-manifest.util :only (ignore-exceptions sleep-random date-string)]
@@ -12,7 +14,6 @@
     [clojure.contrib.java-utils :only (read-properties)]
     ))
 
-(def *path* "d:/android/apps/original")
 
 (defn url-encode
   "Wrapper around java.net.URLEncoder returning a (UTF-8) URL encoded
@@ -35,20 +36,26 @@
       (copy (.getInputStream (doto (.openConnection url)
                                (.setRequestMethod "GET")
                                (.setRequestProperty "User-Agent" "Android-Market/2")
-                               (.setRequestProperty "cookie" cookie))) 
+                               (.setRequestProperty "Cookie" cookie))) 
         out-file)
       (catch java.io.IOException e
+        (.printStackTrace e System/err)
         (.createNewFile (file (str filename ".403")))))))
 
 (defn download-app-secure [assetid authtoken userid deviceid filename]
   "Download app from the official google market."
-  (let [cookie   (str "MarketDA=" "17889847518369858470")
+  (let [cookie   (str "MarketDA=" authtoken)
         request  (str 
                    "?assetId=" (url-encode assetid)
                    "&userId="   (url-encode userid)
                    "&deviceId=" (url-encode deviceid)
                    "&sig=AOGrW-wAAAAATPghJDx4KBmYHEqdsxeApQ8ql7AzpEzn")
         url      (URL. (str "https://android.clients.google.com/market/download/Download" request))]
+      
+    ;; disable ssl certificate check
+     (javax.net.ssl.HttpsURLConnection/setDefaultHostnameVerifier 
+       (proxy [javax.net.ssl.HostnameVerifier] [] 
+         (verify [hostname session] true)))
     (try
       (copy (.getInputStream (doto (.openConnection url)
                                (.setRequestMethod "GET")
@@ -71,40 +78,37 @@
   (let [f (file f)]
     (or (.exists f) (.exists (file (str (.toString f) ".403"))))))
 
-(defn leech-apps [app credentials output-dir]
+(defn download-if-nonexistant [app credentials output-dir]
   "Download all android applications described in apps into output-dir
    using the credentials defined in the map credentials."
   (let [userid      (get credentials "userid")
         deviceid    (get credentials "deviceid")
         authtoken   (get credentials "authtoken")
         app-id      (:id app)
-        output-file (str output-dir \/ app-id)]
+        output-file (file output-dir app-id)]
     
     ;(println app-id \tab output-file)
     (when-not (downloaded? output-file)
-      (println "downloading into " output-dir " " app-id)
+      (println "downloading into" output-dir "app with id" app-id)
       (ignore-exceptions
-        ;(sleep-random 5000 20000)
         (download-app app-id authtoken userid deviceid output-file)))))
                   
 
-(defn load-apps-metadata [dir category]
-  (flatten (deserialize (file dir (str "/apps-" category)))))
+(defn load-apps-metadata [file]
+  (flatten (deserialize file)))
 
 
 (defn download-all-apps [input-dir output-dir & credentials-files]
   (let [properties        (map #(into {} (read-properties %)) credentials-files)
         avail-credentials (map #(assoc % "authtoken" (get-auth-token %)) properties)]
-    (doseq [category ml/all-known-categories]
-      (let [apps (load-apps-metadata input-dir category)
-            output-dir (file output-dir category)]
-        (printf "got %d apps to download into %s \n" (count apps) output-dir)
+    (doseq [in-file (file-seq (file input-dir)) :when (.isFile in-file)]
+      (let [apps (load-apps-metadata in-file)]
+        (println (count apps))
         (doall
-          (map #(leech-apps %1 %2 output-dir) apps (cycle avail-credentials)))))))
+          (pmap #(download-if-nonexistant %1 %2 (file output-dir (cat/get-category %1))) apps (cycle avail-credentials)))))))
 
 (comment
-  #_(printf "%s %s %s\n" %1 %2 output-dir)
-  #_(leech-apps %1 %2 output-dir)
+
   (set! *print-length* 10)
  (download-all-apps 
    (file "results/market-apps" (date-string)) 

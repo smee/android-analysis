@@ -6,6 +6,8 @@
     [clojure.string :only (join)]
     android-manifest.serialization
     android-manifest.util)
+  (:require
+    [android.market.category :as cat])
   (:import 
     [com.gc.android.market.api AndroidMarketApi]
     [com.gc.android.market.api.model 
@@ -19,48 +21,6 @@
      Market$RequestContext$Builder]))
 
 
-(def all-known-categories 
-  ["APP_WALLPAPER"
-   "APP_WIDGETS"
-   "ARCADE"
-   "BOOKS_AND_REFERENCE"
-   "BRAIN"
-   "BUSINESS"
-   "CARDS"
-   "CASUAL"
-   "COMICS"
-   "COMMUNICATION"
-   "DEMO"
-   "EDUCATION"
-   "ENTERTAINMENT"
-   "FINANCE"
-   "GAME_WALLPAPER"
-   "GAME_WIDGETS"
-   "HEALTH"
-   "HEALTH_AND_FITNESS"
-   "LIBRARIES"
-   "LIBRARIES_AND_DEMO"
-   "LIFESTYLE"
-   "MEDIA_AND_VIDEO"
-   "MEDICAL"
-   "MULTIMEDIA"
-   "MUSIC_AND_AUDIO"
-   "NEWS"
-   "NEWS_AND_MAGAZINES"
-   "PERSONALIZATION"
-   "PHOTOGRAPHY"
-   "PRODUCTIVITY"
-   "REFERENCE"
-   "SHOPPING"
-   "SOCIAL"
-   "SPORTS"
-   "SPORTS_GAMES"
-   "THEMES"
-   "TOOLS"
-   "TRANSPORTATION"
-   "TRAVEL"
-   "TRAVEL_AND_LOCAL"
-   "WEATHER"])
 
 
 (defn- apps-request [query app-type view-type order-type cat-id start-idx entries-count extended?]
@@ -113,7 +73,9 @@
 
 (def api-cache (ref {}))
 
-(defn- create-market-api [cred]
+(defn- create-market-api 
+  "Login to google android market. Caches all instances."
+  [cred]
   (dosync
     (if-let [api (get @api-cache cred)]
       api
@@ -131,7 +93,8 @@
     (filter identity
       (try
         (.executeRequest market-api (create-apps-request m))
-        (catch Exception e)))))
+        (catch Exception e
+          (.printStackTrace e System/err))))))
   
 
 (defn create-metadata-fetcher 
@@ -162,24 +125,50 @@ for as long as there are more than 0 results per request."
 (defn fetch-all-newest-apps-category 
   "Download metadata of all the newest android apps for a category."
   [category credentials]
-  (fetch-all-apps {:category category :app-type nil :order-type Market$AppsRequest$OrderType/NEWEST} credentials))
+  (fetch-all-apps  credentials))
 
 (defn fetch-all-apps-author
   "Download metadata of all android apps of one author."
   [author cred]
   (fetch-all-apps {:app-type nil :query (str "pub:" author) :order-type nil} cred))
 
-(defn batch-download-newest [& cred-files]
-  (let [date (date-string)
-        dir  (file (str "results/market-apps/" date))]
+
+(defn batch-download 
+  "Fetch metadata about apps from the google market. Tries to fetch all metadata for 
+   each query template (read: as many as available).
+
+   outdir: directory to write the results to
+   query-templates: sequence of maps that resemble the queries
+   out-file-gen-fn: function that converts query into a string that is used as filename for the results of this query
+   cred-files : sequence of credential files"
+  [outdir query-templates out-file-gen-fn cred-files]
+  (let [dir (file outdir)]
     (.mkdirs dir)
     (dorun 
       (pmap 
-        (fn [cat cred]
-          (serialize (str dir "/apps-" cat) 
-            (fetch-all-newest-apps-category cat cred)))
-        all-known-categories
-        (cycle (map read-properties cred-files)))))) 
+        (fn [template cred] 
+          (let [out (file dir (out-file-gen-fn template))
+                new-file? (not (.exists out))]
+          (when new-file? (serialize out (fetch-all-apps template cred)))))
+        query-templates
+        (cycle (shuffle (map read-properties cred-files))))))) 
+    
+
+(defn batch-download-newest 
+  "Download the newest free apps per category."
+  [cred-files]
+  (let [dir          (file (str "results/market-apps/" (date-string)))
+        out-files-fn :category
+        query-tmpl   (map #(hash-map :category % :app-type nil :order-type Market$AppsRequest$OrderType/NEWEST) cat/all-known-categories)]
+        (batch-download dir query-tmpl out-files-fn cred-files)))
+
+(defn batch-download-query
+  [q cred-files]
+  (let  [dir (str "results/market-apps/")
+         o-f (constantly (str (date-string) "_" q))
+         queries [{:app-type nil :query q}]]
+    (batch-download dir queries o-f cred-files)))
+            
 
 (defn load-authors [input-dir]
   (let [authors (->> input-dir file file-seq (filter #(.isFile %)) (mapcat deserialize) (map :creatorId) distinct)]
@@ -189,8 +178,14 @@ for as long as there are more than 0 results per request."
   (let [authors (load-authors apps-metadata-dir)]  
     (pmap #(fetch-all-apps-author %1 %2) authors (cycle credentials))))
 
+
+
+
 (comment
-  (def cred-files ["marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties" "marketcredentials4.properties"])
+  (def cred-files ["marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties" "marketcredentials4.properties" "marketcredentials5.properties"])
+  (batch-download-newest cred-files)
+  
+  
   (def credentials (map read-properties cred-files))
   
   (let [input-dir (str "results/market-apps/" #_(date-string))
@@ -203,16 +198,7 @@ for as long as there are more than 0 results per request."
   (def api (create-market-api (first credentials)))
   (count (fetch-app-infos {:query "a" :start-idx 0} api))
 
-  (apply batch-download-newest cred-files)
   
-  (def files-to-fix
-    (filter identity
-      (for [f (filter #(.isFile %) (file-seq (file "results/market-apps")))]
-        (with-open [r (java.io.FileReader. (file f))]
-          (when (not= \( (char (.read r)))
-            f)))))
-  (doseq [f files-to-fix]
-    (spit f (str \( (slurp f) \))))
   
   (doseq [f (filter #(.isFile %) (file-seq (file "results/market-apps")))] (do (println f) (load-authors f)))
   (def authors (load-authors "results/market-apps"))
