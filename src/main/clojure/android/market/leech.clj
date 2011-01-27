@@ -184,7 +184,7 @@ for as long as there are more than 0 results per request."
 (comment
   (def cred-files ["marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties" "marketcredentials4.properties" "marketcredentials5.properties"])
   (batch-download-newest cred-files)
-  
+  (batch-download-query " " cred-files)
   
   (def credentials (map read-properties cred-files))
   
