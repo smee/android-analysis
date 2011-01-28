@@ -110,7 +110,7 @@ androidmanifest.xml files using zipper traversals."
 (defn load-apps-from-zip
   "Parse android app manifest files within a zip archive."
   [zip-file]
-  (archive/process-entries zip-file load-android-manifest ".*AndroidManifest.xml"))
+  (archive/process-entries zip-file load-android-manifest #".*AndroidManifest.xml"))
   
 (defn unique-apps 
   "Sort by descending version, filter all apps where version and path are equals. Should result
@@ -126,8 +126,11 @@ in loading android apps without duplicates (same package, lower versions)."
   [dir]
   (find-file dir #".*AndroidManifest.xml"))
 
+(defn extract-intent-filters [apps]
+  (map (partial mapcat :filters) (map :components apps)))
 
-
+(defn fan-in [apps]
+   (into (sorted-set) (frequencies (map count (extract-intent-filters apps)))))
 (comment
   (def manifest (extract-entry "d:/android/reduced/android-20101127.zip" "android/TOOLS/-1119349709413775354/AndroidManifest.xml"))
   (def x (zip/xml-zip (xml/parse (input-stream manifest))))
@@ -136,4 +139,6 @@ in loading android apps without duplicates (same package, lower versions)."
   (create-intent-filters "d:/AndroidManifest.xml")
 (def app (first (load-apps-from-disk [(java.io.File. "d:/AndroidManifest.xml")])))
   
+(def mf (deserialize "d:/android/parsed-manifests.clj"))
+
   )

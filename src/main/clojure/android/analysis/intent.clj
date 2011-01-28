@@ -72,6 +72,8 @@
   [m]
   (intent-stats (queried-intents m)))
 
+(defn fan-out [x]
+   (into (sorted-set) (frequencies (map count (map :called (vals x))))))
 
 (comment
   
