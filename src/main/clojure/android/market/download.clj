@@ -111,9 +111,13 @@
 
   (set! *print-length* 10)
  (download-all-apps 
-   (file "results/market-apps" (date-string)) 
+   (file "results/market-apps/" #_(date-string)) 
    "d:/android/orig" 
-   "marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties" "marketcredentials4.properties")
+   "marketcredentials.properties" 
+   "marketcredentials2.properties" 
+   "marketcredentials3.properties" 
+   "marketcredentials4.properties" 
+   "marketcredentials5.properties")
  
  
  (let [c (read-properties "marketcredentials4.properties")

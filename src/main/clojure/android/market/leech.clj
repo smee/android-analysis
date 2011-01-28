@@ -120,7 +120,8 @@ for as long as there are more than 0 results per request."
   [query-template-map cred]
   (let [api     (create-market-api cred)
         queries (create-queries query-template-map)]
-    (flatten (create-metadata-fetcher api queries))))
+    (filter #(empty? (:price %))
+      (flatten (create-metadata-fetcher api queries)))))
   
 (defn fetch-all-newest-apps-category 
   "Download metadata of all the newest android apps for a category."

@@ -576,7 +576,51 @@ public class IntentFilter {
         private final boolean mWild;
         private final int mPort;
 
-        public AuthorityEntry(String host, String port) {
+        @Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((mHost == null) ? 0 : mHost.hashCode());
+			result = prime * result
+					+ ((mOrigHost == null) ? 0 : mOrigHost.hashCode());
+			result = prime * result + mPort;
+			result = prime * result + (mWild ? 1231 : 1237);
+			return result;
+		}
+
+		@Override
+		public String toString() {
+			return "AuthorityEntry [mOrigHost=" + mOrigHost + ", mHost="
+					+ mHost + ", mWild=" + mWild + ", mPort=" + mPort + "]";
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			AuthorityEntry other = (AuthorityEntry) obj;
+			if (mHost == null) {
+				if (other.mHost != null)
+					return false;
+			} else if (!mHost.equals(other.mHost))
+				return false;
+			if (mOrigHost == null) {
+				if (other.mOrigHost != null)
+					return false;
+			} else if (!mOrigHost.equals(other.mOrigHost))
+				return false;
+			if (mPort != other.mPort)
+				return false;
+			if (mWild != other.mWild)
+				return false;
+			return true;
+		}
+
+		public AuthorityEntry(String host, String port) {
             mOrigHost = host;
             mWild = host.length() > 0 && host.charAt(0) == '*';
             mHost = mWild ? host.substring(1).intern() : host;
@@ -1151,4 +1195,72 @@ public class IntentFilter {
 
         return false;
     }
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((mActions == null) ? 0 : mActions.hashCode());
+		result = prime * result
+				+ ((mCategories == null) ? 0 : mCategories.hashCode());
+		result = prime
+				* result
+				+ ((mDataAuthorities == null) ? 0 : mDataAuthorities.hashCode());
+		result = prime * result
+				+ ((mDataPaths == null) ? 0 : mDataPaths.hashCode());
+		result = prime * result
+				+ ((mDataSchemes == null) ? 0 : mDataSchemes.hashCode());
+		result = prime * result
+				+ ((mDataTypes == null) ? 0 : mDataTypes.hashCode());
+		result = prime * result + (mHasPartialTypes ? 1231 : 1237);
+		result = prime * result + mPriority;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		IntentFilter other = (IntentFilter) obj;
+		if (mActions == null) {
+			if (other.mActions != null)
+				return false;
+		} else if (!mActions.equals(other.mActions))
+			return false;
+		if (mCategories == null) {
+			if (other.mCategories != null)
+				return false;
+		} else if (!mCategories.equals(other.mCategories))
+			return false;
+		if (mDataAuthorities == null) {
+			if (other.mDataAuthorities != null)
+				return false;
+		} else if (!mDataAuthorities.equals(other.mDataAuthorities))
+			return false;
+		if (mDataPaths == null) {
+			if (other.mDataPaths != null)
+				return false;
+		} else if (!mDataPaths.equals(other.mDataPaths))
+			return false;
+		if (mDataSchemes == null) {
+			if (other.mDataSchemes != null)
+				return false;
+		} else if (!mDataSchemes.equals(other.mDataSchemes))
+			return false;
+		if (mDataTypes == null) {
+			if (other.mDataTypes != null)
+				return false;
+		} else if (!mDataTypes.equals(other.mDataTypes))
+			return false;
+		if (mHasPartialTypes != other.mHasPartialTypes)
+			return false;
+		if (mPriority != other.mPriority)
+			return false;
+		return true;
+	}
 }

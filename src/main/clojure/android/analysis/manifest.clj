@@ -2,18 +2,16 @@
   (:use 
     [clojure.contrib.zip-filter.xml :only (xml-> xml1-> attr)]
     [clojure.java.io :only (input-stream)]
-    android.market.archive
     android-manifest.util
     android-manifest.serialization)
   (:require
+    [android.market.archive :as archive]
     [clojure.contrib.zip-filter :as zf]
     [clojure.contrib.zip-filter.xml :as zfx]
     [clojure.zip :as zip]
     [clojure.xml :as xml]
     clojure.walk)
-  (:import
-    org.xmlpull.v1.XmlPullParser
-    ))
+)
 
 (defn- trim-ns 
   "Remove substring from keyword up to the first occurance of the character :"
@@ -37,15 +35,42 @@
     (str pname name)
     name))
 
-;;  Represent an intent filter.
-(defrecord Intent-Filter [class type actions categories datas])
+(defn- create-intent-filter 
+  "Reuse android's implementation of IntentFilter from their source."
+  [m]
+  (let [i-f (android.IntentFilter.)]
+    (when-let [actions (:actions m)]
+      (doseq [a actions] (.addAction i-f a)))
+    (when-let [categories (:categories m)]
+      (doseq [c categories] (.addCategory i-f c)))
+    (when-let [data (:data m)]
+      (doseq [d data]
+        (do
+          (when-let [host (:host d)]
+            (.addDataAuthority i-f host (:port d)))
+          (when-let [scheme (:scheme d)]
+            (.addDataScheme i-f scheme))
+          (when-let [mimetype (:mimeType d)]
+          (.addDataType i-f mimetype))
+          (when-let [p (:path d)]
+            (.addDataPath i-f p android.PatternMatcher/PATTERN_LITERAL))
+          (when-let [p (:pathPrefix d)]
+            (.addDataPath i-f p android.PatternMatcher/PATTERN_PREFIX))
+          (when-let [p (:pathPattern d)]
+            (.addDataPath i-f p android.PatternMatcher/PATTERN_SIMPLE_GLOB)))))
+    i-f))
+    
 
-(defn- create-intent-filter [cls type i-filter]
-  (Intent-Filter. cls type
-    (xml-> i-filter :action (attr :name))
-    (xml-> i-filter :category (attr :name))
-    (for [data (xml-> i-filter :data zip/node #(:attrs %))]
-      data)))
+;;  Represent an android component (activity, service, broadcastreceiver).
+(defrecord Android-Component [class type filters])
+
+(defn- create-components [cls type i-filters]
+  (Android-Component. cls type 
+    (for [i-filter i-filters]
+      (hash-map 
+        :actions (xml-> i-filter :action (attr :name))
+        :categories (xml-> i-filter :category (attr :name))
+        :data (for [data (xml-> i-filter :data zip/node #(:attrs %))] data)))))
   
 
 (defn- find-android-components
@@ -56,12 +81,12 @@ androidmanifest.xml files using zipper traversals."
         components (xml-> x :application zf/children [#(-> % zip/node :tag #{:activity :receiver :service} )])]
     (for [c components]
       (let [cls  (activity-class package-name (xml1-> c (attr :name)))
-            type (xml1-> c zip/node #(:tag %))]
-        (for [i-filter (xml-> c zf/children :intent-filter)]
-          (create-intent-filter cls type i-filter))))))
+            type (xml1-> c zip/node #(:tag %))
+        		i-filters (xml-> c zf/children :intent-filter)]
+        (create-components cls type i-filters)))))
   
 ;;  Datastructure to hold relevant infos about an android application.
-(defrecord Android-App [name version package sdk-version filters])
+(defrecord Android-App [name version package sdk-version components])
 
 (defn load-android-manifest [app-name manifest]
   "Parse android app manifest."
@@ -85,7 +110,7 @@ androidmanifest.xml files using zipper traversals."
 (defn load-apps-from-zip
   "Parse android app manifest files within a zip archive."
   [zip-file]
-  (process-entries zip-file load-android-manifest ".*AndroidManifest.xml"))
+  (archive/process-entries zip-file load-android-manifest ".*AndroidManifest.xml"))
   
 (defn unique-apps 
   "Sort by descending version, filter all apps where version and path are equals. Should result
@@ -101,52 +126,7 @@ in loading android apps without duplicates (same package, lower versions)."
   [dir]
   (find-file dir #".*AndroidManifest.xml"))
 
-;;;; Parsing via xmlpullparser
-(defn- attrs [xpp]
-  (for [i (range (.getAttributeCount xpp))]
-    [(keyword (.getAttributeName xpp i))
-     (.getAttributeValue xpp i)]))
 
-(defn- ns-decs [xpp]
-  (let [d (.getDepth xpp)]
-    (for [i (range (.getNamespaceCount xpp (dec d)) (.getNamespaceCount xpp d))]
-      (let [prefix (.getNamespacePrefix xpp i)]
-        [(keyword (str "xmlns" (when prefix (str ":" prefix))))
-         (.getNamespaceUri xpp i)]))))
-
-(defn- attr-hash [xpp]
-  (into {} (concat (ns-decs xpp) (attrs xpp))))
-
-(defn- pull-step 
-  "lazy sequence of tag names."
-  [xpp]
-  (let [step (fn [xpp]
-               (condp = (.next xpp)
-                 XmlPullParser/START_TAG
-                 (cons {:tag (keyword (.getName xpp)) :depth (.getDepth xpp) :attr (attr-hash xpp)}
-                   (pull-step xpp))
-                 XmlPullParser/END_TAG
-                 (cons {:tag (keyword (str "/" (.getName xpp))) :depth (.getDepth xpp)}
-                   (pull-step xpp))
-                 XmlPullParser/TEXT
-                 (cons nil (pull-step xpp))
-                 nil))]
-    (remove nil? (lazy-seq (step xpp)))))
-
-(defn- init-parser [filename]
-  (doto (org.kxml2.io.KXmlParser.) 
-    (.setFeature XmlPullParser/FEATURE_PROCESS_NAMESPACES true)
-    (.setInput (clojure.java.io/reader filename))))
-
-(defn create-intent-filters 
-  "Extract all intent-filter definitions and create instances of android.IntentFilter.
-Use it's .match method to decide whether an intent matches a filter."
-  [filename]
-  (let [parser (init-parser filename)
-        tags   (pull-step parser)]    
-    (for [i-f (filter #(= :intent-filter (:tag %)) tags)]
-      (doto (android.IntentFilter.) 
-        (.readFromXml parser)))))
 
 (comment
   (def manifest (extract-entry "d:/android/reduced/android-20101127.zip" "android/TOOLS/-1119349709413775354/AndroidManifest.xml"))
@@ -154,6 +134,6 @@ Use it's .match method to decide whether an intent matches a filter."
   (identity (xml-> x :application zf/descendants :intent-filter zip/up zip/node #(:tag %)))
 
   (create-intent-filters "d:/AndroidManifest.xml")
-
+(def app (first (load-apps-from-disk [(java.io.File. "d:/AndroidManifest.xml")])))
   
   )
