@@ -62,15 +62,16 @@
     
 
 ;;  Represent an android component (activity, service, broadcastreceiver).
-(defrecord Android-Component [class type filters])
+(defrecord Android-Component [class type filters exported?])
 
-(defn- create-components [cls type i-filters]
-  (Android-Component. cls type 
-    (for [i-filter i-filters]
-      (hash-map 
-        :actions (xml-> i-filter :action (attr :name))
-        :categories (xml-> i-filter :category (attr :name))
-        :data (for [data (xml-> i-filter :data zip/node #(:attrs %))] data)))))
+(defn- create-components [cls type i-filters exported?]
+  (let [data (for [i-filter i-filters]
+               (hash-map 
+                 :actions (xml-> i-filter :action (attr :name))
+                 :categories (xml-> i-filter :category (attr :name))
+                 :data (for [data (xml-> i-filter :data zip/node #(:attrs %))] data)))]
+    (Android-Component. cls type data exported?))) 
+      
   
 
 (defn- find-android-components
@@ -80,10 +81,11 @@ androidmanifest.xml files using zipper traversals."
   (let [package-name (xml1-> x (attr :package))
         components (xml-> x :application zf/children [#(-> % zip/node :tag #{:activity :receiver :service} )])]
     (for [c components]
-      (let [cls  (activity-class package-name (xml1-> c (attr :name)))
-            type (xml1-> c zip/node #(:tag %))
-        		i-filters (xml-> c zf/children :intent-filter)]
-        (create-components cls type i-filters)))))
+      (let [cls       (activity-class package-name (xml1-> c (attr :name)))
+            type      (xml1-> c zip/node #(:tag %))
+            i-filters (xml-> c zf/children :intent-filter)
+            exported? (Boolean/valueOf (xml1-> c (attr :exported)))]
+        (create-components cls type i-filters exported?)))))
   
 ;;  Datastructure to hold relevant infos about an android application.
 (defrecord Android-App [name version package sdk-version components])
@@ -120,6 +122,14 @@ in loading android apps without duplicates (same package, lower versions)."
     (reverse 
       (sort-by :version apps)))) 
 
+(defn exported? [component]
+  (:exported? component))
+
+(defn components [app]
+  (:components app))
+
+(defn intent-filters [component]
+  (:filters component))
 
 (defn- find-manifests 
   "Find all AndroidManifest.xml files in any subdirectory of dir."
@@ -127,18 +137,29 @@ in loading android apps without duplicates (same package, lower versions)."
   (find-file dir #".*AndroidManifest.xml"))
 
 (defn extract-intent-filters [apps]
-  (map (partial mapcat :filters) (map :components apps)))
+  (map (partial mapcat :filters) (map components apps)))
+
+
+(defn exported-components 
+  "Filter all exported android components. Exported means either the explicit export flag or a
+nonempty intent-filter seq."
+  [{cs :components}]
+  (filter #(or (exported? %) (not-empty (intent-filters %))) cs))
+
 
 (defn fan-in [apps]
-   (into (sorted-set) (frequencies (map count (extract-intent-filters apps)))))
+   (into (sorted-set) (frequencies (map count (exported-components apps)))))
+
 (comment
   (def manifest (extract-entry "d:/android/reduced/android-20101127.zip" "android/TOOLS/-1119349709413775354/AndroidManifest.xml"))
   (def x (zip/xml-zip (xml/parse (input-stream manifest))))
   (identity (xml-> x :application zf/descendants :intent-filter zip/up zip/node #(:tag %)))
 
   (create-intent-filters "d:/AndroidManifest.xml")
-(def app (first (load-apps-from-disk [(java.io.File. "d:/AndroidManifest.xml")])))
+  (def app (first (load-apps-from-disk [(java.io.File. "d:/AndroidManifest.xml")])))
+  (some #(filter exported-components  %) mf)
   
-(def mf (deserialize "d:/android/parsed-manifests.clj"))
+  (def mf (unique-apps (load-apps-from-zip "d:/android/reduced/android-20101127.zip")))
+  (def mf (deserialize "d:/android/parsed-manifests.clj"))
 
   )

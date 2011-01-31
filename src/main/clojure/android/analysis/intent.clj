@@ -15,10 +15,12 @@
 
 
 (defn called-intents [m]
-  (mapcat :called (vals m)))
+   (map #(apply concat (vals (:called %))) (vals m)))
 
 (defn queried-intents [m]
-  (mapcat :called (vals m)))
+  ;; fix stupid bug in the static analysis:
+  ;;   used vector in place of hashmap :(
+  (map #(apply concat (vals  (apply hash-map (:queried %)))) (vals m))) 
 
 (defn- x-of [m x]
   (let [ci (called-intents m)]
@@ -53,8 +55,9 @@
 ;;;;;;;;;;;
 (defn- intent-stats 
   [intents]
-  (let [explicits (filter :explicit? intents)
-        implicits (remove :explicit? intents)]
+  (let [allintents (apply concat intents)
+        explicits (filter :explicit? allintents)
+        implicits (remove :explicit? allintents)]
     (println "#explicit intents:" (count explicits))
     (println "#implicit intents:" (count implicits))
     (let [valid-implicit-calls (filter #(and (contains? % :action) (or (contains? % :categories) (contains? % :data) (contains? % :uri))) implicits)]
@@ -73,12 +76,12 @@
   (intent-stats (queried-intents m)))
 
 (defn fan-out [x]
-   (into (sorted-set) (frequencies (map count (map :called (vals x))))))
+   (into (sorted-set) (frequencies (map count (map #(filter :explicit? %) (called-intents x))))))
 
 (comment
   
-    (def x (reduce merge (process-entries "d:/Projekte/Thorsten/waterloo/intents.zip" process-intent-calls #".*clj")))
-    (def x (deserialize "d:/android/allintents.clj"))
+    (def x (reduce merge (process-entries "d:/Projekte/Thorsten/waterloo/intents2.zip" process-intent-calls #".*clj")))
+    (def x (deserialize "d:/android/allintents2.clj"))
     
     (intent-call-stats x)
     (intent-query-stats x)
