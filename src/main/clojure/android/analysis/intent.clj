@@ -78,6 +78,14 @@
 (defn fan-out [x]
    (into (sorted-set) (frequencies (map count (map #(filter :explicit? %) (called-intents x))))))
 
+(defn most-used-actions 
+  "Group all implicit intents by action, return sorted map of action=>no. of intents"
+  [intents]
+  (let [implicits (remove :explicit? (apply concat (called-intents intents)))
+        groups (group-by :action implicits)
+        counts (map-values count groups)])
+  (take 10 (sort-by-value counts :descending)))
+
 (comment
   
     (def x (reduce merge (process-entries "d:/Projekte/Thorsten/waterloo/intents2.zip" process-intent-calls #".*clj")))

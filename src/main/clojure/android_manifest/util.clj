@@ -119,3 +119,6 @@ the regular expression pattern"
     (str "\\begin{longtable}{lr}" \newline
       (apply str (for [[k v] a-map] (str (f k) " & " (f v) " \\\\" \newline)))
       "\\end{longtable}" \newline)))
+
+(defn print-simple-table [a-map]
+  (doseq [[k v] a-map] (println k " " v)))
