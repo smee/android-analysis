@@ -75,8 +75,10 @@
   [m]
   (intent-stats (queried-intents m)))
 
-(defn fan-out [x]
-   (into (sorted-set) (frequencies (map count (map #(remove :explicit? %) (called-intents x))))))
+(defn fan-out 
+  "Number of unique intents per app that is used for calling other activities, services, broadcast receivers."
+  [x]
+   (into (sorted-set) (frequencies (map count (map #(remove :explicit? (distinct %)) (called-intents x))))))
 
 (defn most-used-actions 
   "Group all implicit intents by action, return sorted map of action=>no. of intents"
@@ -90,6 +92,10 @@
   
     (def x (reduce merge (process-entries "d:/Projekte/Thorsten/waterloo/intents2.zip" process-intent-calls #".*clj")))
     (def x (deserialize "d:/android/allintents2.clj"))
+    (def old-versions (deserialize "d:/android/oldversions.clj"))
+    ;; remove infos about all old versions
+    (def y (into {} (remove (fn [[n v]] (old-versions n)) x)))
+    (print-simple-table (fan-out y))
     
     (intent-call-stats x)
     (intent-query-stats x)
