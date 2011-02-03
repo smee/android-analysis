@@ -76,15 +76,15 @@
   (intent-stats (queried-intents m)))
 
 (defn fan-out [x]
-   (into (sorted-set) (frequencies (map count (map #(filter :explicit? %) (called-intents x))))))
+   (into (sorted-set) (frequencies (map count (map #(remove :explicit? %) (called-intents x))))))
 
 (defn most-used-actions 
   "Group all implicit intents by action, return sorted map of action=>no. of intents"
   [intents]
   (let [implicits (remove :explicit? (apply concat (called-intents intents)))
         groups (group-by :action implicits)
-        counts (map-values count groups)])
-  (take 10 (sort-by-value counts :descending)))
+        counts (map-values count groups)]
+  (take 10 (sort-by-value counts :descending))))
 
 (comment
   

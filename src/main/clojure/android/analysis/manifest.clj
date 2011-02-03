@@ -150,6 +150,14 @@ nonempty intent-filter seq."
 (defn fan-in [apps]
    (into (sorted-set) (frequencies (map count (exported-components apps)))))
 
+(defn names-of-old-app-versions 
+  "Find the names of all apps that have a newer version. Returns a set."
+  [apps]
+  (let [f #(aget (.split (:name %) "/") 2)
+        unique-names-all (map f apps)
+        unique-names (map f (unique-apps apps))]
+    (clojure.set/difference (set unique-names-all) (set unique-names))))
+
 (comment
   (def manifest (extract-entry "d:/android/reduced/android-20101127.zip" "android/TOOLS/-1119349709413775354/AndroidManifest.xml"))
   (def x (zip/xml-zip (xml/parse (input-stream manifest))))
