@@ -75,6 +75,9 @@
   [m]
   (intent-stats (queried-intents m)))
 
+(defn called-implicit-intents [x]
+  (remove :explicit? (distinct (apply concat (called-intents x)))))
+
 (defn fan-out 
   "Number of unique intents per app that is used for calling other activities, services, broadcast receivers."
   [x]
@@ -88,9 +91,12 @@
         counts (map-values count groups)]
   (take 10 (sort-by-value counts :descending))))
 
+(defn load-intents-zip [file]
+  (reduce merge (process-entries file process-intent-calls #".*clj")))
+
 (comment
   
-    (def x (reduce merge (process-entries "d:/Projekte/Thorsten/waterloo/intents2.zip" process-intent-calls #".*clj")))
+    (def x (load-intents-zip "d:/Projekte/Thorsten/waterloo/intents2.zip"))
     (def x (deserialize "d:/android/allintents2.clj"))
     (def old-versions (deserialize "d:/android/oldversions.clj"))
     ;; remove infos about all old versions
