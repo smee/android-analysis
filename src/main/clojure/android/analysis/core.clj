@@ -3,7 +3,8 @@
     android.analysis.manifest
     android.analysis.intent
     android-manifest.serialization
-    [clojure.contrib.io :only (with-out-writer)])
+    [clojure.contrib.io :only (with-out-writer)]
+    [clojure.contrib.seq :only (indexed)])
   (:require 
     clojure.set))
 
@@ -45,6 +46,18 @@ match them with existing classes...."
 (defn dep-provides [apps]
   (map implicit-components apps))
 
+(defn if-to-name-map 
+  "Create a map of unique intent filters of an "
+  [app]
+  (let [i-f (unique-intent-filters app)
+        app-name (:name app)]
+    (apply hash-map (interleave i-f (repeat (set (list app-name)))))))
+
+(defn group-intent-filters 
+  "Group apps by unique intent filters"
+  [apps]
+  (apply (partial merge-with conj) (map if-to-name-map apps)))
+
 (defn aggregate 
   "Create histogram data by counting elements in the data seq and calculate their frequency"
   [data]
@@ -59,7 +72,7 @@ match them with existing classes...."
 (defn save-to-csv [file apps]
   (with-out-writer file
     (println "id,count,type,capability")
-    (doseq [app apps]
+    #_(doseq [app apps]
       (do
         ;; explicit intent call with classes that are not in the app's manifest
         (p app "unit depends" external-explicit-intent-calls false)
@@ -68,13 +81,18 @@ match them with existing classes...."
         ;; number of intent filters per app
         (p app "provides" implicit-components true)
         ;; implicit intent calls per app
-        (p app "capability depends" called-implicit-intents true)))))
+        (p app "capability depends" called-implicit-intents true)
+        ;; apps per unique intent filter
+        ))
+    (doseq [[idx names] (indexed (vals (group-intent-filters apps)))]
+      (println (str "cap" idx \, (count names) ",capability-providing_unit,true") ))))
 
 
 (comment
   (def apps (join-intents 
               (-> "d:/android/reduced/android-20101127.zip" load-apps-from-zip unique-apps clean-app-names)
-              (deserialize "d:/android/allintents2.clj")) )
+              #_(deserialize "d:/android/allintents2.clj")
+              (load-intents-zip "d:/android/apps/intents2.zip")) )
   
   (aggregate (dep-provides apps))
   (aggregate (dep-unit-depends apps))

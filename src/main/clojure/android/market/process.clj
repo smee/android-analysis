@@ -137,7 +137,7 @@ Uses static analysis via the findbugs infrastructure."
   (println "dex2jar: " (dex2jar "D:\\android\\apps\\original\\" "d:/android//apps/jars"))
   (do
     (println "find intents: " 
-      (extract-intents "D:\\android\\apps\\jars" "d:/android/apps/intents")))
+      (extract-intents "D:\\android\\apps\\jars" "d:/android/apps/intents2")))
   
   (serialize "d:/temp/foo" (find-intents (file "D:\\android\\jars\\ARCADE\\-1007597263548681988\\classes.dex")))
   

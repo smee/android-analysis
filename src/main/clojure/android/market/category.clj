@@ -1,5 +1,5 @@
 (ns android.market.category
-  (:use [android-manifest.util :only (reverse-map)]))
+  (:use [clojure.contrib.datalog.util :only (reverse-map)]))
 
 (def categories-i18n
   {"APP_WALLPAPER"          "APP_WALLPAPER" ;;todo   

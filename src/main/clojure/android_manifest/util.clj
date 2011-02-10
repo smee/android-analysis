@@ -14,11 +14,6 @@
   [m]
   (into {} (for [[k v] m :when (not (empty? v))] [k v])))
 
-(defn reverse-map
-  "Reverse the keys/values of a map"
-  [m]
-  (into {} (map (fn [[k v]] [v k]) m)))
-
 (defn sort-by-value
   "Sort map by values. If two values are equal, sort by keys. Sort order may be 
 :ascending or :descending"

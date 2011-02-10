@@ -36,7 +36,7 @@
     (not-any? #{\.} name) (str pname \. name)
     :else name))
 
-(defn- create-intent-filter 
+#_(defn- create-intent-filter 
   "Reuse android's implementation of IntentFilter from their source."
   [m]
   (let [i-f (android.IntentFilter.)]
@@ -131,7 +131,8 @@ in loading android apps without duplicates (same package, lower versions)."
 
 (defn intent-filters [component]
   (:filters component))
-
+(defn unique-intent-filters [app]
+  (distinct (mapcat intent-filters (components app))))
 (defn- find-manifests 
   "Find all AndroidManifest.xml files in any subdirectory of dir."
   [dir]
