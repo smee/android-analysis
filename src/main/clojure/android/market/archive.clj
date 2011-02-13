@@ -19,12 +19,10 @@
 
 (defn get-entries
   "Sequence of name of all entries of a zip archive matching a regular expression."
-  ([zipfile] (get-entries zipfile #".*"))
-  ([zipfile regex] 
+  ([^File zipfile] (get-entries zipfile #".*"))
+  ([^File zipfile regex] 
     (with-open [zf (ZipFile. zipfile)]
-      (doall 
-        (map #(.getName %) 
-          (filter-entries zf regex))))))
+      (doall (map (fn [^ZipEntry ze] (.getName ze)) (filter-entries zf regex))))))
 
 (defn process-entries
   "Run function for every entry (two parameters: entry name and contents as byte-array), 

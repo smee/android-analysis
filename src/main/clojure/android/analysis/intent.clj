@@ -6,12 +6,18 @@
     android-manifest.util
     android-manifest.serialization))
 
+(defn extract-app-name 
+  "Return name of last directory of the given absolute file."
+  ([abs-path] (extract-app-name abs-path \/))
+  ([abs-path sep]
+  (let [[from to] (take-last 2 (keep-indexed #(when (= sep %2) %1) abs-path))
+        app-name  (subs abs-path (inc from) to)]
+    app-name)))
+
 (defn- process-intent-calls 
   "Load intent calling data."
   [entry-name arr]
-  (let [[from to] (take-last 2 (keep-indexed #(when (= \/ %2) %1) entry-name))
-        app-name  (subs entry-name (inc from) to)]
-    (hash-map app-name (deserialize arr))))
+  (hash-map (extract-app-name entry-name) (deserialize arr)))
 
 
 (defn called-intents [m]
