@@ -46,11 +46,11 @@ with classes.dex files that are zip archives with class files in it"
 
 (defn external-explicit-intent-calls 
   ([app] (external-explicit-intent-calls app {}))
-  ([app name-classes]
+  ([app class-lookup-fn]
   (let [diff (clojure.set/difference (explicit-called-intent-classes app) (defined-intent-classes app))]
     (if (empty? diff)
       diff
-      (clojure.set/difference diff (name-classes (:name app)))))))
+      (clojure.set/difference diff (class-lookup-fn (:name app)))))))
 
 
 (defn dep-unit-dependent 
@@ -89,29 +89,29 @@ match them with existing classes...."
   (println (str (:name app) \, (count (f app)) \, type \, flag)))
 
 (defn save-to-csv [file apps]
-  (with-out-writer file
-    (println "id,count,type,capability")
-    (doseq [app apps]
-      (do
-        ;; explicit intent call with classes that are not in the app's manifest
-        (p app "unit-dependent_units" #(external-explicit-intent-calls % (memoize (build-name-classes-fn "d:/android/apps/jars"))) false)
-        ;; explicitly exported android components per app
-        ;(p app "reverse unit depends" mf/explicit-components false)
-        ;; number of intent filters per app
-        (p app "unit-dependent_units" mf/implicit-components true)
-        ;; implicit intent calls per app
-        (p app "unit-dependent_capabilities" intents/called-implicit-intents true)))
-        ))
-;; apps per unique intent filter
-    (doseq [[idx names] (indexed (vals (group-intent-filters apps)))]
-      (println (str "cap" idx \, (count names) ",capability-providing_unit,true") ))))
+  (let [lookup (memoize (build-name-classes-fn "d:/android/jars"))]
+    (with-out-writer file
+      (println "id,count,type,capability")
+      (doseq [app apps]
+        (do
+          ;; explicit intent call with classes that are not in the app's manifest
+          (p app "unit-dependent_units" #(external-explicit-intent-calls % lookup) false)
+          ;; explicitly exported android components per app
+          ;(p app "reverse unit depends" mf/explicit-components false)
+          ;; number of intent filters per app
+          (p app "unit-dependent_units" mf/implicit-components true)
+          ;; implicit intent calls per app
+          (p app "unit-dependent_capabilities" intents/called-implicit-intents true)))
+      ;; apps per unique intent filter
+      (doseq [[idx names] (indexed (vals (group-intent-filters apps)))]
+        (println (str "cap" idx \, (count names) ",capability-providing_unit,true") )))))
 
 
 (comment
   ;; use parallel function invocations
     (def apps (join-intents 
                 (-> "d:/android/reduced/android-20101127.zip" mf/load-apps-from-zip mf/unique-apps clean-app-names)
-                (intents/load-intents-zip "d:/android/apps/intents2.zip") 
+                (intents/load-intents-zip "d:/android/intents2.zip") 
               #_(deserialize "d:/android/allintents2.clj")))
   
   (aggregate (dep-provides apps))
@@ -119,7 +119,7 @@ match them with existing classes...."
   
   (save-to-csv "d:/android/android-results.csv" apps)
   
-  (def class-lookup (memoize (build-name-classes-fn "d:/android/apps/jars")))
+  (def class-lookup (memoize (build-name-classes-fn "d:/android/jars")))
   
   (aggregate (dep-unit-dependent apps class-lookup))
   
