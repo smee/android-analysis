@@ -94,15 +94,15 @@ match them with existing classes...."
     (doseq [app apps]
       (do
         ;; explicit intent call with classes that are not in the app's manifest
-        (p app "unit depends" #(external-explicit-intent-calls % (memoize (build-name-classes-fn "d:/android/apps/jars"))) false)
+        (p app "unit-dependent_units" #(external-explicit-intent-calls % (memoize (build-name-classes-fn "d:/android/apps/jars"))) false)
         ;; explicitly exported android components per app
-        #_(p app "reverse unit depends" mf/explicit-components false)
+        ;(p app "reverse unit depends" mf/explicit-components false)
         ;; number of intent filters per app
-        #_(p app "provides" mf/implicit-components true)
+        (p app "unit-dependent_units" mf/implicit-components true)
         ;; implicit intent calls per app
-        #_(p app "capability depends" intents/called-implicit-intents true)
+        (p app "unit-dependent_capabilities" intents/called-implicit-intents true)))
         ))
-        ;; apps per unique intent filter
+;; apps per unique intent filter
     (doseq [[idx names] (indexed (vals (group-intent-filters apps)))]
       (println (str "cap" idx \, (count names) ",capability-providing_unit,true") ))))
 
