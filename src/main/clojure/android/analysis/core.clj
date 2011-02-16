@@ -88,8 +88,7 @@ match them with existing classes...."
 (defn- p [app type f flag]
   (println (str (:name app) \, (count (f app)) \, type \, flag)))
 
-(defn save-to-csv [file apps]
-  (let [lookup (memoize (build-name-classes-fn "d:/android/jars"))]
+(defn save-to-csv [file apps lookup]
     (with-out-writer file
       (println "id,count,type,capability")
       (doseq [app apps]
@@ -99,13 +98,13 @@ match them with existing classes...."
           ;; explicitly exported android components per app
           ;(p app "reverse unit depends" mf/explicit-components false)
           ;; number of intent filters per app
-          (p app "unit-provided_capabilities" mf/implicit-components true)
+          (p app "unit-provided_capabilities" mf/implicit-components false)
           ;; implicit intent calls per app
-          (p app "unit-dependent_capabilities" intents/called-implicit-intents true)))
+          (p app "unit-dependent_capabilities" intents/called-implicit-intents false)))
       ;; apps per unique intent filter
       (doseq [[idx names] (indexed (vals (group-intent-filters apps)))]
         (println (str "cap" idx \, (count names) ",capability-providing_units,true") ))
-      (println "cap_0_dummy,0,capability-providing_units,true"))))
+      ))
 
 
 (comment
@@ -118,9 +117,9 @@ match them with existing classes...."
   (aggregate (dep-provides apps))
   (aggregate (dep-unit-depends apps))
   
-  (save-to-csv "d:/android/androidRelationships.csv" apps)
   
   (def class-lookup (memoize (build-name-classes-fn "d:/android/jars")))
+  (save-to-csv "d:/android/androidRelationships.csv" apps class-lookup)
   
   (aggregate (dep-unit-dependent apps class-lookup))
   
