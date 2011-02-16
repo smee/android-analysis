@@ -99,12 +99,13 @@ match them with existing classes...."
           ;; explicitly exported android components per app
           ;(p app "reverse unit depends" mf/explicit-components false)
           ;; number of intent filters per app
-          (p app "unit-dependent_units" mf/implicit-components true)
+          (p app "unit-provided_capabilities" mf/implicit-components true)
           ;; implicit intent calls per app
           (p app "unit-dependent_capabilities" intents/called-implicit-intents true)))
       ;; apps per unique intent filter
       (doseq [[idx names] (indexed (vals (group-intent-filters apps)))]
-        (println (str "cap" idx \, (count names) ",capability-providing_unit,true") )))))
+        (println (str "cap" idx \, (count names) ",capability-providing_units,true") ))
+      (println "cap_0_dummy,0,capability-providing_units,true"))))
 
 
 (comment
@@ -117,12 +118,16 @@ match them with existing classes...."
   (aggregate (dep-provides apps))
   (aggregate (dep-unit-depends apps))
   
-  (save-to-csv "d:/android/android-results.csv" apps)
+  (save-to-csv "d:/android/androidRelationships.csv" apps)
   
   (def class-lookup (memoize (build-name-classes-fn "d:/android/jars")))
   
   (aggregate (dep-unit-dependent apps class-lookup))
   
   (external-explicit-intent-calls (nth apps 7049) class-lookup)
+  
+  (def gif (group-intent-filters apps))
+  ;; find intent filter with biggest number of apps defining it
+  (apply (partial max-key second) (map-values count gif))
   
   )
