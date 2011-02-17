@@ -113,20 +113,30 @@ them to java bytecode."
 Uses static analysis via the findbugs infrastructure."
   (read-string (analyze.AnalyzeAndroidApps/findIntents (file app-file))))
 
-(defn extract-intents [main-dir outp-dir]
-    (let [main-dir-f (file main-dir)
-          jar-files (find-file main-dir-f #".*classes.dex")]
+(defn count-intent-constructors [app-file]
+  "Count all constructor invocations for intent objects."
+  (analyze.AnalyzeAndroidApps/countIntentConstructors (file app-file)))
+
+(defn- process-all-files [main-dir outp-dir file-regex out-name process-fn]
+  (let [main-dir-f (file main-dir)
+          jar-files (find-file main-dir-f file-regex)]
     (doseq [f jar-files]
       (let [rel-path (extract-relative-path main-dir-f (.getParentFile f))
-            outfile  (file outp-dir rel-path "intents.clj")
+            outfile  (file outp-dir rel-path out-name)
             lockfile (file outp-dir rel-path ".lock")]
         (make-parents outfile)
         (when (and (not (.exists outfile)) (not (.exists lockfile)))
           (do 
             (.createNewFile lockfile)
             (println "processing" f "into" outfile)
-            (serialize outfile (find-intents f))
+            (serialize outfile (process-fn f))
             (.delete lockfile)))))))
+
+(defn extract-intents [main-dir outp-dir]
+    (process-all-files main-dir outp-dir #".*classes.dex" "intents.clj" find-intents))
+
+(defn extract-intent-constructors [main-dir outp-dir]
+    (process-all-files main-dir outp-dir #".*classes.dex" "intent-count" count-intent-constructors))
 
 (comment
   
@@ -138,6 +148,9 @@ Uses static analysis via the findbugs infrastructure."
   (do
     (println "find intents: " 
       (extract-intents "D:\\android\\apps\\jars" "d:/android/apps/intents2")))
+  (do
+    (println "count intent constructors: " 
+      (extract-intent-constructors "D:\\android\\apps\\jars" "d:/android/apps/intents2")))
   
   (serialize "d:/temp/foo" (find-intents (file "D:\\android\\jars\\ARCADE\\-1007597263548681988\\classes.dex")))
   
