@@ -6,6 +6,8 @@
     android-manifest.util
     android-manifest.serialization))
 
+
+;;;;;;; Load inputs ;;;;;;;;;;;;;;;;;;
 (defn extract-app-name 
   "Return name of last directory of the given absolute file."
   ([abs-path] (extract-app-name abs-path \/))
@@ -20,13 +22,26 @@
   (hash-map (extract-app-name entry-name) (deserialize arr)))
 
 
-(defn called-intents [m]
-   (map #(apply concat (vals (:called %))) (vals m)))
 
-(defn queried-intents [m]
+(defn load-intents-zip [file]
+  (reduce merge (process-entries file process-intent-calls #".*clj")))
+
+(defn load-intent-constructor-counts-zip [file]
+  (reduce merge (process-entries file process-intent-calls  #".*intent-count")))
+
+;;;;;;; Extract data  ;;;;;;;;;;;;;;;;;;
+(defn- called-intents-app [app]
+  (apply concat (vals (:called app))))
+(defn- queried-intents-app [app]
   ;; fix stupid bug in the static analysis:
   ;;   used vector in place of hashmap :(
-  (map #(apply concat (vals  (apply hash-map (:queried %)))) (vals m))) 
+  (apply concat (vals  (apply hash-map (:queried app)))))
+
+(defn called-intents [m]
+   (map called-intents-app (vals m)))
+
+(defn queried-intents [m]
+  (map queried-intents-app (vals m))) 
 
 (defn- x-of [m x]
   (let [ci (called-intents m)]
@@ -97,12 +112,23 @@
         counts (map-values count groups)]
   (take 10 (sort-by-value counts :descending))))
 
-(defn load-intents-zip [file]
-  (reduce merge (process-entries file process-intent-calls #".*clj")))
+(defn calc-recall
+  "Calculate the quotient of number of intents found via static analysis to number of intents constructed
+in an app."
+  ([] (calc-recall 
+        (load-intents-zip "d:/Projekte/Thorsten/waterloo/intentslist.zip")
+        (load-intent-constructor-counts-zip "d:/Projekte/Thorsten/waterloo/intents2andCounts.zip")))
+  ([il ic]
+    (let [sa-counts (map-values #(+ (count (called-intents-app %)) (count (queried-intents-app %))) x)
+          individual-recalls (for [[n c] ic]  (if (zero? c) 1 (/ (sa-counts n) c)))]
+      (double (/ (reduce + individual-recalls) (count individual-recalls))))))
 
 (comment
   
-    (def x (load-intents-zip "d:/Projekte/Thorsten/waterloo/intents2.zip"))
+    (def x (load-intents-zip "d:/Projekte/Thorsten/waterloo/intentslist.zip"))
+    (def c (load-intent-constructor-counts-zip "d:/Projekte/Thorsten/waterloo/intents2andCounts.zip"))
+    (calc-recall (x c))
+    
     (def x (deserialize "d:/android/allintents2.clj"))
     (def old-versions (deserialize "d:/android/oldversions.clj"))
     ;; remove infos about all old versions
