@@ -75,7 +75,7 @@ match them with existing classes...."
 (defn group-intent-filters 
   "Group apps by unique intent filters"
   [apps]
-  (apply (partial merge-with conj) (map if-to-name-map apps)))
+  (apply (partial merge-with clojure.set/union) (map if-to-name-map apps)))
 
 (defn aggregate 
   "Create histogram data by counting elements in the data seq and calculate their frequency"
@@ -128,5 +128,5 @@ match them with existing classes...."
   (def gif (group-intent-filters apps))
   ;; find intent filter with biggest number of apps defining it
   (apply (partial max-key second) (map-values count gif))
-  
+  (filter #(< 800 (second %)) (map-values count gif))
   )
