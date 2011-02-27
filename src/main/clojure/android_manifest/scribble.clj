@@ -38,3 +38,10 @@
   (doseq [f files-to-fix]
     (spit f (str \( (slurp f) \))))
 )
+
+(comment
+  (def jars (elatexam.logs.util/files-in "d:/android/apps/jars" #".*classes.dex"))  
+  (for [f (take 30 (repeatedly #(rand-nth jars)))]
+    (clojure.java.io/copy f (clojure.java.io/file "d:/android/sample" (str (hash f) ".jar"))))
+  
+  )

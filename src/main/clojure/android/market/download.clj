@@ -112,7 +112,7 @@
   (set! *print-length* 10)
  (download-all-apps 
    (file "results/market-apps/" #_(date-string)) 
-   "d:/android/orig" 
+   "d:/android/apps/original" 
    "marketcredentials.properties" 
    "marketcredentials2.properties" 
    "marketcredentials3.properties" 
