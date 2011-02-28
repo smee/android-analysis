@@ -119,7 +119,7 @@ in an app."
         (load-intents-zip "d:/Projekte/Thorsten/waterloo/intentslist.zip")
         (load-intent-constructor-counts-zip "d:/Projekte/Thorsten/waterloo/intents2andCounts.zip")))
   ([il ic]
-    (let [sa-counts (map-values #(+ (count (called-intents-app %)) (count (queried-intents-app %))) x)
+    (let [sa-counts (map-values #(+ (count (called-intents-app %)) (count (queried-intents-app %))) il)
           individual-recalls (for [[n c] ic]  (if (zero? c) 1 (/ (sa-counts n) c)))]
       (double (/ (reduce + individual-recalls) (count individual-recalls))))))
 

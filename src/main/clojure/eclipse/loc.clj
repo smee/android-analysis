@@ -1,6 +1,8 @@
-(use 'android.market.archive)
-(use '[clojure.contrib.string :only (split)])
-(use '[clojure.contrib.io :only (read-lines)])
+(ns eclipse.loc
+  (:use 
+    android.market.archive
+    [clojure.contrib.string :only (split)]
+    [clojure.contrib.io :only (read-lines)]))
 
 
 (defn parse-cloc-output [archive] 

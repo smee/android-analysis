@@ -2,7 +2,6 @@
   (:use 
     [clojure.java.io :only (reader input-stream file)]
     [clojure.contrib.zip-filter.xml]
-    [clojure.contrib.string :only (replace-re)]
     [clojure.string :only (trim)]
     )
   (:require
@@ -75,18 +74,3 @@
 
 ;;;;;;;;;;;;;;;;; analyze local update site mirrors
 
-(defn unique-plugins [& dirs]
-  (let [fseqs (map #(file-seq (file %)) dirs)
-        files (apply concat fseqs)
-        plugins (->> files
-                  (filter #(= "plugins" (.getName (.getParentFile %))))
-                  (map (memfn getName))
-                  (map (partial replace-re #"_.*" ""))
-                  sort
-                  distinct)
-        ]        
-  plugins))
-(comment
-  (def p (unique-plugins #_"D:/cygwin/tmp/eclipse/_marketmirrors"
-                          "D:/eclipse/"))
-  )
