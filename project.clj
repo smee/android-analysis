@@ -4,6 +4,7 @@
                       [marginalia "0.3.2"]] 
   :dependencies [[org.clojure/clojure "1.2.0"]
                  [org.clojure/clojure-contrib "1.2.0"]
-                 [org.apache.lucene/lucene-core "3.0.2"]]
+                 [org.apache.lucene/lucene-core "3.0.2"]
+                 [incanter "1.2.3"]]
   ;;:main android-manifest.main
             )
