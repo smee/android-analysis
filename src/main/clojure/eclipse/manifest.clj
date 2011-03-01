@@ -2,8 +2,8 @@
   (:use
     [clojure.contrib.string :only (replace-re)]
     [clojure.java.io :only (file reader)]
-    [clojure.string :only (trim)]
     [clojure.contrib.io :only (read-lines)]
+    [clojure.string :only (trim)]
     [android.market.archive :only (extract-entry process-entries)]))
 
 (defn find-plugins [& dirs]
@@ -33,9 +33,7 @@
 
 (defmulti read-manifest file-type)
 (defmethod read-manifest :jar [plugin]
-  (when-let [manifests (process-entries plugin #(read-manifest %2) #".*MANIFEST.MF")]
-    manifests))
-
+  (process-entries plugin #(read-manifest %2) #".*MANIFEST.MF"))
 (defmethod read-manifest :manifest [f]
   (-> f reader read-lines))
 (defmethod read-manifest :byte-arr [f]
