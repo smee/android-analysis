@@ -1,6 +1,7 @@
 (ns android-manifest.util
   (:use [clojure.stacktrace :only (root-cause)]
-        [clojure.java.io :only (file)])
+        [clojure.java.io :only (file)]
+        [clojure.contrib.pprint :only (cl-format)])
   (:require
     [clojure.string :as cs]))
 
@@ -117,3 +118,29 @@ the regular expression pattern"
 
 (defn print-simple-table [a-map]
   (doseq [[k v] a-map] (println k " " v)))
+
+(defn table
+  "Given a seq of hash-maps, prints a plaintext table of the values of the hash-maps.
+  If passed a list of keys, displays only those keys.  Otherwise displays all the
+  keys in the first hash-map in the seq.
+Source: http://briancarper.net/blog/527/printing-a-nicely-formatted-plaintext-table-of-data-in-clojure"
+  ([xs]
+    (table xs (keys (first xs))))
+  ([xs ks]
+    (when (seq xs)
+      (let [f (fn [old-widths x]
+                (reduce (fn [new-widths k]
+                          (let [length (inc (count (str (k x))))]
+                            (if (> length (k new-widths 0))
+                              (assoc new-widths k length)
+                              new-widths)))
+                  old-widths ks))
+            widths (reduce f {} (conj xs (zipmap ks ks)))
+            total-width (reduce + (vals widths))
+            format-string (str "~{"
+                            (reduce #(str %1 "~" (%2 widths) "A") "" ks)
+                            "~}~%")]
+        (cl-format true format-string (map str ks))
+        (cl-format true "~{~A~}~%" (repeat total-width \-))
+        (doseq [x xs]
+          (cl-format true format-string (map x ks)))))))
