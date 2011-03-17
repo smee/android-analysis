@@ -105,6 +105,38 @@ match them with existing classes...."
       (doseq [[idx names] (indexed (vals (group-intent-filters apps)))]
         (println (str "cap" idx \, (count names) ",capability-providing_units,true") ))
       ))
+;;;;;;;;;;;;;;;;;  find explicit intent dependencies
+
+(defn resolve-explicit-dependencies [apps class-lookup]
+  (let [packages (sorted-set (map :package apps))
+        n2p (remove-empty-values 
+              (zipmap 
+                (map (juxt :name :package) apps) 
+                (dep-unit-dependent apps class-lookup)))]
+    (remove-empty-values
+      (map-values 
+        #(remove nil?
+           (for [cls %]
+             (when-let [match (starts-with-any packages cls)]
+               cls))) 
+        n2p))))
+
+(defn resolve-explicit-dependencies2 [apps class-lookup]
+  (let [packages (sorted-set (map :package apps))
+        n2p (remove-empty-values 
+              (zipmap 
+                (map (juxt :name :package) apps) 
+                (dep-unit-dependent apps class-lookup)))]
+    n2p))
+
+(defn lcp 
+  "Longest common string prefix"
+  [^String s1 ^String s2]
+  (let [n (min (count s1))]
+    (loop [i 0]
+      (if (or (not= (.charAt s1 i) (.charAt s2 i)) (= i n))
+        (subs s1 0 i)
+        (recur (unchecked-inc i)))))) 
 
 
 (comment
@@ -112,13 +144,15 @@ match them with existing classes...."
     (def apps (join-intents 
                 (-> "d:/android/reduced/android-20101127.zip" mf/load-apps-from-zip mf/unique-apps clean-app-names)
                 (intents/load-intents-zip "d:/android/intents2.zip") 
-              #_(deserialize "d:/android/allintents2.clj")))
+              #_(deserialize "d:/android/apps2")))
+    (def apps (deserialize "d:/android/apps2"))
+    (def class-lookup (memoize (build-name-classes-fn "d:/android/jars")))
+    (def x (resolve-explicit-dependencies apps class-lookup))
   
   (aggregate (dep-provides apps))
   (aggregate (dep-unit-depends apps))
   
   
-  (def class-lookup (memoize (build-name-classes-fn "d:/android/jars")))
   (save-to-csv "d:/android/androidRelationships.csv" apps class-lookup)
   
   (aggregate (dep-unit-dependent apps class-lookup))

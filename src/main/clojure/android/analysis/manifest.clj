@@ -89,7 +89,7 @@ androidmanifest.xml files using zipper traversals."
         (create-components cls type i-filters exported?)))))
   
 ;;  Datastructure to hold relevant infos about an android application.
-(defrecord Android-App [name version package sdk-version components])
+(defrecord Android-App [name version package sdk-version shared-uid components])
 
 (defn load-android-manifest [app-name manifest]
   "Parse android app manifest."
@@ -97,9 +97,10 @@ androidmanifest.xml files using zipper traversals."
         x             (zip/xml-zip doc)
         package-name  (xml1-> x (attr :package))
         version       (xml1-> x (attr :versionCode))
+        shared-uid    (xml1-> x (attr :sharedUserId))
         sdk-version   (or (xml1-> x :uses-sdk (attr :minSdkVersion)) "0")
         components    (find-android-components x)]
-    (Android-App. app-name version package-name sdk-version components)))
+    (Android-App. app-name version package-name sdk-version shared-uid components)))
 
 (defn load-apps-from-disk 
   "Parse android app manifest xml files."

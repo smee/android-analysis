@@ -119,6 +119,11 @@ the regular expression pattern"
 (defn print-simple-table [a-map]
   (doseq [[k v] a-map] (println k " " v)))
 
+(defn starts-with-any 
+  "Does the string s start with any string within str-set?"
+  [str-set ^String s]
+  (some #(.startsWith s %) str-set))
+
 (defn table
   "Given a seq of hash-maps, prints a plaintext table of the values of the hash-maps.
   If passed a list of keys, displays only those keys.  Otherwise displays all the
