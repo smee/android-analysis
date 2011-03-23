@@ -108,7 +108,8 @@ match them with existing classes...."
 ;;;;;;;;;;;;;;;;;  find explicit intent dependencies
 
 (defn resolve-explicit-dependencies [apps class-lookup]
-  (let [packages (sorted-set (map :package apps))
+  (let [packages (apply sorted-set (map :package apps))
+        lookup (into {} (map (juxt :package :name) apps))
         n2p (remove-empty-values 
               (zipmap 
                 (map (juxt :name :package) apps) 
@@ -116,18 +117,12 @@ match them with existing classes...."
     (remove-empty-values
       (map-values 
         #(remove nil?
-           (for [cls %]
-             (when-let [match (starts-with-any packages cls)]
-               cls))) 
+           (distinct 
+             (for [cls %]
+               (when-let [match (starts-with-any packages cls)]
+                 (lookup match))))) 
         n2p))))
 
-(defn resolve-explicit-dependencies2 [apps class-lookup]
-  (let [packages (sorted-set (map :package apps))
-        n2p (remove-empty-values 
-              (zipmap 
-                (map (juxt :name :package) apps) 
-                (dep-unit-dependent apps class-lookup)))]
-    n2p))
 
 (defn lcp 
   "Longest common string prefix"
@@ -141,14 +136,15 @@ match them with existing classes...."
 
 (comment
   ;; use parallel function invocations
-    (def apps (join-intents 
-                (-> "d:/android/reduced/android-20101127.zip" mf/load-apps-from-zip mf/unique-apps clean-app-names)
-                (intents/load-intents-zip "d:/android/intents2.zip") 
-              #_(deserialize "d:/android/apps2")))
+    (def apps (apply join-intents 
+                (pvalues 
+                  (-> "d:/android/reduced/android-20101127.zip" mf/load-apps-from-zip mf/unique-apps clean-app-names)
+                  (intents/load-intents-zip "d:/android/intents2.zip")) 
+                #_(deserialize "d:/android/apps2")))
     (def apps (deserialize "d:/android/apps2"))
-    (def class-lookup (memoize (build-name-classes-fn "d:/android/jars")))
+    (def class-lookup (build-name-classes-fn "d:/android/jars"))
     (def x (resolve-explicit-dependencies apps class-lookup))
-  
+  (spit "d:/android/explicit-deps.dot" (graphviz-test x))
   (aggregate (dep-provides apps))
   (aggregate (dep-unit-depends apps))
   

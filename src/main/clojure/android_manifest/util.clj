@@ -122,7 +122,7 @@ the regular expression pattern"
 (defn starts-with-any 
   "Does the string s start with any string within str-set?"
   [str-set ^String s]
-  (some #(.startsWith s %) str-set))
+  (some #(when (.startsWith s %) %) str-set))
 
 (defn table
   "Given a seq of hash-maps, prints a plaintext table of the values of the hash-maps.

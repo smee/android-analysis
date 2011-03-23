@@ -40,3 +40,7 @@
     (apply str (interpose " " (get-ref-strings apps :service-refs "chocolate")))
     "}"))
 
+(defn graphviz-test [explicit-deps]
+  (let [refs (for [[[_ from] to] explicit-deps]
+               (str \" from \" " -> {" \" (apply str (interpose "\" \"" to)) \" \}))]
+    (str "digraph {" \newline (apply str (interpose \newline refs)) \})))
