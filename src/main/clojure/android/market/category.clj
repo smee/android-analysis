@@ -47,10 +47,8 @@
 (def all-known-categories (set(keys categories-i18n)))
 (def ger-en (reverse-map categories-i18n))
 
-(defn get-category [app]
+(defn get-category [{c :category}]
   {:post [(not-empty %)]}
-  (let [c (:category app)]
-    ;(println "Input:" c)
-    (if (contains? all-known-categories c)
-      c
-      (get ger-en c))))
+  (if-let [i18n (get ger-en c)] 
+    i18n  
+    c))

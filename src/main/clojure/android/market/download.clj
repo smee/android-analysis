@@ -33,11 +33,11 @@
         out-file (file filename)]
     (try
       (make-parents out-file)
-      (copy (.getInputStream (doto (.openConnection url)
+      (with-open [instream (.getInputStream (doto (.openConnection url)
                                (.setRequestMethod "GET")
                                (.setRequestProperty "User-Agent" "Android-Market/2")
-                               (.setRequestProperty "Cookie" cookie))) 
-        out-file)
+                               (.setRequestProperty "Cookie" cookie)))] 
+        (copy instream out-file))
       (catch java.io.IOException e
         (.printStackTrace e System/err)
         (.createNewFile (file (str filename ".403")))))))
@@ -111,7 +111,7 @@
 
   (set! *print-length* 10)
  (download-all-apps 
-   (file "results/market-apps/" #_(date-string)) 
+   (file "results/market-apps/" (date-string)) 
    "d:/android/apps/original" 
    "marketcredentials.properties" 
    "marketcredentials2.properties" 

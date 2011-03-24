@@ -123,12 +123,11 @@
 
 (defn fetch-app-infos [m session]
   "Return reference to sequence of application details. Dereference with @."
-  (call-market 
-    session
-    (create-apps-request m)
-    (fn [resp] (map 
-                 extract-app-infos
-                 (.getAppList resp)))))
+  (ignore-exceptions
+    (call-market 
+      session
+      (create-apps-request m)
+      (fn [resp] (map extract-app-infos (.getAppList resp))))))
   
 
 (defn create-metadata-fetcher 
@@ -137,7 +136,7 @@ for as long as there are more than 0 results per request."
   [api queries] 
   (lazy-seq
     (when-let [q (first queries)]
-      (let [_ (println "sleeping...")
+      (let [_ (sleep-random 1000 5000)
             apps (->> api (fetch-app-infos q) (filter map?))]
         (when (not-empty apps)
           (lazy-cat apps (create-metadata-fetcher api (rest queries))))))))
