@@ -9,8 +9,8 @@
   (:require
     [android.market.category :as cat])
   (:import 
-    [com.gc.android.market.api AndroidMarketApi]
-    [com.gc.android.market.api.model 
+    [com.gc.android.market.api MarketSession MarketSession$Callback]
+    [com.gc.android.market.api.model
      Market$App 
      Market$AppType 
      Market$AppsRequest 
@@ -71,30 +71,64 @@
         :timestamp (System/currentTimeMillis))
       :extendedInfo :allFields :descriptorForType :defaultInstanceForType :unknownFields :serializedSize :promoText :class)))
 
-(def api-cache (ref {}))
+(defn- init-session [credentials]
+  (let [session  (new MarketSession)
+        username (get credentials "username")
+        password (get credentials "password")]
+  (do
+    ; login
+    (doto session
+      (.login username password)
+      (.setLocale java.util.Locale/US))
+      
+    ; we are on an US carrier using a froyo device....
+;    (doto (.getContext session)
+;      (.setAuthSubToken (.getAuthSubToken session))
+;      (.setUnknown1 0)
+;      (.setVersion 1002)
+;      (.setDeviceAndSdkVersion "crespo:8")
+;      (.setUserLanguage "de");"en")
+;      (.setUserCountry "de");"us")
+;      (.setOperatorAlpha "Vodafone");"T-Mobile USA")
+;      (.setOperatorNumeric "26202")
+;      (.setSimOperatorAlpha "Vodafone");"T-Mobile USA")
+;      (.setSimOperatorNumeric "26202")
+;      (.setAndroidId (get credentials "androidid")))
+    session)))
 
+(def api-cache (ref {}))
 (defn- create-market-api 
   "Login to google android market. Caches all instances."
   [cred]
-  (dosync
-    (if-let [api (get @api-cache cred)]
+  (if-let [api (get @api-cache cred)]
       api
-      (let [user (get cred "username")
-            pw   (get cred "password")
-            api  (doto (AndroidMarketApi. user pw true)
-                   (.setAndroidId (get cred "androidid"))
-                   (.fakeGermanCarrier))]
-        (alter api-cache assoc cred api)
-        api))))
+      (dosync
+        (let [api (init-session cred)]
+          (alter api-cache assoc cred api)
+          api))))
 
 
-(defn- fetch-app-infos [m market-api]
-  (map extract-app-infos
-    (filter identity
-      (try
-        (.executeRequest market-api (create-apps-request m))
-        (catch Exception e
-          (.printStackTrace e System/err))))))
+(defn- call-market [session req res-fn]
+  "Call android market api, returns (res-fn response) wrapped in a promise."
+  (let [result   (promise)
+        callback (proxy [MarketSession$Callback] []
+                   (onResult [ctx, resp]
+                     (deliver result (res-fn resp))))]
+    (do
+      (doto session
+        (.append req callback)
+        (.flush))
+      @result)))
+
+
+(defn fetch-app-infos [m session]
+  "Return reference to sequence of application details. Dereference with @."
+  (call-market 
+    session
+    (create-apps-request m)
+    (fn [resp] (map 
+                 extract-app-infos
+                 (.getAppList resp)))))
   
 
 (defn create-metadata-fetcher 
@@ -102,10 +136,11 @@
 for as long as there are more than 0 results per request."
   [api queries] 
   (lazy-seq
-    (if-let [q (first queries)]
-      (let [apps (->> api (fetch-app-infos q) (filter map?))]
+    (when-let [q (first queries)]
+      (let [_ (do (println "sleeping...") (sleep-random 1000 2000) (println "fetching" q))
+            apps (->> api (fetch-app-infos q) (filter map?))]
         (when (not-empty apps)
-          (cons apps (create-metadata-fetcher api (rest queries))))))))
+          (lazy-cat apps (create-metadata-fetcher api (rest queries))))))))
 
 (defn- create-queries 
   "Sequence of api queries 0..800"
