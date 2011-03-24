@@ -137,7 +137,7 @@ for as long as there are more than 0 results per request."
   [api queries] 
   (lazy-seq
     (when-let [q (first queries)]
-      (let [_ (do (println "sleeping...") (sleep-random 1000 2000) (println "fetching" q))
+      (let [_ (println "sleeping...")
             apps (->> api (fetch-app-infos q) (filter map?))]
         (when (not-empty apps)
           (lazy-cat apps (create-metadata-fetcher api (rest queries))))))))
@@ -219,7 +219,7 @@ for as long as there are more than 0 results per request."
 
 (comment
   (def cred-files ["marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties" "marketcredentials4.properties" "marketcredentials5.properties"])
-  (batch-download-newest cred-files)
+  (future (batch-download-newest cred-files))
   (batch-download-query " " cred-files)
   
   (def credentials (map read-properties cred-files))
