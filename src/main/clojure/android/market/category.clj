@@ -44,7 +44,7 @@
    "TRAVEL_AND_LOCAL"       "Reisen & Lokales"
    "WEATHER"                "Wetter"})
 
-(def all-known-categories (set(keys categories-i18n)))
+(def all-known-categories (apply sorted-set (keys categories-i18n)))
 (def ger-en (reverse-map categories-i18n))
 
 (defn get-category [{c :category}]
