@@ -136,7 +136,7 @@ for as long as there are more than 0 results per request."
   [api queries] 
   (lazy-seq
     (when-let [q (first queries)]
-      (let [_ (sleep-random 1000 5000)
+      (let [_ (sleep-random 500 2000)
             apps (->> api (fetch-app-infos q) (filter map?))]
         (when (not-empty apps)
           (lazy-cat apps (create-metadata-fetcher api (rest queries))))))))
@@ -223,7 +223,7 @@ for as long as there are more than 0 results per request."
   
   (def credentials (map read-properties cred-files))
   
-  (let [input-dir (str "results/market-apps/" #_(date-string))
+  (let [input-dir (str "results/market-apps/" (date-string))
         all-from-authors (leech-apps-per-author input-dir credentials)
         outfile (str "results/author-" (date-string))]
     (serialize outfile (remove empty? all-from-authors)))

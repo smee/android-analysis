@@ -107,7 +107,7 @@ androidmanifest.xml files using zipper traversals."
   [manifest-files]
   (pmap 
     (fn [f]
-      (let [app-name (-> f .getParentFile .getName)]
+      (let [app-name (-> f .getName)]
         (load-android-manifest app-name f)))
     manifest-files))
 

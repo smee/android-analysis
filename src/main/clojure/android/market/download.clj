@@ -74,6 +74,17 @@
                    (.login username password #_MarketSession/SERVICE_SECURE))]
     (.getAuthSubToken session)))
 
+(defn construct-output-file 
+  "To prevent ambigious output dirs (using the category doesn't work, 
+changes all the time, for example due to i18n)"
+  [dir app-id]
+  (let [stripped (if (.startsWith app-id "-") (subs app-id 1) app-id)
+        [d1 d2] (->> stripped (partition-all 2) (map (partial apply str)) (take 2))
+        out (file dir d1 d2 app-id)]
+    (do
+      (make-parents out)
+      out)))
+
 (defn- downloaded? [f]
   (let [f (file f)]
     (or (.exists f) (.exists (file (str (.toString f) ".403"))))))
@@ -85,7 +96,7 @@
         deviceid    (get credentials "deviceid")
         authtoken   (get credentials "authtoken")
         app-id      (:id app)
-        output-file (file output-dir app-id)]
+        output-file (construct-output-file output-dir app-id)]
     
     ;(println app-id \tab output-file)
     (when-not (downloaded? output-file)
@@ -102,10 +113,18 @@
   (let [properties        (map #(into {} (read-properties %)) credentials-files)
         avail-credentials (map #(assoc % "authtoken" (get-auth-token %)) properties)]
     (doseq [in-file (file-seq (file input-dir)) :when (.isFile in-file)]
-      (let [apps (load-apps-metadata in-file)]
-        (println (count apps))
+      (let [apps (load-apps-metadata in-file)
+            _ (println "downloading" (count apps) "from" in-file)]
         (doall
-          (pmap #(download-if-nonexistant %1 %2 (file output-dir (cat/get-category %1))) apps (cycle avail-credentials)))))))
+          (pmap #(download-if-nonexistant %1 %2 output-dir) apps (cycle avail-credentials)))))))
+
+(defn clean-up [from to ffn]
+  (let [apps (filter (memfn isFile) (file-seq (file from)))]
+    (for [a apps]
+      (let [out (construct-output-file to (ffn a))]
+        (.renameTo a out)
+        ;out
+        ))))
 
 (comment
 

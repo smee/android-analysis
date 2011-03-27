@@ -3,6 +3,7 @@
     [android-manifest.core :only (valid-action?)]
     [android-manifest.util :only (ignore-exceptions find-file)]
     [android-manifest.serialization :only (serialize)]
+    [android.market.download :only (construct-output-file) ]
     ;clojure.contrib.java-utils
     [clojure.java.io :only (file make-parents)]
     [clojure.contrib.io :only (copy to-byte-array)])
@@ -17,7 +18,7 @@
 
 (defn- process-app [main-dir-f outp-dir-f filename process-fn zip-file]
   (let [rel-path (extract-relative-path main-dir-f zip-file)
-        outfile  (file outp-dir-f rel-path filename)]
+        outfile  (construct-output-file outp-dir-f (.getName zip-file))]
       (make-parents outfile)
       (when (not (.exists outfile))
         (do 
@@ -31,11 +32,11 @@
 (defn- extract-and-convert [main-dir outp-dir file-in-app process-fn]
     (let [main-dir-f (file main-dir)
           outp-dir-f (file outp-dir)]
-      (count (filter identity
-               (pmap
+      (count (pmap
                  #(ignore-exceptions 
                     (process-app main-dir-f outp-dir-f file-in-app process-fn %))
-                 (filter #(and (.isFile %) (not (.endsWith (.getName %) ".403")) #_(.contains (.getPath %) "COMMUN")) (file-seq main-dir-f)))))))
+                 (filter #(and (.isFile %) (not (.endsWith (.getName %) ".403"))) 
+                         (shuffle (file-seq main-dir-f)))))))
 
 (defn decode-binary-xml [instream]
   "Decode android manifest files."
@@ -117,13 +118,11 @@ Uses static analysis via the findbugs infrastructure."
   "Count all constructor invocations for intent objects."
   (analyze.AnalyzeAndroidApps/countIntentConstructors (file app-file)))
 
-(defn- process-all-files [main-dir outp-dir file-regex out-name process-fn]
-  (let [main-dir-f (file main-dir)
-          jar-files (find-file main-dir-f file-regex)]
-    (doseq [f jar-files]
-      (let [rel-path (extract-relative-path main-dir-f (.getParentFile f))
-            outfile  (file outp-dir rel-path out-name)
-            lockfile (file outp-dir rel-path ".lock")]
+(defn- process-all-files [main-dir outp-dir process-fn]
+  (let [main-dir-f (file main-dir)]
+    (doseq [f (file-seq main-dir-f) :when (and (.isFile f) (not (.endsWith (.getName f) ".403")))]
+      (let [outfile  (construct-output-file outp-dir (.getName f))
+            lockfile (construct-output-file outp-dir (str (.getName f) ".lock"))]
         (make-parents outfile)
         (when (and (not (.exists outfile)) (not (.exists lockfile)))
           (do 
@@ -133,24 +132,24 @@ Uses static analysis via the findbugs infrastructure."
             (.delete lockfile)))))))
 
 (defn extract-intents [main-dir outp-dir]
-    (process-all-files main-dir outp-dir #".*classes.dex" "intents.clj" find-intents))
+    (process-all-files main-dir outp-dir find-intents))
 
 (defn extract-intent-constructors [main-dir outp-dir]
-    (process-all-files main-dir outp-dir #".*classes.dex" "intent-count" count-intent-constructors))
+    (process-all-files main-dir outp-dir count-intent-constructors))
 
 (comment
   
   (possible-android-identifiers (String. (to-byte-array (java.io.File. "h:/classes.dex"))))
   
-  (println "new manifests: " (extract-android-manifests "D:\\android\\apps\\original" "h:/android"))
-  (println "new classes.dex: " (extract-bytecode-strings "D:\\android\\apps\\original\\" "h:/android"))
+  (println "new manifests: " (extract-android-manifests "D:\\android\\apps\\original" "d:/android/apps/manifests"))
+  ;(println "new classes.dex: " (extract-bytecode-strings "D:\\android\\apps\\original\\" "d:/android/apps/dex"))
   (println "dex2jar: " (dex2jar "D:\\android\\apps\\original\\" "d:/android//apps/jars"))
   (do
     (println "find intents: " 
       (extract-intents "D:\\android\\apps\\jars" "d:/android/apps/intentslist")))
   (do
     (println "count intent constructors: " 
-      (extract-intent-constructors "D:\\android\\apps\\jars" "d:/android/apps/intents2")))
+      (extract-intent-constructors "D:\\android\\apps\\jars" "d:/android/apps/intent constructor counts")))
   
   (serialize "d:/temp/foo" (find-intents (file "D:\\android\\jars\\ARCADE\\-1007597263548681988\\classes.dex")))
   
