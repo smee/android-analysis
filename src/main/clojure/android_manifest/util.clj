@@ -76,11 +76,14 @@
   
 (defn find-file 
   "Traverse directory dirpath depth first, return all files matching
-the regular expression pattern"
-  [dirpath pattern]
-  (for [file (-> dirpath file file-seq) 
-        :when (re-matches pattern (.getName file))]
-    file))
+the regular expression pattern. Per default returns only files, no directories."
+  ([dirpath pattern] (find-file dirpath pattern true))
+  ([dirpath pattern files-only?]
+  (let [files (for [file (-> dirpath file file-seq) :when (re-matches pattern (.getName file))]
+                file)]
+    (if files-only?
+      (filter (memfn isFile) files)
+      files))))
 
 (defn date-string 
   "Get date as string with format yyyyMMdd."
@@ -95,6 +98,10 @@ the regular expression pattern"
   `(try 
      ~@body
      (catch Exception e# (.println System/err (root-cause e#)))))
+
+(defn wrap-ignore-exceptions [f]
+  (fn [& args]
+    (ignore-exceptions (apply f args))))
 
 (defn unchunk 
   "Disable the chunking behaviour introduced in clojure 1.1"

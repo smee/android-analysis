@@ -19,12 +19,12 @@
 (defn- process-intent-calls 
   "Load intent calling data."
   [entry-name arr]
-  (hash-map (extract-app-name entry-name) (deserialize arr)))
+  (hash-map entry-name (deserialize arr)))
 
 
 
 (defn load-intents-zip [file]
-  (reduce merge (process-entries file process-intent-calls #".*clj")))
+  (reduce merge (process-entries file process-intent-calls)))
 
 (defn load-intent-constructor-counts-zip [file]
   (reduce merge (process-entries file process-intent-calls  #".*intent-count")))

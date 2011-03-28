@@ -31,7 +31,7 @@ returns sequence of results (not lazy)."
   ([zipfile func regex]
     (with-open [zf (ZipFile. zipfile)]
       (doall 
-        (map #(func (.getName %) (to-byte-array (.getInputStream zf %))) (filter-entries zf regex))))))  
+        (pmap #(func (.getName %) (to-byte-array (.getInputStream zf %))) (filter-entries zf regex))))))  
       
       
 (comment

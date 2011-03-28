@@ -39,7 +39,7 @@
   "Build function that looks up the set of classes defined in an android app. Requires a directory
 with classes.dex files that are zip archives with class files in it"
   [jars-dir]
-  (let [fs (find-file jars-dir #".*classes.dex")
+  (let [fs (find-file jars-dir)
         name-file (into {} (pmap (fn [f] (vector (intents/extract-app-name (.getAbsolutePath f) \\) f)) fs))]
     (fn [n] (when-let [f (name-file n)]
               (set (map (comp remove-dot-class normalize-classname) (archive/get-entries f #".*class")))))))
@@ -138,7 +138,7 @@ match them with existing classes...."
   ;; use parallel function invocations
     (def apps (apply join-intents 
                 (pvalues 
-                  (-> "d:/android/reduced/android-20101127.zip" mf/load-apps-from-zip mf/unique-apps clean-app-names)
+                  (-> "d:/android/reduced/android-20101127.zip" mf/load-apps-from-zip mf/unique-apps)
                   (intents/load-intents-zip "d:/android/intents2.zip")) 
                 #_(deserialize "d:/android/apps2")))
     (def apps (deserialize "d:/android/apps2"))

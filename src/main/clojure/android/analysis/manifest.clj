@@ -112,9 +112,10 @@ androidmanifest.xml files using zipper traversals."
     manifest-files))
 
 (defn load-apps-from-zip
-  "Parse android app manifest files within a zip archive."
+  "Parse android app manifest files within a zip archive. Ignores every exception."
   [zip-file]
-  (archive/process-entries zip-file load-android-manifest #".*AndroidManifest.xml"))
+  (filter identity
+          (archive/process-entries zip-file (wrap-ignore-exceptions load-android-manifest) #".*\d\d\d\d(\d)+")))
   
 (defn unique-apps 
   "Sort by descending version, filter all apps where version and path are equals. Should result
@@ -132,8 +133,10 @@ in loading android apps without duplicates (same package, lower versions)."
 
 (defn intent-filters [component]
   (:filters component))
+
 (defn unique-intent-filters [app]
   (distinct (mapcat intent-filters (components app))))
+
 (defn- find-manifests 
   "Find all AndroidManifest.xml files in any subdirectory of dir."
   [dir]

@@ -146,7 +146,7 @@ changes all the time, for example due to i18n)"
        app-id      "4332943286439977254"]
    (download-app-secure app-id authtoken userid deviceid (str app-id ".apk")))
  
- (count (deserialize "d:/android/apps/original/apps-BRAIN"))
+(def avail-apps (set (android.market.archive/get-entries (java.io.File. "d:/android/reduced/manifests-20110327.zip") #".*\d\d\d\d(\d)+")))
  
  ;; disable https certificate verification
  (javax.net.ssl.HttpsURLConnection/setDefaultHostnameVerifier 
