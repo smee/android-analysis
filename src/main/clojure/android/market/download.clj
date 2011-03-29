@@ -74,12 +74,19 @@
                    (.login username password #_MarketSession/SERVICE_SECURE))]
     (.getAuthSubToken session)))
 
+(defn construct-path-parts 
+  "Create a hierarchy of folders by splitting the numeric part of app id in
+substrings of size 2."
+  [app-id]
+  (let [stripped (if (.startsWith app-id "-") (subs app-id 1) app-id)
+        [d1 d2] (->> stripped (partition-all 2) (map (partial apply str)) (take 2))]
+    [d1 d2]))
+
 (defn construct-output-file 
   "To prevent ambigious output dirs (using the category doesn't work, 
 changes all the time, for example due to i18n)"
   [dir app-id]
-  (let [stripped (if (.startsWith app-id "-") (subs app-id 1) app-id)
-        [d1 d2] (->> stripped (partition-all 2) (map (partial apply str)) (take 2))
+  (let [[d1 d2] (construct-path-parts app-id)
         out (file dir d1 d2 app-id)]
     (do
       (make-parents out)

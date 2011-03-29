@@ -8,23 +8,16 @@
 
 
 ;;;;;;; Load inputs ;;;;;;;;;;;;;;;;;;
-(defn extract-app-name 
-  "Return name of last directory of the given absolute file."
-  ([abs-path] (extract-app-name abs-path \/))
-  ([abs-path sep]
-  (let [[from to] (take-last 2 (keep-indexed #(when (= sep %2) %1) abs-path))
-        app-name  (subs abs-path (inc from) to)]
-    app-name)))
 
 (defn- process-intent-calls 
   "Load intent calling data."
   [entry-name arr]
-  (hash-map entry-name (deserialize arr)))
+  (hash-map (aget (.split entry-name "/") 2) (deserialize arr)))
 
 
 
 (defn load-intents-zip [file]
-  (reduce merge (process-entries file process-intent-calls)))
+  (reduce merge (process-entries file process-intent-calls #".*\d\d\d\d(\d)+")))
 
 (defn load-intent-constructor-counts-zip [file]
   (reduce merge (process-entries file process-intent-calls  #".*intent-count")))

@@ -2,7 +2,8 @@
   (:use 
     android-manifest.serialization
     android-manifest.util
-    [clojure.contrib.io :only (with-out-writer)]
+    [android.market.download :as download]
+    [clojure.contrib.io :only (with-out-writer file)]
     [clojure.contrib.seq :only (indexed)])
   (:require 
     clojure.set
@@ -36,13 +37,13 @@
   (subs s 0 (- (count s) 6)))
 
 (defn build-name-classes-fn 
-  "Build function that looks up the set of classes defined in an android app. Requires a directory
-with classes.dex files that are zip archives with class files in it"
+  "Build function that looks up the set of classes defined in an android app. 
+Operates on the result directory of android.market.process/dex2jar"
   [jars-dir]
-  (let [fs (find-file jars-dir)
-        name-file (into {} (pmap (fn [f] (vector (intents/extract-app-name (.getAbsolutePath f) \\) f)) fs))]
-    (fn [n] (when-let [f (name-file n)]
-              (set (map (comp remove-dot-class normalize-classname) (archive/get-entries f #".*class")))))))
+  (fn [n] (let [[p1 p2] (download/construct-path-parts n)
+                  f (file jars-dir p1 p2 n)]
+              (when f
+                (set (map (comp remove-dot-class normalize-classname) (archive/get-entries f #".*class")))))))
 
 (defn external-explicit-intent-calls 
   ([app] (external-explicit-intent-calls app {}))
@@ -96,7 +97,7 @@ match them with existing classes...."
           ;; explicit intent call with classes that are not in the app's manifest
           (p app "unit-dependent_units" #(external-explicit-intent-calls % lookup) false)
           ;; explicitly exported android components per app
-          ;(p app "reverse unit depends" mf/explicit-components false)
+          (p app "reverse unit depends" mf/explicit-components false)
           ;; number of intent filters per app
           (p app "unit-provided_capabilities" mf/implicit-components false)
           ;; implicit intent calls per app
@@ -139,9 +140,9 @@ match them with existing classes...."
     (def apps (apply join-intents 
                 (pvalues 
                   (-> "d:/android/reduced/android-20101127.zip" mf/load-apps-from-zip mf/unique-apps)
-                  (intents/load-intents-zip "d:/android/intents2.zip")) 
+                  (intents/load-intents-zip "d:/android/reduced/intentslist-20110327.zip")) 
                 #_(deserialize "d:/android/apps2")))
-    (def apps (deserialize "d:/android/apps2"))
+    (def apps (deserialize "d:/android/apps-58k"))
     (def class-lookup (build-name-classes-fn "d:/android/jars"))
     (def x (resolve-explicit-dependencies apps class-lookup))
   (spit "d:/android/explicit-deps.dot" (graphviz-test x))
