@@ -88,6 +88,10 @@ androidmanifest.xml files using zipper traversals."
             exported? (Boolean/valueOf (xml1-> c (attr :exported)))]
         (create-components cls type i-filters exported?)))))
   
+
+(defn extract-app-name [name]
+  (last (.split name "/")))
+
 ;;  Datastructure to hold relevant infos about an android application.
 (defrecord Android-App [name version package sdk-version shared-uid components])
 
@@ -100,7 +104,7 @@ androidmanifest.xml files using zipper traversals."
         shared-uid    (xml1-> x (attr :sharedUserId))
         sdk-version   (or (xml1-> x :uses-sdk (attr :minSdkVersion)) "0")
         components    (find-android-components x)]
-    (Android-App. app-name version package-name sdk-version shared-uid components)))
+    (Android-App. (extract-app-name app-name) version package-name sdk-version shared-uid components)))
 
 (defn load-apps-from-disk 
   "Parse android app manifest xml files."
@@ -115,7 +119,7 @@ androidmanifest.xml files using zipper traversals."
   "Parse android app manifest files within a zip archive. Ignores every exception."
   [zip-file]
   (filter identity
-          (archive/process-entries zip-file (wrap-ignore-exceptions load-android-manifest) #".*\d\d\d\d(\d)+")))
+          (archive/process-entries zip-file load-android-manifest #".*\d\d\d\d(\d)+")))
   
 (defn unique-apps 
   "Sort by descending version, filter all apps where version and path are equals. Should result
@@ -162,14 +166,13 @@ nonempty intent-filter seq."
 (defn fan-in [apps]
    (into (sorted-set) (frequencies (map count (exported-components apps)))))
 
-(defn extract-app-name [manifest]
-  (aget (.split (:name manifest) "/") 2))
 
 (defn names-of-old-app-versions 
   "Find the names of all apps that have a newer version. Returns a set."
   [apps]
-  (let [unique-names-all (map extract-app-name apps)
-        unique-names (map extract-app-name (unique-apps apps))]
+  (let [name-of (comp extract-app-name :name)
+        unique-names-all (map name-of apps)
+        unique-names (map name-of (unique-apps apps))]
     (clojure.set/difference (set unique-names-all) (set unique-names))))
 
 

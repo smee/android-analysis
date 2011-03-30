@@ -12,7 +12,7 @@
 (defn- process-intent-calls 
   "Load intent calling data."
   [entry-name arr]
-  (hash-map (aget (.split entry-name "/") 2) (deserialize arr)))
+  (hash-map (last (.split entry-name "/")) (deserialize arr)))
 
 
 

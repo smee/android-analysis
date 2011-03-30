@@ -13,7 +13,7 @@
 
 (defn clean-app-names [manifests]
   (for [mf manifests]
-    (assoc mf :name (mf/extract-app-name mf))))
+    (assoc mf :name ((comp mf/extract-app-name :name) mf))))
 
 (defn join-intents 
   "Add intents to each app."
@@ -139,18 +139,17 @@ match them with existing classes...."
   ;; use parallel function invocations
     (def apps (apply join-intents 
                 (pvalues 
-                  (-> "d:/android/reduced/android-20101127.zip" mf/load-apps-from-zip mf/unique-apps)
-                  (intents/load-intents-zip "d:/android/reduced/intentslist-20110327.zip")) 
-                #_(deserialize "d:/android/apps2")))
+                  (-> "z:/reduced/manifests-20110330.zip" mf/load-apps-from-zip mf/unique-apps)
+                  (intents/load-intents-zip "z:/reduced/intents-20110330.zip"))))
     (def apps (deserialize "d:/android/apps-58k"))
-    (def class-lookup (build-name-classes-fn "d:/android/jars"))
+    (def class-lookup (build-name-classes-fn "z:/jars"))
     (def x (resolve-explicit-dependencies apps class-lookup))
   (spit "d:/android/explicit-deps.dot" (graphviz-test x))
   (aggregate (dep-provides apps))
   (aggregate (dep-unit-depends apps))
   
   
-  (save-to-csv "d:/android/androidRelationships.csv" apps class-lookup)
+  (save-to-csv (str "z:/reduced/results-" (date-string) ".csv") apps class-lookup)
   
   (aggregate (dep-unit-dependent apps class-lookup))
   

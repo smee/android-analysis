@@ -63,7 +63,7 @@ outp-dir."
   "Convert classes.dex to java bytecode using dex2jar"
   (let [tempfile (java.io.File/createTempFile "dex" "jar")]
     (do
-      (pxb.android.dex2jar.v3.Main/doData byte-arr tempfile)
+      (com.googlecode.dex2jar.v3.Main/doData byte-arr tempfile)
       (let [result (to-byte-array tempfile)]
         (.delete tempfile)
         result))))
