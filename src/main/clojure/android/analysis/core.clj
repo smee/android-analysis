@@ -21,11 +21,10 @@
   (for [{n :name :as a} apps]
     (assoc a :intents (intents n))))
 
-(defn normalize-classname [cn]
-  (clojure.string/replace cn \/ \.))
+
 
 (defn explicit-called-intent-classes [app]
-  (->> app :intents :called vals (apply concat) (filter :explicit?) (map :class) (remove nil?) (map normalize-classname) set))
+  (->> app :intents :called vals (apply concat) (filter :explicit?) (map :class) (remove nil?) (map intents/normalize-classname) set))
 
 (defn exported-intent-classes [app]
   (->> app mf/explicit-components (map :class) set))
@@ -43,7 +42,7 @@ Operates on the result directory of android.market.process/dex2jar"
   (fn [n] (let [[p1 p2] (download/construct-path-parts n)
                   f (file jars-dir p1 p2 n)]
               (when f
-                (set (map (comp remove-dot-class normalize-classname) (archive/get-entries f #".*class")))))))
+                (set (map (comp remove-dot-class intents/normalize-classname) (archive/get-entries f #".*class")))))))
 
 (defn external-explicit-intent-calls 
   ([app] (external-explicit-intent-calls app {}))

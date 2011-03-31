@@ -6,18 +6,24 @@
     android-manifest.util
     android-manifest.serialization))
 
+(def app-id-regex #".*\d\d\d\d(\d)+")
+
 
 ;;;;;;; Load inputs ;;;;;;;;;;;;;;;;;;
+(defn normalize-classname [cn]
+  (clojure.string/replace cn \/ \.))
 
 (defn- process-intent-calls 
   "Load intent calling data."
   [entry-name arr]
   (hash-map (last (.split entry-name "/")) (deserialize arr)))
 
-
+(defn load-intents-from-disk [dir]
+  (let [files (find-file dir app-id-regex)]
+    (reduce merge (map #(hash-map (.getName %) (deserialize %)) files))))
 
 (defn load-intents-zip [file]
-  (reduce merge (process-entries file process-intent-calls #".*\d\d\d\d(\d)+")))
+  (reduce merge (process-entries file process-intent-calls app-id-regex)))
 
 (defn load-intent-constructor-counts-zip [file]
   (reduce merge (process-entries file process-intent-calls  #".*intent-count")))

@@ -141,7 +141,7 @@ in loading android apps without duplicates (same package, lower versions)."
 (defn unique-intent-filters [app]
   (distinct (mapcat intent-filters (components app))))
 
-(defn- find-manifests 
+(defn- find-manifests
   "Find all AndroidManifest.xml files in any subdirectory of dir."
   [dir]
   (find-file dir #".*AndroidManifest.xml"))
