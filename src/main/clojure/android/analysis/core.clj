@@ -35,14 +35,19 @@
 (defn- remove-dot-class [s]
   (subs s 0 (- (count s) 6)))
 
+(defn app-file 
+  "Construct file object of android app that resides in a subdirectory of style download/construct-path-parts"
+  [dir id]
+  (let [[p1 p2] (download/construct-path-parts id)]
+    (file dir p1 p2 id)))
+
 (defn build-name-classes-fn 
   "Build function that looks up the set of classes defined in an android app. 
 Operates on the result directory of android.market.process/dex2jar"
   [jars-dir]
-  (fn [n] (let [[p1 p2] (download/construct-path-parts n)
-                  f (file jars-dir p1 p2 n)]
-              (when f
-                (set (map (comp remove-dot-class intents/normalize-classname) (archive/get-entries f #".*class")))))))
+  (fn [n] (when-let [f (app-file jars-dir n)]
+            (set (map (comp remove-dot-class intents/normalize-classname) 
+                      (archive/get-entries f #".*class"))))))
 
 (defn external-explicit-intent-calls 
   ([app] (external-explicit-intent-calls app {}))
@@ -98,13 +103,26 @@ match them with existing classes...."
           ;; explicitly exported android components per app
           (p app "reverse unit depends" mf/explicit-components false)
           ;; number of intent filters per app
-          (p app "unit-provided_capabilities" mf/implicit-components false)
+          (p app "unit-provided_capabilities" mf/unique-intent-filters false)
           ;; implicit intent calls per app
           (p app "unit-dependent_capabilities" intents/called-implicit-intents false)))
       ;; apps per unique intent filter
       (doseq [[idx names] (indexed (vals (group-intent-filters apps)))]
         (println (str "cap" idx \, (count names) ",capability-providing_units,true") ))
       ))
+
+(defn save-sizes-csv [file apps]
+  (with-out-writer file
+      (println "id,size,count,revcount,provides")
+      (doseq [{id :id :as app} apps]
+        (do
+          ;; explicit intent call with classes that are not in the app's manifest
+          (println id \, 
+                   (.length (app-file id))
+                   (count (distinct (intents/called-intents-app app)))
+                   0
+                   (count (mf/implicit-components app)))))))
+
 ;;;;;;;;;;;;;;;;;  find explicit intent dependencies
 
 (defn resolve-explicit-dependencies [apps class-lookup]
@@ -158,4 +176,10 @@ match them with existing classes...."
   ;; find intent filter with biggest number of apps defining it
   (apply (partial max-key second) (map-values count gif))
   (filter #(< 800 (second %)) (map-values count gif))
+  
+  (let [apps (apply join-intents 
+                    (pvalues 
+                      (-> "z:/manifests" (find-file #".*\d{4}\d*") mf/load-apps-from-disk mf/unique-apps)
+                      (intents/load-intents-from-disk "z:/intents")))]
+    (save-sizes-csv (str "z:/reduced/" (date-string) ".csv") apps))
   )

@@ -29,7 +29,7 @@
   (reduce merge (process-entries file process-intent-calls  #".*intent-count")))
 
 ;;;;;;; Extract data  ;;;;;;;;;;;;;;;;;;
-(defn- called-intents-app [app]
+(defn called-intents-app [app]
   (apply concat (vals (:called app))))
 (defn- queried-intents-app [app]
   ;; fix stupid bug in the static analysis:

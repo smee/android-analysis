@@ -186,7 +186,7 @@ for as long as there are more than 0 results per request."
                 new-file? (not (.exists out))]
           (when new-file? (serialize out (fetch-all-apps template cred)))))
         query-templates
-        (cycle (shuffle (map read-properties cred-files))))))) 
+        (cycle (map read-properties cred-files)))))) 
     
 
 (defn batch-download-newest 
