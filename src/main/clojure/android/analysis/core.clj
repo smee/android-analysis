@@ -105,22 +105,26 @@ match them with existing classes...."
           ;; number of intent filters per app
           (p app "unit-provided_capabilities" mf/unique-intent-filters false)
           ;; implicit intent calls per app
-          (p app "unit-dependent_capabilities" intents/called-implicit-intents false)))
+          (p app "unit-dependent_capabilities" (comp intents/called-implicit-intents :intents) false)))
       ;; apps per unique intent filter
       (doseq [[idx names] (indexed (vals (group-intent-filters apps)))]
         (println (str "cap" idx \, (count names) ",capability-providing_units,true") ))
       ))
 
-(defn save-sizes-csv [file apps]
+(defn save-sizes-csv [file apps apps-dir]
   (with-out-writer file
       (println "id,size,count,revcount,provides")
-      (doseq [{id :id :as app} apps]
+      (doseq [{id :name :as app} apps]
         (do
           ;; explicit intent call with classes that are not in the app's manifest
-          (println id \, 
-                   (.length (app-file id))
-                   (count (distinct (intents/called-intents-app app)))
+          (println id 
+                   \, 
+                   (if-let [f (app-file apps-dir id)] (.length f) -1)
+                   \,
+                   (count (distinct ((comp intents/called-implicit-intents :intents) app)))
+                   \,
                    0
+                   \,
                    (count (mf/implicit-components app)))))))
 
 ;;;;;;;;;;;;;;;;;  find explicit intent dependencies
@@ -181,5 +185,5 @@ match them with existing classes...."
                     (pvalues 
                       (-> "z:/manifests" (find-file #".*\d{4}\d*") mf/load-apps-from-disk mf/unique-apps)
                       (intents/load-intents-from-disk "z:/intents")))]
-    (save-sizes-csv (str "z:/reduced/" (date-string) ".csv") apps))
+    (save-sizes-csv (str "z:/reduced/" (date-string) ".csv") apps "z:/original"))
   )
