@@ -105,7 +105,7 @@ match them with existing classes...."
           ;; number of intent filters per app
           (p app "unit-provided_capabilities" mf/unique-intent-filters false)
           ;; implicit intent calls per app
-          (p app "unit-dependent_capabilities" (comp intents/called-implicit-intents :intents) false)))
+          (p app "unit-dependent_capabilities" (comp intents/called-intents-app :intents) false)))
       ;; apps per unique intent filter
       (doseq [[idx names] (indexed (vals (group-intent-filters apps)))]
         (println (str "cap" idx \, (count names) ",capability-providing_units,true") ))
@@ -121,7 +121,7 @@ match them with existing classes...."
                    \, 
                    (if-let [f (app-file apps-dir id)] (.length f) -1)
                    \,
-                   (count (distinct ((comp intents/called-implicit-intents :intents) app)))
+                   (count (distinct ((comp intents/called-intents-app :intents) app)))
                    \,
                    0
                    \,
