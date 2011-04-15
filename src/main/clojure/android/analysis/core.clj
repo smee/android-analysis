@@ -111,7 +111,9 @@ match them with existing classes...."
         (println (str "cap" idx \, (count names) ",capability-providing_units,true") ))
       ))
 
-(defn save-sizes-csv [file apps apps-dir]
+(defn save-sizes-csv 
+  "id, size in bytes, #all unique called intents, 0, # unique intent filters defined"
+  [file apps apps-dir]
   (with-out-writer file
       (println "id,size,count,revcount,provides")
       (doseq [{id :name :as app} apps]
@@ -121,11 +123,11 @@ match them with existing classes...."
                    \, 
                    (if-let [f (app-file apps-dir id)] (.length f) -1)
                    \,
-                   (count (distinct ((comp distinct intents/called-intents-app :intents) app)))
+                   (-> app :intents intents/called-intents-app distinct count)
                    \,
                    0
                    \,
-                   (count (mf/implicit-components app)))))))
+                   (count (mf/unique-intent-filters app)))))))
 
 ;;;;;;;;;;;;;;;;;  find explicit intent dependencies
 
