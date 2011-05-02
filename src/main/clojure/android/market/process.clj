@@ -1,7 +1,7 @@
 (ns android.market.process
   (:use 
     [android-manifest.core :only (valid-action?)]
-    [android-manifest.util :only (ignore-exceptions find-file)]
+    [android-manifest.util :only (ignore-exceptions find-file extract-relative-path)]
     [android-manifest.serialization :only (serialize)]
     [android.market.download :only (construct-output-file) ]
     ;clojure.contrib.java-utils
@@ -11,9 +11,6 @@
     [java.io File ByteArrayInputStream])
   (:require
     [android.market.archive :as archive]))
-
-(defn extract-relative-path [^File dir ^File file]
-  (-> dir .toURI (.relativize (.toURI file)) .getPath))
 
 
 (defn- process-app [main-dir-f outp-dir-f filename process-fn zip-file]
