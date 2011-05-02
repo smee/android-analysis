@@ -3,7 +3,9 @@
         [clojure.java.io :only (file)]
         [clojure.contrib.pprint :only (cl-format)])
   (:require
-    [clojure.string :as cs]))
+    [clojure.string :as cs])
+  (:import
+    [java.io File]))
 
 (defn map-values 
   "Change all map values by applying f to each one."
@@ -156,3 +158,8 @@ Source: http://briancarper.net/blog/527/printing-a-nicely-formatted-plaintext-ta
         (cl-format true "~{~A~}~%" (repeat total-width \-))
         (doseq [x xs]
           (cl-format true format-string (map x ks)))))))
+
+(defn extract-relative-path 
+  "Extract path relative to base directory."
+  [^File base ^File file]
+  (-> base .toURI (.relativize (.toURI file)) .getPath))
