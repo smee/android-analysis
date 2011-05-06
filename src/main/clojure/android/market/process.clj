@@ -4,6 +4,7 @@
     [android-manifest.util :only (ignore-exceptions find-file extract-relative-path)]
     [android-manifest.serialization :only (serialize)]
     [android.market.download :only (construct-output-file) ]
+    [android.analysis.hash :only (md5)]
     ;clojure.contrib.java-utils
     [clojure.java.io :only (file make-parents)]
     [clojure.contrib.io :only (copy to-byte-array)])
@@ -133,6 +134,14 @@ Uses static analysis via the findbugs infrastructure."
 
 (defn extract-intent-constructors [main-dir outp-dir]
     (process-all-files main-dir outp-dir count-intent-constructors))
+
+(defn hash-contents 
+  "Map of zipentry names to md5 hashes of their contents"
+  [zipfile]
+  (into {} (archive/process-entries zipfile #(vec [%1 (md5 %2)]))))
+
+(defn hash-zip-contents [main-dir outp-dir]
+  (process-all-files main-dir outp-dir hash-contents))
 
 (comment
   

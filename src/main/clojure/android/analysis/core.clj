@@ -4,12 +4,14 @@
     android-manifest.util
     [android.market.download :as download]
     [clojure.contrib.io :only (with-out-writer file)]
-    [clojure.contrib.seq :only (indexed)])
+    [clojure.contrib.seq :only (indexed)]
+    [clojure.contrib.datalog.util  :only (reverse-map)])
   (:require 
     clojure.set
     [android.analysis.intent :as intents]
     [android.analysis.manifest :as mf]
-    [android.market.archive :as archive]))
+    [android.market.archive :as archive]
+    [android.analysis.hash :as hash]))
 
 (defn clean-app-names [manifests]
   (for [mf manifests]
@@ -21,6 +23,8 @@
   (for [{n :name :as a} apps]
     (assoc a :intents (intents n))))
 
+(defn implicit-called-intent-actions [app]
+  (->> app :intents :called vals (apply concat) (remove :explicit?) (map :action) (remove nil?) set))
 
 
 (defn explicit-called-intent-classes [app]
@@ -34,6 +38,14 @@
 
 (defn- remove-dot-class [s]
   (subs s 0 (- (count s) 6)))
+
+(defn external-implicit-intent-actions 
+  "Construct sets of action strings that get used within implicit intents that can't 
+be targeted at a component within the same app (because no intent filter uses that action)."
+  [app]
+  (clojure.set/difference 
+    (implicit-called-intent-actions app) 
+    (mf/intent-filter-actions app)))
 
 (defn app-file 
   "Construct file object of android app that resides in a subdirectory of style download/construct-path-parts"
@@ -104,8 +116,8 @@ match them with existing classes...."
           (p app "reverse unit depends" mf/explicit-components false)
           ;; number of intent filters per app
           (p app "unit-provided_capabilities" mf/unique-intent-filters false)
-          ;; implicit intent calls per app
-          (p app "unit-dependent_capabilities" (comp distinct intents/called-intents-app :intents) false)))
+          ;; implicit intent calls per app, only if it looks like the call goes to another app
+          (p app "unit-dependent_capabilities" external-implicit-intent-actions false)))
       ;; apps per unique intent filter
       (doseq [[idx names] (indexed (vals (group-intent-filters apps)))]
         (println (str "cap" idx \, (count names) ",capability-providing_units,true") ))
@@ -157,6 +169,41 @@ match them with existing classes...."
         (subs s1 0 i)
         (recur (unchecked-inc i)))))) 
 
+(defn package-of-class 
+  "extract package of class file name , e.g. (package-of-class \"a/b/c/d.class\") returns
+\"a/b/c\""
+  [clz]
+  (let [idx (.lastIndexOf clz "/")]
+    (if (not= -1 idx) (subs clz 0 idx) "")))
+
+(defn hashes-per-package 
+  "Takes map of class file names to md5 hashes, returns map of packages to set of md5
+hashes of the files in that package."
+  [hashes]
+  (let [hpp (->> hashes
+              reverse-map
+              (group-by (comp package-of-class second))
+              (map-values (comp (partial into (sorted-set)) (partial map first))))]
+    hpp))
+
+(defn not-distinct
+  "Returns a lazy sequence of the elements of coll that have duplicates"
+  {:added "1.0"}
+  [coll]
+    (let [step (fn step [xs seen]
+                   (lazy-seq
+                    ((fn [[f :as xs] seen]
+                      (when-let [s (seq xs)]
+                        (if ((complement contains?) seen f) 
+                          (recur (rest s) (conj seen f))
+                          (cons f (step (rest s) seen)))))
+                     xs seen)))]
+      (distinct (step coll #{}))))
+
+(defn android-libraries [hashes]
+  (let [hpp (pmap #(->> % second hashes-per-package (map-values hash/md5-of)) hashes)
+        duplicates (not-distinct (apply concat hpp))]
+    duplicates))
 
 (comment
   ;; use parallel function invocations
@@ -188,4 +235,21 @@ match them with existing classes...."
                       (-> "z:/manifests" (find-file #".*\d{4}\d*") mf/load-apps-from-disk mf/unique-apps)
                       (intents/load-intents-from-disk "z:/intents")))]
     (save-sizes-csv (str "z:/reduced/" (date-string) ".csv") apps "z:/original"))
+
+  (def apps (apply join-intents 
+                    (pvalues 
+                      (-> "d:/android/reduced/manifests-20110504.zip" mf/load-apps-from-zip mf/unique-apps)
+                      (intents/load-intents-zip "d:/android/reduced/intents-20110504.zip"))))
+  
+  
   )
+
+(comment
+  (let [hashes (pmap #(list (.getName %) (deserialize %)) (find-file "z:/classes-md5/" #".*\d{4}\d*"))
+        libs (android-libraries hashes)
+        ]
+    (serialize "z:/reduced/identified-libs" libs)
+    )
+
+  )
+

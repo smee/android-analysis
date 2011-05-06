@@ -34,7 +34,9 @@
 (defn- queried-intents-app [app]
   ;; fix stupid bug in the static analysis:
   ;;   used vector in place of hashmap :(
-  (apply concat (vals  (apply hash-map (:queried app)))))
+  (let [q (:queried app)
+        intents (if (vector? q) (apply hash-map q) q)]
+    (apply concat (vals intents))))
 
 (defn called-intents [m]
    (map called-intents-app (vals m)))

@@ -146,9 +146,11 @@ in loading android apps without duplicates (same package, lower versions)."
   [dir]
   (find-file dir #".*AndroidManifest.xml"))
 
-(defn extract-intent-filters [apps]
-  (map (partial mapcat :filters) (map components apps)))
+(defn extract-intent-filters [app]
+  (mapcat :filters (components app)))
 
+(defn intent-filter-actions [app]
+  (set ( mapcat :actions (extract-intent-filters app))))
 
 (defn exported-components 
   "Filter all exported android components. Exported means either the explicit export flag or a
