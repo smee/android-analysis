@@ -205,6 +205,11 @@ hashes of the files in that package."
         duplicates (not-distinct (apply concat hpp))]
     duplicates))
 
+(defn discard-path-start [file n]
+  (let [name (-> file str (clojure.string/replace \\ \/))
+        parts (clojure.string/split name #"/")]
+    (clojure.string/join "/" (drop n parts))))
+
 (comment
   ;; use parallel function invocations
     (def apps (apply join-intents 
@@ -250,6 +255,10 @@ hashes of the files in that package."
         ]
     (serialize "z:/reduced/identified-libs" libs)
     )
-
+  (def src (find-file "d:/android/sample/src" #".*java"))
+  (def todelete (filter #(starts-with-any libs (discard-path-start % 5)) src))
+  (dorun (map #(let [newfile (java.io.File. (str "d:/android/sample/src-libs/" (discard-path-start (.getPath %) 4)))]
+                 (clojure.java.io/make-parents newfile)
+                 (clojure.java.io/copy % newfile)) todelete))
   )
 
