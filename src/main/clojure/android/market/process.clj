@@ -9,7 +9,8 @@
     [clojure.java.io :only (file make-parents)]
     [clojure.contrib.io :only (copy to-byte-array)])
   (:import
-    [java.io File ByteArrayInputStream])
+    [java.io File ByteArrayInputStream]
+    Dex2Jar)
   (:require
     [android.market.archive :as archive]))
 
@@ -57,14 +58,7 @@ outp-dir."
     "AndroidManifest.xml" 
     (fn [byte-arr] (decode-binary-xml (ByteArrayInputStream. byte-arr)))))
 
-(defn convert-dex-2-jar [byte-arr]
-  "Convert classes.dex to java bytecode using dex2jar"
-  (let [tempfile (java.io.File/createTempFile "dex" "jar")]
-    (do
-      (com.googlecode.dex2jar.v3.Main/doData byte-arr tempfile)
-      (let [result (to-byte-array tempfile)]
-        (.delete tempfile)
-        result))))
+
 
 (defn dex2jar [main-dir outp-dir]
   "Extract dalvik bytecode (classes.dex) from android apps and convert
@@ -73,7 +67,7 @@ them to java bytecode."
     main-dir 
     outp-dir 
     "classes.dex" 
-    (fn [byte-arr] (convert-dex-2-jar byte-arr))))
+    (fn [byte-arr] (Dex2Jar/doData byte-arr))))
 
 
 
@@ -118,16 +112,17 @@ Uses static analysis via the findbugs infrastructure."
 
 (defn- process-all-files [main-dir outp-dir process-fn]
   (let [main-dir-f (file main-dir)]
-    (doseq [f (file-seq main-dir-f) :when (and (.isFile f) (not (.endsWith (.getName f) ".403")))]
-      (let [outfile  (construct-output-file outp-dir (.getName f))
-            lockfile (construct-output-file outp-dir (str (.getName f) ".lock"))]
-        (make-parents outfile)
-        (when (and (not (.exists outfile)) (not (.exists lockfile)))
-          (do 
-            (.createNewFile lockfile)
-            (println "processing" f "into" outfile)
-            (serialize outfile (process-fn f))
-            (.delete lockfile)))))))
+    (pmap (fn [f]
+            (let [outfile  (construct-output-file outp-dir (.getName f))
+                  lockfile (construct-output-file outp-dir (str (.getName f) ".lock"))]
+              (make-parents outfile)
+              (when (and (not (.exists outfile)) (not (.exists lockfile)))
+                (do 
+                  (.createNewFile lockfile)
+                  (println "processing" f "into" outfile)
+                  (serialize outfile (process-fn f))
+                  (.delete lockfile)))))
+          (filter #(and (.isFile %) (not (.endsWith (.getName %) ".403"))) (file-seq main-dir-f)))))
 
 (defn extract-intents [main-dir outp-dir]
     (process-all-files main-dir outp-dir find-intents))

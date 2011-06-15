@@ -168,3 +168,23 @@ Source: http://briancarper.net/blog/527/printing-a-nicely-formatted-plaintext-ta
   "Extract path relative to base directory."
   [^File base ^File file]
   (-> base .toURI (.relativize (.toURI file)) .getPath))
+
+(defn mapp
+  "Use this instead of (partial map xy)"
+  ([f] (partial map f))
+  ([f x & args]
+     (apply map (partial f x)
+            args )))
+  
+(defn mapc [& args]
+  "From: http://erl.nfshost.com/2011/05/22/map-mapp-and-mapc/
+  Examples: 
+     user> (mapc inc sq inc (range 1 6))
+     (5 10 17 26 37)
+	 user> ((mapc sq inc) (range 1 6))
+     (4 9 16 25 36)"
+  (let [[fns xs] (partition-by fn? args)
+        g (apply comp fns)]
+    (if (empty? xs)
+      (partial map g)
+      (apply map g xs ))))
