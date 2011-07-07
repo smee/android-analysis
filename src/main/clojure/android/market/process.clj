@@ -147,7 +147,7 @@ Uses static analysis via the findbugs infrastructure."
   (println "dex2jar: " (dex2jar "D:\\android\\apps\\original\\" "d:/android//apps/jars"))
   (do
     (println "find intents: " 
-      (extract-intents "D:\\android\\apps\\jars" "d:/android/apps/intentslist")))
+      (extract-intents "e:\\android\\jars" "e:/android/intents")))
   (do
     (println "count intent constructors: " 
       (extract-intent-constructors "D:\\android\\apps\\jars" "d:/android/apps/intent constructor counts")))

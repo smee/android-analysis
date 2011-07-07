@@ -209,6 +209,14 @@ hashes of the files in that package."
   (let [name (-> file str (clojure.string/replace \\ \/))
         parts (clojure.string/split name #"/")]
     (clojure.string/join "/" (drop n parts))))
+;;;;;;;;;;;;;;;;;; misc
+
+(defn record2maps [apps]
+  (->> apps
+    ;; records in :components
+    (map #(update-in % [:components] (partial map (partial into {}))))
+    ;; app records
+    (map (partial into {}))))
 
 (comment
   ;; use parallel function invocations
@@ -237,9 +245,9 @@ hashes of the files in that package."
   
   (let [apps (apply join-intents 
                     (pvalues 
-                      (-> "z:/manifests" (find-file #".*\d{4}\d*") mf/load-apps-from-disk mf/unique-apps)
-                      (intents/load-intents-from-disk "z:/intents")))]
-    (save-sizes-csv (str "z:/reduced/" (date-string) ".csv") apps "z:/original"))
+                      (-> "e:/android/manifests" (find-file #".*\d{4}\d*") mf/load-apps-from-disk mf/unique-apps)
+                      (intents/load-intents-from-disk "e:/android/intents")))]
+    (save-sizes-csv (str "e:/android/reduced/" (date-string) ".csv") apps "e:/android/original"))
 
   (def apps (apply join-intents 
                     (pvalues 
