@@ -142,15 +142,15 @@ Uses static analysis via the findbugs infrastructure."
   
   (possible-android-identifiers (String. (to-byte-array (java.io.File. "h:/classes.dex"))))
   
-  (println "new manifests: " (extract-android-manifests "D:\\android\\apps\\original" "d:/android/apps/manifests"))
+  (println "new manifests: " (extract-android-manifests "e:/android/original" "e:/android/manifests"))
   ;(println "new classes.dex: " (extract-bytecode-strings "D:\\android\\apps\\original\\" "d:/android/apps/dex"))
-  (println "dex2jar: " (dex2jar "D:\\android\\apps\\original\\" "d:/android//apps/jars"))
+  (println "dex2jar: " (dex2jar "e:/android/original" "e:/android/jars"))
   (do
     (println "find intents: " 
-      (extract-intents "e:\\android\\jars" "e:/android/intents")))
+      (extract-intents "e:/android/jars" "e:/android/intents")))
   (do
     (println "count intent constructors: " 
-      (extract-intent-constructors "D:\\android\\apps\\jars" "d:/android/apps/intent constructor counts")))
+      (extract-intent-constructors "e:/android/jars" "e:/android/intent constructor counts")))
   
   (serialize "d:/temp/foo" (find-intents (file "D:\\android\\jars\\ARCADE\\-1007597263548681988\\classes.dex")))
   

@@ -94,6 +94,7 @@ the regular expression pattern. Per default returns only files, no directories."
   ([date]
     (.format (java.text.SimpleDateFormat. "yyyyMMdd") date)))
 
+
 (defmacro ignore-exceptions 
   "Catch any exception and print the message of its root cause."
   [ & body ]

@@ -74,26 +74,18 @@
 (defn- init-session [credentials]
   (let [session  (new MarketSession)
         username (get credentials "username")
-        password (get credentials "password")]
+        password (get credentials "password")
+        ]
   (do
+    ; we are using a gingerbread device....
+    (doto (.getContext session)
+      (.setDeviceAndSdkVersion "crespo:10"))
+    
     ; login
     (doto session
       (.login username password)
       (.setLocale java.util.Locale/US))
-      
-    ; we are on an US carrier using a froyo device....
-;    (doto (.getContext session)
-;      (.setAuthSubToken (.getAuthSubToken session))
-;      (.setUnknown1 0)
-;      (.setVersion 1002)
-;      (.setDeviceAndSdkVersion "crespo:8")
-;      (.setUserLanguage "de");"en")
-;      (.setUserCountry "de");"us")
-;      (.setOperatorAlpha "Vodafone");"T-Mobile USA")
-;      (.setOperatorNumeric "26202")
-;      (.setSimOperatorAlpha "Vodafone");"T-Mobile USA")
-;      (.setSimOperatorNumeric "26202")
-;      (.setAndroidId (get credentials "androidid")))
+     
     session)))
 
 (def api-cache (ref {}))
@@ -192,7 +184,7 @@ for as long as there are more than 0 results per request."
 (defn batch-download-newest 
   "Download the newest free apps per category."
   [cred-files]
-  (let [dir          (file (str "results/market-apps/" (date-string)))
+  (let [dir          (file (str "results/market-apps/" (str (date-string) "-" (java.util.UUID/randomUUID))))
         out-files-fn :category
         query-tmpl   (map #(hash-map :category % :app-type nil :order-type Market$AppsRequest$OrderType/NEWEST) cat/all-known-categories)]
         (batch-download dir query-tmpl out-files-fn cred-files)))

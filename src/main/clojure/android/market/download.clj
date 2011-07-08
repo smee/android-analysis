@@ -138,7 +138,7 @@ changes all the time, for example due to i18n)"
   (set! *print-length* 10)
  (download-all-apps 
    (file "results/market-apps/" (date-string)) 
-   "d:/android/apps/original" 
+   "e:/android/original" 
    "marketcredentials.properties" 
    "marketcredentials2.properties" 
    "marketcredentials3.properties" 
