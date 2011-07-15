@@ -182,7 +182,7 @@ in loading android apps without duplicates (same package, lower versions)."
   
   (set! *print-length* 15)
   (def app-sources "h:/android")
-  (def manifest-files (find-file app-sources #".*AndroidManifest.xml"))
+  (def manifest-files (find-files app-sources #".*AndroidManifest.xml"))
   (def apps (unique-apps (load-apps-from-disk manifest-files)))
   (def actions 
       (filter valid-action? 

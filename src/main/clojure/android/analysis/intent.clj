@@ -19,7 +19,7 @@
   (hash-map (last (.split entry-name "/")) (deserialize arr)))
 
 (defn load-intents-from-disk [dir]
-  (let [files (find-file dir app-id-regex)]
+  (let [files (find-files dir app-id-regex)]
     (reduce merge (map #(hash-map (.getName %) (deserialize %)) files))))
 
 (defn load-intents-zip [file]

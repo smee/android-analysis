@@ -1,44 +1,54 @@
 (ns android.market.process
   (:use 
     [android-manifest.core :only (valid-action?)]
-    [android-manifest.util :only (ignore-exceptions find-file extract-relative-path)]
+    [android-manifest.util :only (ignore-exceptions find-files extract-relative-path date-string)]
     [android-manifest.serialization :only (serialize)]
     [android.market.download :only (construct-output-file) ]
     [android.analysis.hash :only (md5)]
-    ;clojure.contrib.java-utils
-    [clojure.java.io :only (file make-parents)]
+    [clojure.java.io :only (file as-file make-parents)]
     [clojure.contrib.io :only (copy to-byte-array)])
   (:import
     [java.io File ByteArrayInputStream]
     Dex2Jar)
   (:require
-    [android.market.archive :as archive]))
+    [android.market.archive :as archive]
+    [clojure.contrib.string :as string]
+    [clojure.stacktrace :as stack]))
 
 
-(defn- process-app [main-dir-f outp-dir-f filename process-fn zip-file]
-  (let [rel-path (extract-relative-path main-dir-f zip-file)
-        outfile  (construct-output-file outp-dir-f (.getName zip-file))]
+(defn- process-app-in-zip [outp-dir-f file-in-zip process-fn zip-file]
+  (let [outfile  (construct-output-file outp-dir-f (.getName zip-file))]
+    (when-let [contents (archive/extract-entry zip-file file-in-zip)]
+      (println "processing" file-in-zip "in" zip-file)
       (make-parents outfile)
-      (when (not (.exists outfile))
-        (do 
-          (println "processing" filename "in" zip-file)
-          (if-let [contents (archive/extract-entry zip-file filename)]
-            (copy 
-              (process-fn contents) 
-              outfile)
-            :success)))))
+      (copy  (process-fn contents)  outfile)
+      :success)))
 
-(defn- extract-and-convert [main-dir outp-dir file-in-app process-fn]
-    (let [main-dir-f (file main-dir)
-          outp-dir-f (file outp-dir)]
+(defn- extract-and-convert [archives outp-dir file-in-app process-fn]
+    (let [outp-dir-f (as-file outp-dir)]
       (count (pmap
-                 #(ignore-exceptions 
-                    (process-app main-dir-f outp-dir-f file-in-app process-fn %))
-                 (filter #(and (.isFile %) (not (.endsWith (.getName %) ".403"))) 
-                         (file-seq main-dir-f))))))
+               #(ignore-exceptions 
+                  (process-app-in-zip outp-dir-f file-in-app process-fn %))
+               archives))))
 
-(defn decode-binary-xml [instream]
+(defn skip-files-in-archives 
+  "Build a function that returns true if a given file exists already in 
+one of the given archives."
+  [archives]
+  (let [available? (into #{} (map #(last (string/split #"/" %)) (mapcat archive/get-entries archives)))]
+    (fn [^File f] (available? (.getName f)))))
+
+(defn skip-files-in-dir 
+  "Build a function that returns true if a given file exists already in the directory dir
+or its children."
+  [dir]
+  (let [available? (into #{} (map (memfn getName) (find-files dir #".*\d{4}\d*" true)))]
+    (fn [^File f] (available? (.getName f)))))
+
+
+(defn decode-binary-xml 
   "Decode android manifest files."
+  [instream]
   (let [decoder (brut.androlib.res.decoder.XmlPullStreamDecoder. 
                   (brut.androlib.res.decoder.AXmlResourceParser.)
                   (.getResXmlSerializer (brut.androlib.res.AndrolibResources.)))
@@ -48,31 +58,34 @@
       (String. (.toByteArray baos)))))
 
 
-(defn extract-android-manifests [main-dir outp-dir]
+(defn extract-android-manifests 
   "Extract and decrypt all AndroidManifest.xml files from all android apps
 found in main-dir and copy the results into a mirrored folder hierarchy at
 outp-dir."
+  [main-dir skip? outp-dir]
   (extract-and-convert 
-    main-dir 
+    (remove skip? (find-files main-dir #".*\d{4}\d*" true))
     outp-dir 
     "AndroidManifest.xml" 
     (fn [byte-arr] (decode-binary-xml (ByteArrayInputStream. byte-arr)))))
 
 
 
-(defn dex2jar [main-dir outp-dir]
+(defn extract-jars 
   "Extract dalvik bytecode (classes.dex) from android apps and convert
 them to java bytecode."
+  [main-dir skip? outp-dir]
   (extract-and-convert 
-    main-dir 
+    (remove skip? (find-files main-dir #".*\d{4}\d*" true)) 
     outp-dir 
     "classes.dex" 
     (fn [byte-arr] (Dex2Jar/doData byte-arr))))
 
+;;;;;;;;;;;;;;;;;;;;; old ;;;;;;;;;;;;;;;;;;;;;;
 
-
-(defn printable? [ch]
+(defn printable? 
   "Is this character in [33..126]?"
+  [ch]
   (let [val (int ch)]
     (or 
       (and (>= val (int \a)) (<= val (int \z)))
@@ -80,9 +93,10 @@ them to java bytecode."
       (and (>= val (int \0)) (<= val (int \9)))
       (contains? #{\. \- \_} ch))))
 
-(defn possible-android-identifiers [contents]
+(defn possible-android-identifiers 
   "Extract all strings from a binary dexfile (dalvik bytecode)
-   that looks and tastes like an android action reference string."
+   that look and taste like an android action reference string."
+  [contents]
   (->> contents 
     String.
     (partition-by printable?)
@@ -101,35 +115,41 @@ them to java bytecode."
     "classes.dex"                       
     (fn [byte-arr] (prn-str (possible-android-identifiers (String. byte-arr))))))
 
-(defn find-intents [app-file]
+;;;;;;;;;;;;;;;;  extract intents via static analysis   ;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn find-intents 
   "Try to identify all intents that get used for external calls in this android app.
 Uses static analysis via the findbugs infrastructure."
-  (read-string (analyze.AnalyzeAndroidApps/findIntents (file app-file))))
+  [app-file]
+  (try
+    (read-string (analyze.AnalyzeAndroidApps/findIntents (file app-file)))
+    (catch Exception e  
+      (stack/print-stack-trace e)
+      {:called {} :queried {}})))
 
-(defn count-intent-constructors [app-file]
+(defn count-intent-constructors 
   "Count all constructor invocations for intent objects."
+  [app-file]
+  (println app-file)
   (analyze.AnalyzeAndroidApps/countIntentConstructors (file app-file)))
 
-(defn- process-all-files [main-dir outp-dir process-fn]
-  (let [main-dir-f (file main-dir)]
-    (pmap (fn [f]
-            (let [outfile  (construct-output-file outp-dir (.getName f))
-                  lockfile (construct-output-file outp-dir (str (.getName f) ".lock"))]
-              (make-parents outfile)
-              (when (and (not (.exists outfile)) (not (.exists lockfile)))
-                (do 
-                  (.createNewFile lockfile)
-                  (println "processing" f "into" outfile)
-                  (serialize outfile (process-fn f))
-                  (.delete lockfile)))))
-          (filter #(and (.isFile %) (not (.endsWith (.getName %) ".403"))) (file-seq main-dir-f)))))
+(defn- process-all-files [files outp-dir process-fn]
+  (pmap (fn [f]
+          (let [outfile  (construct-output-file outp-dir (.getName f))]
+            (println "processing" f "into" outfile)
+            (serialize outfile (process-fn f))))
+        files))
 
-(defn extract-intents [main-dir outp-dir]
-    (process-all-files main-dir outp-dir find-intents))
 
-(defn extract-intent-constructors [main-dir outp-dir]
-    (process-all-files main-dir outp-dir count-intent-constructors))
+(defn extract-intents [jars-dir intents-dir]
+  (let [skip? (skip-files-in-archives (find-files intents-dir #".*\.zip"))
+        files (remove skip? (find-files jars-dir))]
+    (dorun (process-all-files files (str intents-dir "/" (date-string)) find-intents))))
 
+(defn extract-intent-constructors [main-dir]
+    (process-all-files main-dir count-intent-constructors))
+
+;;;;;;;;;;;;;;;;; calculate MD5 hashes of zip entries ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn hash-contents 
   "Map of zipentry names to md5 hashes of their contents"
   [zipfile]
@@ -138,13 +158,22 @@ Uses static analysis via the findbugs infrastructure."
 (defn hash-zip-contents [main-dir outp-dir]
   (process-all-files main-dir outp-dir hash-contents))
 
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;; misc, experiments ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (comment
   
   (possible-android-identifiers (String. (to-byte-array (java.io.File. "h:/classes.dex"))))
   
-  (println "new manifests: " (extract-android-manifests "e:/android/original" "e:/android/manifests"))
-  ;(println "new classes.dex: " (extract-bytecode-strings "D:\\android\\apps\\original\\" "d:/android/apps/dex"))
-  (println "dex2jar: " (dex2jar "e:/android/original" "e:/android/jars"))
+  (let [now           (date-string)
+        output-dir    (str "e:/android/manifests/" now)
+        skip?         (skip-files-in-archives (find-files "e:/android/manifests" #".*\.zip"))
+        num-extracted (extract-android-manifests "z:/original" skip? output-dir)] 
+    num-extracted)
+  
+  (extract-jars "z:/original" (skip-files-in-dir "e:/android/jars") "e:/android/jars")
+
+
   (do
     (println "find intents: " 
       (extract-intents "e:/android/jars" "e:/android/intents")))
@@ -157,7 +186,7 @@ Uses static analysis via the findbugs infrastructure."
   (def contents (to-byte-array (java.io.File. "h:/classes.dex")))
   
   (dorun
-    (for [f (find-file "h:/android" #".*classes.dex")] 
+    (for [f (find-files "h:/android" #".*classes.dex")] 
       (let [s (slurp f)] 
         (spit f (vec (possible-android-identifiers s))))))
 

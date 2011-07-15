@@ -76,23 +76,23 @@
   [sequence n callback]
   (map #(do (when (= (rem %1 n) 0) (callback %1)) %2) (iterate inc 1) sequence))
   
-(defn find-file 
+(defn find-files 
   "Traverse directory dirpath depth first, return all files matching
 the regular expression pattern. Per default returns only files, no directories."
-  ([dirpath pattern] (find-file dirpath pattern true))
+  ([dirpath] (find-files dirpath #".*")) 
+  ([dirpath pattern] (find-files dirpath pattern true))
   ([dirpath pattern files-only?]
-  (let [files (for [file (-> dirpath file file-seq) :when (re-matches pattern (.getName file))]
-                file)]
-    (if files-only?
-      (filter (memfn isFile) files)
-      files))))
+    (for [file (-> dirpath file file-seq) 
+          :when (re-matches pattern (.getName file))
+          :when (or (not files-only?) (.isFile file))]
+      file)))
 
 (defn date-string 
   "Get date as string with format yyyyMMdd."
   ([]
     (date-string (java.util.Date.)))
   ([date]
-    (.format (java.text.SimpleDateFormat. "yyyyMMdd") date)))
+    (.format (java.text.SimpleDateFormat. "yyyyMMddHHmm") date)))
 
 
 (defmacro ignore-exceptions 

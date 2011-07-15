@@ -245,7 +245,7 @@ hashes of the files in that package."
   
   (let [apps (apply join-intents 
                     (pvalues 
-                      (-> "e:/android/manifests" (find-file #".*\d{4}\d*") mf/load-apps-from-disk mf/unique-apps)
+                      (-> "e:/android/manifests" (find-files #".*\d{4}\d*") mf/load-apps-from-disk mf/unique-apps)
                       (intents/load-intents-from-disk "e:/android/intents")))]
     (save-sizes-csv (str "e:/android/reduced/" (date-string) ".csv") apps "e:/android/original"))
 
@@ -258,12 +258,12 @@ hashes of the files in that package."
   )
 
 (comment
-  (let [hashes (pmap #(list (.getName %) (deserialize %)) (find-file "z:/classes-md5/" #".*\d{4}\d*"))
+  (let [hashes (pmap #(list (.getName %) (deserialize %)) (find-files "z:/classes-md5/" #".*\d{4}\d*"))
         libs (android-libraries hashes)
         ]
     (serialize "z:/reduced/identified-libs" libs)
     )
-  (def src (find-file "d:/android/sample/src" #".*java"))
+  (def src (find-files "d:/android/sample/src" #".*java"))
   (def todelete (filter #(starts-with-any libs (discard-path-start % 5)) src))
   (dorun (map #(let [newfile (java.io.File. (str "d:/android/sample/src-libs/" (discard-path-start (.getPath %) 4)))]
                  (clojure.java.io/make-parents newfile)

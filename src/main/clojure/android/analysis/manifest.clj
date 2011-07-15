@@ -144,7 +144,7 @@ in loading android apps without duplicates (same package, lower versions)."
 (defn- find-manifests
   "Find all AndroidManifest.xml files in any subdirectory of dir."
   [dir]
-  (find-file dir #".*AndroidManifest.xml"))
+  (find-files dir #".*AndroidManifest.xml"))
 
 (defn extract-intent-filters [app]
   (mapcat :filters (components app)))
@@ -191,4 +191,8 @@ nonempty intent-filter seq."
   (def mf (unique-apps (load-apps-from-zip "d:/android/reduced/android-20101127.zip")))
   (def mf (deserialize "d:/android/parsed-manifests.clj"))
 
-  )
+  (def mfs (apply concat (pmap load-apps-from-zip (filter (memfn isFile) (file-seq (java.io.File. "e:/android/manifests"))) )))
+  (def sorted (reverse 
+      (sort-by :version mfs)))
+  (def by-pck (group-by :package mfs))
+  (count (filter #(= 1 (count %)) (vals by-pck))))

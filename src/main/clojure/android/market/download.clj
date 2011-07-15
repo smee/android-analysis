@@ -33,7 +33,8 @@
         out-file (file filename)]
     (try
       (make-parents out-file)
-      (with-open [instream (.getInputStream (doto (.openConnection url)
+      (with-open [instream (.getInputStream 
+                             (doto (.openConnection url)
                                (.setRequestMethod "GET")
                                (.setRequestProperty "User-Agent" "Android-Market/2")
                                (.setRequestProperty "Cookie" cookie)))] 
@@ -83,8 +84,7 @@ substrings of size 2."
     [d1 d2]))
 
 (defn construct-output-file 
-  "To prevent ambigious output dirs (using the category doesn't work, 
-changes all the time, for example due to i18n)"
+  "Create a directory hierarchy from a numeric string. Creates the directories if they don't exists."
   [dir app-id]
   (let [[d1 d2] (construct-path-parts app-id)
         out (file dir d1 d2 app-id)]
@@ -119,7 +119,7 @@ changes all the time, for example due to i18n)"
 (defn download-all-apps [input-dir output-dir & credentials-files]
   (let [properties        (map #(into {} (read-properties %)) credentials-files)
         avail-credentials (map #(assoc % "authtoken" (get-auth-token %)) properties)]
-    (doseq [in-file (file-seq (file input-dir)) :when (.isFile in-file)]
+    (doseq [in-file (file-seq (file input-dir)) :when (.isFile in-file) :when (> (.lastModified in-file) (- (System/currentTimeMillis) (* 24 60 60 1000)))]
       (let [apps (load-apps-metadata in-file)
             _ (println "downloading" (count apps) "from" in-file)]
         (doall
@@ -137,7 +137,7 @@ changes all the time, for example due to i18n)"
 
   (set! *print-length* 10)
  (download-all-apps 
-   (file "results/market-apps/" (date-string)) 
+   (file "e:/android/market-apps/") 
    "e:/android/original" 
    "marketcredentials.properties" 
    "marketcredentials2.properties" 

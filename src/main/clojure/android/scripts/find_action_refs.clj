@@ -9,7 +9,7 @@
             android-source-dir (second args)]
         (println "Walking decompiled apps, loading manifests, querying lucene index for action references... This may take a while!")
 
-          (let [manifest-files     (find-file android-source-dir #".*AndroidManifest.xml")
+          (let [manifest-files     (find-files android-source-dir #".*AndroidManifest.xml")
                 android-apps       (foreign-refs-only (find-all-references manifest-files lucene-dir))
                 real-external-refs (filter #(not-empty (:references-from %)) (filter-included-actions android-apps))
                 output-filename    "real-refs-unique.json"
