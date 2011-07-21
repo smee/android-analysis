@@ -221,5 +221,10 @@
 			<artifactId>asm-debug-all</artifactId>
 			<version>3.2</version>
 		</dependency>
+		<dependency>
+		  <groupId>fleetdb-client</groupId>
+		  <artifactId>fleetdb-client</artifactId>
+		  <version>0.2.2</version>
+		</dependency>		
 	</dependencies>
 </project>

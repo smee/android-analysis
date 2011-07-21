@@ -1,5 +1,5 @@
 (ns android-manifest.util
-  (:use [clojure.stacktrace :only (root-cause)]
+  (:use [clojure.stacktrace :only (print-cause-trace print-stack-trace)]
         [clojure.java.io :only (file)]
         [clojure.contrib.pprint :only (cl-format)])
   (:require
@@ -100,7 +100,7 @@ the regular expression pattern. Per default returns only files, no directories."
   [ & body ]
   `(try 
      ~@body
-     (catch Exception e# (.println System/err (root-cause e#)))))
+     (catch Exception e# (print-cause-trace e#))))
 
 (defn wrap-ignore-exceptions [f]
   (fn [& args]

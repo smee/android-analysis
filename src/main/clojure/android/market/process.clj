@@ -141,10 +141,15 @@ Uses static analysis via the findbugs infrastructure."
         files))
 
 
-(defn extract-intents [jars-dir intents-dir]
-  (let [skip? (skip-files-in-archives (find-files intents-dir #".*\.zip"))
-        files (remove skip? (find-files jars-dir))]
-    (dorun (process-all-files files (str intents-dir "/" (date-string)) find-intents))))
+(defn extract-intents 
+  "Extract as much infos about intent objects created in android apps via static analysis."
+  ([jars-dir intents-dir] (extract-intents jars-dir (skip-files-in-archives (find-files intents-dir #".*\.zip")) intents-dir)) 
+  ([jars-dir skip? intents-dir]
+    (let [files (remove skip? (find-files jars-dir))
+          now (date-string)
+          output-dir (str intents-dir "/" now)]
+      (dorun (process-all-files files output-dir find-intents))
+      now)))
 
 (defn extract-intent-constructors [main-dir]
     (process-all-files main-dir count-intent-constructors))
@@ -166,17 +171,21 @@ Uses static analysis via the findbugs infrastructure."
   (possible-android-identifiers (String. (to-byte-array (java.io.File. "h:/classes.dex"))))
   
   (let [now           (date-string)
-        output-dir    (str "e:/android/manifests/" now)
-        skip?         (skip-files-in-archives (find-files "e:/android/manifests" #".*\.zip"))
+        mf-dir        "e:/android/manifests/"
+        output-dir    (str mf-dir now)
+        skip?         (skip-files-in-archives (find-files mf-dir #".*\.zip"))
         num-extracted (extract-android-manifests "z:/original" skip? output-dir)] 
+    (archive/copy-to-zip (file mf-dir (str now ".zip")) output-dir true)
     num-extracted)
   
   (extract-jars "z:/original" (skip-files-in-dir "e:/android/jars") "e:/android/jars")
 
 
-  (do
-    (println "find intents: " 
-      (extract-intents "e:/android/jars" "e:/android/intents")))
+  (let [i-dir "g:/android/intents/"
+        output-dir (extract-intents "e:/android/jars" i-dir)]
+    (println output-dir)
+    (archive/copy-to-zip (file i-dir (str output-dir ".zip")) (str i-dir output-dir) true))
+  
   (do
     (println "count intent constructors: " 
       (extract-intent-constructors "e:/android/jars" "e:/android/intent constructor counts")))
