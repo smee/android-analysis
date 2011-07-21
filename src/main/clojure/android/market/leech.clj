@@ -15,6 +15,8 @@
      Market$AppType 
      Market$AppsRequest 
      Market$AppsResponse 
+     Market$CommentsRequest
+     Market$CommentsResponse
      Market$ResponseContext 
      Market$AppsRequest$ViewType
      Market$AppsRequest$OrderType
@@ -24,9 +26,9 @@
 
 
 (defn- apps-request [query app-type view-type order-type cat-id start-idx entries-count extended?]
-"Private function that sets all properties of a market request."
-;use setters only if parameter is given (There is a difference between not setting a value
-; and setting it to null.)
+"Private function that sets all properties of a market request.
+ use setters only if parameter is given (There is a difference between not setting a value
+ and setting it to null.)"
 (let [b (Market$AppsRequest/newBuilder)]
   (do
     (when query
@@ -45,9 +47,18 @@
       (.setEntriesCount b entries-count))
     (when extended?
       (.setWithExtendedInfo b extended?))
-      
     (.build b))))
 
+(defn- comments-request [app-id start-idx entries-count]
+  (let [b (Market$CommentsRequest/newBuilder)]
+    (do
+      (when app-id
+        (.setAppId b app-id))
+      (when start-idx
+        (.setStartIndex b start-idx))
+      (when entries-count
+        (.setEntriesCount b entries-count))
+      (.build b))))
 
 (defn- create-apps-request 
     "Use a map to specify an arbitrary subset of market request parameters."
@@ -56,6 +67,10 @@
          order-type Market$AppsRequest$OrderType/NEWEST, category nil, start-idx 0, entries-count 10, extended? true}}]
   (apps-request query app-type view-type order-type category start-idx entries-count extended?))
 
+(defn- create-comments-request
+  [{:keys [app-id start-idx entries-count]
+    :or {app-id "", start-idx 0, entries-count 10}}]
+  (comments-request app-id start-idx entries-count))
 
 (defn- extract-app-infos 
   "Create map of relevant bean properties of one android app."
@@ -70,6 +85,12 @@
         :appType app-type
         :timestamp (System/currentTimeMillis))
       :extendedInfo :allFields :descriptorForType :defaultInstanceForType :unknownFields :serializedSize :promoText :class)))
+
+(defn- extract-comment [comment]
+  (let [m (bean comment)
+        now (System/currentTimeMillis)]
+    (dissoc (assoc m :timestamp now)
+            :serializedSize :descriptorForType :commentslist :initialized :allFields :defaultInstanceForType :unknownFields :class)))
 
 (defn- init-session [credentials]
   (let [session  (new MarketSession)
@@ -113,25 +134,29 @@
       @result)))
 
 
-(defn fetch-app-infos [m session]
+(defn fetch-app-infos [req session resp-fn]
   "Return reference to sequence of application details. Dereference with @."
   (ignore-exceptions
     (call-market 
       session
-      (create-apps-request m)
-      (fn [resp] (map extract-app-infos (.getAppList resp))))))
+      req
+      resp-fn)))
   
 
 (defn create-metadata-fetcher 
 "Create a lazy sequence of android app metadata by calling to the remote api
-for as long as there are more than 0 results per request."
-  [api queries] 
-  (lazy-seq
-    (when-let [q (first queries)]
-      (let [_ (sleep-random 500 2000)
-            apps (->> api (fetch-app-infos q) (filter map?))]
-        (when (not-empty apps)
-          (lazy-cat apps (create-metadata-fetcher api (rest queries))))))))
+for as long as there are more than 0 results per request.
+api: instance of MarketSession
+queries: sequence of query maps
+req-maker: functions that creates instance of a valid request that MarketSessions accepts via append
+resp-fn: function that handles the response"
+[api queries req-maker resp-fn] 
+(lazy-seq
+  (when-let [q (first queries)]
+    (let [_ (sleep-random 500 2000)
+          apps (filter map? (fetch-app-infos (req-maker q) api resp-fn))]
+      (when (not-empty apps)
+        (lazy-cat apps (create-metadata-fetcher api (rest queries) req-maker resp-fn)))))))
 
 (defn- create-queries 
   "Sequence of api queries 0..800"
@@ -143,22 +168,20 @@ for as long as there are more than 0 results per request."
 
 (defn fetch-all-apps 
   "Download metadata of all android apps matching the query."
-  [query-template-map cred]
-  (let [api     (create-market-api cred)
-        queries (create-queries query-template-map)]
-    (filter #(empty? (:price %))
-      (flatten (create-metadata-fetcher api queries)))))
+  ([query-template-map cred] 
+    (fetch-all-apps query-template-map cred create-apps-request #(map extract-app-infos (.getAppList %))))
+  ([query-template-map cred req-maker resp-fn]
+    (let [api     (create-market-api cred)
+          queries (create-queries query-template-map)]
+      (flatten (create-metadata-fetcher api queries req-maker resp-fn)))))
   
-(defn fetch-all-newest-apps-category 
-  "Download metadata of all the newest android apps for a category."
-  [category credentials]
-  (fetch-all-apps  credentials))
-
 (defn fetch-all-apps-author
   "Download metadata of all android apps of one author."
   [author cred]
   (fetch-all-apps {:app-type nil :query (str "pub:" author) :order-type nil} cred))
 
+(defn fetch-all-comments [app-id cred]
+  (fetch-all-apps {:app-id app-id} cred create-comments-request #(map extract-comment (.getCommentsList %))))
 
 (defn batch-download 
   "Fetch metadata about apps from the google market. Tries to fetch all metadata for 
@@ -240,3 +263,15 @@ for as long as there are more than 0 results per request."
             (cycle (map create-market-api credentials))))))
 
 )
+
+(comment
+  (def api (create-market-api (read-properties (first cred-files))))
+  (def cr (.build 
+            (doto (Market$CommentsRequest/newBuilder)
+              (.setAppId "4657776670211489294")
+              (.setStartIndex 70)
+              (.setEntriesCount 10))))
+  (call-market api cr identity)
+  (def cred (read-properties (first cred-files)))
+  (def x (fetch-all-comments "4657776670211489294" cred))
+  )
