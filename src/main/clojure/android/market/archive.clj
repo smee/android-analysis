@@ -1,10 +1,10 @@
 (ns android.market.archive 
   "Functions to help processing zip archive contents."
   (:use
-    [clojure.contrib.io :only (to-byte-array)])
+    [clojure.contrib.io :only (to-byte-array as-file copy delete-file-recursively)])
   (:import
-    [java.io File ByteArrayInputStream]
-    [java.util.zip ZipInputStream ZipEntry ZipFile]))
+    [java.io File ByteArrayInputStream BufferedOutputStream FileOutputStream]
+    [java.util.zip ZipInputStream ZipOutputStream ZipEntry ZipFile]))
 
 (defn extract-entry
   "Extract file from zip, returns byte[]."
@@ -33,8 +33,26 @@ returns sequence of results (not lazy)."
       (doall 
         (pmap #(func (.getName %) (to-byte-array (.getInputStream zf %))) (filter-entries zf regex))))))  
       
-      
-(comment
-  ;; map of entry name to binary length for all xmls files in the archive, that have the substring "1234" in their name
-  (apply merge (process-entries "test.zip" #(hash-map %1 (count %2)) #".*1234.*xml"))
-  )
+
+(defn- unix-path [path]
+  (.replaceAll path "\\\\" "/"))
+
+(defn- trim-leading-str [s to-trim]
+  (subs s  (.length to-trim)))
+
+(defn copy-to-zip 
+  "Copy all files under root-dir into a zip archive located at zip-file. Uses pathes relative to root-dir."
+  ([zip-file root-dir] (copy-to-zip zip-file root-dir false))
+  ([zip-file root-dir move?]
+    (let [root (str (unix-path root-dir) \/)]
+      (with-open [zip-os (-> zip-file
+                           (FileOutputStream.)
+                           (BufferedOutputStream.)
+                           (ZipOutputStream.))]
+        (doseq [file (file-seq (as-file root-dir)) :when (and true (.isFile file))]
+          (let [path (unix-path (trim-leading-str (str file) root))]
+            (.putNextEntry zip-os (doto (ZipEntry. path)
+                                    (.setTime (.lastModified file))))
+            (copy file zip-os)))
+        (when move?
+          (delete-file-recursively root-dir))))))
