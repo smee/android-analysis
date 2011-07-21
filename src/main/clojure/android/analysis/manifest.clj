@@ -177,7 +177,16 @@ nonempty intent-filter seq."
         unique-names (map name-of (unique-apps apps))]
     (clojure.set/difference (set unique-names-all) (set unique-names))))
 
-
+(defn history-stats [mfs]
+  (let [by-pck (group-by :package mfs)
+        counted (map-values count by-pck)
+        counts (vals counted)
+        mean #(float (/ (reduce + %) (count %)))]
+    (println "mean of versions per app:" (mean counts))
+    (println "mean of versions where more than 1 version: " (mean (remove #{1} counts)))
+    (println "max. versions of an app: " (reduce max counts))
+    (println "no. of apps: " (count by-pck))
+    (println "no. of apps with more than one version:" (count (remove #{1} counts))))) 
 
 (comment
   (def manifest (extract-entry "d:/android/reduced/android-20101127.zip" "android/TOOLS/-1119349709413775354/AndroidManifest.xml"))
