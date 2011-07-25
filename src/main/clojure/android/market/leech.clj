@@ -275,3 +275,12 @@ resp-fn: function that handles the response"
   (def cred (read-properties (first cred-files)))
   (def x (fetch-all-comments "4657776670211489294" cred))
   )
+(comment 
+  
+  (def broken (remove nil? (for [f (find-files "e:/android/metadata")]
+    (try
+      (deserialize f)
+      nil
+      (catch Exception e f)))))
+  
+  )

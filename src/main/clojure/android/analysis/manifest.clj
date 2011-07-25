@@ -95,8 +95,9 @@ androidmanifest.xml files using zipper traversals."
 ;;  Datastructure to hold relevant infos about an android application.
 (defrecord Android-App [name version package sdk-version shared-uid components])
 
-(defn load-android-manifest [app-name manifest]
+(defn load-android-manifest 
   "Parse android app manifest."
+  [app-name manifest]
   (let [doc           (remove-xml-namespaces (xml/parse (input-stream manifest)))
         x             (zip/xml-zip doc)
         package-name  (xml1-> x (attr :package))
@@ -200,7 +201,7 @@ nonempty intent-filter seq."
   (def mf (unique-apps (load-apps-from-zip "d:/android/reduced/android-20101127.zip")))
   (def mf (deserialize "d:/android/parsed-manifests.clj"))
 
-  (def mfs (apply concat (pmap load-apps-from-zip (filter (memfn isFile) (file-seq (java.io.File. "e:/android/manifests"))) )))
+  (def mfs (apply concat (pmap load-apps-from-zip (filter (memfn isFile) (file-seq (java.io.File. "g:/android/manifests"))) )))
   (def sorted (reverse 
       (sort-by :version mfs)))
   (def by-pck (group-by :package mfs))

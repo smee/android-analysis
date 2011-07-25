@@ -174,16 +174,15 @@ Uses static analysis via the findbugs infrastructure."
         mf-dir        "e:/android/manifests/"
         output-dir    (str mf-dir now)
         skip?         (skip-files-in-archives (find-files mf-dir #".*\.zip"))
-        num-extracted (extract-android-manifests "z:/original" skip? output-dir)] 
+        num-extracted (extract-android-manifests "e:/android/original" skip? output-dir)] 
     (archive/copy-to-zip (file mf-dir (str now ".zip")) output-dir true)
     num-extracted)
   
-  (extract-jars "z:/original" (skip-files-in-dir "e:/android/jars") "e:/android/jars")
+  (extract-jars "e:/android/original" (skip-files-in-dir "e:/android/jars") "e:/android/jars")
 
 
   (let [i-dir "g:/android/intents/"
         output-dir (extract-intents "e:/android/jars" i-dir)]
-    (println output-dir)
     (archive/copy-to-zip (file i-dir (str output-dir ".zip")) (str i-dir output-dir) true))
   
   (do

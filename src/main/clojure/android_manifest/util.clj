@@ -189,3 +189,6 @@ Source: http://briancarper.net/blog/527/printing-a-nicely-formatted-plaintext-ta
     (if (empty? xs)
       (partial map g)
       (apply map g xs ))))
+
+(defn pmapcat [f & colls]
+  (apply concat (apply pmap f colls)))

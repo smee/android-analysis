@@ -245,13 +245,13 @@ hashes of the files in that package."
   
   (let [apps (apply join-intents 
                     (pvalues 
-                      (-> "e:/android/manifests" (find-files #".*\d{4}\d*") mf/load-apps-from-disk mf/unique-apps)
-                      (intents/load-intents-from-disk "e:/android/intents")))]
+                      (mf/unique-apps (pmapcat mf/load-apps-from-zip (find-files "e:/android/manifests" #".*\.zip")))
+                      (pmapcat intents/load-intents-zip (find-files "e:/android/intents" #".*\.zip"))))]
     (save-sizes-csv (str "e:/android/reduced/" (date-string) ".csv") apps "e:/android/original"))
 
   (def apps (apply join-intents 
                     (pvalues 
-                      (-> "d:/android/reduced/manifests-20110504.zip" mf/load-apps-from-zip mf/unique-apps)
+                      
                       (intents/load-intents-zip "d:/android/reduced/intents-20110504.zip"))))
   
   

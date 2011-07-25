@@ -32,7 +32,14 @@ returns sequence of results (not lazy)."
     (with-open [zf (ZipFile. zipfile)]
       (doall 
         (pmap #(func (.getName %) (to-byte-array (.getInputStream zf %))) (filter-entries zf regex))))))  
-      
+
+(defn broken? 
+  "Is the given file a broken zip archive?"
+  [file]
+  (try
+    (dorun (get-entries (as-file file)))
+    false
+    (catch Exception e (.printStackTrace e) true)))
 
 (defn- unix-path [path]
   (.replaceAll path "\\\\" "/"))
