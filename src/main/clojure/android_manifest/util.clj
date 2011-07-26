@@ -100,7 +100,7 @@ the regular expression pattern. Per default returns only files, no directories."
   [ & body ]
   `(try 
      ~@body
-     (catch Exception e# (print-cause-trace e#))))
+     (catch Exception e# (.printStackTrace e#))))
 
 (defn wrap-ignore-exceptions [f]
   (fn [& args]

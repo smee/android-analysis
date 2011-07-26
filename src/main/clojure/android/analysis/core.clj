@@ -225,7 +225,7 @@ hashes of the files in that package."
                   (-> "z:/reduced/manifests-20110330.zip" mf/load-apps-from-zip mf/unique-apps)
                   (intents/load-intents-zip "z:/reduced/intents-20110330.zip"))))
     (def apps (deserialize "d:/android/apps-58k"))
-    (def class-lookup (build-name-classes-fn "z:/jars"))
+    (def class-lookup (build-name-classes-fn "e:/android/jars"))
     (def x (resolve-explicit-dependencies apps class-lookup))
   (spit "d:/android/explicit-deps.dot" (graphviz-test x))
   (aggregate (dep-provides apps))
@@ -245,8 +245,8 @@ hashes of the files in that package."
   
   (let [apps (apply join-intents 
                     (pvalues 
-                      (mf/unique-apps (pmapcat mf/load-apps-from-zip (find-files "e:/android/manifests" #".*\.zip")))
-                      (pmapcat intents/load-intents-zip (find-files "e:/android/intents" #".*\.zip"))))]
+                      (mf/unique-apps (pmapcat mf/load-apps-from-zip (find-files "g:/android/manifests" #".*\.zip")))
+                      (apply merge (pmap (comp (partial into {}) intents/load-intents-zip) (find-files "g:/android/intents" #".*\.zip")))))]
     (save-sizes-csv (str "e:/android/reduced/" (date-string) ".csv") apps "e:/android/original"))
 
   (def apps (apply join-intents 

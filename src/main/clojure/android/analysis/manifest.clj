@@ -3,7 +3,8 @@
     [clojure.contrib.zip-filter.xml :only (xml-> xml1-> attr)]
     [clojure.java.io :only (input-stream)]
     android-manifest.util
-    android-manifest.serialization)
+    android-manifest.serialization
+    [clojure.contrib.singleton :only (per-thread-singleton)])
   (:require
     [android.market.archive :as archive]
     [clojure.contrib.zip-filter :as zf]
@@ -95,10 +96,17 @@ androidmanifest.xml files using zipper traversals."
 ;;  Datastructure to hold relevant infos about an android application.
 (defrecord Android-App [name version package sdk-version shared-uid components])
 
+;; thread-local cache of saxparsers to prevent deadlock when creating many parser
+;; instances in multiple threads
+(defonce saxparser (per-thread-singleton 
+                      #(let[parser (.. javax.xml.parsers.SAXParserFactory (newInstance) (newSAXParser))]
+                          (fn [s ch]
+                            (.parse parser s ch)))))
+
 (defn load-android-manifest 
   "Parse android app manifest."
   [app-name manifest]
-  (let [doc           (remove-xml-namespaces (xml/parse (input-stream manifest)))
+  (let [doc           (remove-xml-namespaces (xml/parse (input-stream manifest) (saxparser)))
         x             (zip/xml-zip doc)
         package-name  (xml1-> x (attr :package))
         version       (xml1-> x (attr :versionCode))

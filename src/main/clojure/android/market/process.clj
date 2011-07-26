@@ -27,8 +27,11 @@
 (defn- extract-and-convert [archives outp-dir file-in-app process-fn]
     (let [outp-dir-f (as-file outp-dir)]
       (count (pmap
-               #(ignore-exceptions 
-                  (process-app-in-zip outp-dir-f file-in-app process-fn %))
+               #(try 
+                  (process-app-in-zip outp-dir-f file-in-app process-fn %)
+                  (catch Exception e 
+                    (println "Error for" (str %))
+                    (.printStackTrace e)))
                archives))))
 
 (defn skip-files-in-archives 
@@ -171,7 +174,7 @@ Uses static analysis via the findbugs infrastructure."
   (possible-android-identifiers (String. (to-byte-array (java.io.File. "h:/classes.dex"))))
   
   (let [now           (date-string)
-        mf-dir        "e:/android/manifests/"
+        mf-dir        "g:/android/manifests/"
         output-dir    (str mf-dir now)
         skip?         (skip-files-in-archives (find-files mf-dir #".*\.zip"))
         num-extracted (extract-android-manifests "e:/android/original" skip? output-dir)] 
