@@ -1,5 +1,5 @@
-(ns android-manifest.create-lucene-index
-  (:use [android-manifest.lucene])
+(ns android.tools.create-lucene-index
+  (:use [android.tools.lucene])
   (:gen-class))
 
 (defn -main [& args]

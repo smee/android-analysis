@@ -3,8 +3,8 @@
   (:use 
     [clojure.java.io :only (input-stream)]
     android.market.archive
-    android-manifest.util
-    android-manifest.serialization))
+    android.tools.util
+    android.tools.serialization))
 
 (def app-id-regex #".*\d\d\d\d(\d)+")
 

@@ -1,4 +1,4 @@
-(ns android-manifest.scribble
+(ns android.experiments.scribble
   (:require 
     [clojure.contrib.zip-filter :as zf]
     [clojure.contrib.zip-filter.xml :as zfx]

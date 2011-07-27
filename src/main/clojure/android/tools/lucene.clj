@@ -1,4 +1,4 @@
-(ns android-manifest.lucene
+(ns android.tools.lucene
   "Lucene related functions for creating/querying an index."
   (:import 
     org.apache.lucene.analysis.standard.StandardAnalyzer

@@ -1,4 +1,4 @@
-(ns android-manifest.serialization
+(ns android.tools.serialization
   (:use [clojure.pprint :only [pprint]]
         [clojure.java.io :only (file reader writer)])
   (:import [java.io File FileWriter FileReader PushbackReader]))

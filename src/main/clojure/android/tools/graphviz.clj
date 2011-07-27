@@ -1,4 +1,4 @@
-(ns android-manifest.graphviz)
+(ns android.tools.graphviz)
 
 (defn get-ref-strings [all-apps slot-value color]
   (distinct (flatten

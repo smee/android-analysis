@@ -1,4 +1,4 @@
-(ns android-manifest.util
+(ns android.tools.util
   (:use [clojure.stacktrace :only (print-cause-trace print-stack-trace)]
         [clojure.java.io :only (file)]
         [clojure.contrib.pprint :only (cl-format)])

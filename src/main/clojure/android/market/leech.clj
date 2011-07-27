@@ -4,8 +4,8 @@
     [clojure.contrib.io :only (file)]
     [clojure.stacktrace :only (root-cause)]
     [clojure.string :only (join)]
-    android-manifest.serialization
-    android-manifest.util)
+    android.tools.serialization
+    android.tools.util)
   (:require
     [android.market.category :as cat])
   (:import 

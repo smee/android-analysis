@@ -1,7 +1,7 @@
 (ns android.analysis.core
   (:use 
-    android-manifest.serialization
-    android-manifest.util
+    android.tools.serialization
+    android.tools.util
     [android.market.download :as download]
     [clojure.contrib.io :only (with-out-writer file)]
     [clojure.contrib.seq :only (indexed)]

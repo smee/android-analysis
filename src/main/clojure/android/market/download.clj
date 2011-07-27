@@ -6,8 +6,8 @@
   (:require 
     [android.market.category :as cat])
   (:use 
-    android-manifest.serialization
-    [android-manifest.util :only (ignore-exceptions sleep-random date-string)]
+    android.tools.serialization
+    [android.tools.util :only (ignore-exceptions sleep-random date-string)]
     [android.market.leech :as ml]
     [clojure.contrib.io :only (file make-parents)]
     [clojure.contrib.duck-streams :only (copy)]

@@ -1,4 +1,4 @@
-(ns android-manifest.find-action-refs
+(ns android.tools.find-action-refs
   (:use [android-manifest core scribble]
     [clojure.contrib.json :only (pprint-json)])
   (:gen-class))

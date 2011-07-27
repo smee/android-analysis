@@ -2,8 +2,8 @@
   (:use 
     [clojure.contrib.zip-filter.xml :only (xml-> xml1-> attr)]
     [clojure.java.io :only (input-stream)]
-    android-manifest.util
-    android-manifest.serialization
+    android.tools.util
+    android.tools.serialization
     [clojure.contrib.singleton :only (per-thread-singleton)])
   (:require
     [android.market.archive :as archive]

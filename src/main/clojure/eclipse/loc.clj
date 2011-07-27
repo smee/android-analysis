@@ -24,7 +24,7 @@
     (let [result (parse-cloc-output archive)
           locs (:individual-loc result)
           loc (:loc result)
-          t* (bootstrap x median :size 10000)
+          t* (bootstrap loc median :size 10000)
           loc-per-unit (mean t*)]
       {:loc-sum (* loc-per-unit est-count)
        :loc-mean loc-per-unit

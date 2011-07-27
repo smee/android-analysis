@@ -1,4 +1,4 @@
-(ns android.analysis.xmlpull
+(ns android.experiments.xmlpull
   (:import
     org.xmlpull.v1.XmlPullParser))
 

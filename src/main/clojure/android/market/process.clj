@@ -1,8 +1,7 @@
 (ns android.market.process
   (:use 
-    [android-manifest.core :only (valid-action?)]
-    [android-manifest.util :only (ignore-exceptions find-files extract-relative-path date-string)]
-    [android-manifest.serialization :only (serialize)]
+    [android.tools.util :only (ignore-exceptions find-files extract-relative-path date-string)]
+    [android.tools.serialization :only (serialize)]
     [android.market.download :only (construct-output-file) ]
     [android.analysis.hash :only (md5)]
     [clojure.java.io :only (file as-file make-parents)]
@@ -84,39 +83,6 @@ them to java bytecode."
     "classes.dex" 
     (fn [byte-arr] (Dex2Jar/doData byte-arr))))
 
-;;;;;;;;;;;;;;;;;;;;; old ;;;;;;;;;;;;;;;;;;;;;;
-
-(defn printable? 
-  "Is this character in [33..126]?"
-  [ch]
-  (let [val (int ch)]
-    (or 
-      (and (>= val (int \a)) (<= val (int \z)))
-      (and (>= val (int \A)) (<= val (int \Z)))
-      (and (>= val (int \0)) (<= val (int \9)))
-      (contains? #{\. \- \_} ch))))
-
-(defn possible-android-identifiers 
-  "Extract all strings from a binary dexfile (dalvik bytecode)
-   that look and taste like an android action reference string."
-  [contents]
-  (->> contents 
-    String.
-    (partition-by printable?)
-    (remove #(>= 6 (count %)))
-    (remove (comp not printable? first))
-    (filter valid-action?)
-    ;(filter (re-find #"([.a-zA-Z0-9]+)"))
-    distinct
-    (map (partial apply str))))
-
-
-(defn extract-bytecode-strings [main-dir outp-dir]
-  (extract-and-convert 
-    main-dir 
-    outp-dir 
-    "classes.dex"                       
-    (fn [byte-arr] (prn-str (possible-android-identifiers (String. byte-arr))))))
 
 ;;;;;;;;;;;;;;;;  extract intents via static analysis   ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

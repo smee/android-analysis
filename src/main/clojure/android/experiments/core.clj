@@ -1,13 +1,13 @@
-(ns android-manifest.core
+(ns android.experiments.core
   (:use 
     [clojure.set :only [intersection difference union map-invert]]
     [clojure.pprint :only (pprint)]
     [clojure.contrib.seq-utils :only (separate)]
     [clojure.contrib.zip-filter.xml :only (xml-> xml1-> attr)]
-    android-manifest.lucene
-    android-manifest.serialization
-    android-manifest.util
-    android-manifest.sdk
+    android.tools.lucene
+    android.tools.serialization
+    android.tools.util
+    android.tools.sdk
     [clojure.contrib.datalog.util :only (reverse-map)])
   (:require
     [clojure.contrib.zip-filter :as zf]
@@ -178,6 +178,40 @@ in loading android apps without duplicates (same package, lower versions)."
   (keys 
     (dissoc (remove-empty-values action-doc-map) 0))))
 
+;;;;;;;;;;;;;;;;;;;;; old ;;;;;;;;;;;;;;;;;;;;;;
+
+(defn printable? 
+  "Is this character in [33..126]?"
+  [ch]
+  (let [val (int ch)]
+    (or 
+      (and (>= val (int \a)) (<= val (int \z)))
+      (and (>= val (int \A)) (<= val (int \Z)))
+      (and (>= val (int \0)) (<= val (int \9)))
+      (contains? #{\. \- \_} ch))))
+
+(defn possible-android-identifiers 
+  "Extract all strings from a binary dexfile (dalvik bytecode)
+   that look and taste like an android action reference string."
+  [contents]
+  (->> contents 
+    String.
+    (partition-by printable?)
+    (remove #(>= 6 (count %)))
+    (remove (comp not printable? first))
+    (filter valid-action?)
+    ;(filter (re-find #"([.a-zA-Z0-9]+)"))
+    distinct
+    (map (partial apply str))))
+
+
+(defn extract-bytecode-strings [main-dir outp-dir]
+  (extract-and-convert 
+    main-dir 
+    outp-dir 
+    "classes.dex"                       
+    (fn [byte-arr] (prn-str (possible-android-identifiers (String. byte-arr))))))
+
 (comment
   
   (set! *print-length* 15)
@@ -197,7 +231,7 @@ in loading android apps without duplicates (same package, lower versions)."
   
   (print-findings r3 manifest-files)
 
-  (use 'android-manifest.graphviz :reload)
+  (use 'android.tools.graphviz :reload)
   (spit (str "d:/android/results/refviz-33k-" (date-string) ".dot") (graphviz r3))
   (binding [*print-length* nil]
     (spit "d:/android/results/real-refs-20k.json" (with-out-str (pprint-json r3))))
