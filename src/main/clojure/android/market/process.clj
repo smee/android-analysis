@@ -129,43 +129,13 @@ Uses static analysis via the findbugs infrastructure."
   [zipfile]
   (into {} (archive/process-entries zipfile #(vec [%1 (md5 %2)]))))
 
-(defn hash-zip-contents [main-dir outp-dir]
-  (process-all-files main-dir outp-dir hash-contents))
+(defn hash-zip-contents
+  ([main-dir outp-dir] (hash-zip-contents main-dir (skip-files-in-archives (find-files outp-dir #".*\.zip")) outp-dir)) 
+  ([main-dir skip? outp-dir]
+    (let [files (remove skip? (find-files main-dir))
+          now (date-string)
+          output-dir (str outp-dir "/" now)]
+      (dorun (process-all-files files output-dir hash-contents))
+      now)))
 
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;; misc, experiments ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(comment
-  
-  (possible-android-identifiers (String. (to-byte-array (java.io.File. "h:/classes.dex"))))
-  
-  (let [now           (date-string)
-        mf-dir        "g:/android/manifests/"
-        output-dir    (str mf-dir now)
-        skip?         (skip-files-in-archives (find-files mf-dir #".*\.zip"))
-        num-extracted (extract-android-manifests "e:/android/original" skip? output-dir)] 
-    (archive/copy-to-zip (file mf-dir (str now ".zip")) output-dir true)
-    num-extracted)
-  
-  (extract-jars "e:/android/original" (skip-files-in-dir "e:/android/jars") "e:/android/jars")
-
-
-  (let [i-dir "g:/android/intents/"
-        output-dir (extract-intents "e:/android/jars" i-dir)]
-    (archive/copy-to-zip (file i-dir (str output-dir ".zip")) (str i-dir output-dir) true))
-  
-  (do
-    (println "count intent constructors: " 
-      (extract-intent-constructors "e:/android/jars" "e:/android/intent constructor counts")))
-  
-  (serialize "d:/temp/foo" (find-intents (file "D:\\android\\jars\\ARCADE\\-1007597263548681988\\classes.dex")))
-  
-  (def contents (to-byte-array (java.io.File. "h:/classes.dex")))
-  
-  (dorun
-    (for [f (find-files "h:/android" #".*classes.dex")] 
-      (let [s (slurp f)] 
-        (spit f (vec (possible-android-identifiers s))))))
-
-  )
 

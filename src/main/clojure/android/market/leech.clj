@@ -166,7 +166,7 @@ resp-fn: function that handles the response"
 [api queries req-maker resp-fn] 
 (lazy-seq
   (when-let [q (first queries)]
-    (let [_ (sleep-random 500 2000)
+    (let [_ (sleep-random 2000 5000)
           apps (filter map? (fetch-app-infos (req-maker q) api resp-fn))]
       (when (not-empty apps)
         (lazy-cat apps (create-metadata-fetcher api (rest queries) req-maker resp-fn)))))))
