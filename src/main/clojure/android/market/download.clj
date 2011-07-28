@@ -121,7 +121,7 @@ substrings of size 2."
         avail-credentials (map #(assoc % "authtoken" (get-auth-token %)) properties)]
     (doseq [in-file (file-seq (file input-dir)) :when (.isFile in-file) :when (> (.lastModified in-file) (- (System/currentTimeMillis) (* 24 60 60 1000)))]
       (let [apps (load-apps-metadata in-file)
-            _ (println "downloading" (count apps) "from" in-file)]
+            _ (println "downloading max." (count apps) "from" in-file)]
         (doall
           (pmap #(download-if-nonexistant %1 %2 output-dir) apps (cycle avail-credentials)))))))
 
@@ -137,13 +137,15 @@ substrings of size 2."
 
   (set! *print-length* 10)
  (download-all-apps 
-   (file "e:/android/market-apps/") 
+   (file "e:/android/metadata/") 
    "e:/android/original" 
    "marketcredentials.properties" 
    "marketcredentials2.properties" 
    "marketcredentials3.properties" 
    "marketcredentials4.properties" 
-   "marketcredentials5.properties")
+   "marketcredentials5.properties"
+   "marketcredentials6.properties"
+   "marketcredentials7.properties")
  
  
  (let [c (read-properties "marketcredentials4.properties")
@@ -153,7 +155,7 @@ substrings of size 2."
        app-id      "4332943286439977254"]
    (download-app-secure app-id authtoken userid deviceid (str app-id ".apk")))
  
-(def avail-apps (set (android.market.archive/get-entries (java.io.File. "d:/android/reduced/manifests-20110327.zip") #".*\d\d\d\d(\d)+")))
+(def avail-apps (set (android.tools.archive/get-entries (java.io.File. "d:/android/reduced/manifests-20110327.zip") #".*\d\d\d\d(\d)+")))
  
  ;; disable https certificate verification
  (javax.net.ssl.HttpsURLConnection/setDefaultHostnameVerifier 

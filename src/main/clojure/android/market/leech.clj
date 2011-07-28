@@ -1,7 +1,8 @@
 (ns android.market.leech
   (:use 
-    [clojure.contrib.java-utils :only (read-properties)]
+    [clojure.contrib.core :only (.?.)]
     [clojure.contrib.io :only (file)]
+    [clojure.contrib.java-utils :only (read-properties)]
     [clojure.stacktrace :only (root-cause)]
     [clojure.string :only (join)]
     android.tools.serialization
@@ -15,6 +16,8 @@
      Market$AppType 
      Market$AppsRequest 
      Market$AppsResponse 
+     Market$CategoriesRequest
+     Market$CategoriesResponse
      Market$CommentsRequest
      Market$CommentsResponse
      Market$ResponseContext 
@@ -59,6 +62,9 @@
       (when entries-count
         (.setEntriesCount b entries-count))
       (.build b))))
+
+(defn- categories-request []
+  (.build (Market$CategoriesRequest/newBuilder)))
 
 (defn- create-apps-request 
     "Use a map to specify an arbitrary subset of market request parameters."
@@ -134,6 +140,13 @@
       @result)))
 
 
+(defn get-all-categories
+  "Retrieve sequence of all currently active categories from android market."
+  [cred]
+  (let [resp-fn #(sort (remove empty? (map (memfn getCategoryId) (mapcat (memfn getSubCategoriesList) (.?. % getCategoriesList)))))
+        api (create-market-api cred)]
+    (call-market api (categories-request) resp-fn)))
+
 (defn fetch-app-infos [req session resp-fn]
   "Return reference to sequence of application details. Dereference with @."
   (ignore-exceptions
@@ -169,7 +182,7 @@ resp-fn: function that handles the response"
 (defn fetch-all-apps 
   "Download metadata of all android apps matching the query."
   ([query-template-map cred] 
-    (fetch-all-apps query-template-map cred create-apps-request #(map extract-app-infos (.getAppList %))))
+    (fetch-all-apps query-template-map cred create-apps-request #(map extract-app-infos (.?. % getAppList))))
   ([query-template-map cred req-maker resp-fn]
     (let [api     (create-market-api cred)
           queries (create-queries query-template-map)]
@@ -181,7 +194,7 @@ resp-fn: function that handles the response"
   (fetch-all-apps {:app-type nil :query (str "pub:" author) :order-type nil} cred))
 
 (defn fetch-all-comments [app-id cred]
-  (fetch-all-apps {:app-id app-id} cred create-comments-request #(map extract-comment (.getCommentsList %))))
+  (fetch-all-apps {:app-id app-id} cred create-comments-request #(map extract-comment (.?. % getCommentsList))))
 
 (defn batch-download 
   "Fetch metadata about apps from the google market. Tries to fetch all metadata for 
@@ -209,7 +222,8 @@ resp-fn: function that handles the response"
   [cred-files]
   (let [dir          (file (str "results/market-apps/" (str (date-string) "-" (java.util.UUID/randomUUID))))
         out-files-fn :category
-        query-tmpl   (map #(hash-map :category % :app-type nil :order-type Market$AppsRequest$OrderType/NEWEST) cat/all-known-categories)]
+        categories (get-all-categories (read-properties (first cred-files)))
+        query-tmpl   (map #(hash-map :category % :app-type nil :order-type Market$AppsRequest$OrderType/NEWEST) categories)]
         (batch-download dir query-tmpl out-files-fn cred-files)))
 
 (defn batch-download-query
@@ -230,9 +244,15 @@ resp-fn: function that handles the response"
 
 
 
-
 (comment
-  (def cred-files ["marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties" "marketcredentials4.properties" "marketcredentials5.properties"])
+  (def cred-files  
+    ["marketcredentials.properties" 
+     "marketcredentials2.properties" 
+     "marketcredentials3.properties" 
+     "marketcredentials4.properties" 
+     "marketcredentials5.properties"
+     "marketcredentials6.properties"
+     ])
   (batch-download-newest cred-files)
   (batch-download-query " " cred-files)
   
@@ -273,7 +293,7 @@ resp-fn: function that handles the response"
               (.setEntriesCount 10))))
   (call-market api cr identity)
   (def cred (read-properties (first cred-files)))
-  (def x (fetch-all-comments "4657776670211489294" cred))
+  (def x (fetch-all-comments "-6318794405226192550" cred))
   )
 (comment 
   

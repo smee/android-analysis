@@ -10,7 +10,7 @@
     [java.io File ByteArrayInputStream]
     Dex2Jar)
   (:require
-    [android.market.archive :as archive]
+    [android.tools.archive :as archive]
     [clojure.contrib.string :as string]
     [clojure.stacktrace :as stack]))
 

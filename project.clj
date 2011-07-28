@@ -2,7 +2,8 @@
   :description "FIXME: write"
   :dev-dependencies  [[vimclojure/server "2.2.0-SNAPSHOT"]
                       [marginalia "0.6.0"]
-                      [slamhound "1.2.0"]] 
+                      [slamhound "1.2.0"]
+                      [clojure-refactoring "0.5.0"]] 
   :dependencies [[org.clojure/clojure "1.2.1"]
                  [org.clojure/clojure-contrib "1.2.0"]
                  [org.apache.lucene/lucene-core "3.0.2"]

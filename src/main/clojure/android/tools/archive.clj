@@ -1,4 +1,4 @@
-(ns android.market.archive 
+(ns android.tools.archive 
   "Functions to help processing zip archive contents."
   (:use
     [clojure.contrib.io :only (to-byte-array as-file copy delete-file-recursively)])

@@ -6,7 +6,7 @@
     android.tools.serialization
     [clojure.contrib.singleton :only (per-thread-singleton)])
   (:require
-    [android.market.archive :as archive]
+    [android.tools.archive :as archive]
     [clojure.contrib.zip-filter :as zf]
     [clojure.contrib.zip-filter.xml :as zfx]
     [clojure.zip :as zip]

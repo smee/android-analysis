@@ -2,7 +2,7 @@
   "Functions for inspecting the results of the intent calling static analysis of android apps."
   (:use 
     [clojure.java.io :only (input-stream)]
-    android.market.archive
+    android.tools.archive
     android.tools.util
     android.tools.serialization))
 

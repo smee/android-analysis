@@ -10,7 +10,7 @@
     clojure.set
     [android.analysis.intent :as intents]
     [android.analysis.manifest :as mf]
-    [android.market.archive :as archive]
+    [android.tools.archive :as archive]
     [android.analysis.hash :as hash]))
 
 (defn clean-app-names [manifests]
