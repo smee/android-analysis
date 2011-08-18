@@ -6,16 +6,17 @@
     [android.tools.util :only (date-string)]))
 
 
-(def cred-files ["marketcredentials.properties" "marketcredentials2.properties" "marketcredentials3.properties" "marketcredentials4.properties" "marketcredentials5.properties"])
- (batch-download-newest cred-files)
-
-(download-all-apps 
-   (file "results/market-apps") 
-   "/home/steffen/smbtest/original"
-   "marketcredentials.properties" 
+(def cred-files 
+  ["marketcredentials.properties" 
    "marketcredentials2.properties" 
    "marketcredentials3.properties" 
    "marketcredentials4.properties" 
    "marketcredentials5.properties"
    "marketcredentials6.properties"
-   "marketcredentials7.properties")
+   "marketcredentials7.properties"])
+
+ (batch-download-newest cred-files)
+
+ (apply 
+   (partial download-all-apps (file "results/market-apps") "e:/android/original") 
+   cred-files)

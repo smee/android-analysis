@@ -1,7 +1,8 @@
 (ns android.tools.archive 
   "Functions to help processing zip archive contents."
   (:use
-    [clojure.contrib.io :only (to-byte-array as-file copy delete-file-recursively)])
+    [clojure.contrib.io :only (to-byte-array as-file copy delete-file-recursively)]
+    [android.tools.util :only (find-files)])
   (:import
     [java.io File ByteArrayInputStream BufferedOutputStream FileOutputStream]
     [java.util.zip ZipInputStream ZipOutputStream ZipEntry ZipFile]))
@@ -33,6 +34,15 @@ returns sequence of results (not lazy)."
       (doall 
         (pmap #(func (.getName %) (to-byte-array (.getInputStream zf %))) (filter-entries zf regex))))))  
 
+(defn process-entries!
+  "Run function with side effects for every entry (two parameters: entry name and contents as byte-array).
+   Returns nil."
+  ([zipfile func] (process-entries! zipfile func #".*"))
+  ([zipfile func regex]
+    (with-open [zf (ZipFile. zipfile)]
+      (dorun 
+        (pmap #(func (.getName %) (to-byte-array (.getInputStream zf %))) (filter-entries zf regex))))))  
+
 (defn broken? 
   "Is the given file a broken zip archive?"
   [file]
@@ -51,15 +61,17 @@ returns sequence of results (not lazy)."
   "Copy all files under root-dir into a zip archive located at zip-file. Uses pathes relative to root-dir."
   ([zip-file root-dir] (copy-to-zip zip-file root-dir false))
   ([zip-file root-dir move?]
-    (let [root (str (unix-path root-dir) \/)]
-      (with-open [zip-os (-> zip-file
-                           (FileOutputStream.)
-                           (BufferedOutputStream.)
-                           (ZipOutputStream.))]
-        (doseq [file (file-seq (as-file root-dir)) :when (and true (.isFile file))]
-          (let [path (unix-path (trim-leading-str (str file) root))]
-            (.putNextEntry zip-os (doto (ZipEntry. path)
-                                    (.setTime (.lastModified file))))
-            (copy file zip-os)))
-        (when move?
-          (delete-file-recursively root-dir))))))
+    (let [root (str (unix-path root-dir) \/)
+          files (seq (find-files (as-file root-dir)))]
+      (when files
+        (with-open [zip-os (-> zip-file
+                             (FileOutputStream.)
+                             (BufferedOutputStream.)
+                             (ZipOutputStream.))]
+          (doseq [file files]
+            (let [path (unix-path (trim-leading-str (str file) root))]
+              (.putNextEntry zip-os (doto (ZipEntry. path)
+                                      (.setTime (.lastModified file))))
+              (copy file zip-os)))
+          (when move?
+            (delete-file-recursively root-dir)))))))

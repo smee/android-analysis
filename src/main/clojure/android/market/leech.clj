@@ -172,12 +172,12 @@ resp-fn: function that handles the response"
         (lazy-cat apps (create-metadata-fetcher api (rest queries) req-maker resp-fn)))))))
 
 (defn- create-queries 
-  "Sequence of api queries 0..800"
+  "Sequence of api queries 0..infinity"
   [template]
   (map #(assoc template 
           :start-idx (* % 10) 
           :entries-count 10) 
-    (range 0 80)))
+    (iterate inc 0)))
 
 (defn fetch-all-apps 
   "Download metadata of all android apps matching the query."
@@ -245,14 +245,7 @@ resp-fn: function that handles the response"
 
 
 (comment
-  (def cred-files  
-    ["marketcredentials.properties" 
-     "marketcredentials2.properties" 
-     "marketcredentials3.properties" 
-     "marketcredentials4.properties" 
-     "marketcredentials5.properties"
-     "marketcredentials6.properties"
-     ])
+  (def cred-files  (find-files "." #"marketcredentials.*.properties"))
   (batch-download-newest cred-files)
   (batch-download-query " " cred-files)
   
@@ -295,12 +288,4 @@ resp-fn: function that handles the response"
   (def cred (read-properties (first cred-files)))
   (def x (fetch-all-comments "-6318794405226192550" cred))
   )
-(comment 
-  
-  (def broken (remove nil? (for [f (find-files "e:/android/metadata")]
-    (try
-      (deserialize f)
-      nil
-      (catch Exception e f)))))
-  
-  )
+

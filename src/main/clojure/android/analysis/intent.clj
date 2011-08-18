@@ -22,7 +22,7 @@
   (let [files (find-files dir app-id-regex)]
     (reduce merge (map #(hash-map (.getName %) (deserialize %)) files))))
 
-(defn load-intents-zip [file]
+(defn load-intents-from-zip [file]
   (reduce merge (process-entries file process-intent-calls app-id-regex)))
 
 (defn load-intent-constructor-counts-zip [file]
@@ -117,7 +117,7 @@
   "Calculate the quotient of number of intents found via static analysis to number of intents constructed
 in an app."
   ([] (calc-recall 
-        (load-intents-zip "d:/Projekte/Thorsten/waterloo/intentslist.zip")
+        (load-intents-from-zip "d:/Projekte/Thorsten/waterloo/intentslist.zip")
         (load-intent-constructor-counts-zip "d:/Projekte/Thorsten/waterloo/intents2andCounts.zip")))
   ([il ic]
     (let [sa-counts (map-values #(+ (count (called-intents-app %)) (count (queried-intents-app %))) il)

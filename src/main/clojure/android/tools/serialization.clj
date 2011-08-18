@@ -23,3 +23,12 @@
   "Read clojure datastructure from file."
   (with-open [r (PushbackReader. (reader f))]
     (read r)))
+
+(defn deserialize-all [f]
+  "Read clojure datastructures from file, returns a seq of all contents."
+  (with-open [r (PushbackReader. (reader f))]
+    (loop [r r, res []]
+      (let [token (read r false :eof)]
+        (if (= :eof token)
+          res
+          (recur r (conj res token)))))))

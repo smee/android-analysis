@@ -1,13 +1,14 @@
 (ns android.scripts.process
   (:use
     android.market.process
-    [android.tools.util :only (find-files date-string)]
+    [android.tools.util :only (find-files date-string pmapcat)]
     [clojure.java.io :only (file)])
   (:require 
     [android.tools.archive :as archive]
     [android.analysis.core :as c]
     [android.analysis.manifest :as mf]
     [android.analysis.intent :as intents]))
+
 
 (def *path* "z:/")
 
@@ -17,7 +18,8 @@
         *intents* (str *path* "intents/")
         *mf*      (str *path* "manifests/")
         *hash*    (str *path* "classes-md5/")
-        *stats*   (str *path* "reduced/")]
+        *stats*   (str *path* "reduced/")
+        zips      #".*.(?i)zip"]
     
     (println "extracting jars from" *apps* "into" *jars*)
     (extract-jars *apps* (skip-files-in-dir *jars*) *jars*)
@@ -26,7 +28,7 @@
     (let [now           (date-string)
           mf-dir        *mf*
           output-dir    (str mf-dir now)
-          skip?         (skip-files-in-archives (find-files mf-dir #".*\.zip"))
+          skip?         (skip-files-in-archives (find-files mf-dir zips))
           num-extracted (extract-android-manifests *apps* skip? output-dir)] 
       (archive/copy-to-zip (file mf-dir (str now ".zip")) output-dir true)
       num-extracted)
@@ -41,12 +43,20 @@
       (archive/copy-to-zip (file *hash* (str output-dir ".zip")) (str *hash* output-dir) true))
     
     
-    (println "writing output csv... into" *stats*) 
-    (let [class-lookup (c/build-name-classes-fn *jars*)
+    #_(println "writing output csv into" *stats* "...") 
+    #_(let [class-lookup (c/build-name-classes-fn *jars*)
           apps (apply c/join-intents 
                       (pvalues 
-                        (-> *mf* (find-files #".*\d{4}\d*") mf/load-apps-from-disk mf/unique-apps)
-                        (intents/load-intents-from-disk *intents*)))]
+                        (mf/unique-apps (pmapcat mf/load-apps-from-zip (find-files *mf* zips)))
+                        (reduce merge (map intents/load-intents-from-zip (find-files *intents* zips)))))]
       (do
         (c/save-sizes-csv (str *stats* "sizes-" (date-string) ".csv") apps *apps*)
-        (c/save-to-csv (str *stats* "deps-" (date-string) ".csv") apps class-lookup)))))
+        (c/save-to-csv (str *stats* "deps-" (date-string) ".csv") apps class-lookup)))
+    
+    (println "Done.")))
+
+
+(comment
+  
+  (binding [*path* "e:/android/"]
+    (-main)))

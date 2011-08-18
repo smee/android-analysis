@@ -12,6 +12,15 @@
   [f m]
   (into {} (for [[k v] m] [k (f v)])))
 
+(defn mapmap
+  "Apply kf and vf to a sequence, s, and produce a map of (kf %) to (vf %).
+from http://tech.puredanger.com/2010/09/24/meet-my-little-friend-mapmap/"
+  ([vf s]
+     (mapmap identity vf s))
+  ([kf vf s]
+     (zipmap (map kf s)
+              (map vf s))))
+
 (defn remove-empty-values 
   "Remove all key-values where value is empty."
   [m]

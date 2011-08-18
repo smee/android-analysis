@@ -81,3 +81,35 @@
         (spit f (vec (possible-android-identifiers s))))))
 
   )
+
+
+
+;;;;;;;; write all metadata into directories by packagename, files per versioncode
+
+(defn construct-path-parts 
+  "Create a hierarchy of folders by splitting the string on dots and creating subdirectories."
+  [package]
+  (split #"\." package))
+
+(defn construct-output-dir 
+  "Create a directory hierarchy from a numeric string. Creates the directories if they don't exists."
+  [dir package]
+  (let [out (apply file (flatten (list dir (construct-path-parts package))))]
+    (do
+      (make-parents (file out "dummy"))
+      out)))
+
+
+(defn sort-file [f output-dir]
+  (let [m (flatten (deserialize-all f))
+        gr (map-values first (group-by :packageName m))]
+    (doseq [[package {version :versionCode :as metadata}] gr]
+      (let [out (construct-output-dir output-dir package)
+            out-file (file out (str version))]
+        (append-spit out-file metadata)))))
+
+(defn sort-metadata [input-dir output-dir]
+  (let [files (find-files input-dir)
+        logged-f (seq-counter files 50 #(println % "files done."))]
+    (pmap #(sort-file % output-dir) logged-f)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

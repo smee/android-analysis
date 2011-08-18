@@ -37,7 +37,7 @@
   "Build a function that returns true if a given file exists already in 
 one of the given archives."
   [archives]
-  (let [available? (into #{} (map #(last (string/split #"/" %)) (mapcat archive/get-entries archives)))]
+  (let [available? (into #{} (map #(last (string/split #"/" %)) (ignore-exceptions (mapcat archive/get-entries archives))))]
     (fn [^File f] (available? (.getName f)))))
 
 (defn skip-files-in-dir 
@@ -127,7 +127,8 @@ Uses static analysis via the findbugs infrastructure."
 (defn hash-contents 
   "Map of zipentry names to md5 hashes of their contents"
   [zipfile]
-  (into {} (archive/process-entries zipfile #(vec [%1 (md5 %2)]))))
+  (ignore-exceptions
+    (into {} (archive/process-entries zipfile #(vec [%1 (md5 %2)])))))
 
 (defn hash-zip-contents
   ([main-dir outp-dir] (hash-zip-contents main-dir (skip-files-in-archives (find-files outp-dir #".*\.zip")) outp-dir)) 
