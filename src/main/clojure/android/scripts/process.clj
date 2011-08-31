@@ -12,6 +12,7 @@
     [android.analysis.manifest :as mf]
     [android.analysis.intent :as intents]))
 
+(declare load-apps)
 
 (def *path* "z:/")
 
@@ -48,15 +49,30 @@
     
     #_(println "writing output csv into" *stats* "...") 
     #_(let [class-lookup (c/build-name-classes-fn *jars*)
-          apps (apply c/join-intents 
-                      (pvalues 
-                        (mf/unique-apps (pmapcat mf/load-apps-from-zip (find-files *mf* zips)))
-                        (reduce merge (map intents/load-intents-from-zip (find-files *intents* zips)))))]
+          apps (load-apps *mf* *intents*)]
       (do
         (c/save-sizes-csv (str *stats* "sizes-" (date-string) ".csv") apps *apps*)
         (c/save-to-csv (str *stats* "deps-" (date-string) ".csv") apps class-lookup)))
     
     (println "Done.")))
+
+
+(defn load-apps [manifests-dir intents-dir]
+  (apply c/join-intents 
+         (pvalues 
+           (mf/unique-apps (pmapcat mf/load-apps-from-zip (find-files manifests-dir #".*.(?i)zip")))
+           (reduce merge (map intents/load-intents-from-zip (find-files intents-dir #".*.(?i)zip"))))))
+
+(defn extract-real-inter-apps-actions 
+  "For every app find the names of all actions that are called via implicit intents 
+- that are not defined within the apps' manifest and
+- that are not defined in the android SDK documentation and
+- that are not defined in any intent filter of any google core app."
+  [apps]
+  (let [inter-apps-actions (map (juxt :name :package c/external-implicit-intent-actions) apps)
+        remove-android-actions (fn [[_ _ actions :as row]] (assoc row 2 (remove android-specific? actions)))
+        inter-wo-sdk (map remove-android-actions inter-apps-actions)]
+    inter-wo-sdk))
 
 
 (comment
