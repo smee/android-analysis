@@ -10,6 +10,8 @@
                  [org.apache.lucene/lucene-core "3.0.2"]
                  [incanter "1.2.3" :exclusions [swank-clojure]]
                  [org.clojars.nathell/redis-clojure "1.2.7"]
+                 [org.clojars.smee/archive "0.1.0-SNAPSHOT"]
+                 [org.clojars.smee/common "1.0.0-SNAPSHOT"]
                  ;; database
 ;                 [clojureql "1.1.0-SNAPSHOT"]
 ;                 [lobos "0.8.0-SNAPSHOT"]

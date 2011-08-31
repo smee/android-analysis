@@ -5,8 +5,7 @@
     [clojure.contrib.java-utils :only (read-properties)]
     [clojure.stacktrace :only (root-cause)]
     [clojure.string :only (join)]
-    android.tools.serialization
-    android.tools.util)
+    [org.clojars.smee serialization util time])
   (:require
     [android.market.category :as cat])
   (:import 
@@ -204,11 +203,12 @@ resp-fn: function that handles the response"
    query-templates: sequence of maps that resemble the queries
    out-file-gen-fn: function that converts query into a string that is used as filename for the results of this query
    cred-files : sequence of credential files"
+  ;;TODO rewrite using agents to avoid thread safety issues in Market.AppRequest.Builder when two threads use the same credentials/api instance
   [outdir query-templates out-file-gen-fn cred-files]
   (let [dir (file outdir)]
     (.mkdirs dir)
     (dorun 
-      (pmap 
+      (map 
         (fn [template cred] 
           (let [out (file dir (out-file-gen-fn template))
                 new-file? (not (.exists out))]

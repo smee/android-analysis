@@ -1,7 +1,11 @@
 (ns android.market.metadata
   (:use
-    [android.tools.util :only (find-files map-values mapmap seq-counter pmapcat)]
-    [android.tools.serialization :only (deserialize-all)]
+    [org.clojars.smee
+     [map :only (map-values mapmap pmapcat)]
+     [file :only (find-files)]
+     [seq :only (seq-counter)]
+     [serialization :only (deserialize-all)]]
+    
     [clojure.contrib.string :only (split)]
     [clojure.java.io :only (file make-parents)]
     [clojure.contrib.duck-streams :only (append-spit)]

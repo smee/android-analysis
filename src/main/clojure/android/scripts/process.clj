@@ -1,10 +1,13 @@
 (ns android.scripts.process
   (:use
     android.market.process
-    [android.tools.util :only (find-files date-string pmapcat)]
+    [org.clojars.smee  
+     [file :only (find-files)]
+     [time :only (date-string)]
+     [map :only (pmapcat)]]
     [clojure.java.io :only (file)])
   (:require 
-    [android.tools.archive :as archive]
+    [archive :as archive]
     [android.analysis.core :as c]
     [android.analysis.manifest :as mf]
     [android.analysis.intent :as intents]))

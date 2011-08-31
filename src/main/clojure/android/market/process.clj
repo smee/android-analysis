@@ -1,7 +1,10 @@
 (ns android.market.process
   (:use 
-    [android.tools.util :only (ignore-exceptions find-files extract-relative-path date-string)]
-    [android.tools.serialization :only (serialize)]
+    [org.clojars.smee
+     [util :only (ignore-exceptions)]
+     [file :only (find-files extract-relative-path)]
+     [serialization :only (serialize)]
+     [time :only (date-string)]]
     [android.market.download :only (construct-output-file) ]
     [android.analysis.hash :only (md5)]
     [clojure.java.io :only (file as-file make-parents)]
@@ -10,7 +13,7 @@
     [java.io File ByteArrayInputStream]
     Dex2Jar)
   (:require
-    [android.tools.archive :as archive]
+    [archive :as archive]
     [clojure.contrib.string :as string]
     [clojure.stacktrace :as stack]))
 

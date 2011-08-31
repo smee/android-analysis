@@ -5,9 +5,8 @@
     [clojure.contrib.seq-utils :only (separate)]
     [clojure.contrib.zip-filter.xml :only (xml-> xml1-> attr)]
     android.tools.lucene
-    android.tools.serialization
-    android.tools.util
-    android.tools.sdk
+    [org.clojars.smee map seq serialization util]
+    android.experiments.sdk
     [clojure.contrib.datalog.util :only (reverse-map)])
   (:require
     [clojure.contrib.zip-filter :as zf]

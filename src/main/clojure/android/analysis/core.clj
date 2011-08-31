@@ -1,7 +1,11 @@
 (ns android.analysis.core
   (:use 
-    android.tools.serialization
-    android.tools.util
+    [org.clojars.smee 
+     [util :only (starts-with-any)]
+     [file :only (find-files)]
+     [map :only (remove-empty-values map-values)]
+     serialization
+     ]
     [android.market.download :as download]
     [clojure.contrib.io :only (with-out-writer file)]
     [clojure.contrib.seq :only (indexed)]
@@ -10,7 +14,7 @@
     clojure.set
     [android.analysis.intent :as intents]
     [android.analysis.manifest :as mf]
-    [android.tools.archive :as archive]
+    [archive :as archive]
     [android.analysis.hash :as hash]))
 
 (defn clean-app-names [manifests]

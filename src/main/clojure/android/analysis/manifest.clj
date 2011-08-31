@@ -2,11 +2,10 @@
   (:use 
     [clojure.contrib.zip-filter.xml :only (xml-> xml1-> attr)]
     [clojure.java.io :only (input-stream)]
-    android.tools.util
-    android.tools.serialization
+    [org.clojars.smee file map seq serialization util]
     [clojure.contrib.singleton :only (per-thread-singleton)])
   (:require
-    [android.tools.archive :as archive]
+    [archive :as archive]
     [clojure.contrib.zip-filter :as zf]
     [clojure.contrib.zip-filter.xml :as zfx]
     [clojure.zip :as zip]

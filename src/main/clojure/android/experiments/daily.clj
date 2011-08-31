@@ -1,7 +1,7 @@
 (ns android.experiments.daily
   (:use
     [incanter core charts]
-    [android.tools.util :only (find-files)]
+    [org.clojars.smee.file :only (find-files)]
     [clojure.contrib.singleton :only (per-thread-singleton)]))
 
 

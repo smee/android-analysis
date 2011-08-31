@@ -4,7 +4,7 @@
     [clojure.java.io :only (file reader)]
     [clojure.contrib.io :only (read-lines)]
     [clojure.string :only (trim)]
-    [android.tools.archive :only (extract-entry process-entries)]))
+    [archive :only (extract-entry process-entries)]))
 
 (defn find-plugins [& dirs]
   (let [fseqs (map #(file-seq (file %)) dirs)

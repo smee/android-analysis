@@ -1,6 +1,6 @@
 (ns eclipse.loc
   (:use 
-    android.tools.archive
+    archive
     [clojure.contrib.string :only (split)]
     [clojure.java.io :only (copy file reader)]
     [incanter.core :exclude (copy)]
