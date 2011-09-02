@@ -5,7 +5,8 @@
      [file :only (find-files)]
      [time :only (date-string)]
      [map :only (pmapcat)]]
-    [clojure.java.io :only (file)])
+    [clojure.java.io :only (file)]
+    [android.experiments.sdk :only (android-specific?)])
   (:require 
     [archive :as archive]
     [android.analysis.core :as c]
@@ -26,24 +27,24 @@
         zips      #".*.(?i)zip"]
     
     (println "extracting jars from" *apps* "into" *jars*)
-    (extract-jars *apps* (skip-files-in-dir *jars*) *jars*)
+    #_(time (extract-jars *apps* (skip-files-in-dir *jars*) *jars*))
     
     (println "extracting manifests from" *jars* "into" *mf*)
-    (let [now           (date-string)
+    #_(let [now           (date-string)
           mf-dir        *mf*
           output-dir    (str mf-dir now)
           skip?         (skip-files-in-archives (find-files mf-dir zips))
-          num-extracted (extract-android-manifests *apps* skip? output-dir)] 
+          num-extracted (time (extract-android-manifests *apps* skip? output-dir))] 
       (archive/copy-to-zip (file mf-dir (str now ".zip")) output-dir true)
       num-extracted)
   
     (println "extracting intents from" *jars* "into" *intents*)
-    (let [output-dir (extract-intents *jars* *intents*)]
+    (let [output-dir (time (extract-intents *jars* "d:/intents/" #_*intents*))]
       (archive/copy-to-zip (file *intents* (str output-dir ".zip")) (str *intents* output-dir) true))
     
     
     (println "calculating hashes from" *jars* "into" *hash*)
-    (let [output-dir (hash-zip-contents *jars* *hash*)]
+    (let [output-dir (time (hash-zip-contents *jars* *hash*))]
       (archive/copy-to-zip (file *hash* (str output-dir ".zip")) (str *hash* output-dir) true))
     
     
@@ -58,10 +59,9 @@
 
 
 (defn load-apps [manifests-dir intents-dir]
-  (apply c/join-intents 
-         (pvalues 
-           (mf/unique-apps (pmapcat mf/load-apps-from-zip (find-files manifests-dir #".*.(?i)zip")))
-           (reduce merge (map intents/load-intents-from-zip (find-files intents-dir #".*.(?i)zip"))))))
+  (c/join-intents 
+    (pmapcat mf/load-apps-from-zip (find-files manifests-dir #".*.(?i)zip"))
+    (reduce merge (map intents/load-intents-from-zip (find-files intents-dir #".*.(?i)zip")))))
 
 (defn extract-real-inter-apps-actions 
   "For every app find the names of all actions that are called via implicit intents 

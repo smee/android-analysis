@@ -3,6 +3,7 @@
     [org.clojars.smee
      [util :only (ignore-exceptions)]
      [file :only (find-files extract-relative-path)]
+     [seq :only (wrap-time-estimator)]
      [serialization :only (serialize)]
      [time :only (date-string)]]
     [android.market.download :only (construct-output-file) ]
@@ -110,7 +111,7 @@ Uses static analysis via the findbugs infrastructure."
           (let [outfile  (construct-output-file outp-dir (.getName f))]
             (println "processing" f "into" outfile)
             (serialize outfile (process-fn f))))
-        files))
+        (wrap-time-estimator 330000 5000 files)))
 
 
 (defn extract-intents 
