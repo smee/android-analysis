@@ -30,6 +30,8 @@
 (defn implicit-called-intent-actions [app]
   (->> app :intents :called vals (apply concat) (remove :explicit?) (map :action) (remove nil?) set))
 
+(defn dynamically-registered-intent-actions [app]
+  (->> app :intents :registered :registerReceiver (mapcat :actions) set))
 
 (defn explicit-called-intent-classes [app]
   (->> app :intents :called vals (apply concat) (filter :explicit?) (map :class) (remove nil?) (map intents/normalize-classname) set))
@@ -45,11 +47,19 @@
 
 (defn external-implicit-intent-actions 
   "Construct sets of action strings that get used within implicit intents that can't 
-be targeted at a component within the same app (because no intent filter uses that action)."
+be targeted at a component within the same app (because no intent filter uses that action, registered
+via the androidmanifest.xml or dynamically during runtime)."
   [app]
-  (clojure.set/difference 
-    (implicit-called-intent-actions app) 
-    (mf/intent-filter-actions app)))
+  (let [implicit-called (implicit-called-intent-actions app)
+        package (:package app)
+        implicit-filtered (set (remove #(.startsWith % package) implicit-called))
+        defined-in-manifest (mf/intent-filter-actions app)
+        defined-at-runtime (dynamically-registered-intent-actions app)
+        ]
+    (reduce clojure.set/difference 
+            [implicit-filtered
+             defined-in-manifest
+             defined-at-runtime])))
 
 (defn app-file 
   "Construct file object of android app that resides in a subdirectory of style download/construct-path-parts"

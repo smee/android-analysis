@@ -19,5 +19,5 @@
    (do
      (batch-download-newest cred-files)
      (apply 
-       (partial download-all-apps (file "results/market-apps") "e:/android/original") 
+       (partial download-all-apps (file "results/market-apps") "z:/original") 
        cred-files)))
