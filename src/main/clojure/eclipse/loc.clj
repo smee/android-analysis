@@ -32,8 +32,8 @@
        :raw locs}))
 
 (comment
-  (parse-cloc-output "D:/Dropbox/My Dropbox/Arbeit/Projekte/Thorsten/waterloo/eclipse-loc.zip")
-  (def x (:individual-loc (def x (:individual-loc (parse-cloc-output "d:/android/sample/src/loc.zip")))))
+  (parse-cloc-output "D:/Dropbox/Arbeit/Projekte/Thorsten/waterloo/eclipse-loc.zip")
+  (def x (:individual-loc (parse-cloc-output "d:/android/sample/src/loc.zip")))
   (def t* (bootstrap x median :size 10000))
   (quantile t* :probs [0.025 0.975])
   (mean t*)

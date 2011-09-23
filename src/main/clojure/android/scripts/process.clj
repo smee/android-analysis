@@ -48,8 +48,8 @@
       (archive/copy-to-zip (file *hash* (str output-dir ".zip")) (str *hash* output-dir) true))
     
     
-    #_(println "writing output csv into" *stats* "...") 
-    #_(let [class-lookup (c/build-name-classes-fn *jars*)
+    (println "writing output csv into" *stats* "...") 
+    (let [class-lookup (c/build-name-classes-fn *jars*)
           apps (load-apps *mf* *intents*)]
       (do
         (c/save-sizes-csv (str *stats* "sizes-" (date-string) ".csv") apps *apps*)

@@ -15,7 +15,8 @@
     [android.analysis.intent :as intents]
     [android.analysis.manifest :as mf]
     [archive :as archive]
-    [android.analysis.hash :as hash]))
+    [android.analysis.hash :as hash]
+    [android.experiments.sdk :as sdk]))
 
 (defn clean-app-names [manifests]
   (for [mf manifests]
@@ -131,7 +132,7 @@ match them with existing classes...."
           ;; number of intent filters per app
           (p app "unit-provided_capabilities" mf/unique-intent-filters false)
           ;; implicit intent calls per app, only if it looks like the call goes to another app
-          (p app "unit-dependent_capabilities" external-implicit-intent-actions false)))
+          (p app "unit-dependent_capabilities" (comp #_(partial remove sdk/android-specific?) external-implicit-intent-actions) false)))
       ;; apps per unique intent filter
       (doseq [[idx names] (indexed (vals (group-intent-filters apps)))]
         (println (str "cap" idx \, (count names) ",capability-providing_units,true") ))
