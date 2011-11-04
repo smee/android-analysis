@@ -8,8 +8,7 @@
      ]
     [android.market.download :as download]
     [clojure.contrib.io :only (with-out-writer file)]
-    [clojure.contrib.seq :only (indexed)]
-    [clojure.contrib.datalog.util  :only (reverse-map)])
+    [clojure.contrib.seq :only (indexed)])
   (:require 
     clojure.set
     [android.analysis.intent :as intents]

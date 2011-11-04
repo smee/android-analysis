@@ -3,7 +3,14 @@
      (java.security 
        NoSuchAlgorithmException
        MessageDigest)
-     (java.math BigInteger)))
+     (java.math BigInteger))
+  (:use
+    [archive :only (process-entries)]
+    [org.clojars.smee 
+     [file :only (find-files)]
+     [map :only (remove-empty-values map-values)]
+     [serialization]]
+    [clojure.contrib.datalog.util :only (reverse-map)]))
 
 (defn md5
   "Compute the hex MD5 sum of a byte array."
@@ -52,16 +59,17 @@ hashes of the files in that package."
       (distinct (step coll #{}))))
 
 (defn android-libraries [hashes]
-  (let [hpp (pmap #(->> % second hashes-per-package (map-values hash/md5-of)) hashes)
+  (let [hpp (pmap #(->> % second hashes-per-package (map-values md5-of)) hashes)
         duplicates (not-distinct (apply concat hpp))]
     duplicates))
 
 
 (comment
   
-    (let [hashes (pmap #(list (.getName %) (deserialize %)) (find-files "z:/classes-md5/" #".*\d{4}\d*"))
+    (let [hashes (for [f (find-files "e:/android/classes-md5/" #".*zip")] 
+                   (process-entries f #(list % (deserialize %2)) #".*\d{4}\d*"))
         libs (android-libraries hashes)
         ]
-    (serialize "z:/reduced/identified-libs" libs)
+    (serialize "e:/android/identified-libs" libs)
     )
     )
