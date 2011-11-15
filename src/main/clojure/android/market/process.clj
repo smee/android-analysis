@@ -8,14 +8,14 @@
      [time :only (date-string)]]
     [android.market.download :only (construct-output-file) ]
     [android.analysis.hash :only (md5)]
-    [clojure.java.io :only (file as-file make-parents)]
-    [clojure.contrib.io :only (copy to-byte-array)])
+    [clojure.java.io :only (file as-file make-parents copy)]
+    )
   (:import
     [java.io File ByteArrayInputStream]
     Dex2Jar)
   (:require
     [archive :as archive]
-    [clojure.contrib.string :as string]
+    [clojure.string :as string]
     [clojure.stacktrace :as stack]))
 
 

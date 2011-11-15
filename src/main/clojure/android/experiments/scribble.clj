@@ -1,9 +1,14 @@
 (ns android.experiments.scribble
   (:require 
-    [clojure.contrib.zip-filter :as zf]
-    [clojure.contrib.zip-filter.xml :as zfx]
+    clojure.string
+    [clojure.data.zip :as zf]
+    [clojure.data.zip.xml :as zfx]
     [clojure.zip :as zip]
-    [clojure.xml :as xml]))
+    [clojure.xml :as xml])
+  (:use [clojure.java.io :only (file make-parents)]
+        [org.clojars.smee 
+         [map :only (map-values)]
+         [serialization :only (deserialize-all)]]))
 
 
 (defn xml-zipper [s]
@@ -89,7 +94,7 @@
 (defn construct-path-parts 
   "Create a hierarchy of folders by splitting the string on dots and creating subdirectories."
   [package]
-  (split #"\." package))
+  (clojure.string/split #"\." package))
 
 (defn construct-output-dir 
   "Create a directory hierarchy from a numeric string. Creates the directories if they don't exists."

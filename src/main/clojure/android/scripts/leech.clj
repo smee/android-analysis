@@ -2,7 +2,7 @@
   (:use 
     [android.market.leech :only (batch-download-newest)]
     [android.market.download :only (download-all-apps)]
-    [clojure.contrib.io :only (file)]
+    [clojure.java.io :only (file)]
     [org.clojars.smee.time :only (date-string)]))
 
 
@@ -19,5 +19,5 @@
    (do
      (batch-download-newest cred-files)
      (apply 
-       (partial download-all-apps (file "results/market-apps") "z:/original") 
+       (partial download-all-apps (file "results/market-apps") "e:/android/original") 
        cred-files)))

@@ -1,8 +1,7 @@
 (ns eclipse.manifest
   (:use
-    [clojure.contrib.string :only (replace-re)]
     [clojure.java.io :only (file reader)]
-    [clojure.contrib.io :only (read-lines)]
+    [clojure.java.io :only (read-lines)]
     [clojure.string :only (trim)]
     [archive :only (extract-entry process-entries)]))
 
@@ -13,7 +12,7 @@
         files (filter (memfn isFile) in-plugin-dir)]
     (filter #(.endsWith (.getName %) ".jar") files)))
 
-(defn unique-plugins
+#_(defn unique-plugins
   "By jar file name without version."
   [& dirs]
   (let [plugins (apply find-plugins dirs)]        

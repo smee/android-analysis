@@ -8,9 +8,8 @@
     [archive :only (process-entries)]
     [org.clojars.smee 
      [file :only (find-files)]
-     [map :only (remove-empty-values map-values)]
-     [serialization]]
-    [clojure.contrib.datalog.util :only (reverse-map)]))
+     [map :only (remove-empty-values map-values reverse-map)]
+     [serialization]]))
 
 (defn md5
   "Compute the hex MD5 sum of a byte array."
@@ -66,9 +65,9 @@ hashes of the files in that package."
 
 (comment
   
-    (let [hashes (for [f (find-files "e:/android/classes-md5/" #".*zip")] 
+    (let [hashes (for [f (find-files "e:/android/classes-md5/" #".*99.zip")] 
                    (process-entries f #(list % (deserialize %2)) #".*\d{4}\d*"))
-        libs (android-libraries hashes)
+        libs (map android-libraries hashes)
         ]
     (serialize "e:/android/identified-libs" libs)
     )

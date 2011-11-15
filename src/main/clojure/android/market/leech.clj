@@ -1,8 +1,7 @@
 (ns android.market.leech
   (:use 
-    [clojure.contrib.core :only (.?.)]
-    [clojure.contrib.io :only (file)]
-    [clojure.contrib.java-utils :only (read-properties)]
+    [clojure.core.incubator :only (.?.)]
+    [clojure.java.io :only (file)]
     [clojure.stacktrace :only (root-cause)]
     [clojure.string :only (join)]
     [org.clojars.smee serialization util time])

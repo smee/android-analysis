@@ -15,7 +15,7 @@
 
 (declare load-apps)
 
-(def *path* "z:/")
+(def ^:dynamic *path* "e:/")
 
 (defn -main []
   (let [*apps*    (str *path* "original/")
@@ -49,7 +49,7 @@
     
     
     (println "writing output csv into" *stats* "...") 
-    (let [class-lookup (c/build-name-classes-fn *jars*)
+    #_(let [class-lookup (c/build-name-classes-fn *jars*)
           apps (load-apps *mf* *intents*)]
       (do
         (c/save-sizes-csv (str *stats* "sizes-" (date-string) ".csv") apps *apps*)
@@ -59,8 +59,7 @@
 
 (comment
   (binding [*path* "e:/android/"]
-    (-main))
- )
+    (-main)))
 
 
 (defn load-apps [manifests-dir intents-dir]

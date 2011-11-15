@@ -1,9 +1,12 @@
 (ns android.experiments.daily
   (:use
     [incanter core charts]
-    [org.clojars.smee.file :only (find-files)]
-    [clojure.contrib.singleton :only (per-thread-singleton)]))
+    [org.clojars.smee 
+     [file :only (find-files)]
+     [util :only (per-thread-singleton)]]
+    ))
 
+(def df (per-thread-singleton #(java.text.SimpleDateFormat. "yyyyMMdd")))
 
 (defn- use-time-axis 
   "Replace domain axis by date/time axis."
@@ -13,7 +16,6 @@
     (.setDomainAxis plot axis)))
 
 
-(def df (per-thread-singleton #(java.text.SimpleDateFormat. "yyyyMMdd")))
 
 (defn read-date-stats [input-dir] 
   (let [apks (find-files input-dir)

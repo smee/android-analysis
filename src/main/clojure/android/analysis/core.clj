@@ -7,8 +7,7 @@
      serialization
      ]
     [android.market.download :as download]
-    [clojure.contrib.io :only (with-out-writer file)]
-    [clojure.contrib.seq :only (indexed)])
+    [clojure.java.io :only (file writer)])
   (:require 
     clojure.set
     [android.analysis.intent :as intents]
@@ -16,6 +15,14 @@
     [archive :as archive]
     [android.analysis.hash :as hash]
     [android.experiments.sdk :as sdk]))
+
+(defmacro with-out-writer
+  "Opens a writer on f, binds it to *out*, and evalutes body.
+  Anything printed within body will be written to f."
+  [f & body]
+  `(with-open [stream# (writer ~f)]
+     (binding [*out* stream#]
+       ~@body)))
 
 (defn clean-app-names [manifests]
   (for [mf manifests]
@@ -133,8 +140,9 @@ match them with existing classes...."
           ;; implicit intent calls per app, only if it looks like the call goes to another app
           (p app "unit-dependent_capabilities" (comp #_(partial remove sdk/android-specific?) external-implicit-intent-actions) false)))
       ;; apps per unique intent filter
-      (doseq [[idx names] (indexed (vals (group-intent-filters apps)))]
-        (println (str "cap" idx \, (count names) ",capability-providing_units,true") ))
+      (map-indexed 
+        (fn [idx names] (println (str "cap" idx \, (count names) ",capability-providing_units,true") )) 
+        (vals (group-intent-filters apps)))
       ))
 
 (defn save-sizes-csv 

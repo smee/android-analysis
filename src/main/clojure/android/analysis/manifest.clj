@@ -1,13 +1,14 @@
 (ns android.analysis.manifest
   (:use 
-    [clojure.contrib.zip-filter.xml :only (xml-> xml1-> attr)]
+    [clojure.data.zip.xml :only (xml-> xml1-> attr)]
     [clojure.java.io :only (input-stream)]
     [org.clojars.smee file map seq serialization util]
-    [clojure.contrib.singleton :only (per-thread-singleton)])
+    [org.clojars.smee.util :only (per-thread-singleton)])
   (:require
     [archive :as archive]
-    [clojure.contrib.zip-filter :as zf]
-    [clojure.contrib.zip-filter.xml :as zfx]
+    clojure.set
+    [clojure.data.zip :as zf]
+    [clojure.data.zip.xml :as zfx]
     [clojure.zip :as zip]
     [clojure.xml :as xml]
     clojure.walk)

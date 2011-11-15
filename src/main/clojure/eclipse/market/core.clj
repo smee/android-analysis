@@ -1,11 +1,11 @@
 (ns eclipse.market.core
   (:use 
     [clojure.java.io :only (reader input-stream file)]
-    [clojure.contrib.zip-filter.xml]
+    [clojure.data.zip.xml]
     [clojure.string :only (trim)]
     )
   (:require
-    [clojure.contrib.zip-filter :as zf]
+    [clojure.data.zip :as zf]
     [clojure.zip :as zip]
     [clojure.xml :as xml]))
 

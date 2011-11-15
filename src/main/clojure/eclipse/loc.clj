@@ -1,7 +1,7 @@
 (ns eclipse.loc
   (:use 
     archive
-    [clojure.contrib.string :only (split)]
+    [clojure.string :only (split)]
     [clojure.java.io :only (copy file reader)]
     [incanter.core :exclude (copy)]
     [incanter stats charts]))

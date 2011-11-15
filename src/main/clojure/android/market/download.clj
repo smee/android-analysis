@@ -7,12 +7,12 @@
     [android.market.category :as cat])
   (:use 
     [org.clojars.smee
-     [util :only (sleep-random ignore-exceptions)]
+     [util :only (sleep-random ignore-exceptions read-properties)]
      serialization]
     [android.market.leech :as ml]
-    [clojure.contrib.io :only (file make-parents)]
-    [clojure.contrib.duck-streams :only (copy)]
-    [clojure.contrib.java-utils :only (read-properties)]
+    [clojure.java.io :only (file make-parents)]
+    [clojure.java.io :only (copy)]
+    
     ))
 
 

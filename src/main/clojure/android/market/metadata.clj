@@ -6,9 +6,8 @@
      [seq :only (seq-counter)]
      [serialization :only (deserialize-all)]]
     
-    [clojure.contrib.string :only (split)]
+    [clojure.string :only (split)]
     [clojure.java.io :only (file make-parents)]
-    [clojure.contrib.duck-streams :only (append-spit)]
     somnium.congomongo))
 
 

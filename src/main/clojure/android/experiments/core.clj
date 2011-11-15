@@ -2,15 +2,14 @@
   (:use 
     [clojure.set :only [intersection difference union map-invert]]
     [clojure.pprint :only (pprint)]
-    [clojure.contrib.seq-utils :only (separate)]
-    [clojure.contrib.zip-filter.xml :only (xml-> xml1-> attr)]
+    [clojure.data.zip.xml :only (xml-> xml1-> attr)]
     android.tools.lucene
     [org.clojars.smee map seq serialization util]
     android.experiments.sdk
-    [clojure.contrib.datalog.util :only (reverse-map)])
+    )
   (:require
-    [clojure.contrib.zip-filter :as zf]
-    [clojure.contrib.zip-filter.xml :as zfx]
+    [clojure.data.zip :as zf]
+    [clojure.data.zip.xml :as zfx]
     [clojure.zip :as zip]
     [clojure.xml :as xml])
   (:import 

@@ -1,14 +1,14 @@
 (ns android.market.category
-  (:use [clojure.contrib.datalog.util :only (reverse-map)]))
+  (:use [org.clojars.smee.map :only (reverse-map)]))
 
 (def categories-i18n
   {"APP_WALLPAPER"          "APP_WALLPAPER" ;;todo   
    "APP_WIDGETS"            "Tools"     
    "ARCADE"                 "Arcade & Actionspiele" 
-   "BOOKS_AND_REFERENCE"    "Bücher & Nachschlagewerke"     
-   "BRAIN"                  "Rätsel & Denksport"                 
-   "BUSINESS"               "Geschäftlich"          
-   "CARDS"                  "Karten- & Glücksspiele"                   
+   "BOOKS_AND_REFERENCE"    "Bï¿½cher & Nachschlagewerke"     
+   "BRAIN"                  "Rï¿½tsel & Denksport"                 
+   "BUSINESS"               "Geschï¿½ftlich"          
+   "CARDS"                  "Karten- & Glï¿½cksspiele"                   
    "CASUAL"                 "Gelegenheitsspiele"           
    "COMICS"                 "Comics"               
    "COMMUNICATION"          "Kommunikation"             
