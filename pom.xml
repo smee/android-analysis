@@ -161,7 +161,7 @@
 			<artifactId>androidmarketapi</artifactId>
 			<version>0.3</version>
 			<scope>system</scope>
-			<systemPath>${basedir}/src/main/etc/androidmarketapi-fixed-1.0-SNAPSHOT.jar</systemPath>
+			<systemPath>${basedir}/src/main/etc/androidmarketapi-0.6.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>com.google.protobuf</groupId>
@@ -185,11 +185,25 @@
 			<systemPath>${basedir}/src/main/etc/apktool.jar</systemPath>
 		</dependency>
 		<dependency>
-			<groupId>unknown</groupId>
-			<artifactId>dex2jar</artifactId>
-			<version>0.7.8</version>
+			<groupId>dex2jar</groupId>
+			<artifactId>dex-translator</artifactId>
+			<version>0.9.3</version>
 			<scope>system</scope>
-			<systemPath>${basedir}/src/main/etc/dex2jar-0.0.7.8-SNAPSHOT.jar</systemPath>
+			<systemPath>${basedir}/src/main/etc/dex-translator-0.0.9.3.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>dex2jar</groupId>
+			<artifactId>dex-ir</artifactId>
+			<version>1.1</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/etc/dex-ir-1.1.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>dex2jar</groupId>
+			<artifactId>dex-reader</artifactId>
+			<version>1.4</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/etc/dex-reader-1.4.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>unknown</groupId>
@@ -217,14 +231,14 @@
 			<version>2.0</version>
 		</dependency>
 		<dependency>
-			<groupId>asm</groupId>
-			<artifactId>asm-debug-all</artifactId>
-			<version>3.2</version>
-		</dependency>
-		<dependency>
 		  <groupId>clojure-refactoring</groupId>
 		  <artifactId>clojure-refactoring</artifactId>
 		  <version>0.5.0</version>
-		</dependency>		
+		</dependency>
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm-all</artifactId>
+			<version>3.3.1</version>
+		</dependency>
 	</dependencies>
 </project>
