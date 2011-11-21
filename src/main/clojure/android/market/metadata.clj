@@ -5,7 +5,7 @@
      [file :only (find-files)]
      [seq :only (seq-counter)]
      [serialization :only (deserialize-all)]]
-    
+    [archive :only (process-entries)]
     [clojure.string :only (split)]
     [clojure.java.io :only (file make-parents)]
     somnium.congomongo))
@@ -55,17 +55,21 @@
 (comment
   
   (def db (mongo! :db :android))
+  ;; load flat files
   (let [files (find-files "e:/android/metadata/incoming")
         maps-per-file (pmap (comp flatten deserialize-all) files)]
     (doseq [m maps-per-file]
       (mass-insert! :metadata (map #(select-keys % relevant-keys) m))))
-  
-  (map (fn [f] (android.tools.archive/process-entries! 
-          f
-          (fn [_ bytes] (mass-insert! :metadata 
-                                      (map #(select-keys % relevant-keys)
-                                           (flatten (deserialize-all bytes)))))))
-       (find-files "e:/android/metadata/incoming"))
+  ;;
+  ;; OR
+  ;; load zip archives
+  (dorun
+    (map (fn [f] (process-entries 
+                   f
+                   (fn [_ bytes] (mass-insert! :metadata 
+                                               (map #(select-keys % relevant-keys)
+                                                    (flatten (deserialize-all bytes)))))))
+         (find-files "e:/android/metadata/incoming")))
   
   
   (add-index! :metadata [:packageName])

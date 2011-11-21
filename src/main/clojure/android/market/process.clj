@@ -41,7 +41,7 @@
   "Build a function that returns true if a given file exists already in 
 one of the given archives."
   [archives]
-  (let [available? (into #{} (map #(last (string/split #"/" %)) (ignore-exceptions (mapcat archive/get-entries archives))))]
+  (let [available? (into #{} (map #(last (string/split % #"/")) (ignore-exceptions (mapcat archive/get-entries archives))))]
     (fn [^File f] (available? (.getName f)))))
 
 (defn skip-files-in-dir 

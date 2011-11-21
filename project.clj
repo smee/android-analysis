@@ -11,7 +11,7 @@
                  [org.apache.lucene/lucene-core "3.0.2"]
                  [incanter "1.3.0-SNAPSHOT" :exclusions [swank-clojure]]
                  [org.clojars.smee/archive "0.2.0-SNAPSHOT"]
-                 [org.clojars.smee/common "1.1.0-SNAPSHOT"]
+                 [org.clojars.smee/common "1.1.0"]
                  [congomongo "0.1.6-SNAPSHOT"]
                  [asm/asm-all "3.3.1"]
                 ])
