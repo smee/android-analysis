@@ -68,7 +68,8 @@
                    f
                    (fn [_ bytes] (mass-insert! :metadata 
                                                (map #(select-keys % relevant-keys)
-                                                    (flatten (deserialize-all bytes)))))))
+                                                    (flatten (deserialize-all bytes))))
+                     nil)))
          (find-files "e:/android/metadata/incoming")))
   
   
@@ -87,17 +88,30 @@
           fine-clustered (map-values (partial group-by :versionCode) clustered)]
       (map-values #(into (sorted-map) (map-values count %)) fine-clustered)))
   
-  
+  ;; number of metadata entries per packageName and version
   (map-reduce :metadata
               "function(){
                    emit({packageName: this.packageName, versionCode: this.versionCode}, {count: 1});
                }"
               "function(p, versions){
                   var c = 0;
-                  for ( v in versions )
+                  versions.forEach(function(v){
                       c += v['count'];
-                  return {count: c}; 
+                   });
 
+                  return {count: c}; 
                }"
-              "clustered")
+              "clustered"
+              :output :collection)
+  (def metadata-counts
+    (let [x (fetch :clustered)
+          y (map (juxt #(get-in % [:_id :packageName]) #(get-in % [:_id :versionCode]) #(get-in % [:value :count])) x)]
+      (->> y
+        (group-by first)
+        (map-values #(->> % 
+                       (map next)
+                       (map vec)
+                       (into (sorted-map)))))))
+  ;; print number of different versions per package name
+   (clojure.pprint/pprint (into (sorted-map) (frequencies (map count (vals metadata-counts)))))
   )
