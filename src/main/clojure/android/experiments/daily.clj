@@ -1,8 +1,10 @@
 (ns android.experiments.daily
   (:use
-    [incanter core charts]
+    [incanter core charts
+     [stats :only (linear-model)]]
     [org.clojars.smee 
      [file :only (find-files)]
+     [map :only (map-values)]
      [util :only (per-thread-singleton)]]
     ))
 
@@ -21,13 +23,16 @@
   (let [apks (find-files input-dir)
         days (map #(.format (df) (java.util.Date. (.lastModified %))) apks)
         by-day (group-by identity days)] 
-    by-day))
+    (map-values count by-day)))
 
 (defn show-daily-chart [by-day]
   (let [x (map #(.getTime (.parse (df) %)) (keys by-day))
-        y (map count (vals by-day))
+        y (vals by-day)
+        lm (linear-model y x)
         chart (doto (scatter-plot x y 
                                   :title "Apps per day"
                                   :x-label "Date" 
-                                  :y-label "no. of apps downloaded") (use-time-axis))]
+                                  :y-label "no. of apps downloaded") 
+                (use-time-axis)
+                (add-lines x (:fitted lm) :series-label "Trend (OLS Regression)"))]
     (view chart)))
