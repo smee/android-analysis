@@ -4,7 +4,7 @@
     [clojure.java.io :only (file)]
     [clojure.stacktrace :only (root-cause)]
     [clojure.string :only (join)]
-    [org.clojars.smee serialization util time])
+    [org.clojars.smee serialization util time file])
   (:require
     [android.market.category :as cat])
   (:import 
@@ -104,14 +104,12 @@
   (do
     ; we are using a gingerbread device....
     (doto (.getContext session)
-      (.setDeviceAndSdkVersion "crespo:10"))
-    
+      (.setDeviceAndSdkVersion "crespo:10")
+      (.setAndroidId (get credentials "androidid")))
     ; login
     (doto session
       (.login username password)
-      (.setLocale java.util.Locale/US))
-     
-    session)))
+      (.setLocale java.util.Locale/US)))))
 
 (def api-cache (ref {}))
 (defn- create-market-api 
@@ -258,7 +256,7 @@ resp-fn: function that handles the response"
   (take 3 all-from-authors)
   (def request (create-apps-request {:query "NihongoUp" :view-type Market$AppsRequest$ViewType/FREE}))
   (def api (create-market-api (first credentials)))
-  (count (fetch-app-infos {:query "a" :start-idx 0} api))
+  (count (fetch-app-infos {:query "a" :start-idx 0} api #(do (println %) %)))
 
   
   

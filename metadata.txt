@@ -1,0 +1,75 @@
+@startuml
+title Structure of available android related data
+
+abstract class App {
+  title 
+  creator
+  creatorId
+  contact...
+  <b>packageName :string </b>
+  rating: float
+  appType: AppType
+  category: Category
+  ....
+}
+
+class APK {
+  id: long
+  version: string
+  <b>versionCode: integer </b>
+  timestamp: long
+}
+
+enum Category {
+ ARCADE
+ BRAIN
+ BUSINESS
+ FINANCE
+ ....
+}
+enum AppType {
+APPLICATION
+GAME
+WALLPAPER
+}
+class Comment {
+ authorId: string
+ text: string
+ rating: integer
+ creationTime:long
+}
+
+note as apknote
+contains:
+ - Manifest.xml
+ - classes.dex with DALVIK bytecode
+<b>timeStamp</b> is the time we first
+saw this version in the market
+end note
+
+note as appversionnote
+Each app has a unique <b>package</b> and at least
+one AppVersion (identified by <b>versionCode</b>, 
+increasing monotonously). An app has several
+versions that can be downloaded individually
+end note
+
+note as commentnote
+Comments are per App, not per APK!
+It's not possible to reliably
+link a comment to a specific app version (apk).
+end note
+
+GoogleMarket "1" *-- "1..36" Category
+Category "1" o-- "*" App
+App "1" .. "1..36" AppType: has an 
+App "1" *-- "1..*" APK: consists of
+appversionnote .. App
+appversionnote .. APK
+commentnote .. Comment
+apknote .. APK
+App "1" *-- "*" Comment
+
+
+@enduml
+

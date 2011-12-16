@@ -138,7 +138,7 @@ substrings of size 2."
 
   (set! *print-length* 10)
  (download-all-apps 
-   (file "e:/android/metadata/") 
+   (file "results/market-apps") 
    "e:/android/original" 
    "marketcredentials.properties" 
    "marketcredentials2.properties" 

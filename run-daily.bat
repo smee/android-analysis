@@ -1,0 +1,1 @@
+java -cp lib\*;src\main\etc\*;src\main\clojure;d:\maven-repository\com/google/protobuf/protobuf-java/2.3.0/protobuf-java-2.3.0.jar clojure.main -e "(require 'android.scripts.leech)" >> log.txt
