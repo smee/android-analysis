@@ -134,16 +134,16 @@ match them with existing classes...."
           ;; explicit intent call with classes that are not in the app's manifest
           (p app "unit-dependent_units" #(external-explicit-intent-calls % lookup) false)
           ;; explicitly exported android components per app
-          (p app "reverse unit depends" mf/explicit-components false)
+          ;(p app "unit-depending_capabilities" mf/explicit-components false)
           ;; number of intent filters per app
           (p app "unit-provided_capabilities" mf/unique-intent-filters false)
           ;; implicit intent calls per app, only if it looks like the call goes to another app
           (p app "unit-dependent_capabilities" (comp #_(partial remove sdk/android-specific?) external-implicit-intent-actions) false)))
       ;; apps per unique intent filter
-      (map-indexed 
-        (fn [idx names] (println (str "cap" idx \, (count names) ",capability-providing_units,true") )) 
-        (vals (group-intent-filters apps)))
-      ))
+      (dorun 
+        (map-indexed 
+          (fn [idx names] (println (str "cap" idx \, (count names) ",capability-providing_units,true") )) 
+          (vals (group-intent-filters apps))))))
 
 (defn save-sizes-csv 
   "id, size in bytes, #all unique called intents, 0, # unique intent filters defined"

@@ -118,3 +118,17 @@
         logged-f (seq-counter files 50 #(println % "files done."))]
     (pmap #(sort-file % output-dir) logged-f)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(comment
+  (use '[org.clojars.smee.serialization :only [deserialize]]
+       '[clojure.java.io :only [writer file]]
+       '[org.clojars.smee [file :only [find-files]] [seq :only [wrap-time-estimator]]]
+       '[archive :only [process-entries]])
+  (with-open [out (-> "e:/android/all-hashes.csv" file writer)] 
+    (let [archives (find-files "e:/android/classes-md5" #".*zip")]
+      (doseq [archive (wrap-time-estimator (count archives) 1 archives)]
+        (println archive)
+        (process-entries archive 
+                         (fn [name contents] (doseq [[class hash] (deserialize contents)] (.write out (str name \; class \; hash \newline)))) 
+                         #".*\d{4}\d*"))))
+  )

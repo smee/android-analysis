@@ -10,9 +10,9 @@
 (defn parse-cloc-output [archive] 
   (let [lines    (process-entries archive (fn [_ in] (line-seq (reader in))))
       java-lines (map (partial filter #(.startsWith % "Java")) lines)
-      splitted   (map (partial split #"\s+") (reduce concat java-lines))
+      splitted   (map #(split % #"\s+") (reduce concat java-lines))
       loc (->> splitted (map last) (map #(Integer/parseInt %)))
-      comments (reduce + (->> splitted (map #(nth % 3)) (map #(Integer/parseInt %))))]
+      comments (apply + (->> splitted (map #(nth % 3)) (map #(Integer/parseInt %))))]
     (hash-map :loc (reduce + loc) :comments comments :individual-loc loc)))
 
   (defn choose-random-sample [i files to] 

@@ -164,3 +164,40 @@
 (send-off require-all-agent (fn[agent] (with-out-str (require-all-namespaces-starting-with "clojure"))))
 
 
+
+
+(def findfn-ns-set
+  (map the-ns '#{clojure.core clojure.set clojure.string}))
+
+(defn fn-name [var]
+  (apply symbol (map str
+                     ((juxt (comp ns-name :ns)
+                            :name)
+                      (meta var)))))
+
+(defn filter-vars [testfn]
+  (for [f (mapcat (comp vals ns-publics) findfn-ns-set)
+        :when (try
+                (binding [*out* (java.io.StringWriter.)]
+                  (testfn f))
+                (catch Throwable _# nil))]
+    (fn-name f)))
+
+(defn find-fn [out & in]
+  (filter-vars
+   (fn [f]
+     (= out
+        (apply
+         (if (-> f meta :macro)
+           (fn [& args]
+             (eval `(~f ~@args)))
+           f)
+         in)))))
+
+(defn find-arg [out & in]
+  (filter-vars
+   (fn [f]
+     (when-not (-> f meta :macro)
+       (= out
+          (eval `(let [~'% ~f]
+                   (~@in))))))))

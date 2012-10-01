@@ -1,3 +1,4 @@
+
 (ns android.scripts.process
   (:use
     android.market.process
@@ -49,10 +50,10 @@
     
     
     (println "writing output csv into" *stats* "...") 
-    #_(let [class-lookup (c/build-name-classes-fn *jars*)
+    (let [class-lookup (c/build-name-classes-fn *jars*)
           apps (load-apps *mf* *intents*)]
       (do
-        (c/save-sizes-csv (str *stats* "sizes-" (date-string) ".csv") apps *apps*)
+        #_(c/save-sizes-csv (str *stats* "sizes-" (date-string) ".csv") apps *apps*)
         (c/save-to-csv (str *stats* "deps-" (date-string) ".csv") apps class-lookup)))
     
     (println "Done.")))
@@ -103,4 +104,22 @@
           ]
       (for [a actions]
         [a ])))
+  
+  
+  ;;write shortened raw dataset for paper appendix
+  (with-open [pw (java.io.PrintWriter. "e:/android/20120304-apps-data-obf.json")] 
+    (write-json (pmap #(let [m {:class :c, :type :t :filters :f :exported? :e1 :explicit? :e2
+                               :intents :i :name :n :version :v :package :p :sdk-version :sv :shared-uid :si :components :co
+                               :called :cl :queried :q :registered :r
+                               :action :a :data :d :categories :ct}
+                            pname (:package %)
+                            len (count pname)
+                            f (fn [x] (cond
+                                        (keyword? x) (or (m x) x)
+                                        (and (string? x) (.startsWith x pname) (not= x pname)) (.substring x len)
+                                        :else x))]
+                        (prewalk f %)) 
+                     apps) 
+                pw false))
+  
   )

@@ -3,17 +3,11 @@
     [android.market.leech :only (batch-download-newest)]
     [android.market.download :only (download-all-apps)]
     [clojure.java.io :only (file)]
-    [org.clojars.smee.time :only (date-string)]))
+    [org.clojars.smee.time :only (date-string)]
+    [org.clojars.smee.file :only (find-files)]))
 
 
-(def cred-files 
-  ["marketcredentials.properties" 
-   "marketcredentials2.properties" 
-   "marketcredentials3.properties" 
-   "marketcredentials4.properties" 
-   "marketcredentials5.properties"
-   "marketcredentials6.properties"
-   "marketcredentials7.properties"])
+(def cred-files  (find-files "." #"marketcredentials.*.properties"))
 
  (time
    (do

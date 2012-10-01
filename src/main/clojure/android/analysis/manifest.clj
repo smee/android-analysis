@@ -209,7 +209,8 @@ nonempty intent-filter seq."
   (def mf (unique-apps (load-apps-from-zip "d:/android/reduced/android-20101127.zip")))
   (def mf (deserialize "d:/android/parsed-manifests.clj"))
 
-  (def mfs (apply concat (pmap load-apps-from-zip (filter (memfn isFile) (file-seq (java.io.File. "g:/android/manifests"))) )))
+  (def mfs (map (fn [app] (hash-map :name (:name app) :components (map (partial into {}) (exported-components app)))) 
+                (apply concat (pmap load-apps-from-zip (find-files "e:/android/manifests") ))))
   (def sorted (reverse 
       (sort-by :version mfs)))
   (def by-pck (group-by :package mfs))

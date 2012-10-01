@@ -57,18 +57,72 @@ hashes of the files in that package."
                      xs seen)))]
       (distinct (step coll #{}))))
 
-(defn android-libraries [hashes]
+(defn android-libraries 
+  "FIXME: stupid, duplicates may exist when comparing different sets of hashes!
+also, duplicates may exist between multiple versions of one app (private lib). We need to
+make sure duplicates are only counted if a package occurs in different apps!"
+  [hashes]
   (let [hpp (pmap #(->> % second hashes-per-package (map-values md5-of)) hashes)
         duplicates (not-distinct (apply concat hpp))]
     duplicates))
 
-
 (comment
   
-    (let [hashes (for [f (find-files "e:/android/classes-md5/" #".*99.zip")] 
+    (let [hashes (for [f (take 1 (find-files "/media/sf_android/classes-md5/" #".*99.zip"))] 
                    (process-entries f #(list % (deserialize %2)) #".*\d{4}\d*"))
         libs (map android-libraries hashes)
         ]
     (serialize "e:/android/identified-libs" libs)
     )
+;; experimental code for finding the number of unique vs. duplicated library classes in android apps
+    (use 'clojure.java.io 'org.clojars.smee.serialization)
+    (require '[clojure.string :as s])
+    
+    (with-open [^java.io.Writer bw (writer "/media/sf_android/concattedhashes")] 
+      (doseq [file (find-files "/media/sf_android/classes-md5/" #".*.zip")] 
+        (println file) (flush) 
+        (process-entries file #(doseq [[k v] (seq (deserialize %2))] 
+                                 (.write bw (str \[ \" k \" \space \" v \" \space \" %1 \" \] \newline))) 
+                         #".*\d{4}\d*")))
+    ;;bash> sort -k 2 -T . concattedhashes | gzip -c >> byhash.gz&
+    ;; m2 is a map of id to package of the app (unique identifier per app, irrespective of version)
+    (def m2 (reduce merge (for [[p m] m] (reduce #(assoc % %2 p) {}  m))))
+    ;; TODO classifier case:
+    ;; - one tupel: unique
+    ;; - multiple tupel, all ids have different packages: real library
+    ;; - multiple tupel, all same package: unique
+    ;; - multiple tupel, mixed: ???
+    (defn classifier [m tupels]
+      (let [single? (= 1 (count tupels))
+            all-packages-equal? (= 1 (count (distinct (map last tupels))))
+            key (cond 
+                  single? :unique
+                  all-packages-equal? :private-lib
+                  :else :lib)] 
+        (reduce (fn [m [class hash name]]
+                  (update-in m [name key] (fnil inc 0))) m tupels)))
+    
+    (with-open [rdr (-> "/media/sf_android/byhash.gz" input-stream java.util.zip.GZIPInputStream. java.io.InputStreamReader. java.io.BufferedReader.)
+                ;w (-> "/media/sf_android/with-package.gz" output-stream java.util.zip.GZIPOutputStream. java.io.OutputStreamWriter. java.io.BufferedWriter.)
+                ]
+      (->> rdr
+        line-seq
+        (map read-string) 
+        (map (fn [[cl hash name]] (vector cl hash name (get m2 (subs  name 6)))))
+        ;(map #(.write w (str (pr-str %) "\n")))
+        ;dorun
+        (partition-by second)
+        ;(take 10) doall
+        (reduce classifier {})
+        (serialize "/media/sf_android/counted")
+        ))
+    ;; write csv
+    (def m (into (sorted-map) (deserialize "/media/sf_android/counted")))
+    (with-open [w (writer "/media/sf_android/libs-public.csv")]
+      (do 
+        (.write w "id;unique classes;library classes;private library classes\n")
+        (doseq [[name {:keys [lib unique private-lib]}] m]
+          (.write w (s/join ";" [(subs name 6) (or unique 0) (or lib 0) (or private-lib 0)]))
+          (.write w "\n"))))
+    nil
     )

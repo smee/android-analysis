@@ -15,11 +15,13 @@
                     :category
                     :creator
                     :creatorId
+                    :contactWebsite
+                    :downloadsCount
+                    :downloadsCountText
                     :id
                     :installSize
                     :packageName
-                    :permissionIdCount
-                    :permissionIdList
+                    :promotionalVideo
                     :rating
                     :ratingsCount
                     :timestamp
@@ -54,7 +56,7 @@
 
 (comment
   
-  (def db (mongo! :db :android))
+  (def db (mongo! :db :android :host "139.18.8.41"))
   ;; load flat files
   (let [files (find-files "e:/android/metadata/incoming")
         maps-per-file (pmap (comp flatten deserialize-all) files)]
@@ -64,13 +66,15 @@
   ;; OR
   ;; load zip archives
   (dorun
-    (map (fn [f] (process-entries 
+    (map (fn [f] 
+           (println f)
+           (process-entries 
                    f
                    (fn [_ bytes] (mass-insert! :metadata 
                                                (map #(select-keys % relevant-keys)
                                                     (flatten (deserialize-all bytes))))
                      nil)))
-         (find-files "e:/android/metadata/incoming")))
+         (find-files "/media/sf_android/metadata")))
   
   
   (add-index! :metadata [:packageName])
@@ -83,10 +87,10 @@
   
   (def version-depth
     ;; map of packagename to map of versions to number of metadata documents
-    (let [raw (fetch :metadata :only [:packageName :versionCode])
-          clustered (group-by :packageName raw)
-          fine-clustered (map-values (partial group-by :versionCode) clustered)]
-      (map-values #(into (sorted-map) (map-values count %)) fine-clustered)))
+    (let [keys [:packageName :id]
+          raw (distinct (map #(select-keys % keys) (fetch :metadata :only keys)))
+          clustered (group-by :packageName raw)]
+      (map-values #(set (map :id %)) clustered)))
   
   ;; number of metadata entries per packageName and version
   (map-reduce :metadata
@@ -114,4 +118,35 @@
                        (into (sorted-map)))))))
   ;; print number of different versions per package name
    (clojure.pprint/pprint (into (sorted-map) (frequencies (map count (vals metadata-counts)))))
+  
+  ;; reconstruct app version history
+  ;; step 1: extract all triples of id, packageName and versionCode from metadata zip files
+  (use 'clojure.java.io)
+  (use 'org.clojars.smee.util)
+  (use 'org.clojars.smee.serialization)
+  (let [uncomp-fn (fn [f] 
+                     (with-open [w (writer (file "c:/temp/android/" (.getName f)))] 
+                       (process-entries f 
+                           (fn [_ bytes] 
+                             (let [maps (map #(select-keys % [:id :packageName :versionCode]) (flatten (ignore-exceptions (deserialize-all bytes))))] 
+                               (.write w (with-out-str (dorun (map prn maps))))
+                               (.write w "\n"))))))] 
+     
+     (doseq [file (find-files "i:/backups/android/metadata")]
+       (uncomp-fn file)))
+  ;; step 2: on command line sort by package
+  ;$> cd /cygdrive/c/temp/android
+  ;$> sort -t , -k 2 * > sorted
+  ;$> uniq sorted > unique
+  ;; step 3: merge triples, keep uniques, sort, partition, write json
+  (def apps (deserialize-all "c:/temp/android/unique"))
+  (def apps2 (map-values 
+               (fn [s] (sort-by :version 
+                                (map 
+                                  #(hash-map :version (:versionCode %) :id (:id %)) s))) 
+               (group-by :packageName apps)))
+   (use 'clojure.data.json)
+   (spit "c:/temp/android/metadata.json" (with-out-str (pprint-json apps2)))
   )
+
+;(with-mongo (make-connection "android" {:host "127.0.0.1" :port 27017}) (dorun (map (fn [f] (do (println f) (process-entries f (fn [_ bytes] (mass-insert! :metadata (map #(select-keys % relevant-keys) (flatten (deserialize-all bytes)))) nil)) (println "done."))) (find-files "/media/sf_android/metadata/"))))

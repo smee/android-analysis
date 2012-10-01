@@ -220,7 +220,10 @@ resp-fn: function that handles the response"
   (let [dir          (file (str "results/market-apps/" (str (date-string) "-" (java.util.UUID/randomUUID))))
         out-files-fn :category
         categories (get-all-categories (read-properties (first cred-files)))
-        query-tmpl   (map #(hash-map :category % :app-type nil :order-type Market$AppsRequest$OrderType/NEWEST) categories)]
+        query-tmpl   (concat
+                       (map #(hash-map :category % :app-type nil :order-type Market$AppsRequest$OrderType/NEWEST) categories)
+                       (map #(hash-map :category % :app-type nil :order-type Market$AppsRequest$OrderType/POPULAR) categories)
+                       (map #(hash-map :category % :app-type nil :order-type Market$AppsRequest$OrderType/NONE) categories))]
         (batch-download dir query-tmpl out-files-fn cred-files)))
 
 (defn batch-download-query
@@ -242,7 +245,7 @@ resp-fn: function that handles the response"
 
 
 (comment
-  (def cred-files  (find-files "." #"marketcredentials.*.properties"))
+  (def cred-files  (find-files "." #"marketcredentials...properties"))
   (batch-download-newest cred-files)
   (batch-download-query " " cred-files)
   
